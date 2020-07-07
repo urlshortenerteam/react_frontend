@@ -1,23 +1,16 @@
 import React from "react";
 import { Line }from "@ant-design/charts";
-/*
-LineChart:
-@author Zhuohao Shen <ao7777@sjtu.edu.cn>
-@date July 7th 2020
-@description A chart of line showing visit counts by hours
-@params {Array(JSON)} data - data of distribution order by hour
-@contents {DOM} - a flex box of chart showing distribution
-*/
+import {testData} from "./MapBox.js"
 export default class LineChart extends React.Component{
     state={
         data:[],
         config:{},
     }
-    constructor(props) {
-        super(props);
-        this.state={data: props.data,
+    constructor() {
+        super();
+        this.state={data: testData[0].time_distr,
         config: {
-            data:props.data,
+            data:testData[0].time_distr,
             title:{visible:true,text:'分时段统计'},
             description: {
                 visible: true,

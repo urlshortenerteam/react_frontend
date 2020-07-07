@@ -3,20 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
+=======
     "@ant-design/charts": "^0.9.6",
-    "@ant-design/icons": "^4.2.1",
     "@antv/g2plot": "^1.1.11",
     "@antv/l7": "^2.2.20",
     "@antv/l7-district": "^2.2.20",
     "@antv/l7-maps": "^2.2.20",
+>>>>>>> parent of f53b067... statistics page initialized
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "antd": "^4.4.1",
-    "moment": "^2.27.0",
+    "antd": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "@ant-design/icons": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-router-dom": "^5.2.0"
   }
 }
