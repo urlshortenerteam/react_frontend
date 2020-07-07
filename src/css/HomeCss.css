@@ -1,0 +1,25 @@
+.Block{
+    width:100%;
+    height: 400px;
+    top: 20%;position: fixed;
+
+    /*border-radius: 25px;*/
+    box-shadow: 0 0 10px 0px  #132c33;
+    background-color: #36292f;
+    /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
+}
+
+body{
+    background-color: #ede3e7;
+}
+/*baccd9*/
+
+
+.title{
+    color: #d8e3e7;
+    font-size: 37px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+
+}
