@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/charts": "^0.9.6",
+    "@ant-design/icons": "^4.2.1",
     "@antv/g2plot": "^1.1.11",
     "@antv/l7": "^2.2.20",
     "@antv/l7-district": "^2.2.20",
