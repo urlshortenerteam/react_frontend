@@ -18,7 +18,6 @@ StatisticsBar
 @date July 6th 2020
 @description Navigation bar for statistic page
 */
-//repairing
 export default class StatisticsBar extends React.Component{
     state={
         collapsed:false,
