@@ -1,15 +1,24 @@
 import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import 'antd/dist/antd.css';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-import StatisticsView from "./view/StatisticsView";
-moment.locale('zh-cn');
 
 function App() {
   return (
     <div className="App">
-        <StatisticsView />
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }
