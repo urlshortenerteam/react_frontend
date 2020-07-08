@@ -2,6 +2,7 @@ import React from "react";
 import StatisticsBar from "../components/StatisticsBar";
 import {Row,Col} from 'antd';
 import MapBox from "../components/MapBox";
+import Navigation from "../components/Navigation";
 const testData=[{short:'abc',
     count:2341,
     area_distr:[
@@ -734,6 +735,13 @@ export default class StatisticsView extends React.Component{
     render() {
         return (
             <div>
+                {/*<Row>*/}
+                {/*    <Col span={20} offset={2}>*/}
+                {/*        <Navigation/>*/}
+                {/*    </Col>*/}
+
+                {/*</Row>*/}
+                <Navigation/>
                 <Row>
                     <Col style={{background:'black',"max-width":"256px"}}>
                         <StatisticsBar />

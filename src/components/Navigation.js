@@ -2,7 +2,7 @@ import React from "react";
 import {Col, Menu, Row} from 'antd';
 import {MailOutlined, AppstoreOutlined, SettingOutlined} from '@ant-design/icons';
 import { PageHeader, Dropdown, Button, Tag, Typography} from 'antd';
-import { EllipsisOutlined ,AreaChartOutlined,PicLeftOutlined} from '@ant-design/icons';
+import { EllipsisOutlined ,AreaChartOutlined,PicLeftOutlined,BankOutlined} from '@ant-design/icons';
 
 const { Paragraph } = Typography;
 
@@ -73,7 +73,11 @@ export default class Navigation extends React.Component {
                         avatar={{src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4'}}
                         subTitle={[
 
-                                <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+                            // theme={"dark"}
+                                <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal" >
+                                    <Menu.Item key="home" icon={ <BankOutlined />}>
+                                        <a href="#">首页</a>
+                                    </Menu.Item>
                                     <SubMenu icon={<SettingOutlined/>} title="产品功能">
                                         <Menu.ItemGroup title="访问统计">
                                             {/*<Menu.Item key="setting:1">Option 1</Menu.Item>*/}
@@ -95,6 +99,7 @@ export default class Navigation extends React.Component {
                                     <Menu.Item key="app" icon={  <AreaChartOutlined />}>
                                         统计图表
 
+                                        <a href="#/statistics">统计图表</a>
                                     </Menu.Item>
                                     <Menu.Item key="create" icon={  <PicLeftOutlined />}>
 
