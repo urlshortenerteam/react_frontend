@@ -11,72 +11,7 @@ import { Alert } from 'antd';
 import { message, Space } from 'antd';
 
 const {TextArea} = Input;
-const columns_for_oneToOne = [
-    {
-        title: '长链接',
-        dataIndex: 'long',
-        align: 'center',
-        key: 'long',
-        // render: text => <a>{text}</a>,
-        ellipsis: {
-            showTitle: false,
-        },
-        render: long => (
-            <Tooltip placement="topLeft" title={long}>
-                {/*<a>{long}</a>*/}
-                {long}
-            </Tooltip>
-        ),
-        width: 150,
-    },
-    {
-        title: '短链接',
-        dataIndex: 'short',
-        align: 'center',
-        key: 'short',
-        width: 80,
-    },
 
-];
-
-const columns_for_manyToOne = [
-    {
-        title: '长链接',
-        dataIndex: 'long',
-        align: 'center',
-        key: 'long',
-        // render: text => <a>{text}</a>,
-        ellipsis: {
-            showTitle: false,
-        },
-        render: long => (
-            <Tooltip placement="topLeft" title={long}>
-                {/*<a>{long}</a>*/}
-                {long}
-            </Tooltip>
-        ),
-        width: 150,
-    },
-    {
-        title: '短链接',
-
-        dataIndex: 'short',
-        align: 'center',
-        key: 'short',
-        width: 80,
-        render: (value, row, index) => {
-            const obj = {
-                children: value,
-                props: {},
-            };
-            if (index !==0) {
-                obj.props.rowSpan = 0;
-            }
-            return obj;
-        },
-    },
-
-];
 export default class CreateView extends Component {
 
     state = {
@@ -85,7 +20,13 @@ export default class CreateView extends Component {
         tableVisible_manyToOne: false,
         showData:[],
     };
+
     manyToOne = () => {
+        //先将oneToOne隐藏
+        this.setState({
+            tableVisible_oneToOne: false,
+        });
+
         //按换行符分割输入的字符串
         let s = this.state.value;
         let urlArray = s.split(/[\n,]/g);
@@ -100,7 +41,7 @@ export default class CreateView extends Component {
             //检查是否为 http:// 或https://
             else
             {
-                if(item.indexOf("https://")!=0 && item.indexOf("http://")!=0)
+                if(item.indexOf("https://")!==0 && item.indexOf("http://")!==0)
                 {
                     flag=false;
                     messages+=index+1;
@@ -111,6 +52,12 @@ export default class CreateView extends Component {
 
         });
         console.log(urlArray);
+
+        if(urlArray.length===0)
+        {
+            message.error("输入不能为空");
+            return;
+        }
 
         //格式不正确则打印错误
         if(!flag)
@@ -167,6 +114,11 @@ export default class CreateView extends Component {
 
     };
     oneToOne = () => {
+        //先将manyToOne隐藏
+        this.setState({
+            tableVisible_manyToOne: false,
+        });
+
         //按换行符分割输入的字符串
         let s = this.state.value;
         let urlArray = s.split(/[\n,]/g);
@@ -264,6 +216,73 @@ export default class CreateView extends Component {
     };
 
     render() {
+
+        const columns_for_oneToOne = [
+            {
+                title: '长链接',
+                dataIndex: 'long',
+                align: 'center',
+                key: 'long',
+                // render: text => <a>{text}</a>,
+                ellipsis: {
+                    showTitle: false,
+                },
+                render: long => (
+                    <Tooltip placement="topLeft" title={long}>
+                        {long}
+                    </Tooltip>
+                ),
+                width: 150,
+            },
+            {
+                title: '短链接',
+                dataIndex: 'short',
+                align: 'center',
+                key: 'short',
+                width: 80,
+            },
+
+        ];
+
+        const columns_for_manyToOne = [
+            {
+                title: '长链接',
+                dataIndex: 'long',
+                align: 'center',
+                key: 'long',
+                // render: text => <a>{text}</a>,
+                ellipsis: {
+                    showTitle: false,
+                },
+                render: long => (
+                    <Tooltip placement="topLeft" title={long}>
+                        {/*<a>{long}</a>*/}
+                        {long}
+                    </Tooltip>
+                ),
+                width: 150,
+            },
+            {
+                title: '短链接',
+
+                dataIndex: 'short',
+                align: 'center',
+                key: 'short',
+                width: 80,
+                render: (value, row, index) => {
+                    const obj = {
+                        children: value,
+                        props: {},
+                    };
+                    if (index === 0) {
+                        obj.props.rowSpan = this.state.showData.length;
+                    }
+                    else  obj.props.rowSpan=0;
+                    return obj;
+                },
+            },
+
+        ];
         return (
             <div>
                 <Row>
@@ -273,19 +292,6 @@ export default class CreateView extends Component {
 
                 </Row>
 
-                <Row>
-                    <Col span={16} offset={4}>
-                        <TextArea
-                            value={this.state.value}
-                            onChange={this.onChange}
-                            placeholder="请输入长链接，以换行符分割"
-                            autoSize={{minRows: 5, maxRows: 100}}
-                        />
-                    </Col>
-
-                </Row>
-
-                <br/>
                 <Row>
                     <Col span={2} offset={4}>
                         <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
@@ -300,6 +306,20 @@ export default class CreateView extends Component {
                 </Row>
 
                 <br/>
+                <Row>
+                    <Col span={16} offset={4}>
+                        <TextArea
+                            value={this.state.value}
+                            onChange={this.onChange}
+                            placeholder="请输入长链接，以换行符分割"
+                            autoSize={{minRows: 6, maxRows: 100}}
+                        />
+                    </Col>
+
+                </Row>
+
+                <br/>
+
                 <Row>
                     <Col span={16} offset={4}>
                         {this.state.tableVisible_oneToOne ?

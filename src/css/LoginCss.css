@@ -13,8 +13,8 @@
     top: 25%;position: fixed;
     left: 33%;
     border-radius: 25px;
-    box-shadow: 0 0 70px 0px  #132c33;
-    background-color: #93b5cf;
+    box-shadow: 10px 10px 50px #3399CC;
+    background-color: #336699;
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
 }
 .myh4{
