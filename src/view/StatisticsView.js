@@ -2,6 +2,8 @@ import React from "react";
 import StatisticsBar from "../components/StatisticsBar";
 import {Row,Col} from 'antd';
 import MapBox from "../components/MapBox";
+import TrendingLines from "../components/TrendingLines";
+import '../css/Statistics.css'
 const testData=[{short:'abc',
     count:2341,
     area_distr:[
@@ -177,10 +179,15 @@ const testData=[{short:'abc',
         }
     ],
     time_distr:[
-        {time:'0',value:3}, {time:'1',value:5},{time:'2',value:6},{time:'3',value:2},{time:'4',value:2},{time:'5',value:2},{time:'6',value:2},{time:'7',value:2},
-        {time:'8',value:2},{time:'9',value:742},{time:'10',value:241},{time:'11',value:2},{time:'12',value:2},{time:'13',value:2}, {time:'14',value:2},{time:'15',value:2},
-        {time:'16',value:262},{time:'17',value:20},{time:'18',value:242},{time:'19',value:2},{time:'20',value:2},
-        {time:'21',value:212},{time:'22',value:234},{time:'23',value:253}
+        {time:'0',url:"short.cn/URl",value:3}, {time:'1',url:"short.cn/URl",value:5},{time:'2',url:"short.cn/URl",value:6},{time:'3',url:"short.cn/URl",value:2},{time:'4',url:"short.cn/URl",value:2},{time:'5',url:"short.cn/URl",value:2},{time:'6',url:"short.cn/URl",value:2},{time:'7',url:"short.cn/URl",value:2},
+        {time:'8',url:"short.cn/URl",value:2},{time:'9',url:"short.cn/URl",value:742},{time:'10',url:"short.cn/URl",value:241},{time:'11',url:"short.cn/URl",value:2},{time:'12',url:"short.cn/URl",value:2},{time:'13',url:"short.cn/URl",value:2}, {time:'14',url:"short.cn/URl",value:2},{time:'15',url:"short.cn/URl",value:2},
+        {time:'16',url:"short.cn/URl",value:262},{time:'17',url:"short.cn/URl",value:20},{time:'18',url:"short.cn/URl",value:242},{time:'19',url:"short.cn/URl",value:2},{time:'20',url:"short.cn/URl",value:2},
+        {time:'21',url:"short.cn/URl",value:212},{time:'22',url:"short.cn/URl",value:234},{time:'23',url:"short.cn/URl",value:253},
+        {time:'0',url:"short.cn/uRL",value:3}, {time:'1',url:"short.cn/uRL",value:5},{time:'2',url:"short.cn/uRL",value:6},{time:'3',url:"short.cn/uRL",value:2},{time:'4',url:"short.cn/uRL",value:2},{time:'5',url:"short.cn/uRL",value:2},{time:'6',url:"short.cn/uRL",value:2},{time:'7',url:"short.cn/uRL",value:2},
+        {time:'8',url:"short.cn/uRL",value:122},{time:'9',url:"short.cn/uRL",value:442},{time:'10',url:"short.cn/uRL",value:71},{time:'11',url:"short.cn/uRL",value:542},{time:'12',url:"short.cn/uRL",value:42},{time:'13',url:"short.cn/uRL",value:2}, {time:'14',url:"short.cn/uRL",value:72},{time:'15',url:"short.cn/uRL",value:2},
+        {time:'16',url:"short.cn/uRL",value:26},{time:'17',url:"short.cn/uRL",value:20},{time:'18',url:"short.cn/uRL",value:142},{time:'19',url:"short.cn/uRL",value:322},{time:'20',url:"short.cn/uRL",value:2},
+        {time:'21',url:"short.cn/uRL",value:22},{time:'22',url:"short.cn/uRL",value:274},{time:'23',url:"short.cn/uRL",value:453}
+
     ],
     source_distr:{'jd.com':345,'taobao.com':35,'qq.com':312}
 },
@@ -731,16 +738,25 @@ StatisticsView
 @description Statistics page
 */
 export default class StatisticsView extends React.Component{
+    state={
+        display:'area'
+    }
+    toggleSwitch=({key})=>{
+        this.setState({display:key});
+    }
     render() {
+
         return (
             <div>
                 <Row>
                     <Col style={{background:'black',"max-width":"256px"}}>
-                        <StatisticsBar />
+                        <StatisticsBar toggleSwitch={this.toggleSwitch} />
                     </Col>
-                    <Col  flex="auto" style={{height: 800}}>
-                        <MapBox data={testData[0].area_distr}/>
+                    <Col flex="auto" style={{height: 800}}>
+                        {this.state.display==='time'?<TrendingLines data={testData[0].time_distr}/>:null}
+                        {this.state.display==='area'?<MapBox data={testData[0].area_distr}/>:null}
                     </Col>
+
                 </Row>
             </div>
         );

@@ -18,11 +18,70 @@ export default class LineChart extends React.Component{
         this.state={data: props.data,
         config: {
             data:props.data,
-            title:{visible:true,text:'分时段统计'},
+            title:{visible:true,text:'访问量',style: {fill: "white"}},
             description: {
                 visible: true,
-                text: '对短链接访问量分时段统计',
-            },xField:'time',yField:'value'
+                text: '短链接访问量分时段统计',
+                style: {
+                    fill: "#cccccc",
+                }
+            },xField:'time',yField:'value',
+            xAxis:{
+                visible:true,
+                title:{
+                    visible:true,
+                    text:"时间",
+                    style: {fill: "white"}
+                },
+                label: {
+                    visible: true,
+                    autoRotate: true,
+                    autoHide: true,
+                    style: {fill: "white"}
+                },
+            },
+            yAxis:{
+                visible:true,
+                title:{
+                    visible:true,
+                    text:"访问量",
+                    style: {fill: "white"},
+                    grid:{
+                        visible:true,
+                        style: {fill: "white"}
+                    }
+                },
+                label: {
+                    visible: true,
+                    autoRotate: true,
+                    autoHide: true,
+                    style: {fill: "white"}
+                },
+            },
+            legend:{
+                position:"top-left",
+                style: {fill: "white"}
+            },
+            seriesField:"url",
+            tooltip:{
+                visible:true,
+                shared:true,
+                showCrosshairs:true,
+                crosshairs:{
+                    type:'y'
+                },
+                offset:20,
+            },
+            color: ['#9ad4ff', '#8df8c2', '#ffdc78','#ff9898'],
+            interactions: [
+                {
+                    type: 'slider',
+                    cfg: {
+                        start: 0.1,
+                        end: 0.2,
+                    },
+                },
+            ],
         }
         };
     }
