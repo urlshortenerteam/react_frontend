@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/charts": "^0.9.6",
+    "@ant-design/icons": "^4.2.1",
+    "@antv/g2plot": "^1.1.11",
+    "@antv/l7": "^2.2.20",
+    "@antv/l7-district": "^2.2.20",
+    "@antv/l7-maps": "^2.2.20",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "latest",
+
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",

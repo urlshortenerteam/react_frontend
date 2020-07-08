@@ -1,0 +1,10 @@
+.ant-form-item-label > label {
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 32px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+}

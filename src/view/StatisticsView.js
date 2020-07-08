@@ -2,6 +2,7 @@ import React from "react";
 import StatisticsBar from "../components/StatisticsBar";
 import {Row,Col} from 'antd';
 import MapBox from "../components/MapBox";
+import Navigation from "../components/Navigation";
 import TrendingLines from "../components/TrendingLines";
 import '../css/Statistics.css'
 const testData=[{short:'abc',
@@ -748,6 +749,13 @@ export default class StatisticsView extends React.Component{
 
         return (
             <div>
+                {/*<Row>*/}
+                {/*    <Col span={20} offset={2}>*/}
+                {/*        <Navigation/>*/}
+                {/*    </Col>*/}
+
+                {/*</Row>*/}
+                <Navigation/>
                 <Row>
                     <Col style={{background:'black',"max-width":"256px"}}>
                         <StatisticsBar toggleSwitch={this.toggleSwitch} />

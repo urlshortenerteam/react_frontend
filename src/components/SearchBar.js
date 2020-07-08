@@ -1,10 +1,14 @@
 import React from "react";
-import {Col,Row,Button} from "antd";
+import {Col, Row, Button, message} from "antd";
 import { Input } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
 export default class SearchBar extends React.Component{
+    show=()=>{
+        message.error("请先登录");
+    };
+
     render() {
         return(
             <Row>
@@ -19,7 +23,7 @@ export default class SearchBar extends React.Component{
                 </Col>
 
                 <Col span={4}>
-                    <Button ghost size="large">生成短链接</Button>
+                    <Button ghost size="large" onClick={this.show}>生成短链接</Button>
                 </Col>
 
             </Row>
