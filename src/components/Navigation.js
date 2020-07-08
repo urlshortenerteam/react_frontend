@@ -93,7 +93,7 @@ export default class Navigation extends React.Component {
                                         </Menu.ItemGroup>
                                     </SubMenu>
                                     <Menu.Item key="app" icon={  <AreaChartOutlined />}>
-                                        统计图表
+                                        <a href="#/statistics" >统计图表</a>
 
                                     </Menu.Item>
                                     <Menu.Item key="create" icon={  <PicLeftOutlined />}>
