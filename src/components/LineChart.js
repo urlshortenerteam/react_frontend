@@ -77,8 +77,8 @@ export default class LineChart extends React.Component{
                 {
                     type: 'slider',
                     cfg: {
-                        start: 0.1,
-                        end: 0.2,
+                        start: 0.4,
+                        end: 0.8,
                     },
                 },
             ],

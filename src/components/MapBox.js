@@ -77,8 +77,10 @@ export default class MapBox extends React.Component{
                     {
                         position:'relative',
                         height:'100%',
+
                         marginLeft:30,
                         marginRight:32,
+
                     }
                 }
             >

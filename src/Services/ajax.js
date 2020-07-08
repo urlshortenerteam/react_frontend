@@ -22,9 +22,10 @@ let postRequest = (url, json, callback) => {
 };
 
 
-let getRequest = (url, callback) => {
-
-    fetch(url)
+let getRequest = (url, callback,{errorCallback,params}) => {
+    let _url=new URL(url)
+    _url.search=new URLSearchParams(params).toString();
+    fetch(_url)
         .then((response) => {
             return response.json()
         })
@@ -33,6 +34,7 @@ let getRequest = (url, callback) => {
         })
         .catch((error) => {
             console.log(error);
+            errorCallback(error);
         });
 };
 
