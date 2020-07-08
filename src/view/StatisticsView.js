@@ -1,9 +1,10 @@
 import React from "react";
-import StatisticsBar from "../components/StatisticsBar";
+import StatisticsBar from "../components/statistics/StatisticsBar";
 import {Row,Col} from 'antd';
 import MapBox from "../components/MapBox";
-import TrendingLines from "../components/TrendingLines";
+import TrendingLines from "../components/statistics/TrendingLines";
 import '../css/Statistics.css'
+import OverView from "../components/statistics/OverView";
 const testData=[{short:'abc',
     count:2341,
     area_distr:[
@@ -734,12 +735,12 @@ const testData=[{short:'abc',
 /*
 StatisticsView
 @author Zhuohao Shen
-@date July 6th 2020
+@date July 7th 2020
 @description Statistics page
 */
 export default class StatisticsView extends React.Component{
     state={
-        display:'area'
+        display:'overview'
     }
     toggleSwitch=({key})=>{
         this.setState({display:key});
@@ -749,14 +750,14 @@ export default class StatisticsView extends React.Component{
         return (
             <div>
                 <Row>
-                    <Col style={{background:'black',"max-width":"256px"}}>
+                    <Col style={{background:'black',"maxWidth":"256px"}}>
                         <StatisticsBar toggleSwitch={this.toggleSwitch} />
                     </Col>
                     <Col flex="auto" style={{height: 800}}>
                         {this.state.display==='time'?<TrendingLines data={testData[0].time_distr}/>:null}
                         {this.state.display==='area'?<MapBox data={testData[0].area_distr}/>:null}
+                        {this.state.display==='overview'?<OverView />:null}
                     </Col>
-
                 </Row>
             </div>
         );
