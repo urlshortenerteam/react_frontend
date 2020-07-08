@@ -2,42 +2,56 @@ import React, {Component} from "react";
 import Navigation from "../components/Navigation";
 import { Row, Col } from 'antd';
 import "../css/HomeCss.css"
-import { Input } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
 import SearchBar from "../components/SearchBar";
+import { Layout, Menu, Breadcrumb } from 'antd';
 
-const { Search } = Input;
+const { Header, Content, Footer } = Layout;
+
 class HomeView extends Component{
     render() {
         return (
-            <div>
-                <Row>
-                    <Col span={20} offset={2}>
-                        <Navigation/>
-                    </Col>
 
-                </Row>
+            <Layout style={{ backgroundColor:'#001529' }}>
+                <Header>
+
+                    <Row>
+                        <Col span={20} offset={2}>
+                            <Navigation/>
+                        </Col>
+
+                    </Row>
+                </Header>
+                {/*style={{ padding: '0 50px' }}*/}
+                {/*<Content >*/}
+                <div style={{backgroundColor:'#001529'}}>
                 <div className="Block">
                     <br/><br/>
                     <div className="title">
                         简单易用的渠道短链接统计工具
                     </div>
                     <br/><br/><br/>
-                <div>
-                    <Row>
-                        <Col span={18} offset={3}>
+                    <div>
+                        <Row>
+                            <Col span={18} offset={3}>
 
-                            <SearchBar/>
+                                <SearchBar/>
 
 
-                        </Col>
+                            </Col>
 
-                    </Row>
+                        </Row>
+                    </div>
+
                 </div>
-
             </div>
+                {/*</Content>*/}
+                <br/> <br/> <br/>  <br/>      <br/>  <br/><br/>
 
-            </div>
+                <Footer style={{ textAlign: 'center',backgroundColor:'#001529',color:'#d8e3e7' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            </Layout>
+
+
+
         );
     }
 

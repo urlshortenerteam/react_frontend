@@ -1,0 +1,16 @@
+.ant-page-header-heading-title {
+    margin-right: 12px;
+    margin-bottom: 0;
+    color: #006699;
+/*rgba(0, 0, 0, 0.85);*/
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    background-color: #6699CC;
+}
