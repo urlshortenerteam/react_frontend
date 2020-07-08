@@ -1,3 +1,4 @@
+
 import {postRequest,getRequest,deleteRequest} from "./ajax";
 
 export const getBatchOneToOne=(data,callback)=>{
