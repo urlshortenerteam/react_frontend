@@ -1,7 +1,7 @@
 import '../../css/Carousel.css'
 import React from "react";
 import RealTimeTrack from "./RealTimeTrack";
-import {Gauge,Liquid} from "@ant-design/charts";
+import {StackedArea,Liquid} from "@ant-design/charts";
 import {Row,Col} from 'antd';
 
 /*
@@ -11,59 +11,46 @@ Overview
 @description show overview for current user
 */
 export default class OverView extends React.Component{
-    WorkloadGauge=(style)=>{
+    StackedLines= (data) => {
         const config = {
             title: {
                 visible: true,
-                text: '负载',
-                alignTo:'middle'
+                text: '访问量趋势',
             },
-            value: 34,
-            min: 0,
-            max: 100,
-            range: [0, 70],
-            format: (v) => {
-                return v + '%';
-            },
-            color: ['l(0) 0:' +
-            '#b0d0ff' +
-            ' 1:' +
-            '#03c600'
-            ],
-        };
-        return  <Gauge {...config} style={style} theme="dark"/>
-    }
-    fluxLiquid=()=>{
-        const config = {
-            title: {
+            description: {
                 visible: true,
-                text: '流量',
-                alignTo:'middle'
+                text:
+                    '近24小时访问量概览',
             },
-            forceFit:true,
-
-            color:'#99CC33',
-            min: 0,
-            max: 10000,
-            value: 5639,
-            statistic: { formatter: (value) => ((100 * value) / 10000).toFixed(1) + '%'
-            ,color:"#ffffff"
+            data,
+            xField: 'time',
+            yField: 'value',
+            theme:'dark',
+            stackField: 'url',
+            color: ['#6897a7', '#8bc0d6', '#60d7a7', '#dedede', '#fedca9', '#fab36f', '#d96d6f'],
+            xAxis: {
+                type: 'dateTime',
+                tickCount: 5,
             },
+            label: {
+                visible: true,
+                type: 'area',
+                autoScale: true,
+            },
+            legend: {
+                visible: true,
+                offsetX:-10,
+                position: 'right-top',
+            },
+            responsive: true,
         };
-        return <Liquid {...config} theme="dark"/>;
-    }
+        return <StackedArea {...config} />;
+    };
     render() {
         return (
             <div>
-                <Row align="bottom" >
-                    <Col flex={1}>
-                        {this.WorkloadGauge()}
+                {this.StackedLines(this.props.data)}
 
-                    </Col >
-                    <Col  flex={2}>
-                        {this.fluxLiquid()}
-                    </Col>
-                </Row>
                 <RealTimeTrack />
             </div>
         );
