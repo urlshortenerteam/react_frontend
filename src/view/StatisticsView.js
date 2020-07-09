@@ -23,10 +23,10 @@ export default class StatisticsView extends React.Component{
         display:'overview',
         data:[],
         lineData:[]
-    }
+    };
     toggleSwitch=({key})=>{
         this.setState({display:key});
-    }
+    };
     async componentDidMount() {
         getRequest("http://localhost:4000/getStat",this.handleData,{
                 params:{id:0},
@@ -47,23 +47,25 @@ export default class StatisticsView extends React.Component{
                 )
 
             }
-        )
+        );
         this.setState({lineData:lines});
         console.log(this.state)
-    }
+    };
     handleError=(error)=>{
         console.log(error);
-    }
+    };
     render() {
 
         return (
             <div>
                 <Navigation/>
                 <Row>
+
                     <Col md style={{background:'black',"maxWidth":"20%"}} >
                         <StatisticsBar toggleSwitch={this.toggleSwitch} />
                     </Col>
                     <Col flex="1 1 content" style={{height: 800,
+
                         marginLeft:30,
                         marginRight:32,
                     }}>

@@ -1,17 +1,24 @@
 import React, {Component, useReducer} from "react";
 import Navigation from "../components/Navigation";
-import {Row, Col,Tooltip} from 'antd';
+import {Row, Col, Tooltip, Layout, Tabs} from 'antd';
 import "../css/HomeCss.css"
 import {Input, Button} from 'antd';
 import {AudioOutlined} from '@ant-design/icons';
 import SearchBar from "../components/SearchBar";
 import {Table} from 'antd';
-import {getBatchOneToOne} from "../Services/CreateService"
+import {getBatchManyToOne, getBatchOneToOne} from "../Services/CreateService"
 import { Alert } from 'antd';
 import { message, Space } from 'antd';
-
+import "../css/CreateCss.css"
+const { Header, Content, Footer } = Layout;
 const {TextArea} = Input;
 
+/*
+CreateView
+@author Shuchang Liu
+@date July 7th 2020
+@description Create View
+*/
 export default class CreateView extends Component {
 
     state = {
@@ -68,49 +75,49 @@ export default class CreateView extends Component {
 
 
         //将数据发给后端
-        const callBack=(data)=>{
+        const callBack=(rep)=>{
+            console.log(rep.data.short);
             let result=[];
-            data.forEach(function(item,index){
+            urlArray.forEach(function (item,index) {
                 result.push({
                     long:urlArray[index],
-                    short:item,
+                    short:rep.data.short
                 })
             });
-
             this.setState({
-                showData:result
-            })
+                showData:result,
+                tableVisible_manyToOne: true,
+            });
+            console.log(result);
         };
 
         // 格式正确则将数据发回后端
         if(flag)
         {
-            getBatchOneToOne(this.state.urls,callBack);
+            getBatchManyToOne(this.state.urls,callBack);
 
-            this.setState({
-                tableVisible_manyToOne: true,
-            });
+
         }
 
         // 先在没有后端，先只显示数据
-        if(flag)
-        {
-            let result=[];
-            urlArray.forEach(function(item,index){
-                result.push({
-                    long:item,
-                    short:"hhhh",
-                })
-            });
-
-            this.setState({
-                showData:result
-            });
-            this.setState({
-                value:""
-            });
-
-        }
+        // if(flag)
+        // {
+        //     let result=[];
+        //     urlArray.forEach(function(item,index){
+        //         result.push({
+        //             long:item,
+        //             short:"hhhh",
+        //         })
+        //     });
+        //
+        //     this.setState({
+        //         showData:result
+        //     });
+        //     this.setState({
+        //         value:""
+        //     });
+        //
+        // }
 
     };
     oneToOne = () => {
@@ -160,18 +167,19 @@ export default class CreateView extends Component {
 
 
         //将数据发给后端
-        const callBack=(data)=>{
+        const callBack=(res)=>{
             let result=[];
-            data.forEach(function(item,index){
-                result.push({
-                    long:urlArray[index],
-                    short:item,
-                })
-            });
-
-            this.setState({
-                showData:result
-            })
+            console.log(res);
+            // res.data.forEach(function(item,index){
+            //     result.push({
+            //         long:urlArray[index],
+            //         short:item,
+            //     })
+            // });
+            //
+            // this.setState({
+            //     showData:result
+            // })
         };
 
         // 格式正确则将数据发回后端
@@ -284,62 +292,154 @@ export default class CreateView extends Component {
 
         ];
         return (
-            <div>
-                <Row>
-                    <Col span={20} offset={2}>
-                        <Navigation/>
-                    </Col>
+            <Layout style={{ backgroundColor:'#001529' }}>
+                <Header>
 
-                </Row>
+                    <Row>
+                        <Col span={20} offset={2}>
+                            <Navigation/>
+                        </Col>
 
-                <Row>
-                    <Col span={2} offset={4}>
-                        <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
+                    </Row>
+                </Header>
 
-                    </Col>
-                    <Col span={6}>
+                <Content  style={{ padding: '0 50px' }}>
+                    <br/>  <br/>
+                    <Row>
+                                 <Col span={2} offset={4}>
+                                     <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
 
-                        <Button type="primary" onClick={this.manyToOne}>多对一生成</Button>
-                    </Col>
+                                 </Col>
+                                <Col span={6}>
 
-
-                </Row>
-
-                <br/>
-                <Row>
-                    <Col span={16} offset={4}>
-                        <TextArea
-                            value={this.state.value}
-                            onChange={this.onChange}
-                            placeholder="请输入长链接，以换行符分割"
-                            autoSize={{minRows: 6, maxRows: 100}}
-                        />
-                    </Col>
-
-                </Row>
-
-                <br/>
-
-                <Row>
-                    <Col span={16} offset={4}>
-                        {this.state.tableVisible_oneToOne ?
-                            <Table
-                                columns={columns_for_oneToOne}
-                                dataSource={this.state.showData}
-                            />
-                            : null}
-                        {this.state.tableVisible_manyToOne ?
-                            <Table
-                                columns={columns_for_manyToOne}
-                                dataSource={this.state.showData}
-                            />
-                            : null}
-                    </Col>
-
-                </Row>
+                                     <Button type="primary" onClick={this.manyToOne}>多对一生成</Button>
+                                 </Col>
 
 
-            </div>
+                             </Row>
+
+                         <br/>
+                         <Row>
+                             <Col span={16} offset={4}>
+
+                                 <div className="shadow">
+                                     <TextArea
+                                         value={this.state.value}
+                                         onChange={this.onChange}
+                                         placeholder="请输入长链接，以换行符分割"
+                                         autoSize={{minRows: 6, maxRows: 100}}
+
+                                     />
+                                 </div>
+
+
+
+                             </Col>
+
+                         </Row>
+
+                         <br/>
+
+                         <Row>
+                             <Col span={16} offset={4}>
+                                 {this.state.tableVisible_oneToOne ?
+                                     // <div className="shadow">
+                                         <Table
+                                             columns={columns_for_oneToOne}
+                                             dataSource={this.state.showData}
+                                         />
+                                     // </div>
+
+                                     : null}
+                                 {this.state.tableVisible_manyToOne ?
+                                     // <div className="shadow">
+                                         <Table
+                                             columns={columns_for_manyToOne}
+                                             dataSource={this.state.showData}
+                                         />
+                                     // </div>
+
+                                     : null}
+                             </Col>
+
+                         </Row>
+
+
+                </Content>
+                <br/> <br/> <br/>  <br/>      <br/>  <br/><br/>
+
+                <Footer style={{ textAlign: 'center',backgroundColor:'#001529',color:'#d8e3e7' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            </Layout>
+
+            // <div>
+            //     <Row>
+            //         <Col span={20} offset={2}>
+            //             <Navigation/>
+            //         </Col>
+            //
+            //     </Row>
+            //
+            //     <Row>
+            //         <Col span={2} offset={4}>
+            //             <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
+            //
+            //         </Col>
+            //         <Col span={6}>
+            //
+            //             <Button type="primary" onClick={this.manyToOne}>多对一生成</Button>
+            //         </Col>
+            //
+            //
+            //     </Row>
+            //
+            //     <br/>
+            //     <Row>
+            //         <Col span={16} offset={4}>
+            //
+            //             <div className="shadow">
+            //                 <TextArea
+            //                     value={this.state.value}
+            //                     onChange={this.onChange}
+            //                     placeholder="请输入长链接，以换行符分割"
+            //                     autoSize={{minRows: 6, maxRows: 100}}
+            //
+            //                 />
+            //             </div>
+            //
+            //
+            //
+            //         </Col>
+            //
+            //     </Row>
+            //
+            //     <br/>
+            //
+            //     <Row>
+            //         <Col span={16} offset={4}>
+            //             {this.state.tableVisible_oneToOne ?
+            //                 // <div className="shadow">
+            //                     <Table
+            //                         columns={columns_for_oneToOne}
+            //                         dataSource={this.state.showData}
+            //                     />
+            //                 // </div>
+            //
+            //                 : null}
+            //             {this.state.tableVisible_manyToOne ?
+            //                 // <div className="shadow">
+            //                     <Table
+            //                         columns={columns_for_manyToOne}
+            //                         dataSource={this.state.showData}
+            //                     />
+            //                 // </div>
+            //
+            //                 : null}
+            //         </Col>
+            //
+            //     </Row>
+            //
+            //
+            // </div>
         );
     }
 }

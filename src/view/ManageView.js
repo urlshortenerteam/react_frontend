@@ -5,7 +5,8 @@ import "../css/HomeCss.css"
 
 import SearchBar from "../components/SearchBar";
 import { Layout, } from 'antd';
-
+import { Tabs } from 'antd';
+const { TabPane } = Tabs;
 const { Header, Content, Footer } = Layout;
 class ManageView extends Component{
     render() {
@@ -22,6 +23,25 @@ class ManageView extends Component{
                 </Header>
 
                 <Content  style={{ padding: '0 50px' }}>
+                    <Row>
+                        <Col span={2}></Col>
+                        <Col span={20}>
+                            <Tabs defaultActiveKey="1" >
+                                <TabPane tab="我的短链接" key="1">
+
+                                </TabPane>
+                                <TabPane tab="Type Manage" key="2">
+
+                                </TabPane>
+                                <TabPane tab="Order Manage" key="3">
+
+                                </TabPane>
+
+                            </Tabs>
+                        </Col>
+                        <Col span={2}></Col>
+                    </Row>
+
 
 
                 </Content>
