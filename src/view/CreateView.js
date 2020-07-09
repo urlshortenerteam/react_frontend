@@ -1,6 +1,6 @@
 import React, {Component, useReducer} from "react";
 import Navigation from "../components/Navigation";
-import {Row, Col,Tooltip} from 'antd';
+import {Row, Col, Tooltip, Layout, Tabs} from 'antd';
 import "../css/HomeCss.css"
 import {Input, Button} from 'antd';
 import {AudioOutlined} from '@ant-design/icons';
@@ -10,6 +10,7 @@ import {getBatchManyToOne, getBatchOneToOne} from "../Services/CreateService"
 import { Alert } from 'antd';
 import { message, Space } from 'antd';
 import "../css/CreateCss.css"
+const { Header, Content, Footer } = Layout;
 const {TextArea} = Input;
 
 /*
@@ -291,75 +292,154 @@ export default class CreateView extends Component {
 
         ];
         return (
-            <div>
-                <Row>
-                    <Col span={20} offset={2}>
-                        <Navigation/>
-                    </Col>
+            <Layout style={{ backgroundColor:'#001529' }}>
+                <Header>
 
-                </Row>
+                    <Row>
+                        <Col span={20} offset={2}>
+                            <Navigation/>
+                        </Col>
 
-                <Row>
-                    <Col span={2} offset={4}>
-                        <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
+                    </Row>
+                </Header>
 
-                    </Col>
-                    <Col span={6}>
+                <Content  style={{ padding: '0 50px' }}>
+                    <br/>  <br/>
+                    <Row>
+                                 <Col span={2} offset={4}>
+                                     <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
 
-                        <Button type="primary" onClick={this.manyToOne}>多对一生成</Button>
-                    </Col>
+                                 </Col>
+                                <Col span={6}>
 
-
-                </Row>
-
-                <br/>
-                <Row>
-                    <Col span={16} offset={4}>
-
-                        <div className="shadow">
-                            <TextArea
-                                value={this.state.value}
-                                onChange={this.onChange}
-                                placeholder="请输入长链接，以换行符分割"
-                                autoSize={{minRows: 6, maxRows: 100}}
-
-                            />
-                        </div>
+                                     <Button type="primary" onClick={this.manyToOne}>多对一生成</Button>
+                                 </Col>
 
 
+                             </Row>
 
-                    </Col>
+                         <br/>
+                         <Row>
+                             <Col span={16} offset={4}>
 
-                </Row>
+                                 <div className="shadow">
+                                     <TextArea
+                                         value={this.state.value}
+                                         onChange={this.onChange}
+                                         placeholder="请输入长链接，以换行符分割"
+                                         autoSize={{minRows: 6, maxRows: 100}}
 
-                <br/>
-
-                <Row>
-                    <Col span={16} offset={4}>
-                        {this.state.tableVisible_oneToOne ?
-                            // <div className="shadow">
-                                <Table
-                                    columns={columns_for_oneToOne}
-                                    dataSource={this.state.showData}
-                                />
-                            // </div>
-
-                            : null}
-                        {this.state.tableVisible_manyToOne ?
-                            // <div className="shadow">
-                                <Table
-                                    columns={columns_for_manyToOne}
-                                    dataSource={this.state.showData}
-                                />
-                            // </div>
-
-                            : null}
-                    </Col>
-
-                </Row>
+                                     />
+                                 </div>
 
 
-            </div>
+
+                             </Col>
+
+                         </Row>
+
+                         <br/>
+
+                         <Row>
+                             <Col span={16} offset={4}>
+                                 {this.state.tableVisible_oneToOne ?
+                                     // <div className="shadow">
+                                         <Table
+                                             columns={columns_for_oneToOne}
+                                             dataSource={this.state.showData}
+                                         />
+                                     // </div>
+
+                                     : null}
+                                 {this.state.tableVisible_manyToOne ?
+                                     // <div className="shadow">
+                                         <Table
+                                             columns={columns_for_manyToOne}
+                                             dataSource={this.state.showData}
+                                         />
+                                     // </div>
+
+                                     : null}
+                             </Col>
+
+                         </Row>
+
+
+                </Content>
+                <br/> <br/> <br/>  <br/>      <br/>  <br/><br/>
+
+                <Footer style={{ textAlign: 'center',backgroundColor:'#001529',color:'#d8e3e7' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            </Layout>
+
+            // <div>
+            //     <Row>
+            //         <Col span={20} offset={2}>
+            //             <Navigation/>
+            //         </Col>
+            //
+            //     </Row>
+            //
+            //     <Row>
+            //         <Col span={2} offset={4}>
+            //             <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
+            //
+            //         </Col>
+            //         <Col span={6}>
+            //
+            //             <Button type="primary" onClick={this.manyToOne}>多对一生成</Button>
+            //         </Col>
+            //
+            //
+            //     </Row>
+            //
+            //     <br/>
+            //     <Row>
+            //         <Col span={16} offset={4}>
+            //
+            //             <div className="shadow">
+            //                 <TextArea
+            //                     value={this.state.value}
+            //                     onChange={this.onChange}
+            //                     placeholder="请输入长链接，以换行符分割"
+            //                     autoSize={{minRows: 6, maxRows: 100}}
+            //
+            //                 />
+            //             </div>
+            //
+            //
+            //
+            //         </Col>
+            //
+            //     </Row>
+            //
+            //     <br/>
+            //
+            //     <Row>
+            //         <Col span={16} offset={4}>
+            //             {this.state.tableVisible_oneToOne ?
+            //                 // <div className="shadow">
+            //                     <Table
+            //                         columns={columns_for_oneToOne}
+            //                         dataSource={this.state.showData}
+            //                     />
+            //                 // </div>
+            //
+            //                 : null}
+            //             {this.state.tableVisible_manyToOne ?
+            //                 // <div className="shadow">
+            //                     <Table
+            //                         columns={columns_for_manyToOne}
+            //                         dataSource={this.state.showData}
+            //                     />
+            //                 // </div>
+            //
+            //                 : null}
+            //         </Col>
+            //
+            //     </Row>
+            //
+            //
+            // </div>
         );
     }
 }
