@@ -20,7 +20,7 @@ export default class TrendingLines extends Component{
     }
     render() {
         return (
-            <Collapse defaultActiveKey={['1']} ghost style={{'background-color':'#011428'}}>
+            <Collapse defaultActiveKey={['1']} ghost style={{'backgroundColor':'#011428'}}>
                 <Panel  header="过去24小时" key="1">
                     <LineChart  data={this.state.data} />
                 </Panel>
@@ -30,7 +30,7 @@ export default class TrendingLines extends Component{
                 <Panel header="最近一个月" key="3">
                     <p>test</p>
                 </Panel>
-                <Panel header="最近一年" key="3">
+                <Panel header="最近一年" key="4">
                 <p>test</p>
             </Panel>
             </Collapse>
