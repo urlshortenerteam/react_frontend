@@ -50,7 +50,6 @@ export default class RealTimeTrack extends React.Component{
         )
     }
     handleData=(response)=>{
-        console.log(response.data.logs)
         this.setState({data:response.data.logs});
     }
     handleError=(error)=>{
@@ -59,7 +58,13 @@ export default class RealTimeTrack extends React.Component{
 
     render() {
         return (
-            <Table dataSource={this.state.data} columns={this.state.columns} />
+            <Table dataSource={this.state.data}
+                   columns={this.state.columns}
+                   title={() => '实时统计'}
+                   rowKey={(record)=>{
+                       return record.time+(record.ip).toString()
+                   }}
+            />
         );
     }
 }

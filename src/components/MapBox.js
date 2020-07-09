@@ -43,7 +43,7 @@ export default class MapBox extends React.Component{
                 cityStrokeWidth: 1,
                 fill: {
                     color: {
-                        field: 'NAME_CHN',
+                        field: 'value',
                         values: [
                             '#feedde',
                             '#a2c3fd',
@@ -57,7 +57,7 @@ export default class MapBox extends React.Component{
                 popup: {
                     enable: true,
                     Html: props => {
-                        return `<span>${props.NAME_CHN}</span>`;
+                        return `<span>${props.NAME_CHN}</span><br/><span>${props.value}次访问</span>`;
                     }
                 }
             })
@@ -77,10 +77,6 @@ export default class MapBox extends React.Component{
                     {
                         position:'relative',
                         height:'100%',
-
-                        marginLeft:30,
-                        marginRight:32,
-
                     }
                 }
             >
