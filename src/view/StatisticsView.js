@@ -60,16 +60,18 @@ export default class StatisticsView extends React.Component{
             <div>
                 <Navigation/>
                 <Row>
-                    <Col  style={{background:'black',"maxWidth":"256px"}}>
+
+                    <Col md style={{background:'black',"maxWidth":"20%"}} >
                         <StatisticsBar toggleSwitch={this.toggleSwitch} />
                     </Col>
-                    <Col offset={3} span={21} style={{height: 800,
+                    <Col flex="1 1 content" style={{height: 800,
+
                         marginLeft:30,
                         marginRight:32,
                     }}>
                         {this.state.display==='time'?<TrendingLines data={this.state.lineData}/>:null}
                         {this.state.display==='area'?<MapBox data={this.state.data[0].area_distr}/>:null}
-                        {this.state.display==='overview'?<OverView />:null}
+                        {this.state.display==='overview'?<OverView data={this.state.lineData} />:null}
                     </Col>
                 </Row>
             </div>
