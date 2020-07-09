@@ -35,13 +35,13 @@ export default class StatisticsView extends React.Component{
         )
     }
     handleData=(response)=>{
-        this.setState({data:response.data.stats});
+        this.setState({data:response.data});
         let lines=[];
         this.state.data.forEach(
             (url)=>{
                 url.time_distr.forEach(
                     (time)=>{
-                        time.url='short.cn/'+url.short;
+                        time.url='short.cn/'+url.shortUrl;
                         lines.push(time)
                     }
                 )

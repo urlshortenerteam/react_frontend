@@ -63,7 +63,7 @@ export default class LineChart extends React.Component{
                 position:"top-left",
                 style: {fill: "white"}
             },
-            seriesField:"url",
+            seriesField:"shortUrl",
             tooltip:{
                 visible:true,
                 shared:true,

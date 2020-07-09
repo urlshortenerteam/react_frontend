@@ -6,7 +6,6 @@ let postRequest = (url, json, callback) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        credentials: "include",
 
     };
     fetch(url,opts)
