@@ -6,12 +6,18 @@ import {Input, Button} from 'antd';
 import {AudioOutlined} from '@ant-design/icons';
 import SearchBar from "../components/SearchBar";
 import {Table} from 'antd';
-import {getBatchOneToOne} from "../Services/CreateService"
+import {getBatchManyToOne, getBatchOneToOne} from "../Services/CreateService"
 import { Alert } from 'antd';
 import { message, Space } from 'antd';
-
+import "../css/CreateCss.css"
 const {TextArea} = Input;
 
+/*
+CreateView
+@author Shuchang Liu
+@date July 7th 2020
+@description Create View
+*/
 export default class CreateView extends Component {
 
     state = {
@@ -68,49 +74,49 @@ export default class CreateView extends Component {
 
 
         //将数据发给后端
-        const callBack=(data)=>{
+        const callBack=(rep)=>{
+            console.log(rep.data.short);
             let result=[];
-            data.forEach(function(item,index){
+            urlArray.forEach(function (item,index) {
                 result.push({
                     long:urlArray[index],
-                    short:item,
+                    short:rep.data.short
                 })
             });
-
             this.setState({
-                showData:result
-            })
+                showData:result,
+                tableVisible_manyToOne: true,
+            });
+            console.log(result);
         };
 
         // 格式正确则将数据发回后端
         if(flag)
         {
-            getBatchOneToOne(this.state.urls,callBack);
+            getBatchManyToOne(this.state.urls,callBack);
 
-            this.setState({
-                tableVisible_manyToOne: true,
-            });
+
         }
 
         // 先在没有后端，先只显示数据
-        if(flag)
-        {
-            let result=[];
-            urlArray.forEach(function(item,index){
-                result.push({
-                    long:item,
-                    short:"hhhh",
-                })
-            });
-
-            this.setState({
-                showData:result
-            });
-            this.setState({
-                value:""
-            });
-
-        }
+        // if(flag)
+        // {
+        //     let result=[];
+        //     urlArray.forEach(function(item,index){
+        //         result.push({
+        //             long:item,
+        //             short:"hhhh",
+        //         })
+        //     });
+        //
+        //     this.setState({
+        //         showData:result
+        //     });
+        //     this.setState({
+        //         value:""
+        //     });
+        //
+        // }
 
     };
     oneToOne = () => {
@@ -160,18 +166,19 @@ export default class CreateView extends Component {
 
 
         //将数据发给后端
-        const callBack=(data)=>{
+        const callBack=(res)=>{
             let result=[];
-            data.forEach(function(item,index){
-                result.push({
-                    long:urlArray[index],
-                    short:item,
-                })
-            });
-
-            this.setState({
-                showData:result
-            })
+            console.log(res);
+            // res.data.forEach(function(item,index){
+            //     result.push({
+            //         long:urlArray[index],
+            //         short:item,
+            //     })
+            // });
+            //
+            // this.setState({
+            //     showData:result
+            // })
         };
 
         // 格式正确则将数据发回后端
@@ -308,12 +315,19 @@ export default class CreateView extends Component {
                 <br/>
                 <Row>
                     <Col span={16} offset={4}>
-                        <TextArea
-                            value={this.state.value}
-                            onChange={this.onChange}
-                            placeholder="请输入长链接，以换行符分割"
-                            autoSize={{minRows: 6, maxRows: 100}}
-                        />
+
+                        <div className="shadow">
+                            <TextArea
+                                value={this.state.value}
+                                onChange={this.onChange}
+                                placeholder="请输入长链接，以换行符分割"
+                                autoSize={{minRows: 6, maxRows: 100}}
+
+                            />
+                        </div>
+
+
+
                     </Col>
 
                 </Row>
@@ -323,16 +337,22 @@ export default class CreateView extends Component {
                 <Row>
                     <Col span={16} offset={4}>
                         {this.state.tableVisible_oneToOne ?
-                            <Table
-                                columns={columns_for_oneToOne}
-                                dataSource={this.state.showData}
-                            />
+                            // <div className="shadow">
+                                <Table
+                                    columns={columns_for_oneToOne}
+                                    dataSource={this.state.showData}
+                                />
+                            // </div>
+
                             : null}
                         {this.state.tableVisible_manyToOne ?
-                            <Table
-                                columns={columns_for_manyToOne}
-                                dataSource={this.state.showData}
-                            />
+                            // <div className="shadow">
+                                <Table
+                                    columns={columns_for_manyToOne}
+                                    dataSource={this.state.showData}
+                                />
+                            // </div>
+
                             : null}
                     </Col>
 

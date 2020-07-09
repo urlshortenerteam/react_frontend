@@ -106,7 +106,13 @@ class LogInBlock extends React.Component{
 
 }
 
-class Login extends Component{
+/*
+LoginView
+@author Shuchang Liu
+@date July 8th 2020
+@description Login View
+*/
+class LoginView extends Component{
 
 
     render() {
@@ -124,4 +130,4 @@ class Login extends Component{
     }
 }
 
-export default withRouter(Login);
+export default withRouter(LoginView);

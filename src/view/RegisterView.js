@@ -204,6 +204,7 @@ const RegistrationForm = () => {
     );
 };
 
+
 class StepBar extends React.Component {
 
 
@@ -222,6 +223,12 @@ class StepBar extends React.Component {
     }
 }
 
+/*
+RegisterView
+@author Shuchang Liu
+@date July 8th 2020
+@description Register View
+*/
 class RegisterView extends Component{
     render() {
         return (
