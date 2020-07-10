@@ -1,3 +1,4 @@
+const hostUrl='http://localhost:4000';
 let postRequest = (url, json, callback) => {
 
     let opts = {
@@ -10,7 +11,7 @@ let postRequest = (url, json, callback) => {
         },
 
     };
-    fetch(url,opts)
+    fetch(hostUrl+url,opts)
         .then((response) => {
             return response.json()
         })
@@ -24,7 +25,7 @@ let postRequest = (url, json, callback) => {
 
 
 let getRequest = (url, callback,{errorCallback,params}) => {
-    let _url=new URL(url);
+    let _url=new URL(hostUrl+url);
     _url.search=new URLSearchParams(params).toString();
     fetch(_url)
         .then((response) => {
@@ -41,7 +42,7 @@ let getRequest = (url, callback,{errorCallback,params}) => {
 
 let deleteRequest = (url, callback) => {
 
-    fetch(url,{method: "DELETE"})
+    fetch(hostUrl+url,{method: "DELETE"})
         .then((response) => {
             return response.json()
         })
