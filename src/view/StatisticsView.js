@@ -24,7 +24,7 @@ export default class StatisticsView extends React.Component{
         this.setState({display:key});
     };
     async componentDidMount() {
-        getRequest("http://localhost:4000/getStat",this.handleData,{
+        getRequest("/getStat",this.handleData,{
                 params:{id:0},
                 errorCallback:this.handleError
             }

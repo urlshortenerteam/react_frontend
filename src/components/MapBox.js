@@ -45,7 +45,7 @@ export default class MapBox extends React.Component{
                     color: {
                         field: 'value',
                         values: [
-                            '#feedde',
+                            '#b1ceff',
                             '#a2c3fd',
                             '#6b7afd',
                             '#3c6cfd',
