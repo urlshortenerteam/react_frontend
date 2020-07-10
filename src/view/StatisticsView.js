@@ -2,12 +2,8 @@ import React from "react";
 import StatisticsBar from "../components/statistics/StatisticsBar";
 import {Row,Col} from 'antd';
 import MapBox from "../components/MapBox";
-
 import Navigation from "../components/Navigation";
-
-
 import TrendingLines from "../components/statistics/TrendingLines";
-
 import '../css/Statistics.css'
 import OverView from "../components/statistics/OverView";
 import {getRequest} from "../Services/ajax";
@@ -23,37 +19,37 @@ export default class StatisticsView extends React.Component{
         display:'overview',
         data:[],
         lineData:[]
-    }
+    };
     toggleSwitch=({key})=>{
         this.setState({display:key});
-    }
+    };
     async componentDidMount() {
-        getRequest("http://localhost:4000/getStat",this.handleData,{
+        getRequest("/getStat",this.handleData,{
                 params:{id:0},
                 errorCallback:this.handleError
             }
         )
     }
     handleData=(response)=>{
-        this.setState({data:response.data.stats});
+        this.setState({data:response.data});
         let lines=[];
         this.state.data.forEach(
             (url)=>{
                 url.time_distr.forEach(
                     (time)=>{
-                        time.url='short.cn/'+url.short;
+                        time.url='short.cn/'+url.shortUrl;
                         lines.push(time)
                     }
                 )
 
             }
-        )
+        );
         this.setState({lineData:lines});
         console.log(this.state)
-    }
+    };
     handleError=(error)=>{
         console.log(error);
-    }
+    };
     render() {
 
         return (

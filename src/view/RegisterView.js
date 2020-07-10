@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-
-
 import {Steps, message, Alert} from 'antd';
 import "../css/RegisterCss.css"
 import {
@@ -18,6 +16,7 @@ import {
     PaperClipOutlined,
 } from '@ant-design/icons';
 import {register} from "../Services/userService";
+import "../css/RegisterCss.css"
 const { Step } = Steps;
 
 const AutoCompleteOption = AutoComplete.Option;
@@ -197,12 +196,21 @@ const RegistrationForm = () => {
             <br/>
             <Form.Item {...tailFormItemLayout}>
 
-                <Button ghost htmlType="submit">Register</Button>
+                <Row>
+                    <Col span={5}></Col>
+                    <Col span={8}>
+                        <Button ghost htmlType="submit">Register</Button>
+
+                    </Col>
+                    <Col span={8}></Col>
+                </Row>
+
 
             </Form.Item>
         </Form>
     );
 };
+
 
 class StepBar extends React.Component {
 
@@ -222,6 +230,12 @@ class StepBar extends React.Component {
     }
 }
 
+/*
+RegisterView
+@author Shuchang Liu
+@date July 8th 2020
+@description Register View
+*/
 class RegisterView extends Component{
     render() {
         return (
@@ -235,13 +249,20 @@ class RegisterView extends Component{
                     </div>
                     {/*<br/><br/><br/><br/><br/><br/><br/><br/>*/}
 
-                    <Row>
-                        <Col span={6}></Col>
-                        <Col span={10} >
-                            <RegistrationForm/>
-                        </Col>
-                        <Col span={8}></Col>
-                    </Row>
+                    <div className="registerBlock">
+                        <div className="registerTitle"><span>REGISTER</span></div>
+                        <Row>
+                            <Col span={2}></Col>
+                            <Col span={18} >
+
+
+                                <br/>
+                                <RegistrationForm/>
+                            </Col>
+                            <Col span={3}></Col>
+                        </Row>
+                    </div>
+
 
                 </div>
             </div>

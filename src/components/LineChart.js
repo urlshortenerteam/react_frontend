@@ -12,7 +12,7 @@ export default class LineChart extends React.Component{
     state={
         data:[],
         config:{},
-    }
+    };
     constructor(props) {
         super(props);
         console.log(props.data);
@@ -23,22 +23,17 @@ export default class LineChart extends React.Component{
             description: {
                 visible: true,
                 text: '短链接访问量分时段统计',
-                style: {
-                    fill: "#cccccc",
-                }
             },xField:'time',yField:'value',
             xAxis:{
                 visible:true,
                 title:{
                     visible:true,
                     text:"时间",
-                    style: {fill: "white"}
                 },
                 label: {
                     visible: true,
                     autoRotate: true,
                     autoHide: true,
-                    style: {fill: "white"}
                 },
             },
             yAxis:{
@@ -49,14 +44,12 @@ export default class LineChart extends React.Component{
                     style: {fill: "white"},
                     grid:{
                         visible:true,
-                        style: {fill: "white"}
                     }
                 },
                 label: {
                     visible: true,
                     autoRotate: true,
                     autoHide: true,
-                    style: {fill: "white"}
                 },
             },
             legend:{
@@ -64,6 +57,7 @@ export default class LineChart extends React.Component{
                 style: {fill: "white"}
             },
             seriesField:"url",
+            theme:'dark',
             tooltip:{
                 visible:true,
                 shared:true,

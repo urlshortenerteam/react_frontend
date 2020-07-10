@@ -12,14 +12,14 @@ export default class RealTimeTrack extends React.Component{
     state={
         data:[],
         columns:[],
-    }
+    };
     constructor(props) {
         super(props);
         this.state={columns:[
                 {
                     title: '短链接',
-                    dataIndex: 'short',
-                    key: 'short',
+                    dataIndex: 'shortUrl',
+                    key: 'shortUrl',
                 },
                 {
                     title: '原链接',
@@ -43,7 +43,7 @@ export default class RealTimeTrack extends React.Component{
             ]}
     }
     componentDidMount() {
-        getRequest("http://localhost:4000/getReal",this.handleData,{
+        getRequest("/getReal",this.handleData,{
             params:{id:0},
             errorCallback:this.handleError
             }
@@ -51,10 +51,10 @@ export default class RealTimeTrack extends React.Component{
     }
     handleData=(response)=>{
         this.setState({data:response.data.logs});
-    }
+    };
     handleError=(error)=>{
         console.log(error);
-    }
+    };
 
     render() {
         return (
