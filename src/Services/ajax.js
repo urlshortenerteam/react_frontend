@@ -5,10 +5,7 @@ let postRequest = (url, json, callback) => {
         body: JSON.stringify(json),
         headers: {
             'Content-Type': 'application/json'
-                // 'text/plain'
-        //    'application/json'
         },
-        // credentials: "include",
 
     };
     fetch(url,opts)

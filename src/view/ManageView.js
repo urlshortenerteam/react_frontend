@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import Navigation from "../components/Navigation";
 import {Row, Col} from 'antd';
 import "../css/HomeCss.css"
-
-import SearchBar from "../components/SearchBar";
 import { Layout, } from 'antd';
 import { Tabs } from 'antd';
 const { TabPane } = Tabs;

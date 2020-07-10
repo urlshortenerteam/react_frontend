@@ -33,7 +33,7 @@ export default class StatisticsBar extends React.Component{
     }
     render(){
         return (
-            <div style={{ "maxWidth": 256 }}>
+            <div style={{ "maxWidth": 256,margin:"auto" }}>
                 <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
                 </Button>
