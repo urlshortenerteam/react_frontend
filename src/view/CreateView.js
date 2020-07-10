@@ -84,6 +84,7 @@ export default class CreateView extends Component {
                     short:rep.data.short
                 })
             });
+
             this.setState({
                 showData:result,
                 tableVisible_manyToOne: true,
