@@ -141,7 +141,7 @@ export default class CreateView extends Component {
             //检查是否为 http:// 或https://
             else
             {
-                if(item.indexOf("https://")!=0 && item.indexOf("http://")!=0)
+                if(item.indexOf("https://")!==0 && item.indexOf("http://")!==0)
                 {
                     flag=false;
                     messages+=index+1;

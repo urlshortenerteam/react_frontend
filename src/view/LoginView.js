@@ -5,7 +5,7 @@ import {Form, Input, Button, Checkbox} from 'antd';
 import '../css/LoginCss.css'
 import 'antd/dist/antd.css';
 
-import {UserOutlined} from '@ant-design/icons';
+import {AccountBookOutlined, LockOutlined, UserOutlined} from '@ant-design/icons';
 import {withRouter} from "react-router-dom";
 
 const onFinish = values => {
@@ -31,15 +31,14 @@ class LogInBlock extends React.Component{
             console.log('Failed:', errorInfo);
         };
         return (
-            <div >
                 <div className="login">
+                    <Row style={{padding:"25px"}}>
+                        <Col span={6}>
 
-                    <Row>
-                        <Col span={6}></Col>
+                        </Col>
                         <Col span={12}>
                             <div>
-                                <div className="title"><span>Log In</span></div>
-                                <div className="myh4">
+                                <div className="title">登录</div>
                                     <Form
                                         name="basic"
                                         initialValues={{remember: true}}
@@ -48,35 +47,39 @@ class LogInBlock extends React.Component{
                                         ref={this.formRef}
                                     >
 
-                                        <span className="myh4">Username  </span>
+                                        {/*<span className="myh4">Username  </span>*/}
                                         <Form.Item
                                             name="username"
                                             rules={[{ required: true, message: 'Please input your username!' }]}
                                         >
 
-                                            <Input placeholder="input  username " prefix={<UserOutlined />}/>
+                                            <Input placeholder="请输入用户名" prefix={<UserOutlined
+                                            style={{color:"white"}}
+                                            />}/>
 
 
                                         </Form.Item>
 
-                                        <span className="myh4">Password   </span>
+                                        {/*<span className="myh4">Password   </span>*/}
                                         <Form.Item
                                             name="password"
                                             rules={[{ required: true, message: 'Please input your password!' }]}>
 
-                                            <Input.Password placeholder="input password"/>
+                                            <Input.Password placeholder="请输入密码" prefix={<LockOutlined
+                                                style={{color:"white"}}
+                                            />}/>
 
                                         </Form.Item>
 
 
-                                        <Row>
+                                        <Row justify='space-between'>
 
-                                            <Col span={17}> <a href='#/register'> <Button ghost ><span>Register</span></Button></a></Col>
-                                            <Col span={7}>
+                                            <Col > <a href='#/register'> <Button ghost ><span>注册</span></Button></a></Col>
+                                            <Col >
                                                 <Form.Item >
 
                                                     <Button ghost htmlType="submit">
-                                                        Log In
+                                                        登录
                                                     </Button>
 
                                                 </Form.Item>
@@ -85,7 +88,6 @@ class LogInBlock extends React.Component{
 
 
                                     </Form>
-                                </div>
 
 
                             </div>
@@ -99,7 +101,6 @@ class LogInBlock extends React.Component{
 
 
                 </div>
-            </div>
         );
     }
 
