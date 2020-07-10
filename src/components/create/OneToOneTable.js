@@ -1,9 +1,9 @@
 import React, {Component, useContext, useEffect, useRef, useState} from "react";
 
 import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider} from 'antd';
-import {getBatchManyToOne} from "../Services/CreateService"
-import "../css/HomeCss.css"
-import "../css/CreateCss.css"
+import {getBatchManyToOne} from "../../Services/CreateService"
+import "../../css/HomeCss.css"
+import "../../css/CreateCss.css"
 
 
 const EditableContext = React.createContext();
@@ -93,7 +93,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
     return <td {...restProps}>{childNode}</td>;
 };
 
-export default class ManyToOneTable extends React.Component {
+/*
+OneToOneTable
+@author Shuchang Liu
+@date July 10th 2020
+@description OneToOneTable used in CreateView.js
+*/
+export default class OneToOneTable extends React.Component {
     constructor(props) {
         super(props);
         this.columns = [
@@ -121,7 +127,7 @@ export default class ManyToOneTable extends React.Component {
                 colSpan: 0,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                        <Popconfirm title="确定删除此长链接？" onConfirm={() => this.handleDelete(record.key)}>
                             {!this.state.created ?
                                 <Button type="primary">删除</Button> :
                                 <Button type="primary" disabled>删除</Button>
@@ -190,7 +196,6 @@ export default class ManyToOneTable extends React.Component {
     };
 
     handleSave = row => {
-
         const newData = [...this.state.dataSource];
         const index = newData.findIndex(item => row.key === item.key);
 
@@ -244,9 +249,7 @@ export default class ManyToOneTable extends React.Component {
             created: false
         })
     };
-
-    manyToOne = () => {
-
+    oneToOne = () => {
 
         let urlArray = this.state.dataSource;
         let req = [];
@@ -267,8 +270,6 @@ export default class ManyToOneTable extends React.Component {
                 }
                 req.push(item.long)
             }
-
-
         });
 
         if (urlArray.length === 0) {
@@ -282,15 +283,15 @@ export default class ManyToOneTable extends React.Component {
             message.error(messages + "条长链接格式不正确");
         }
 
-
         //将数据发给后端
-        const callBack = (rep) => {
-            console.log(rep.data);
+        const callBack = (res) => {
+            console.log(res.data);
             let result = [];
+            let shorts=res.data;
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,
-                    short: rep.data
+                    short: shorts[index]
                 })
             });
             this.setState({
@@ -304,7 +305,6 @@ export default class ManyToOneTable extends React.Component {
         if (flag) {
             getBatchManyToOne(req, callBack);
         }
-
     };
 
     render() {
@@ -332,34 +332,40 @@ export default class ManyToOneTable extends React.Component {
         });
         return (
             <div>
-                {/*<Divider>*/}
                 <Row>
-                    <Col span={2}>
+                    <Col span={8}>
+                        <Divider dashed />
+                    </Col>
+                    <Col span={2} offset={1}>
                         <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
                             添加
                         </Button>
                     </Col>
                     <Col span={2}>
 
-                        <Button type="primary" onClick={this.manyToOne}>
+                        <Button type="primary" onClick={this.oneToOne}>
                             生成
                         </Button>
                     </Col>
-                    <Col span={2}>
+                    <Col span={1}>
 
                         <Button type="primary" onClick={this.reset}>
                             重置
                         </Button>
                     </Col>
+                    <Col span={9} offset={1}>
+                        <Divider  dashed />
+                    </Col>
                 </Row>
-                {/*</Divider>*/}
 
+                <br/>
                 <Table
                     components={components}
                     rowClassName={() => 'editable-row'}
                     bordered
                     dataSource={dataSource}
                     columns={columns}
+                    pagination={{ position: ['bottomCenter'] }}
                 />
             </div>
         );

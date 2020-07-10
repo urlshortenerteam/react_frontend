@@ -1,14 +1,16 @@
 import React, {Component} from "react";
 import Navigation from "../components/Navigation";
 import {SearchOutlined} from '@ant-design/icons';
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs,Divider} from 'antd';
+import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider} from 'antd';
 import {getBatchManyToOne, getBatchOneToOne} from "../Services/CreateService"
 import "../css/HomeCss.css"
 import "../css/CreateCss.css"
-import ManyToOneTable from "../components/ManyToOneTable";
+import ManyToOneTable from "../components/create/ManyToOneTable";
+import OneToOneTable from "../components/create/OneToOneTable";
+
 const {Header, Content, Footer} = Layout;
 const {TextArea} = Input;
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 /*
 CreateView
@@ -249,15 +251,13 @@ export default class CreateView extends Component {
                     <Row>
                         <Col span={3}></Col>
                         <Col span={18}>
-                            <Tabs defaultActiveKey="1" >
+                            <Tabs defaultActiveKey="1">
                                 <TabPane tab="原始" key="1">
                                     <Row>
                                         <Col span={4} offset={4}>
                                             <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
-
                                         </Col>
                                         <Col span={6}>
-
                                             <Button type="primary" onClick={this.manyToOne}>多对一生成</Button>
                                         </Col>
                                     </Row>
@@ -271,7 +271,6 @@ export default class CreateView extends Component {
                                                     onChange={this.onChange}
                                                     placeholder="请输入长链接，以换行符分割"
                                                     autoSize={{minRows: 6, maxRows: 100}}
-
                                                 />
                                             </div>
                                         </Col>
@@ -280,45 +279,35 @@ export default class CreateView extends Component {
                                     <Row>
                                         <Col span={16} offset={4}>
                                             {this.state.tableVisible_oneToOne ?
-                                                // <div className="shadow">
                                                 <Table
                                                     columns={columns_for_oneToOne}
                                                     dataSource={this.state.showData}
                                                 />
-                                                // </div>
-
                                                 : null}
                                             {this.state.tableVisible_manyToOne ?
-                                                // <div className="shadow">
                                                 <Table
                                                     columns={columns_for_manyToOne}
                                                     dataSource={this.state.showData}
                                                 />
-                                                // </div>
-
                                                 : null}
                                         </Col>
-
                                     </Row>
-
                                 </TabPane>
                                 <TabPane tab="多对一" key="2">
+                                    <br/>
                                     <ManyToOneTable/>
                                 </TabPane>
-                                <TabPane tab="Order Manage" key="3">
-
+                                <TabPane tab="一对一" key="3">
+                                    <br/>
+                                    <OneToOneTable/>
                                 </TabPane>
-
                             </Tabs>
                         </Col>
                         <Col span={3}></Col>
                     </Row>
                     <br/> <br/>
-
-
                 </Content>
                 <br/> <br/> <br/> <br/> <br/> <br/><br/>
-
                 <Footer style={{textAlign: 'center', backgroundColor: '#001529', color: '#d8e3e7'}}>Ant Design ©2018
                     Created by Ant UED</Footer>
             </Layout>
