@@ -5,6 +5,8 @@ let postRequest = (url, json, callback) => {
         body: JSON.stringify(json),
         headers: {
             'Content-Type': 'application/json'
+                // 'text/plain'
+        //    'application/json'
         },
 
     };
@@ -22,7 +24,7 @@ let postRequest = (url, json, callback) => {
 
 
 let getRequest = (url, callback,{errorCallback,params}) => {
-    let _url=new URL(url)
+    let _url=new URL(url);
     _url.search=new URLSearchParams(params).toString();
     fetch(_url)
         .then((response) => {

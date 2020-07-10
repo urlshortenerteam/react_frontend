@@ -4,6 +4,13 @@ import { Input } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
+
+/*
+SearchBar
+@author Shuchang Liu
+@date July 6th 2020
+@description Search Bar
+*/
 export default class SearchBar extends React.Component{
     show=()=>{
         message.error("请先登录");

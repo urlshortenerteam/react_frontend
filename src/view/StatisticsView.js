@@ -23,10 +23,10 @@ export default class StatisticsView extends React.Component{
         display:'overview',
         data:[],
         lineData:[]
-    }
+    };
     toggleSwitch=({key})=>{
         this.setState({display:key});
-    }
+    };
     async componentDidMount() {
         getRequest("http://localhost:4000/getStat",this.handleData,{
                 params:{id:0},
@@ -47,13 +47,13 @@ export default class StatisticsView extends React.Component{
                 )
 
             }
-        )
+        );
         this.setState({lineData:lines});
         console.log(this.state)
-    }
+    };
     handleError=(error)=>{
         console.log(error);
-    }
+    };
     render() {
 
         return (

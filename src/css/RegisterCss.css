@@ -8,3 +8,26 @@
     color: rgba(255, 255, 255, 0.85);
     font-size: 14px;
 }
+
+.registerBlock{
+    width:800px;
+    top: 10%;
+    position: fixed;
+    height: 580px;
+    border-radius: 25px;
+    box-shadow: 10px 10px 50px #3399CC;
+    background-color: #336699;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
+}
+
+.registerTitle{
+    color: #d8e3e7;
+    font-size: 37px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+
+}

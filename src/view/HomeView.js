@@ -7,6 +7,12 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 
 const { Header, Content, Footer } = Layout;
 
+/*
+HomeView
+@author Shuchang Liu
+@date July 6th 2020
+@description Home View
+*/
 class HomeView extends Component{
     render() {
         return (

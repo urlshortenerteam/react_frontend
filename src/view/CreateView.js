@@ -76,14 +76,15 @@ export default class CreateView extends Component {
 
         //将数据发给后端
         const callBack=(rep)=>{
-            console.log(rep.data);
+            console.log(rep.data.short);
             let result=[];
             urlArray.forEach(function (item,index) {
                 result.push({
                     long:urlArray[index],
-                    short:rep.data
+                    short:rep.data.short
                 })
             });
+
             this.setState({
                 showData:result,
                 tableVisible_manyToOne: true,
@@ -94,10 +95,30 @@ export default class CreateView extends Component {
         // 格式正确则将数据发回后端
         if(flag)
         {
-            getBatchManyToOne(urlArray,callBack);
+            getBatchManyToOne(this.state.urls,callBack);
 
 
         }
+
+        // 先在没有后端，先只显示数据
+        // if(flag)
+        // {
+        //     let result=[];
+        //     urlArray.forEach(function(item,index){
+        //         result.push({
+        //             long:item,
+        //             short:"hhhh",
+        //         })
+        //     });
+        //
+        //     this.setState({
+        //         showData:result
+        //     });
+        //     this.setState({
+        //         value:""
+        //     });
+        //
+        // }
 
     };
     oneToOne = () => {
@@ -147,18 +168,19 @@ export default class CreateView extends Component {
 
 
         //将数据发给后端
-        const callBack=(data)=>{
+        const callBack=(res)=>{
             let result=[];
-            data.forEach(function(item,index){
-                result.push({
-                    long:urlArray[index],
-                    short:item,
-                })
-            });
-
-            this.setState({
-                showData:result
-            })
+            console.log(res);
+            // res.data.forEach(function(item,index){
+            //     result.push({
+            //         long:urlArray[index],
+            //         short:item,
+            //     })
+            // });
+            //
+            // this.setState({
+            //     showData:result
+            // })
         };
 
         // 格式正确则将数据发回后端

@@ -12,7 +12,7 @@ export default class LineChart extends React.Component{
     state={
         data:[],
         config:{},
-    }
+    };
     constructor(props) {
         super(props);
         console.log(props.data);

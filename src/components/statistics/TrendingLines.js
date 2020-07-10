@@ -11,7 +11,7 @@ TrendingLines
 export default class TrendingLines extends Component{
     state={
         data:[]
-    }
+    };
     constructor(props) {
         super(props);
         this.state={
