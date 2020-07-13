@@ -1,13 +1,13 @@
 import * as React from "react";
-import {Menu,Button} from 'antd'
+import {Button, Menu} from 'antd'
 import {
     AppstoreOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    PieChartOutlined,
-    LineChartOutlined,
     HeatMapOutlined,
-    MailOutlined
+    LineChartOutlined,
+    MailOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    PieChartOutlined
 } from '@ant-design/icons';
 
 

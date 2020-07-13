@@ -13,7 +13,7 @@ apiRoutes.get('/getReal', function(req, res) {
             data: Mock.mock({
                 "logs|1-5":[
                     {
-                            "shortUrl":/[a-z][A-Z][0-9][a-z][0-9][A-Z]/,
+                            "shortUrl":/[a-zA-Z0-9]{6}/,
                             "long":'@url("http")',
                             "ip":'@ip',
                             "source":'@domain',
@@ -223,7 +223,7 @@ apiRoutes.post('/getOneShort', function(req, res) {
         msg: '查询成功',
     };
     Object.assign(jsonResponse,Mock.mock({
-            "data":/[a-z][A-Z][0-9][a-z][0-9][A-Z]/,}
+            "data":/[a-zA-Z0-9]{6}/,}
     ));
 
     setTimeout(() => {

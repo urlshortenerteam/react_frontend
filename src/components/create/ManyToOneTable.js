@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider, Popover} from 'antd';
+import {Button, Col, Divider, Form, Input, message, Popconfirm, Popover, Row, Spin, Table, Tooltip} from 'antd';
 import {getBatchManyToOne} from "../../Services/CreateService"
 import "../../css/HomeCss.css"
 import "../../css/CreateCss.css"
@@ -153,10 +153,7 @@ export default class ManyToOneTable extends React.Component {
                             {value}
                             {value === '' ? null :
                                 <Popover content={
-                                    <img
-                                        src={"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + hostUrl + '/' +
-                                        value
-                                        }/>
+                                    this.AsyncQRcode(value)
                                 }
                                          title="生成二维码"
                                 >
@@ -178,9 +175,31 @@ export default class ManyToOneTable extends React.Component {
                 },
             ],
             count: 1,
-            created: false
-
+            created: false,
+            loaded: false
         };
+    }
+
+    handleQRload = () => {
+        console.log("hello");
+        this.setState({loaded: true});
+    }
+
+    AsyncQRcode = (value) => {
+        return (
+            <div style={{textAlign: 'center'}}>
+                <img
+                    src={"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + hostUrl + '/' +
+                    value
+                    }
+                    onLoad={this.handleQRload}
+                />
+                {
+                    this.state.loaded ? null : <Spin size="large"/>
+                }
+            </div>
+
+        )
     }
 
     handleDelete = key => {
@@ -309,7 +328,8 @@ export default class ManyToOneTable extends React.Component {
             });
             this.setState({
                 dataSource: result,
-                created: true
+                created: true,
+                loaded: false,
             });
             console.log(result);
         };

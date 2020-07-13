@@ -1,17 +1,15 @@
 import React from "react";
-import {Col, Menu, Row} from 'antd';
-import {AppstoreOutlined, SettingOutlined} from '@ant-design/icons';
-import {PageHeader, Dropdown, Button, Tag, Typography} from 'antd';
+import {Button, Dropdown, Menu, PageHeader, Typography} from 'antd';
 import {
-    EllipsisOutlined,
+    AlignCenterOutlined,
+    AppstoreOutlined,
     AreaChartOutlined,
-    PicLeftOutlined,
     BankOutlined,
-    AlignCenterOutlined
+    EllipsisOutlined,
+    PicLeftOutlined,
+    SettingOutlined
 } from '@ant-design/icons';
 import "../css/NavigationCss.css"
-import {logout} from "../Services/userService"
-const {Paragraph} = Typography;
 
 const menu = (
     <Menu>
@@ -101,25 +99,22 @@ export default class Navigation extends React.Component {
                         </Menu>
 
 
-                    ]}
-                    extra={[
-                        <Button key="2" ghost>
-                            {JSON.parse(sessionStorage.getItem("loginStatus")) === 1 ?
-                                <a  onClick={logout}>登出</a> :
-                                <a href="#/login">登录</a>
-                            }
-                        </Button>,
-                        <Button ghost key="1">
-                            <a href="#/register">注册</a>
-                        </Button>,
-                        // <Button key="1" type="primary">
-                        //     Primary
-                        // </Button>,
-                        // <DropdownMenu ghost key="more" />,
 
-                    ]}
-                />,
+                        ]}
+                        extra={[
+                            <Button key="3" ghost href="#/login">
+                                登录
+                                </Button>,
+                            <Button ghost key="2" href="#/register">
+                                注册
+                            </Button>,
+                            // <Button key="1" type="primary">
+                            //     Primary
+                            // </Button>,
+                            // <DropdownMenu ghost key="more" />,
 
+                        ]}
+                    />,
 
             </div>
 

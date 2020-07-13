@@ -1,8 +1,7 @@
 import '../../css/Carousel.css'
 import React from "react";
 import RealTimeTrack from "./RealTimeTrack";
-import {StackedArea,Liquid} from "@ant-design/charts";
-import {Row,Col} from 'antd';
+import {StackedArea} from "@ant-design/charts";
 
 /*
 Overview
@@ -48,7 +47,7 @@ export default class OverView extends React.Component{
     };
     render() {
         return (
-            <div>
+            <div style={{position:'relative'}}>
                 {this.StackedLines(this.props.data)}
 
                 <RealTimeTrack />
