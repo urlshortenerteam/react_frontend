@@ -49,7 +49,7 @@ body .login  {
 .login input{
     background: transparent;
 }
-.ant-input-affix-wrapper > input.ant-input {
+.login .ant-input-affix-wrapper > input.ant-input {
     padding: 0;
     border: none;
     outline: none;
