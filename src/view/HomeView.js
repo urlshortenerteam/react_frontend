@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import Navigation from "../components/Navigation";
-import { Row, Col } from 'antd';
+import {Col, Layout, Row,Button} from 'antd';
 import "../css/HomeCss.css"
-import SearchBar from "../components/SearchBar";
-import { Layout } from 'antd';
+import {hostUrl} from "../Services/ajax";
+import {RightOutlined} from "@ant-design/icons";
 
-const { Header, Content, Footer } = Layout;
+const {Header, Content, Footer} = Layout;
 
 /*
 HomeView
@@ -13,11 +13,10 @@ HomeView
 @date July 6th 2020
 @description Home View
 */
-class HomeView extends Component{
+class HomeView extends Component {
     render() {
         return (
-
-            <Layout style={{ backgroundColor:'#001529' }}>
+            <Layout style={{backgroundColor: '#001529',height:'100%'}}>
                 <Header>
 
                     <Row>
@@ -27,33 +26,19 @@ class HomeView extends Component{
 
                     </Row>
                 </Header>
-                {/*style={{ padding: '0 50px' }}*/}
-                {/*<Content >*/}
-                <div style={{backgroundColor:'#001529'}}>
-                <div className="Block">
-                    <br/><br/>
-                    <div className="title">
-                        简单易用的渠道短链接统计工具
-                    </div>
-                    <br/><br/><br/>
-                    <div>
-                        <Row>
-                            <Col span={18} offset={3}>
-
-                                <SearchBar/>
-
-
-                            </Col>
-
-                        </Row>
-                    </div>
-
-                </div>
-            </div>
-                {/*</Content>*/}
-                <br/> <br/> <br/>  <br/>      <br/>  <br/><br/>
-
-                <Footer style={{ textAlign: 'center',backgroundColor:'#001529',color:'#d8e3e7' }}>Reevoo ShortLink ©2020 Created by Reevoo Team</Footer>
+                <Content style={{display:'flex',height:'100%'}}>
+                    <h1 className="centerDesc">
+                        短链接<br/>
+                        从未如此<br/>
+                        简单易用<br style={{padding: 0}}/>
+                        <Button icon={<RightOutlined/>} href='#/create' ghost>开始探索</Button>
+                    </h1>
+                    <img className="leftDesc" src={hostUrl + "/flow.png"} alt={''}/>
+                    <img className="rightBottomDesc" src={hostUrl + "/people.png"} alt={''}/>
+                    <img className="rightTopDesc" src={hostUrl + "/trans.png"} alt={''}/>
+                </Content>
+                <Footer style={{textAlign: 'center', backgroundColor: '#001529', color: '#d8e3e7'}}>Reevoo ShortLink
+                    ©2020 Created by Reevoo Team</Footer>
             </Layout>
 
         );

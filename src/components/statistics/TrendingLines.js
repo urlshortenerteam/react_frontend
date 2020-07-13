@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import { Collapse } from 'antd';
+import {Collapse} from 'antd';
 import LineChart from "../LineChart";
+
 const { Panel } = Collapse;
 /*
 TrendingLines

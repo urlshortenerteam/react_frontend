@@ -231,5 +231,21 @@ apiRoutes.post('/getOneShort', function(req, res) {
     }, random);
 });
 
+apiRoutes.post('/getShort', function(req, res) {
+    console.log(req);
+    let jsonResponse={
+        status: 200,
+        msg: '查询成功',
+
+
+    };
+    Object.assign(jsonResponse,Mock.mock({
+        "data|10":[/[a-z][A-Z][0-9][a-z][0-9][A-Z]/],}
+    ));
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
 
 module.exports = apiRoutes;

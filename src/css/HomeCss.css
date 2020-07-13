@@ -5,7 +5,7 @@
     /*position: relative;*/
 margin-top: 8%;
     /*border-radius: 25px;*/
-    box-shadow: 0 0 10px 0px  #132c33;
+    box-shadow: 0 0 10px 0  #132c33;
     background-color: #6699CC;
 
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
@@ -24,4 +24,39 @@ body{
     text-align: center;
     font-weight: bold;
 
+}
+.centerDesc{
+    max-width: 400px;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: 40%;
+    height: 100%;
+    font-size: 55px;
+    z-index: 3;
+    line-height: 70px;
+    margin-top:5%
+}
+.leftDesc{
+    width: 40%;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.rightBottomDesc{
+    max-height: 200px;
+    margin-left: auto;
+    margin-top: auto;
+
+}
+.rightTopDesc{
+     margin-left: auto;
+    width: 30%;
+     margin-bottom: auto;
+
+}
+#root{
+    height: 100%;
 }

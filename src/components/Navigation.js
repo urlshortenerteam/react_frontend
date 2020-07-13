@@ -1,10 +1,16 @@
 import React from "react";
-import {Col, Menu, Row} from 'antd';
-import {AppstoreOutlined, SettingOutlined} from '@ant-design/icons';
-import { PageHeader, Dropdown, Button, Tag, Typography} from 'antd';
-import { EllipsisOutlined ,AreaChartOutlined,PicLeftOutlined,BankOutlined,AlignCenterOutlined } from '@ant-design/icons';
+import {Button, Dropdown, Menu, PageHeader, Typography} from 'antd';
+import {
+    AlignCenterOutlined,
+    AppstoreOutlined,
+    AreaChartOutlined,
+    BankOutlined,
+    EllipsisOutlined,
+    PicLeftOutlined,
+    SettingOutlined
+} from '@ant-design/icons';
 import "../css/NavigationCss.css"
-const { Paragraph } = Typography;
+
 
 const menu = (
     <Menu>
@@ -116,11 +122,11 @@ export default class Navigation extends React.Component {
 
                         ]}
                         extra={[
-                            <Button key="3" ghost>
-                                <a href="#/login">登录</a>
+                            <Button key="3" ghost href="#/login">
+                                登录
                                 </Button>,
-                            <Button ghost key="2">
-                                <a href="#/register">注册</a>
+                            <Button ghost key="2" href="#/register">
+                                注册
                             </Button>,
                             // <Button key="1" type="primary">
                             //     Primary

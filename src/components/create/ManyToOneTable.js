@@ -1,10 +1,10 @@
-import React, {Component, useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider,Popover,Spin} from 'antd';
-import {getBatchManyToOne} from "../Services/CreateService"
-import "../css/HomeCss.css"
-import "../css/CreateCss.css"
-import {hostUrl} from "../Services/ajax"
+import {Button, Col, Divider, Form, Input, message, Popconfirm, Popover, Row, Spin, Table, Tooltip} from 'antd';
+import {getBatchManyToOne} from "../../Services/CreateService"
+import "../../css/HomeCss.css"
+import "../../css/CreateCss.css"
+import {hostUrl} from "../../Services/ajax"
 import {QrcodeOutlined} from "@ant-design/icons";
 
 const EditableContext = React.createContext();
@@ -94,6 +94,12 @@ const EditableCell: React.FC<EditableCellProps> = ({
     return <td {...restProps}>{childNode}</td>;
 };
 
+/*
+ManyToOneTable
+@author Shuchang Liu
+@date July 10th 2020
+@description ManyToOneTable used in CreateView.js
+*/
 export default class ManyToOneTable extends React.Component {
     constructor(props) {
         super(props);
@@ -122,14 +128,13 @@ export default class ManyToOneTable extends React.Component {
                 colSpan: 0,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                        <Popconfirm title="确定删除此长链接？" onConfirm={() => this.handleDelete(record.key)}>
                             {!this.state.created ?
                                 <Button type="primary">删除</Button> :
                                 <Button type="primary" disabled>删除</Button>
                             }
                         </Popconfirm>
                     ) : null,
-
             },
             {
                 title: '短链接',
@@ -145,8 +150,8 @@ export default class ManyToOneTable extends React.Component {
                         obj.props.rowSpan = this.state.dataSource.length;
                     } else obj.props.rowSpan = 0;
                     return (<div>
-                                {value}
-                            {value===''?null:
+                            {value}
+                            {value === '' ? null :
                                 <Popover content={
                                     this.AsyncQRcode(value)
                                 }
@@ -168,22 +173,21 @@ export default class ManyToOneTable extends React.Component {
                     long: '请输入长链接,可输入多个，以空格切分',
                     short: '',
                 },
-
             ],
             count: 1,
             created: false,
-            loaded:false
+            loaded: false
         };
     }
 
-    handleQRload=()=>{
+    handleQRload = () => {
         console.log("hello");
-        this.setState({loaded:true});
+        this.setState({loaded: true});
     }
 
-    AsyncQRcode=(value)=>{
-        return(
-            <div style={{textAlign:'center'}}>
+    AsyncQRcode = (value) => {
+        return (
+            <div style={{textAlign: 'center'}}>
                 <img
                     src={"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + hostUrl + '/' +
                     value
@@ -199,19 +203,17 @@ export default class ManyToOneTable extends React.Component {
     }
 
     handleDelete = key => {
-
         const dataSource = [...this.state.dataSource];
         this.setState({
             dataSource: dataSource.filter(item => item.key !== key),
         });
         console.log(this.state.dataSource);
-
     };
 
     handleAdd = () => {
-        const {count, dataSource} = this.state;
+        const {dataSource} = this.state;
         const newData = {
-            key:this.state.count+1,
+            key: this.state.count + 1,
             long: "以http://或https://",
             short: ' ',
         };
@@ -224,7 +226,6 @@ export default class ManyToOneTable extends React.Component {
     };
 
     handleSave = row => {
-
         const newData = [...this.state.dataSource];
         const index = newData.findIndex(item => row.key === item.key);
 
@@ -279,6 +280,7 @@ export default class ManyToOneTable extends React.Component {
         })
     };
 
+
     manyToOne = () => {
 
 
@@ -301,7 +303,6 @@ export default class ManyToOneTable extends React.Component {
                 }
                 req.push(item.long)
             }
-
 
         });
 
@@ -330,7 +331,7 @@ export default class ManyToOneTable extends React.Component {
             this.setState({
                 dataSource: result,
                 created: true,
-                loaded:false,
+                loaded: false,
             });
             console.log(result);
         };
@@ -339,8 +340,8 @@ export default class ManyToOneTable extends React.Component {
         if (flag) {
             getBatchManyToOne(req, callBack);
         }
-
     };
+
 
     render() {
         const {dataSource} = this.state;
@@ -367,34 +368,46 @@ export default class ManyToOneTable extends React.Component {
         });
         return (
             <div>
-                {/*<Divider>*/}
                 <Row>
-                    <Col span={2}>
-                        <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
-                            添加
-                        </Button>
+                    <Col span={8}>
+                        <Divider dashed/>
+                    </Col>
+                    <Col span={2} offset={1}>
+                        {!this.state.created ?
+                            <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
+                                添加
+                            </Button> :
+                            <Button type="primary" disabled>添加</Button>
+                        }
                     </Col>
                     <Col span={2}>
 
-                        <Button type="primary" onClick={this.manyToOne}>
-                            生成
-                        </Button>
+                        {!this.state.created ?
+                            <Button type="primary" onClick={this.manyToOne}>
+                                生成
+                            </Button> :
+                            <Button type="primary" disabled>生成</Button>
+                        }
                     </Col>
-                    <Col span={2}>
+                    <Col span={1}>
 
                         <Button type="primary" onClick={this.reset}>
                             重置
                         </Button>
                     </Col>
+                    <Col span={9} offset={1}>
+                        <Divider dashed/>
+                    </Col>
                 </Row>
-                {/*</Divider>*/}
 
+                <br/>
                 <Table
                     components={components}
                     rowClassName={() => 'editable-row'}
                     bordered
                     dataSource={dataSource}
                     columns={columns}
+                    pagination={{position: ['bottomCenter']}}
                 />
             </div>
         );

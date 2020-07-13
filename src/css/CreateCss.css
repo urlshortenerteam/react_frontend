@@ -6,3 +6,18 @@
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
 }
 
+.ant-tabs-tab {
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0 32px 0 0;
+    padding: 12px 0;
+    font-size: 14px;
+    background: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    color: white;
+}
