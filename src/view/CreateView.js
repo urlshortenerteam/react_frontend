@@ -1,13 +1,26 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import {SearchOutlined} from '@ant-design/icons';
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs,Divider} from 'antd';
-import {getBatchManyToOne, getBatchOneToOne} from "../Services/CreateService"
-import "../css/HomeCss.css"
-import "../css/CreateCss.css"
+import { SearchOutlined } from "@ant-design/icons";
+import {
+    Row,
+    Col,
+    Tooltip,
+    Layout,
+    Table,
+    Input,
+    Button,
+    message,
+    Form,
+    Popconfirm,
+    Tabs,
+    Divider,
+} from "antd";
+import { getBatchManyToOne, getBatchOneToOne } from "../Services/CreateService";
+import "../css/HomeCss.css";
+import "../css/CreateCss.css";
 import ManyToOneTable from "../components/ManyToOneTable";
-const {Header, Content, Footer} = Layout;
-const {TextArea} = Input;
+const { Header, Content, Footer } = Layout;
+const { TextArea } = Input;
 const { TabPane } = Tabs;
 
 /*
@@ -17,9 +30,8 @@ CreateView
 @description Create View
 */
 export default class CreateView extends Component {
-
     state = {
-        value: '',
+        value: "",
         tableVisible_oneToOne: false,
         tableVisible_manyToOne: false,
         showData: [],
@@ -38,20 +50,20 @@ export default class CreateView extends Component {
         let flag = true;
         let messages = "第";
         urlArray.forEach((item, index) => {
-
             if (!item) {
-                urlArray.splice(index, 1);//删除空项
+                urlArray.splice(index, 1); //删除空项
             }
             //检查是否为 http:// 或https://
             else {
-                if (item.indexOf("https://") !== 0 && item.indexOf("http://") !== 0) {
+                if (
+                    item.indexOf("https://") !== 0 &&
+                    item.indexOf("http://") !== 0
+                ) {
                     flag = false;
                     messages += index + 1;
                     messages += "、";
                 }
             }
-
-
         });
         console.log(urlArray);
 
@@ -66,7 +78,6 @@ export default class CreateView extends Component {
             message.error(messages + "条长链接格式不正确");
         }
 
-
         //将数据发给后端
         const callBack = (rep) => {
             console.log(rep.data);
@@ -74,8 +85,8 @@ export default class CreateView extends Component {
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index],
-                    short: rep.data
-                })
+                    short: rep.data,
+                });
             });
 
             this.setState({
@@ -88,9 +99,7 @@ export default class CreateView extends Component {
         // 格式正确则将数据发回后端
         if (flag) {
             getBatchManyToOne(urlArray, callBack);
-
         }
-
     };
     oneToOne = () => {
         //先将manyToOne隐藏
@@ -105,13 +114,15 @@ export default class CreateView extends Component {
         let flag = true;
         let messages = "第";
         urlArray.forEach((item, index) => {
-
             if (!item) {
-                urlArray.splice(index, 1);//删除空项
+                urlArray.splice(index, 1); //删除空项
             }
             //检查是否为 http:// 或https://
             else {
-                if (item.indexOf("https://") != 0 && item.indexOf("http://") != 0) {
+                if (
+                    item.indexOf("https://") != 0 &&
+                    item.indexOf("http://") != 0
+                ) {
                     flag = false;
                     messages += index + 1;
                     messages += "、";
@@ -131,7 +142,6 @@ export default class CreateView extends Component {
             message.error(messages + "条长链接格式不正确");
         }
 
-
         //将数据发给后端
         const callBack = (res) => {
             let result = [];
@@ -140,12 +150,12 @@ export default class CreateView extends Component {
                 result.push({
                     long: urlArray[index],
                     short: item,
-                })
+                });
             });
 
             this.setState({
-                showData: result
-            })
+                showData: result,
+            });
         };
 
         // 格式正确则将数据发回后端
@@ -156,31 +166,29 @@ export default class CreateView extends Component {
                 tableVisible_oneToOne: true,
             });
         }
-
     };
 
-    onChange = ({target: {value}}) => {
-        this.setState({value});
+    onChange = ({ target: { value } }) => {
+        this.setState({ value });
         // console.log(this.state.value);
         this.setState({
             tableVisible_oneToOne: false,
             tableVisible_manyToOne: false,
-        })
+        });
     };
 
     render() {
-
         const columns_for_oneToOne = [
             {
-                title: '长链接',
-                dataIndex: 'long',
-                align: 'center',
-                key: 'long',
+                title: "长链接",
+                dataIndex: "long",
+                align: "center",
+                key: "long",
                 // render: text => <a>{text}</a>,
                 ellipsis: {
                     showTitle: false,
                 },
-                render: long => (
+                render: (long) => (
                     <Tooltip placement="topLeft" title={long}>
                         {long}
                     </Tooltip>
@@ -188,26 +196,25 @@ export default class CreateView extends Component {
                 width: 150,
             },
             {
-                title: '短链接',
-                dataIndex: 'short',
-                align: 'center',
-                key: 'short',
+                title: "短链接",
+                dataIndex: "short",
+                align: "center",
+                key: "short",
                 width: 80,
             },
-
         ];
 
         const columns_for_manyToOne = [
             {
-                title: '长链接',
-                dataIndex: 'long',
-                align: 'center',
-                key: 'long',
+                title: "长链接",
+                dataIndex: "long",
+                align: "center",
+                key: "long",
                 // render: text => <a>{text}</a>,
                 ellipsis: {
                     showTitle: false,
                 },
-                render: long => (
+                render: (long) => (
                     <Tooltip placement="topLeft" title={long}>
                         {/*<a>{long}</a>*/}
                         {long}
@@ -216,11 +223,11 @@ export default class CreateView extends Component {
                 width: 150,
             },
             {
-                title: '短链接',
+                title: "短链接",
 
-                dataIndex: 'short',
-                align: 'center',
-                key: 'short',
+                dataIndex: "short",
+                align: "center",
+                key: "short",
                 width: 80,
                 render: (value, row, index) => {
                     const obj = {
@@ -233,96 +240,114 @@ export default class CreateView extends Component {
                     return obj;
                 },
             },
-
         ];
         return (
-            <Layout style={{backgroundColor: '#001529'}}>
+            <Layout style={{ backgroundColor: "#001529" }}>
                 <Header>
                     <Row>
                         <Col span={20} offset={2}>
-                            <Navigation/>
+                            <Navigation />
                         </Col>
                     </Row>
                 </Header>
-
-                <Content style={{padding: '0 50px'}}>
+                <Content style={{ padding: "0 50px" }}>
                     <Row>
                         <Col span={3}></Col>
                         <Col span={18}>
-                            <Tabs defaultActiveKey="1" >
+                            <Tabs defaultActiveKey="1">
                                 <TabPane tab="原始" key="1">
                                     <Row>
                                         <Col span={4} offset={4}>
-                                            <Button type="primary" onClick={this.oneToOne}>一对一生成</Button>
-
+                                            <Button
+                                                type="primary"
+                                                onClick={this.oneToOne}
+                                            >
+                                                一对一生成
+                                            </Button>
                                         </Col>
                                         <Col span={6}>
-
-                                            <Button type="primary" onClick={this.manyToOne}>多对一生成</Button>
+                                            <Button
+                                                type="primary"
+                                                onClick={this.manyToOne}
+                                            >
+                                                多对一生成
+                                            </Button>
                                         </Col>
                                     </Row>
-                                    <br/>
+                                    <br />
                                     <Row>
                                         <Col span={16} offset={4}>
-
                                             <div className="shadow">
                                                 <TextArea
                                                     value={this.state.value}
                                                     onChange={this.onChange}
                                                     placeholder="请输入长链接，以换行符分割"
-                                                    autoSize={{minRows: 6, maxRows: 100}}
-
+                                                    autoSize={{
+                                                        minRows: 6,
+                                                        maxRows: 100,
+                                                    }}
                                                 />
                                             </div>
                                         </Col>
                                     </Row>
-                                    <br/><br/><br/>
+                                    <br />
+                                    <br />
+                                    <br />
                                     <Row>
                                         <Col span={16} offset={4}>
-                                            {this.state.tableVisible_oneToOne ?
+                                            {this.state
+                                                .tableVisible_oneToOne ? (
                                                 // <div className="shadow">
                                                 <Table
-                                                    columns={columns_for_oneToOne}
-                                                    dataSource={this.state.showData}
+                                                    columns={
+                                                        columns_for_oneToOne
+                                                    }
+                                                    dataSource={
+                                                        this.state.showData
+                                                    }
                                                 />
-                                                // </div>
+                                            ) : // </div>
 
-                                                : null}
-                                            {this.state.tableVisible_manyToOne ?
+                                            null}
+                                            {this.state
+                                                .tableVisible_manyToOne ? (
                                                 // <div className="shadow">
                                                 <Table
-                                                    columns={columns_for_manyToOne}
-                                                    dataSource={this.state.showData}
+                                                    columns={
+                                                        columns_for_manyToOne
+                                                    }
+                                                    dataSource={
+                                                        this.state.showData
+                                                    }
                                                 />
-                                                // </div>
+                                            ) : // </div>
 
-                                                : null}
+                                            null}
                                         </Col>
-
                                     </Row>
-
                                 </TabPane>
                                 <TabPane tab="多对一" key="2">
-                                    <ManyToOneTable/>
+                                    <ManyToOneTable />
                                 </TabPane>
-                                <TabPane tab="Order Manage" key="3">
-
-                                </TabPane>
-
+                                <TabPane tab="Order Manage" key="3"></TabPane>
                             </Tabs>
                         </Col>
                         <Col span={3}></Col>
                     </Row>
-                    <br/> <br/>
-
-
+                    <br /> <br />
                 </Content>
-                <br/> <br/> <br/> <br/> <br/> <br/><br/>
-
-                <Footer style={{textAlign: 'center', backgroundColor: '#001529', color: '#d8e3e7'}}>Ant Design ©2018
-                    Created by Ant UED</Footer>
+                <br /> <br /> <br /> <br /> <br /> <br />
+                <br />
+                <Footer
+                    style={{
+                        textAlign: "center",
+                        backgroundColor: "#001529",
+                        color: "#d8e3e7",
+                    }}
+                >
+                    Ant Design ©2018 Created by Ant UED
+                </Footer>
             </Layout>
-
         );
     }
 }
