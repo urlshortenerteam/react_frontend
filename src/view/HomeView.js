@@ -53,7 +53,7 @@ class HomeView extends Component{
                 {/*</Content>*/}
                 <br/> <br/> <br/>  <br/>      <br/>  <br/><br/>
 
-                <Footer style={{ textAlign: 'center',backgroundColor:'#001529',color:'#d8e3e7' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                <Footer style={{ textAlign: 'center',backgroundColor:'#001529',color:'#d8e3e7' }}>Reevoo ShortLink ©2020 Created by Reevoo Team</Footer>
             </Layout>
 
         );

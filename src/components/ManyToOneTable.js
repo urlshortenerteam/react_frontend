@@ -1,10 +1,11 @@
 import React, {Component, useContext, useEffect, useRef, useState} from "react";
 
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider} from 'antd';
+import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider,Popover} from 'antd';
 import {getBatchManyToOne} from "../Services/CreateService"
 import "../css/HomeCss.css"
 import "../css/CreateCss.css"
-
+import {hostUrl} from "../Services/ajax"
+import {QrcodeOutlined} from "@ant-design/icons";
 
 const EditableContext = React.createContext();
 
@@ -143,7 +144,21 @@ export default class ManyToOneTable extends React.Component {
                     if (index === 0) {
                         obj.props.rowSpan = this.state.dataSource.length;
                     } else obj.props.rowSpan = 0;
-                    return obj;
+                    return (<div>
+                                {value}
+                            {value===''?null:
+                                <Popover content={
+                                    <img
+                                        src={"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + hostUrl + '/' +
+                                        value
+                                        }/>
+                                }
+                                         title="生成二维码"
+                                >
+                                    <QrcodeOutlined/>
+                                </Popover>
+                            }                            </div>
+                    );
                 },
             },
 
