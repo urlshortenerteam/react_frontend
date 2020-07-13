@@ -140,6 +140,16 @@ export default class ManyToOneTable extends React.Component {
                 dataIndex: 'short',
                 align: 'center',
                 width: "30%",
+                render: (value, row, index) => {
+                    const obj = {
+                        children: value,
+                        props: {},
+                    };
+                    if (index === 0) {
+                        obj.props.rowSpan = this.state.dataSource.length;
+                    } else obj.props.rowSpan = 0;
+                    return obj;
+                },
             },
 
         ];
@@ -328,15 +338,21 @@ export default class ManyToOneTable extends React.Component {
                             <Divider dashed />
                     </Col>
                     <Col span={2} offset={1}>
-                        <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
-                            添加
-                        </Button>
+                        {!this.state.created ?
+                            <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
+                                添加
+                            </Button>:
+                            <Button type="primary" disabled>添加</Button>
+                        }
                     </Col>
                     <Col span={2}>
 
-                        <Button type="primary" onClick={this.manyToOne}>
-                            生成
-                        </Button>
+                        {!this.state.created ?
+                            <Button type="primary" onClick={this.manyToOne}>
+                                生成
+                            </Button> :
+                            <Button type="primary" disabled>生成</Button>
+                        }
                     </Col>
                     <Col span={1}>
 

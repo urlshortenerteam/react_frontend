@@ -236,9 +236,11 @@ apiRoutes.post('/getShort', function(req, res) {
     let jsonResponse={
         status: 200,
         msg: '查询成功',
+
+
     };
     Object.assign(jsonResponse,Mock.mock({
-        "data":/[a-z][A-Z][0-9][a-z][0-9][A-Z]/,}
+        "data|10":[/[a-z][A-Z][0-9][a-z][0-9][A-Z]/],}
     ));
 
     setTimeout(() => {

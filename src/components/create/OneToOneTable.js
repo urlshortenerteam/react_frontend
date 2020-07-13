@@ -1,7 +1,7 @@
 import React, {Component, useContext, useEffect, useRef, useState} from "react";
 
 import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider} from 'antd';
-import {getBatchManyToOne} from "../../Services/CreateService"
+import {getBatchOneToOne} from "../../Services/CreateService"
 import "../../css/HomeCss.css"
 import "../../css/CreateCss.css"
 
@@ -141,16 +141,11 @@ export default class OneToOneTable extends React.Component {
                 dataIndex: 'short',
                 align: 'center',
                 width: "30%",
-                render: (value, row, index) => {
-                    const obj = {
-                        children: value,
-                        props: {},
-                    };
-                    if (index === 0) {
-                        obj.props.rowSpan = this.state.dataSource.length;
-                    } else obj.props.rowSpan = 0;
-                    return obj;
-                },
+                render: short => (
+                    <Tooltip placement="topLeft" title={short}>
+                        {short}
+                    </Tooltip>
+                ),
             },
 
         ];
@@ -303,7 +298,7 @@ export default class OneToOneTable extends React.Component {
 
         // 格式正确则将数据发回后端
         if (flag) {
-            getBatchManyToOne(req, callBack);
+            getBatchOneToOne(req, callBack);
         }
     };
 
@@ -337,15 +332,23 @@ export default class OneToOneTable extends React.Component {
                         <Divider dashed />
                     </Col>
                     <Col span={2} offset={1}>
-                        <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
-                            添加
-                        </Button>
+                        {!this.state.created ?
+                            <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
+                                添加
+                            </Button>:
+                            <Button type="primary" disabled>添加</Button>
+                        }
+
+
                     </Col>
                     <Col span={2}>
+                        {!this.state.created ?
+                            <Button type="primary" onClick={this.oneToOne}>
+                                生成
+                            </Button> :
+                            <Button type="primary" disabled>生成</Button>
+                        }
 
-                        <Button type="primary" onClick={this.oneToOne}>
-                            生成
-                        </Button>
                     </Col>
                     <Col span={1}>
 
