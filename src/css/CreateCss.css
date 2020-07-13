@@ -1,8 +1,5 @@
-
-.shadow{
-
-    box-shadow: 10px 10px 50px #3399CC;
+.shadow {
+    box-shadow: 10px 10px 50px #3399cc;
 
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
 }
-
