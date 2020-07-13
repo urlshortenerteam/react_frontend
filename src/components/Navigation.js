@@ -1,10 +1,17 @@
 import React from "react";
 import {Col, Menu, Row} from 'antd';
 import {AppstoreOutlined, SettingOutlined} from '@ant-design/icons';
-import { PageHeader, Dropdown, Button, Tag, Typography} from 'antd';
-import { EllipsisOutlined ,AreaChartOutlined,PicLeftOutlined,BankOutlined,AlignCenterOutlined } from '@ant-design/icons';
+import {PageHeader, Dropdown, Button, Tag, Typography} from 'antd';
+import {
+    EllipsisOutlined,
+    AreaChartOutlined,
+    PicLeftOutlined,
+    BankOutlined,
+    AlignCenterOutlined
+} from '@ant-design/icons';
 import "../css/NavigationCss.css"
-const { Paragraph } = Typography;
+import {logout} from "../Services/userService"
+const {Paragraph} = Typography;
 
 const menu = (
     <Menu>
@@ -65,7 +72,7 @@ export default class Navigation extends React.Component {
         const {current} = this.state;
         return (
             <div>
-                    <PageHeader
+                <PageHeader
 
                         ghost
                         className="site-page-header"
@@ -73,62 +80,69 @@ export default class Navigation extends React.Component {
                         avatar={{src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4'}}
                         subTitle={[
 
-                            // theme={"dark"}
-                                <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal"  theme={"dark"}>
-                                    <Menu.Item key="home" icon={ <BankOutlined />}>
-                                        <a href="#">首页</a>
-                                    </Menu.Item>
-                                    <SubMenu icon={<SettingOutlined/>} title="产品功能">
-                                        <Menu.ItemGroup title="访问统计">
-                                            {/*<Menu.Item key="setting:1">Option 1</Menu.Item>*/}
-                                            {/*<Menu.Item key="setting:2">Option 2</Menu.Item>*/}
-                                        </Menu.ItemGroup>
-                                        <Menu.ItemGroup title="报表分享">
-                                        </Menu.ItemGroup>
-                                        <Menu.ItemGroup title="随时修改">
-                                        </Menu.ItemGroup>
-                                        <Menu.ItemGroup title="批量创建">
-                                        </Menu.ItemGroup>
-                                        <Menu.ItemGroup title="随机跳转">
-                                        </Menu.ItemGroup>
-                                        <Menu.ItemGroup title="分类管理">
-                                        </Menu.ItemGroup>
-                                        <Menu.ItemGroup title="生成二维码">
-                                        </Menu.ItemGroup>
-                                    </SubMenu>
-                                    <Menu.Item key="statistics" icon={  <AreaChartOutlined />}>
-                                        <a href="#/statistics">统计图表</a>
-                                    </Menu.Item>
-                                    <Menu.Item key="create" icon={  <PicLeftOutlined />}>
-                                        <a href="#/create">批量生成</a>
-                                    </Menu.Item>
-                                    <Menu.Item key="manage" icon={<AlignCenterOutlined />}>
-                                        <a href="#/manage">管理链接</a>
-                                    </Menu.Item>
-                                    <Menu.Item key="other" icon={<AppstoreOutlined/>}>
-                                        <a href="https://xiaomark.com/" target="_blank" rel="noopener noreferrer">
-                                            其他
-                                        </a>
-                                    </Menu.Item>
-                                </Menu>
+                        // theme={"dark"}
+                        <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal" theme={"dark"}>
+                            <Menu.Item key="home" icon={<BankOutlined/>}>
+                                <a href="#">首页</a>
+                            </Menu.Item>
+                            <SubMenu icon={<SettingOutlined/>} title="产品功能">
+                                <Menu.ItemGroup title="访问统计">
+                                    {/*<Menu.Item key="setting:1">Option 1</Menu.Item>*/}
+                                    {/*<Menu.Item key="setting:2">Option 2</Menu.Item>*/}
+                                </Menu.ItemGroup>
+                                <Menu.ItemGroup title="报表分享">
+                                </Menu.ItemGroup>
+                                <Menu.ItemGroup title="随时修改">
+                                </Menu.ItemGroup>
+                                <Menu.ItemGroup title="批量创建">
+                                </Menu.ItemGroup>
+                                <Menu.ItemGroup title="随机跳转">
+                                </Menu.ItemGroup>
+                                <Menu.ItemGroup title="分类管理">
+                                </Menu.ItemGroup>
+                                <Menu.ItemGroup title="生成二维码">
+                                </Menu.ItemGroup>
+                            </SubMenu>
+                            <Menu.Item key="statistics" icon={<AreaChartOutlined/>}>
+                                <a href="#/statistics">统计图表</a>
+                            </Menu.Item>
+                            <Menu.Item key="create" icon={<PicLeftOutlined/>}>
+                                <a href="#/create">批量生成</a>
+                            </Menu.Item>
+                            <Menu.Item key="manage" icon={<AlignCenterOutlined/>}>
+                                <a href="#/manage">管理链接</a>
+                            </Menu.Item>
+                            <Menu.Item key="other" icon={<AppstoreOutlined/>}>
+                                <a href="https://xiaomark.com/" target="_blank" rel="noopener noreferrer">
+                                    其他
+                                </a>
+                            </Menu.Item>
+                        </Menu>
 
 
+                    ]}
+                    extra={[
 
-                        ]}
-                        extra={[
-                            <Button key="3" ghost>
+
+                        <Button key="2" ghost>
+                            {JSON.parse(sessionStorage.getItem("loginStatus")) === 1 ?
+                                <a  onClick={logout}>登出</a> :
                                 <a href="#/login">登录</a>
-                                </Button>,
-                            <Button ghost key="2">
-                                <a href="#/register">注册</a>
-                            </Button>,
-                            // <Button key="1" type="primary">
-                            //     Primary
-                            // </Button>,
-                            // <DropdownMenu ghost key="more" />,
+                            }
 
-                        ]}
-                    />,
+                        </Button>,
+
+
+                        <Button ghost key="1">
+                            <a href="#/register">注册</a>
+                        </Button>,
+                        // <Button key="1" type="primary">
+                        //     Primary
+                        // </Button>,
+                        // <DropdownMenu ghost key="more" />,
+
+                    ]}
+                />,
 
 
             </div>
