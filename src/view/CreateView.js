@@ -273,7 +273,6 @@ export default class CreateView extends Component {
             },
             {
                 title: '短链接',
-
                 dataIndex: 'short',
                 align: 'center',
                 key: 'short',

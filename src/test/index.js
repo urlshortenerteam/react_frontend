@@ -31,7 +31,7 @@ apiRoutes.get('/getStat', function(req, res) {
     Object.assign(jsonResponse,Mock.mock({
         "data|1-10":[
             {
-                "shortUrl":/[a-z][A-Z][0-9][a-z][0-9][A-Z]/,
+                "shortUrl":/[a-zA-Z0-9]{6}/,
                 "count":'@natural(0,100000)',
                 "long":'@url("http")',
                 "area_distr":[
