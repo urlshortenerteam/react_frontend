@@ -11,7 +11,6 @@ import {
 } from '@ant-design/icons';
 import "../css/NavigationCss.css"
 
-
 const menu = (
     <Menu>
         <Menu.Item>
@@ -71,14 +70,13 @@ export default class Navigation extends React.Component {
         const {current} = this.state;
         return (
             <div>
-                    <PageHeader
+                <PageHeader
 
                         ghost
                         className="site-page-header"
                         title="Reevoo"
                         avatar={{src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4'}}
                         subTitle={[
-
                             // theme={"dark"}
                                 <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal"  theme={"dark"}>
                                     <Menu.Item key="home" icon={ <BankOutlined />}>
@@ -135,7 +133,6 @@ export default class Navigation extends React.Component {
 
                         ]}
                     />,
-
 
             </div>
 

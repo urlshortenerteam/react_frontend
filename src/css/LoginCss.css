@@ -59,6 +59,13 @@ body .login  {
 .login input{
     background: transparent;
 }
+.ant-input-affix-wrapper > input.ant-input {
+    padding: 0;
+    border: none;
+    outline: none;
+    color:white;
+}
+
 .login .ant-input-affix-wrapper{
     background: transparent;
     color:white;

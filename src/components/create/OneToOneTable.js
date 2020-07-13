@@ -77,11 +77,15 @@ const EditableCell: React.FC<EditableCellProps> = ({
                 rules={[
                     {
                         required: true,
-                        message: `${title} is required.`,
+                        message: `${title} 需填入`,
                     },
                 ]}
             >
-                <Input ref={inputRef} onPressEnter={save} onBlur={save}/>
+                <Input
+                    ref={inputRef}
+                    onPressEnter={save}
+                    onBlur={save}
+                />
             </Form.Item>
         ) : (
             <div className="editable-cell-value-wrap" style={{paddingRight: 24}} onClick={toggleEdit}>
@@ -154,7 +158,7 @@ export default class OneToOneTable extends React.Component {
             dataSource: [
                 {
                     key: 1,
-                    long: '请输入长链接,可输入多个，以空格切分',
+                    long: '以http://或https://开头',
                     short: '',
                 },
 
@@ -179,7 +183,8 @@ export default class OneToOneTable extends React.Component {
         const {count, dataSource} = this.state;
         const newData = {
             key:this.state.count+1,
-            long: "以http://或https://",
+            long: "以http://或https://开头",
+
             short: ' ',
         };
         this.setState({

@@ -248,4 +248,48 @@ apiRoutes.post('/getShort', function(req, res) {
     }, random);
 });
 
+apiRoutes.post('/loginReq', function(req, res) {
+    console.log(req);
+    let jsonResponse={
+        status: 200,
+        msg: '查询成功',
+
+
+    };
+    Object.assign(jsonResponse,Mock.mock({
+        "data|1":[
+            {
+                "loginStatus|1-2": true,
+                "type|1":[1,2,0],
+                "id|1-100": 100,
+            }
+        ],}
+    ));
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.post('/logoutReq', function(req, res) {
+    console.log(req);
+    let jsonResponse={
+        status: 200,
+        msg: '查询成功',
+
+
+    };
+    Object.assign(jsonResponse,Mock.mock({
+        "data|1":[
+            {
+                "status|1-2": true,
+            }
+        ],}
+    ));
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
 module.exports = apiRoutes;
