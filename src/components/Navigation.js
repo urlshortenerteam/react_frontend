@@ -87,8 +87,6 @@ export default class Navigation extends React.Component {
                             </Menu.Item>
                             <SubMenu icon={<SettingOutlined/>} title="产品功能">
                                 <Menu.ItemGroup title="访问统计">
-                                    {/*<Menu.Item key="setting:1">Option 1</Menu.Item>*/}
-                                    {/*<Menu.Item key="setting:2">Option 2</Menu.Item>*/}
                                 </Menu.ItemGroup>
                                 <Menu.ItemGroup title="报表分享">
                                 </Menu.ItemGroup>
@@ -122,17 +120,12 @@ export default class Navigation extends React.Component {
 
                     ]}
                     extra={[
-
-
                         <Button key="2" ghost>
                             {JSON.parse(sessionStorage.getItem("loginStatus")) === 1 ?
                                 <a  onClick={logout}>登出</a> :
                                 <a href="#/login">登录</a>
                             }
-
                         </Button>,
-
-
                         <Button ghost key="1">
                             <a href="#/register">注册</a>
                         </Button>,
