@@ -332,41 +332,6 @@ export default class OneToOneTable extends React.Component {
         });
         return (
             <div>
-                <Row>
-                    <Col span={8}>
-                        <Divider dashed />
-                    </Col>
-                    <Col span={2} offset={1}>
-                        {!this.state.created ?
-                            <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
-                                添加
-                            </Button>:
-                            <Button type="primary" disabled>添加</Button>
-                        }
-
-
-                    </Col>
-                    <Col span={2}>
-                        {!this.state.created ?
-                            <Button type="primary" onClick={this.oneToOne}>
-                                生成
-                            </Button> :
-                            <Button type="primary" disabled>生成</Button>
-                        }
-
-                    </Col>
-                    <Col span={1}>
-
-                        <Button type="primary" onClick={this.reset}>
-                            重置
-                        </Button>
-                    </Col>
-                    <Col span={9} offset={1}>
-                        <Divider  dashed />
-                    </Col>
-                </Row>
-
-                <br/>
                 <Table
                     components={components}
                     rowClassName={() => 'editable-row'}
@@ -374,6 +339,37 @@ export default class OneToOneTable extends React.Component {
                     dataSource={dataSource}
                     columns={columns}
                     pagination={{ position: ['bottomCenter'] }}
+                    footer={() =>
+                        <Row>
+                            <Col span={8}></Col>
+                            <Col span={2} offset={1}>
+                                {!this.state.created ?
+                                    <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
+                                        添加
+                                    </Button>:
+                                    <Button type="primary" disabled>添加</Button>
+                                }
+
+
+                            </Col>
+                            <Col span={2}>
+                                {!this.state.created ?
+                                    <Button type="primary" onClick={this.oneToOne}>
+                                        生成
+                                    </Button> :
+                                    <Button type="primary" disabled>生成</Button>
+                                }
+
+                            </Col>
+                            <Col span={1}>
+
+                                <Button type="primary" onClick={this.reset}>
+                                    重置
+                                </Button>
+                            </Col>
+                            <Col span={9} offset={1}></Col>
+                        </Row>
+                    }
                 />
             </div>
         );

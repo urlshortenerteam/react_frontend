@@ -292,4 +292,26 @@ apiRoutes.post('/logoutReq', function(req, res) {
     }, random);
 });
 
+apiRoutes.post('/register', function(req, res) {
+    console.log(req);
+    let jsonResponse={
+        status: 200,
+        msg: '查询成功',
+
+
+    };
+    Object.assign(jsonResponse,Mock.mock({
+        "data|1":[
+            {
+                "success|1-2": true,
+            }
+        ],}
+    ));
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+
 module.exports = apiRoutes;
