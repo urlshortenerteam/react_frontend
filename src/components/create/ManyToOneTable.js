@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider,Popover} from 'antd';
+import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider, Popover} from 'antd';
 import {getBatchManyToOne} from "../../Services/CreateService"
 import "../../css/HomeCss.css"
 import "../../css/CreateCss.css"
@@ -150,8 +150,8 @@ export default class ManyToOneTable extends React.Component {
                         obj.props.rowSpan = this.state.dataSource.length;
                     } else obj.props.rowSpan = 0;
                     return (<div>
-                                {value}
-                            {value===''?null:
+                            {value}
+                            {value === '' ? null :
                                 <Popover content={
                                     <img
                                         src={"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + hostUrl + '/' +
@@ -192,9 +192,9 @@ export default class ManyToOneTable extends React.Component {
     };
 
     handleAdd = () => {
-        const { dataSource} = this.state;
+        const {dataSource} = this.state;
         const newData = {
-            key:this.state.count+1,
+            key: this.state.count + 1,
             long: "以http://或https://开头",
             short: ' ',
         };
@@ -263,8 +263,6 @@ export default class ManyToOneTable extends React.Component {
 
 
     manyToOne = () => {
-
-
         let urlArray = this.state.dataSource;
         let req = [];
         //check the format
@@ -348,47 +346,42 @@ export default class ManyToOneTable extends React.Component {
         });
         return (
             <div>
-                <Row>
-                    <Col span={8}>
-                            <Divider dashed />
-                    </Col>
-                    <Col span={2} offset={1}>
-                        {!this.state.created ?
-                            <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
-                                添加
-                            </Button>:
-                            <Button type="primary" disabled>添加</Button>
-                        }
-                    </Col>
-                    <Col span={2}>
-
-                        {!this.state.created ?
-                            <Button type="primary" onClick={this.manyToOne}>
-                                生成
-                            </Button> :
-                            <Button type="primary" disabled>生成</Button>
-                        }
-                    </Col>
-                    <Col span={1}>
-
-                        <Button type="primary" onClick={this.reset}>
-                            重置
-                        </Button>
-                    </Col>
-                    <Col span={9} offset={1}>
-                        <Divider  dashed />
-                    </Col>
-                </Row>
-
-                <br/>
                 <Table
                     components={components}
                     rowClassName={() => 'editable-row'}
                     bordered
                     dataSource={dataSource}
                     columns={columns}
-                    pagination={{ position: ['bottomCenter'] }}
+                    pagination={{position: ['bottomCenter']}}
+                    footer={() =>
+                        <Row>
+                            <Col span={8}></Col>
+                            <Col span={2} offset={1}>
+                                {!this.state.created ?
+                                    <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
+                                        添加
+                                    </Button> :
+                                    <Button type="primary" disabled>添加</Button>
+                                }
+                            </Col>
+                            <Col span={2}>
+                                {!this.state.created ?
+                                    <Button type="primary" onClick={this.manyToOne}>
+                                        生成
+                                    </Button> :
+                                    <Button type="primary" disabled>生成</Button>
+                                }
+                            </Col>
+                            <Col span={1}>
+                                <Button type="primary" onClick={this.reset}>
+                                    重置
+                                </Button>
+                            </Col>
+                            <Col span={9} offset={1}></Col>
+                        </Row>
+                    }
                 />
+
             </div>
         );
     }
