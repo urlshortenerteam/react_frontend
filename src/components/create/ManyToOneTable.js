@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useRef, useState} from "react";
 
 import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider,Popover} from 'antd';
-import {getBatchManyToOne} from "../Services/CreateService"
-import "../css/HomeCss.css"
-import "../css/CreateCss.css"
-import {hostUrl} from "../Services/ajax"
+import {getBatchManyToOne} from "../../Services/CreateService"
+import "../../css/HomeCss.css"
+import "../../css/CreateCss.css"
+import {hostUrl} from "../../Services/ajax"
 import {QrcodeOutlined} from "@ant-design/icons";
 
 const EditableContext = React.createContext();
