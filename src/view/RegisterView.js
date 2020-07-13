@@ -222,7 +222,9 @@ class RegisterView extends Component {
                             <Col span={14}>
                                 <br />
                                 <br />
-                                <RegistrationForm />
+                                <div className="register">
+                                    <RegistrationForm />
+                                </div>
                             </Col>
                             <Col span={6}></Col>
                         </Row>

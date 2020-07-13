@@ -1,4 +1,4 @@
-.ant-form-item-label > label {
+.register .ant-form-item-label > label {
     position: relative;
     display: -ms-inline-flexbox;
     display: inline-flex;
@@ -33,7 +33,7 @@
     text-shadow: 0 0 5px #3399cc;
 }
 
-.ant-input {
+.register .ant-input {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
@@ -56,7 +56,7 @@
     background: transparent;
 }
 
-.ant-input-affix-wrapper {
+.register .ant-input-affix-wrapper {
     position: relative;
     display: inline-block;
     width: 100%;
