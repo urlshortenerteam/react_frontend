@@ -54,15 +54,15 @@ const tailFormItemLayout = {
 
 const RegistrationForm = () => {
     const [form] = Form.useForm();
-    const callback=(data)=>
+    const callback=(res)=>
     {
-        if(data.status>0)
+        if(res.data.success)
         {
-            message.success(data.msg);
+            message.success("注册成功");
             window.location.href="#/login";
         }
         else {
-            message.error(data.msg);
+            message.error("注册失败:用户名重复");
         }
 
     };
@@ -72,7 +72,6 @@ const RegistrationForm = () => {
 
         register(values,callback);
     };
-
 
     return (
         <Form
@@ -84,8 +83,8 @@ const RegistrationForm = () => {
             scrollToFirstError
         >
             <Form.Item
-                name="username"
-                label="Username"
+                name="name"
+                label="用户名"
 
                 rules={[
                     {
@@ -97,51 +96,10 @@ const RegistrationForm = () => {
             >
                 <Input />
             </Form.Item>
-            <Form.Item
-                name="nickname"
-                label="Nickname"
 
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your nickname!',
-                        whitespace: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name="tel"
-                label="Phone"
-
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your phone number!',
-                        whitespace: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name="address"
-                label="Address"
-
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your phone address!',
-                        whitespace: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
             <Form.Item
                 name="password"
-                label="Password"
+                label="密码"
                 rules={[
                     {
                         required: true,
@@ -155,7 +113,7 @@ const RegistrationForm = () => {
 
             <Form.Item
                 name="confirm"
-                label="Confirm Password"
+                label="确认密码"
                 dependencies={['password']}
                 hasFeedback
                 rules={[
@@ -168,7 +126,6 @@ const RegistrationForm = () => {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
-
                             return Promise.reject('The two passwords that you entered do not match!');
                         },
                     }),
@@ -197,38 +154,18 @@ const RegistrationForm = () => {
             <Form.Item {...tailFormItemLayout}>
 
                 <Row>
-                    <Col span={5}></Col>
+                    <Col span={6}></Col>
                     <Col span={8}>
-                        <Button ghost htmlType="submit">Register</Button>
-
+                        <Button ghost htmlType="submit">注册</Button>
                     </Col>
                     <Col span={8}></Col>
                 </Row>
-
-
             </Form.Item>
         </Form>
     );
 };
 
 
-class StepBar extends React.Component {
-
-
-    render() {
-
-        return (
-            <div>
-                <Steps>
-                    <Step status="finish" title="Username" icon={<UserOutlined />} />
-                    <Step status="finish" title="Phone" icon={<PhoneOutlined />} />
-                    <Step status="finish" title="Password" icon={<UnlockOutlined />} />
-                    <Step status="finish" title="E-mail" icon={<PaperClipOutlined />} />
-                </Steps>,
-            </div>
-        );
-    }
-}
 
 /*
 RegisterView
@@ -241,28 +178,18 @@ class RegisterView extends Component{
         return (
             <div >
                 <div className="container ">
-                    <div className="col-md-12 column">
-                        <br/> <br/> <br/>
-                        {/*<StepBar  num={0}/>*/}
-                        <br/>
-                        <br/>
-                    </div>
-                    {/*<br/><br/><br/><br/><br/><br/><br/><br/>*/}
 
                     <div className="registerBlock">
-                        <div className="registerTitle"><span>REGISTER</span></div>
+                        <div className="registerTitle"><span>注册</span></div>
                         <Row>
-                            <Col span={2}></Col>
-                            <Col span={18} >
-
-
-                                <br/>
+                            <Col span={4}></Col>
+                            <Col span={14} >
+                                <br/> <br/>
                                 <RegistrationForm/>
                             </Col>
-                            <Col span={3}></Col>
+                            <Col span={6}></Col>
                         </Row>
                     </div>
-
 
                 </div>
             </div>

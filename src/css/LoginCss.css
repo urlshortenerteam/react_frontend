@@ -2,11 +2,6 @@
 /*    background-image: linear-gradient(to bottom right,#d0dfe6,#8abcd1);*/
 
 /*}*/
-.myBack{
-    /*background-color: #d0dfe6;*/
-    background-image: linear-gradient(to bottom right,#d0dfe6,#8abcd1);
-
-}
 
 .login{
     width:480px;
@@ -43,10 +38,6 @@ body .login .left{
     border-top-left-radius: 25px;
     padding: 55px;
 
-    /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
-
-
-
 }
 body .login  {
     color: #d8e3e7;
@@ -54,7 +45,6 @@ body .login  {
     padding: 5px;
     text-align: center;
     font-weight: bold;
-
 }
 .login input{
     background: transparent;
