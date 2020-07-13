@@ -48,7 +48,7 @@ export default class OverView extends React.Component{
     };
     render() {
         return (
-            <div>
+            <div style={{position:'relative'}}>
                 {this.StackedLines(this.props.data)}
 
                 <RealTimeTrack />
