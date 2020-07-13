@@ -217,35 +217,17 @@ apiRoutes.get('/getStat', function(req, res) {
     }, random);
 });
 
-apiRoutes.post('/getShort', function(req, res) {
-
-    let n=req.body.length;
-    setTimeout(() => {
-        res.json({
-            status: 200,
-            msg: '查询成功',
-            data: Mock.mock({
-                    "short|5":[
-                        {
-                            "short":/[a-z][A-Z][0-9][a-z][0-9][A-Z]/,
-                        }
-                    ]
-                }
-            )
-        });
-    }, random);
-});
-
 apiRoutes.post('/getOneShort', function(req, res) {
+    let jsonResponse={
+        status: 200,
+        msg: '查询成功',
+    };
+    Object.assign(jsonResponse,Mock.mock({
+            "data":/[a-z][A-Z][0-9][a-z][0-9][A-Z]/,}
+    ));
+
     setTimeout(() => {
-        res.json({
-            status: 200,
-            msg: '查询成功',
-            data: Mock.mock({
-                "short":/[a-z][A-Z][0-9][a-z][0-9][A-Z]/,
-                }
-            )
-        });
+        res.json(jsonResponse);
     }, random);
 });
 

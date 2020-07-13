@@ -1,6 +1,6 @@
 import React from "react";
 import {Col, Menu, Row} from 'antd';
-import {MailOutlined, AppstoreOutlined, SettingOutlined} from '@ant-design/icons';
+import {AppstoreOutlined, SettingOutlined} from '@ant-design/icons';
 import { PageHeader, Dropdown, Button, Tag, Typography} from 'antd';
 import { EllipsisOutlined ,AreaChartOutlined,PicLeftOutlined,BankOutlined,AlignCenterOutlined } from '@ant-design/icons';
 import "../css/NavigationCss.css"
