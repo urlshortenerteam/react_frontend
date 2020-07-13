@@ -1,6 +1,6 @@
 import React from "react";
 import StatisticsBar from "../components/statistics/StatisticsBar";
-import {Row,Col} from 'antd';
+import {Col, Row} from 'antd';
 import MapBox from "../components/MapBox";
 import Navigation from "../components/Navigation";
 import TrendingLines from "../components/statistics/TrendingLines";

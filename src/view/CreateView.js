@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Navigation from "../components/Navigation";
-import {SearchOutlined} from '@ant-design/icons';
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider} from 'antd';
+import {Button, Col, Input, Layout, message, Row, Table, Tabs, Tooltip} from 'antd';
 import {getBatchManyToOne, getBatchOneToOne} from "../Services/CreateService"
 import "../css/HomeCss.css"
 import "../css/CreateCss.css"

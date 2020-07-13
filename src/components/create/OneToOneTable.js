@@ -1,6 +1,6 @@
-import React, {Component, useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider} from 'antd';
+import {Button, Col, Divider, Form, Input, message, Popconfirm, Row, Table, Tooltip} from 'antd';
 import {getBatchOneToOne} from "../../Services/CreateService"
 import "../../css/HomeCss.css"
 import "../../css/CreateCss.css"

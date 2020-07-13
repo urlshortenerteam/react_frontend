@@ -1,7 +1,7 @@
 import React from "react";
-import { Scene } from '@antv/l7';
-import { CountryLayer } from '@antv/l7-district';
-import { Mapbox } from '@antv/l7-maps';
+import {Scene} from '@antv/l7';
+import {CountryLayer} from '@antv/l7-district';
+import {Mapbox} from '@antv/l7-maps';
 /*
 MapBox:
 @author Zhuohao Shen <ao7777@sjtu.edu.cn>

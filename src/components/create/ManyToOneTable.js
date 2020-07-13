@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider,Popover} from 'antd';
+import {Button, Col, Divider, Form, Input, message, Popconfirm, Popover, Row, Spin, Table, Tooltip} from 'antd';
 import {getBatchManyToOne} from "../../Services/CreateService"
 import "../../css/HomeCss.css"
 import "../../css/CreateCss.css"
@@ -150,13 +150,10 @@ export default class ManyToOneTable extends React.Component {
                         obj.props.rowSpan = this.state.dataSource.length;
                     } else obj.props.rowSpan = 0;
                     return (<div>
-                                {value}
-                            {value===''?null:
+                            {value}
+                            {value === '' ? null :
                                 <Popover content={
-                                    <img
-                                        src={"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + hostUrl + '/' +
-                                        value
-                                        }/>
+                                    this.AsyncQRcode(value)
                                 }
                                          title="生成二维码"
                                 >
@@ -178,9 +175,31 @@ export default class ManyToOneTable extends React.Component {
                 },
             ],
             count: 1,
-            created: false
-
+            created: false,
+            loaded: false
         };
+    }
+
+    handleQRload = () => {
+        console.log("hello");
+        this.setState({loaded: true});
+    }
+
+    AsyncQRcode = (value) => {
+        return (
+            <div style={{textAlign: 'center'}}>
+                <img
+                    src={"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + hostUrl + '/' +
+                    value
+                    }
+                    onLoad={this.handleQRload}
+                />
+                {
+                    this.state.loaded ? null : <Spin size="large"/>
+                }
+            </div>
+
+        )
     }
 
     handleDelete = key => {
@@ -192,7 +211,7 @@ export default class ManyToOneTable extends React.Component {
     };
 
     handleAdd = () => {
-        const { dataSource} = this.state;
+        const {dataSource} = this.state;
         const newData = {
             key:this.state.count+1,
             long: "以http://或https://开头",
@@ -311,7 +330,8 @@ export default class ManyToOneTable extends React.Component {
             });
             this.setState({
                 dataSource: result,
-                created: true
+                created: true,
+                loaded: false,
             });
             console.log(result);
         };
@@ -350,13 +370,13 @@ export default class ManyToOneTable extends React.Component {
             <div>
                 <Row>
                     <Col span={8}>
-                            <Divider dashed />
+                        <Divider dashed/>
                     </Col>
                     <Col span={2} offset={1}>
                         {!this.state.created ?
                             <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>
                                 添加
-                            </Button>:
+                            </Button> :
                             <Button type="primary" disabled>添加</Button>
                         }
                     </Col>
@@ -376,7 +396,7 @@ export default class ManyToOneTable extends React.Component {
                         </Button>
                     </Col>
                     <Col span={9} offset={1}>
-                        <Divider  dashed />
+                        <Divider dashed/>
                     </Col>
                 </Row>
 
@@ -387,7 +407,7 @@ export default class ManyToOneTable extends React.Component {
                     bordered
                     dataSource={dataSource}
                     columns={columns}
-                    pagination={{ position: ['bottomCenter'] }}
+                    pagination={{position: ['bottomCenter']}}
                 />
             </div>
         );
