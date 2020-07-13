@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-
-
 import {Steps, message, Alert} from 'antd';
 import "../css/RegisterCss.css"
 import {
