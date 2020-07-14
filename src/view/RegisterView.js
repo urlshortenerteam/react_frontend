@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {AutoComplete, Button, Col, Form, Input, message, Row, Steps} from 'antd';
-import "../css/RegisterCss.css"
-import {PaperClipOutlined, PhoneOutlined, UnlockOutlined, UserOutlined,} from '@ant-design/icons';
+import {AutoComplete, Button, Col, Form, Input, message, Row, Steps} from "antd";
+import "../css/RegisterCss.css";
+import {PaperClipOutlined, PhoneOutlined, UnlockOutlined, UserOutlined,} from "@ant-design/icons";
 import {register} from "../Services/userService";
 
 const { Step } = Steps;
@@ -41,23 +41,18 @@ const tailFormItemLayout = {
 
 const RegistrationForm = () => {
     const [form] = Form.useForm();
-    const callback=(res)=>
-    {
-        if(res.data.success)
-        {
+    const callback = (res) => {
+        if (res.data.success) {
             message.success("注册成功");
-            window.location.href="#/login";
-        }
-        else {
+            window.location.href = "#/login";
+        } else {
             message.error("注册失败:用户名重复");
         }
-
     };
-    const onFinish = values => {
-        console.log('Received val' +
-            'ues of form: ', values);
+    const onFinish = (values) => {
+        console.log("Received val" + "ues of form: ", values);
 
-        register(values,callback);
+        register(values, callback);
     };
 
     return (
@@ -66,31 +61,67 @@ const RegistrationForm = () => {
             form={form}
             name="register"
             onFinish={onFinish}
-
             scrollToFirstError
         >
             <Form.Item
                 name="name"
                 label="用户名"
-
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your username!',
+                        message: "Please input your username!",
                         whitespace: true,
                     },
                 ]}
             >
                 <Input />
             </Form.Item>
-
+            <Form.Item
+                name="nickname"
+                label="Nickname"
+                rules={[
+                    {
+                        required: true,
+                        message: "Please input your nickname!",
+                        whitespace: true,
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+            <Form.Item
+                name="tel"
+                label="Phone"
+                rules={[
+                    {
+                        required: true,
+                        message: "Please input your phone number!",
+                        whitespace: true,
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+            <Form.Item
+                name="address"
+                label="Address"
+                rules={[
+                    {
+                        required: true,
+                        message: "Please input your phone address!",
+                        whitespace: true,
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
             <Form.Item
                 name="password"
                 label="密码"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your password!',
+                        message: "Please input your password!",
                     },
                 ]}
                 hasFeedback
@@ -101,19 +132,21 @@ const RegistrationForm = () => {
             <Form.Item
                 name="confirm"
                 label="确认密码"
-                dependencies={['password']}
+                dependencies={["password"]}
                 hasFeedback
                 rules={[
                     {
                         required: true,
-                        message: 'Please confirm your password!',
+                        message: "Please confirm your password!",
                     },
                     ({ getFieldValue }) => ({
                         validator(rule, value) {
-                            if (!value || getFieldValue('password') === value) {
+                            if (!value || getFieldValue("password") === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject('The two passwords that you entered do not match!');
+                            return Promise.reject(
+                                "The two passwords that you entered do not match!"
+                            );
                         },
                     }),
                 ]}
@@ -126,24 +159,25 @@ const RegistrationForm = () => {
                 label="E-mail"
                 rules={[
                     {
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
+                        type: "email",
+                        message: "The input is not valid E-mail!",
                     },
                     {
                         required: true,
-                        message: 'Please input your E-mail!',
+                        message: "Please input your E-mail!",
                     },
                 ]}
             >
                 <Input />
             </Form.Item>
-            <br/>
+            <br />
             <Form.Item {...tailFormItemLayout}>
-
                 <Row>
                     <Col span={6}></Col>
                     <Col span={8}>
-                        <Button ghost htmlType="submit">注册</Button>
+                        <Button ghost htmlType="submit">
+                            注册
+                        </Button>
                     </Col>
                     <Col span={8}></Col>
                 </Row>
@@ -153,37 +187,42 @@ const RegistrationForm = () => {
 };
 
 
-
 /*
 RegisterView
 @author Shuchang Liu
 @date July 8th 2020
 @description Register View
 */
-class RegisterView extends Component{
+class RegisterView extends Component {
     render() {
         return (
-            <div >
+            <div>
                 <div className="container ">
+                    <div className="col-md-12 column">
+                        <br /> <br /> <br />
+                        {/*<StepBar  num={0}/>*/}
+                        <br />
+                        <br />
+                    </div>
+                    {/*<br/><br/><br/><br/><br/><br/><br/><br/>*/}
 
                     <div className="registerBlock">
-                        <div className="registerTitle"><span>注册</span></div>
+                        <div className="registerTitle">
+                            <span>注册</span>
+                        </div>
                         <Row>
                             <Col span={4}></Col>
                             <Col span={14} >
-                                <br/> <br/>
-                                <div className="register">
-                                    <RegistrationForm/>
-                                </div>
+                                <br/>
+                                <br />
+                                <RegistrationForm />
                             </Col>
                             <Col span={6}></Col>
                         </Row>
                     </div>
-
                 </div>
             </div>
         );
     }
-
 }
 export default RegisterView;

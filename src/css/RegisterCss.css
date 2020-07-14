@@ -9,21 +9,21 @@
     font-size: 14px;
 }
 
-.registerBlock{
-    width:800px;
+.registerBlock {
+    width: 800px;
     top: 15%;
     position: fixed;
     height: 460px;
     border-radius: 25px;
-    box-shadow: 10px 10px 30px #3399CC;
+    box-shadow: 10px 10px 30px #3399cc;
     /*background-color: #336699;*/
     left: 0;
     right: 0;
-    margin:0 auto;
+    margin: 0 auto;
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
 }
 
-.registerTitle{
+.registerTitle {
     color: #d8e3e7;
     font-size: 37px;
     padding-top: 30px;

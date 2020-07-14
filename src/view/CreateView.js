@@ -7,10 +7,9 @@ import "../css/HomeCss.css"
 import "../css/CreateCss.css"
 import ManyToOneTable from "../components/create/ManyToOneTable";
 import OneToOneTable from "../components/create/OneToOneTable";
-
-const {Header, Content, Footer} = Layout;
-const {TextArea} = Input;
-const {TabPane} = Tabs;
+const { Header, Content, Footer } = Layout;
+const { TextArea } = Input;
+const { TabPane } = Tabs;
 
 /*
 CreateView
@@ -19,9 +18,8 @@ CreateView
 @description Create View
 */
 export default class CreateView extends Component {
-
     state = {
-        value: '',
+        value: "",
         tableVisible_oneToOne: false,
         tableVisible_manyToOne: false,
         showData: [],
@@ -32,16 +30,15 @@ export default class CreateView extends Component {
 
 
         return (
-            <Layout style={{backgroundColor: '#001529'}}>
+            <Layout style={{ backgroundColor: "#001529" }}>
                 <Header>
                     <Row>
                         <Col span={20} offset={2}>
-                            <Navigation/>
+                            <Navigation />
                         </Col>
                     </Row>
                 </Header>
-
-                <Content style={{padding: '0 50px'}}>
+                <Content style={{ padding: "0 50px" }}>
                     <Row>
                         <Col span={3}></Col>
                         <Col span={18}>
@@ -54,7 +51,7 @@ export default class CreateView extends Component {
                                     </span>
                                 }>
                                     <br/>
-                                    <ManyToOneTable/>
+                                    <ManyToOneTable />
                                 </TabPane>
                                 <TabPane tab={
                                     <span>
@@ -69,13 +66,17 @@ export default class CreateView extends Component {
                         </Col>
                         <Col span={3}></Col>
                     </Row>
-                    <br/> <br/>
+                    <br /> <br />
                 </Content>
                 <br/> <br/> <br/> <br/> <br/> <br/><br/>
-                <Footer style={{textAlign: 'center', backgroundColor: '#001529', color: '#d8e3e7'}}>Ant Design ©2018
-                    Created by Ant UED</Footer>
+                <Footer style={{textAlign: "center",
+                        backgroundColor: "#001529",
+                        color: "#d8e3e7",
+                    }}
+                >
+                    Ant Design ©2018 Created by Ant UED
+                </Footer>
             </Layout>
-
         );
     }
 }

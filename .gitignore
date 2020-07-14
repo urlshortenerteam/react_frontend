@@ -46,3 +46,4 @@ yarn-error.log*
 hs_err_pid*
 
 yarn.lock
+.idea
