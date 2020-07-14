@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import Navigation from "../components/Navigation";
 import { PicCenterOutlined, PicRightOutlined } from "@ant-design/icons";
-import { Col, Input, Layout, Row, Tabs } from "antd";
+import { Col, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 import "../css/CreateCss.css";
 import ManyToOneTable from "../components/create/ManyToOneTable";
 import OneToOneTable from "../components/create/OneToOneTable";
 
 const { Header, Content, Footer } = Layout;
-const { TextArea } = Input;
 const { TabPane } = Tabs;
 
 /*
@@ -37,8 +36,7 @@ export default class CreateView extends Component {
                 </Header>
                 <Content style={{ padding: "0 50px" }}>
                     <Row>
-                        <Col span={3}></Col>
-                        <Col span={18}>
+                        <Col span={18} offset={3}>
                             <Tabs defaultActiveKey="1" centered>
                                 <TabPane
                                     key="1"
@@ -66,7 +64,6 @@ export default class CreateView extends Component {
                                 </TabPane>
                             </Tabs>
                         </Col>
-                        <Col span={3}></Col>
                     </Row>
                     <br /> <br />
                 </Content>

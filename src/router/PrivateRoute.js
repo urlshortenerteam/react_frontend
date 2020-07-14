@@ -28,12 +28,7 @@ export default class PrivateRoute extends React.Component {
     }
 
     render() {
-        const {
-            component: Component,
-            path: path,
-            exact = false,
-            strict = false,
-        } = this.props;
+        const { component: Component, path: path, exact = false } = this.props;
         // const Component=this.props.component;
         // const path=this.props.path;
         // const exact=this.props.exact;

@@ -1,66 +1,13 @@
 import React from "react";
-import { Button, Dropdown, Menu, PageHeader } from "antd";
+import { Button, Menu, PageHeader } from "antd";
 import {
     AlignCenterOutlined,
     AppstoreOutlined,
     AreaChartOutlined,
     BankOutlined,
-    EllipsisOutlined,
     PicLeftOutlined,
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
-
-const menu = (
-    <Menu>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.alipay.com/"
-            >
-                1st menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.taobao.com/"
-            >
-                2nd menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.tmall.com/"
-            >
-                3rd menu item
-            </a>
-        </Menu.Item>
-    </Menu>
-);
-const { SubMenu } = Menu;
-const DropdownMenu = () => {
-    return (
-        <Dropdown key="more" overlay={menu}>
-            <Button
-                style={{
-                    border: "none",
-                    padding: 0,
-                }}
-            >
-                <EllipsisOutlined
-                    style={{
-                        fontSize: 20,
-                        verticalAlign: "top",
-                    }}
-                />
-            </Button>
-        </Dropdown>
-    );
-};
 
 /*
 Navigation:
@@ -127,16 +74,12 @@ export default class Navigation extends React.Component {
                         </Menu>,
                     ]}
                     extra={[
-                        <Button key="3" ghost href="#/login">
+                        <Button key="2" ghost href="#/login">
                             登录
                         </Button>,
-                        <Button ghost key="2" href="#/register">
+                        <Button ghost key="1" href="#/register">
                             注册
                         </Button>,
-                        // <Button key="1" type="primary">
-                        //     Primary
-                        // </Button>,
-                        // <DropdownMenu ghost key="more" />,
                     ]}
                 />
                 ,

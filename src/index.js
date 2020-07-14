@@ -3,15 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "antd/dist/antd.css";
 import * as serviceWorker from "./serviceWorker";
-
 import BasicRouter from "./router/BasicRouter";
-// ReactDOM.render(
-//   <React.StrictMode>
-//     {/*<App />*/}
-//     <HomeView/>
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
+
 ReactDOM.render(<BasicRouter />, document.getElementById("root"));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

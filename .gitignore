@@ -47,3 +47,5 @@ hs_err_pid*
 
 yarn.lock
 .idea
+/.idea/
+package-lock.json

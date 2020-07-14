@@ -1,7 +1,7 @@
-[data-theme="compact"]
-    .white-chart
-    .site-collapse-custom-collapse
-    .site-collapse-custom-panel,
+[data-theme="compact"],
+.white-chart,
+.site-collapse-custom-collapse,
+.site-collapse-custom-panel,
 .site-collapse-custom-collapse .site-collapse-custom-panel {
     color: #ffffff;
 }
