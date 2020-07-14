@@ -374,7 +374,8 @@ export default class OneToOneTable extends React.Component {
                     <Col span={9} offset={1}>
                         <Divider  dashed />
                     </Col>
-                </Row>
+                </Row>}
+                />
 
                 <br/>
                 <Table
@@ -385,6 +386,7 @@ export default class OneToOneTable extends React.Component {
                     columns={columns}
                     pagination={{ position: ['bottomCenter'] }}
                 />
+
             </div>
         );
     }
