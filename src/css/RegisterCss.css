@@ -9,28 +9,28 @@
     font-size: 14px;
 }
 
-.registerBlock{
-    width:800px;
+.registerBlock {
+    width: 800px;
     top: 15%;
     position: fixed;
     height: 460px;
     border-radius: 25px;
-    box-shadow: 10px 10px 30px #3399CC;
+    box-shadow: 10px 10px 30px #3399cc;
     /*background-color: #336699;*/
     left: 0;
     right: 0;
-    margin:0 auto;
+    margin: 0 auto;
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
 }
 
-.registerTitle{
+.registerTitle {
     color: #d8e3e7;
     font-size: 37px;
     padding-top: 30px;
 
     text-align: center;
     font-weight: bold;
-    text-shadow: 0 0 5px #3399CC;
+    text-shadow: 0 0 5px #3399cc;
 }
 
 .ant-input {
@@ -39,8 +39,8 @@
     margin: 0;
     font-variant: tabular-nums;
     list-style: none;
-    -webkit-font-feature-settings: 'tnum';
-    font-feature-settings: 'tnum', "tnum";
+    -webkit-font-feature-settings: "tnum";
+    font-feature-settings: "tnum", "tnum";
     position: relative;
     display: inline-block;
     width: 100%;

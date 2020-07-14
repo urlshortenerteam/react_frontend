@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {Collapse} from 'antd';
+import React, { Component } from "react";
+import { Collapse } from "antd";
 import LineChart from "../LineChart";
 
 const { Panel } = Collapse;
@@ -9,21 +9,25 @@ TrendingLines
 @date July 8th 2020
 @description Show all the trending of the user
 */
-export default class TrendingLines extends Component{
-    state={
-        data:[]
+export default class TrendingLines extends Component {
+    state = {
+        data: [],
     };
     constructor(props) {
         super(props);
-        this.state={
-            data:props.data
-        }
+        this.state = {
+            data: props.data,
+        };
     }
     render() {
         return (
-            <Collapse defaultActiveKey={['1']} ghost style={{'backgroundColor':'#011428',position:'relative'}}>
-                <Panel  header="过去24小时" key="1">
-                    <LineChart  data={this.state.data} />
+            <Collapse
+                defaultActiveKey={["1"]}
+                ghost
+                style={{ backgroundColor: "#011428" }}
+            >
+                <Panel header="过去24小时" key="1">
+                    <LineChart data={this.state.data} />
                 </Panel>
                 <Panel header="最近一周" key="2">
                     <p>test</p>
@@ -32,10 +36,9 @@ export default class TrendingLines extends Component{
                     <p>test</p>
                 </Panel>
                 <Panel header="最近一年" key="4">
-                <p>test</p>
-            </Panel>
+                    <p>test</p>
+                </Panel>
             </Collapse>
         );
     }
-
 }
