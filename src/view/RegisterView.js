@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { AutoComplete, Button, Col, Form, Input, message, Row, Steps } from "antd";
+import { Button, Col, Form, Input, message, Row } from "antd";
 import "../css/RegisterCss.css";
 
 import { register } from "../Services/userService";
-
 
 const formItemLayout = {
     labelCol: {
