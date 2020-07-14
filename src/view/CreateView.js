@@ -51,8 +51,7 @@ export default class CreateView extends Component {
                 </Header>
                 <Content style={{ padding: "0 50px" }}>
                     <Row>
-                        <Col span={3}></Col>
-                        <Col span={18}>
+                        <Col span={18} offset={3}>
                             <Tabs defaultActiveKey="1" centered>
                                 <TabPane
                                     key="1"
@@ -80,7 +79,6 @@ export default class CreateView extends Component {
                                 </TabPane>
                             </Tabs>
                         </Col>
-                        <Col span={3}></Col>
                     </Row>
                     <br /> <br />
                 </Content>

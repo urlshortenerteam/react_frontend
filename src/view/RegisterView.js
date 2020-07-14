@@ -182,13 +182,11 @@ const RegistrationForm = () => {
             <br />
             <Form.Item {...tailFormItemLayout}>
                 <Row>
-                    <Col span={6}></Col>
-                    <Col span={8}>
+                    <Col span={8} offset={6}>
                         <Button ghost htmlType="submit">
                             注册
                         </Button>
                     </Col>
-                    <Col span={8}></Col>
                 </Row>
             </Form.Item>
         </Form>
@@ -208,26 +206,21 @@ class RegisterView extends Component {
                 <div className="container ">
                     <div className="col-md-12 column">
                         <br /> <br /> <br />
-                        {/*<StepBar  num={0}/>*/}
                         <br />
                         <br />
                     </div>
-                    {/*<br/><br/><br/><br/><br/><br/><br/><br/>*/}
-
                     <div className="registerBlock">
                         <div className="registerTitle">
                             <span>注册</span>
                         </div>
                         <Row>
-                            <Col span={4}></Col>
-                            <Col span={14}>
+                            <Col span={14} offset={4}>
                                 <br />
                                 <br />
                                 <div className="register">
                                     <RegistrationForm />
                                 </div>
                             </Col>
-                            <Col span={6}></Col>
                         </Row>
                     </div>
                 </div>

@@ -11,7 +11,6 @@ class LogInBlock extends React.Component {
     formRef = React.createRef();
 
     render() {
-        // const { getFieldDecorator } = this.props.form;
         const onFinish = (values) => {
             console.log("Received values of form: ", values);
             userService.login(values);
@@ -23,7 +22,7 @@ class LogInBlock extends React.Component {
         return (
             <div className="login">
                 <Row style={{ padding: "25px" }}>
-                    <Col span={12}>
+                    <Col span={12} offset={6}>
                         <div>
                             <div className="title">登录</div>
                             <Form
@@ -33,7 +32,6 @@ class LogInBlock extends React.Component {
                                 onFinishFailed={onFinishFailed}
                                 ref={this.formRef}
                             >
-                                {/*<span className="myh4">Username  </span>*/}
                                 <Form.Item
                                     name="username"
                                     rules={[
@@ -54,7 +52,6 @@ class LogInBlock extends React.Component {
                                     />
                                 </Form.Item>
 
-                                {/*<span className="myh4">Password   </span>*/}
                                 <Form.Item
                                     name="password"
                                     rules={[
