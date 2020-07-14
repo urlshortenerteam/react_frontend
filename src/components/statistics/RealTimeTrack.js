@@ -11,8 +11,9 @@ RealTimeTrack
 export default class RealTimeTrack extends React.Component {
     state = {
         data: [],
-        columns: [],
+        columns: []
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -20,37 +21,39 @@ export default class RealTimeTrack extends React.Component {
                 {
                     title: "短链接",
                     dataIndex: "shortUrl",
-                    key: "shortUrl",
+                    key: "shortUrl"
                 },
                 {
                     title: "原链接",
                     dataIndex: "long",
-                    key: "long",
+                    key: "long"
                 },
                 {
                     title: "访问者IP",
                     dataIndex: "ip",
-                    key: "ip",
+                    key: "ip"
                 },
                 {
                     title: "来源",
                     dataIndex: "source",
-                    key: "source",
+                    key: "source"
                 },
                 {
                     title: "访问时间",
                     dataIndex: "time",
-                    key: "time",
-                },
-            ],
+                    key: "time"
+                }
+            ]
         };
     }
+
     componentDidMount() {
         getRequest("/getReal", this.handleData, {
             params: { id: 0 },
-            errorCallback: this.handleError,
+            errorCallback: this.handleError
         });
     }
+
     handleData = (response) => {
         this.setState({ data: response.data.logs });
     };

@@ -1,25 +1,12 @@
 import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import { PicRightOutlined, PicCenterOutlined } from "@ant-design/icons";
-import {
-    Row,
-    Col,
-    Tooltip,
-    Layout,
-    Table,
-    Input,
-    Button,
-    message,
-    Form,
-    Popconfirm,
-    Tabs,
-    Divider,
-} from "antd";
-import { getBatchManyToOne, getBatchOneToOne } from "../Services/CreateService";
+import { PicCenterOutlined, PicRightOutlined } from "@ant-design/icons";
+import { Col, Input, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 import "../css/CreateCss.css";
 import ManyToOneTable from "../components/create/ManyToOneTable";
 import OneToOneTable from "../components/create/OneToOneTable";
+
 const { Header, Content, Footer } = Layout;
 const { TextArea } = Input;
 const { TabPane } = Tabs;
@@ -35,7 +22,7 @@ export default class CreateView extends Component {
         value: "",
         tableVisible_oneToOne: false,
         tableVisible_manyToOne: false,
-        showData: [],
+        showData: []
     };
 
     render() {
@@ -44,7 +31,7 @@ export default class CreateView extends Component {
                 <Header>
                     <Row>
                         <Col span={20} offset={2}>
-                            <Navigation />
+                            <Navigation/>
                         </Col>
                     </Row>
                 </Header>
@@ -57,39 +44,39 @@ export default class CreateView extends Component {
                                     key="1"
                                     tab={
                                         <span>
-                                            <PicRightOutlined />
+                                            <PicRightOutlined/>
                                             多对一
                                         </span>
                                     }
                                 >
-                                    <br />
-                                    <ManyToOneTable />
+                                    <br/>
+                                    <ManyToOneTable/>
                                 </TabPane>
                                 <TabPane
                                     tab={
                                         <span>
-                                            <PicCenterOutlined />
+                                            <PicCenterOutlined/>
                                             一对一
                                         </span>
                                     }
                                     key="2"
                                 >
-                                    <br />
-                                    <OneToOneTable />
+                                    <br/>
+                                    <OneToOneTable/>
                                 </TabPane>
                             </Tabs>
                         </Col>
                         <Col span={3}></Col>
                     </Row>
-                    <br /> <br />
+                    <br/> <br/>
                 </Content>
-                <br /> <br /> <br /> <br /> <br /> <br />
-                <br />
+                <br/> <br/> <br/> <br/> <br/> <br/>
+                <br/>
                 <Footer
                     style={{
                         textAlign: "center",
                         backgroundColor: "#001529",
-                        color: "#d8e3e7",
+                        color: "#d8e3e7"
                     }}
                 >
                     Ant Design ©2018 Created by Ant UED

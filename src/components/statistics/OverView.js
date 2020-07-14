@@ -14,11 +14,11 @@ export default class OverView extends React.Component {
         const config = {
             title: {
                 visible: true,
-                text: "访问量趋势",
+                text: "访问量趋势"
             },
             description: {
                 visible: true,
-                text: "近24小时访问量概览",
+                text: "近24小时访问量概览"
             },
             data,
             xField: "time",
@@ -32,32 +32,33 @@ export default class OverView extends React.Component {
                 "#dedede",
                 "#fedca9",
                 "#fab36f",
-                "#d96d6f",
+                "#d96d6f"
             ],
             xAxis: {
                 type: "dateTime",
-                tickCount: 5,
+                tickCount: 5
             },
             label: {
                 visible: true,
                 type: "area",
-                autoScale: true,
+                autoScale: true
             },
             legend: {
                 visible: true,
                 offsetX: -10,
-                position: "right-top",
+                position: "right-top"
             },
-            responsive: true,
+            responsive: true
         };
         return <StackedArea {...config} />;
     };
+
     render() {
         return (
             <div style={{ position: "relative" }}>
                 {this.StackedLines(this.props.data)}
 
-                <RealTimeTrack />
+                <RealTimeTrack/>
             </div>
         );
     }

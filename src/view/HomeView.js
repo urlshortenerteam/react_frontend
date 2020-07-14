@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import { Col, Layout, Row, Button } from "antd";
+import { Button, Col, Layout, Row } from "antd";
 import "../css/HomeCss.css";
 import { hostUrl } from "../Services/ajax";
 import { RightOutlined } from "@ant-design/icons";
@@ -20,19 +20,19 @@ class HomeView extends Component {
                 <Header>
                     <Row>
                         <Col span={20} offset={2}>
-                            <Navigation />
+                            <Navigation/>
                         </Col>
                     </Row>
                 </Header>
                 <div style={{ display: "flex", height: "100%" }}>
                     <h1 className="centerDesc">
                         短链接
-                        <br />
+                        <br/>
                         从未如此
-                        <br />
+                        <br/>
                         简单易用
-                        <br style={{ padding: 0 }} />
-                        <Button icon={<RightOutlined />} href="#/create" ghost>
+                        <br style={{ padding: 0 }}/>
+                        <Button icon={<RightOutlined/>} href="#/create" ghost>
                             开始探索
                         </Button>
                     </h1>
@@ -56,7 +56,7 @@ class HomeView extends Component {
                     style={{
                         textAlign: "center",
                         backgroundColor: "#001529",
-                        color: "#d8e3e7",
+                        color: "#d8e3e7"
                     }}
                 >
                     Reevoo ShortLink ©2020 Created by Reevoo Team

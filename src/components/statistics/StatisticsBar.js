@@ -7,7 +7,7 @@ import {
     MailOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    PieChartOutlined,
+    PieChartOutlined
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -20,7 +20,7 @@ StatisticsBar
 */
 export default class StatisticsBar extends React.Component {
     state = {
-        collapsed: false,
+        collapsed: false
     };
     toggleCollapsed = () => {
         this.setState({ collapsed: !this.state.collapsed });
@@ -28,6 +28,7 @@ export default class StatisticsBar extends React.Component {
     toggleSwitch = ({ key }) => {
         this.props.toggleSwitch({ key: key });
     };
+
     render() {
         return (
             <div style={{ maxWidth: 256, margin: "auto" }}>
@@ -50,16 +51,16 @@ export default class StatisticsBar extends React.Component {
                     theme="dark"
                     inlineCollapsed={this.state.collapsed}
                 >
-                    <Menu.Item key="overview" icon={<PieChartOutlined />}>
+                    <Menu.Item key="overview" icon={<PieChartOutlined/>}>
                         概览
                     </Menu.Item>
-                    <Menu.Item key="time" icon={<LineChartOutlined />}>
+                    <Menu.Item key="time" icon={<LineChartOutlined/>}>
                         时段
                     </Menu.Item>
-                    <Menu.Item key="area" icon={<HeatMapOutlined />}>
+                    <Menu.Item key="area" icon={<HeatMapOutlined/>}>
                         地区
                     </Menu.Item>
-                    <SubMenu key="source" icon={<MailOutlined />} title="来源">
+                    <SubMenu key="source" icon={<MailOutlined/>} title="来源">
                         <Menu.Item key="5">合作商</Menu.Item>
                         <Menu.Item key="6">广告伙伴</Menu.Item>
                         <Menu.Item key="7">供应链</Menu.Item>
@@ -67,7 +68,7 @@ export default class StatisticsBar extends React.Component {
                     </SubMenu>
                     <SubMenu
                         key="commission"
-                        icon={<AppstoreOutlined />}
+                        icon={<AppstoreOutlined/>}
                         title="佣金"
                     >
                         <Menu.Item key="9">Option 9</Menu.Item>

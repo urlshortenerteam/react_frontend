@@ -14,6 +14,7 @@
 body {
     background-color: #001529;
 }
+
 /*#000000   黑色*/
 /*#333333   灰色*/
 /*#001529*/
@@ -24,6 +25,7 @@ body {
     text-align: center;
     font-weight: bold;
 }
+
 .centerDesc {
     max-width: 400px;
     color: white;
@@ -38,22 +40,26 @@ body {
     line-height: 70px;
     margin-top: 5%;
 }
+
 .leftDesc {
     width: 40%;
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
 }
+
 .rightBottomDesc {
     max-height: 200px;
     margin-left: auto;
     margin-top: auto;
 }
+
 .rightTopDesc {
     margin-left: auto;
     width: 30%;
     margin-bottom: auto;
 }
+
 #root {
     height: 100%;
 }

@@ -13,14 +13,16 @@ MapBox:
 export default class MapBox extends React.Component {
     scene: Scene;
     state = {
-        statisticData: [],
+        statisticData: []
     };
+
     constructor(props) {
         super(props);
         this.state = {
-            statisticData: props.data,
+            statisticData: props.data
         };
     }
+
     componentDidMount() {
         const scene = new Scene({
             id: "map",
@@ -30,8 +32,8 @@ export default class MapBox extends React.Component {
                 style: "dark",
                 zoom: 3,
                 minZoom: 0,
-                maxZoom: 10,
-            }),
+                maxZoom: 10
+            })
         });
         scene.on("loaded", () => {
             new CountryLayer(scene, {
@@ -50,20 +52,21 @@ export default class MapBox extends React.Component {
                             "#6b7afd",
                             "#3c6cfd",
                             "#0d5de6",
-                            "#0344a6",
-                        ],
-                    },
+                            "#0344a6"
+                        ]
+                    }
                 },
                 popup: {
                     enable: true,
                     Html: (props) => {
                         return `<span>${props.NAME_CHN}</span><br/><span>${props.value}次访问</span>`;
-                    },
-                },
+                    }
+                }
             });
         });
         this.scene = scene;
     }
+
     componentWillUnmount() {
         this.scene.destroy();
     }
@@ -74,7 +77,7 @@ export default class MapBox extends React.Component {
                 id="map"
                 style={{
                     position: "relative",
-                    height: "100%",
+                    height: "100%"
                 }}
             ></div>
         );

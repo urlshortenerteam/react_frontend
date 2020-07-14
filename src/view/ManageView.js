@@ -5,6 +5,7 @@ import "../css/HomeCss.css";
 
 const { TabPane } = Tabs;
 const { Header, Content, Footer } = Layout;
+
 class ManageView extends Component {
     render() {
         return (
@@ -12,7 +13,7 @@ class ManageView extends Component {
                 <Header>
                     <Row>
                         <Col span={20} offset={2}>
-                            <Navigation />
+                            <Navigation/>
                         </Col>
                     </Row>
                 </Header>
@@ -29,13 +30,13 @@ class ManageView extends Component {
                         <Col span={2}></Col>
                     </Row>
                 </Content>
-                <br /> <br /> <br /> <br /> <br /> <br />
-                <br />
+                <br/> <br/> <br/> <br/> <br/> <br/>
+                <br/>
                 <Footer
                     style={{
                         textAlign: "center",
                         backgroundColor: "#001529",
-                        color: "#d8e3e7",
+                        color: "#d8e3e7"
                     }}
                 >
                     Ant Design ©2018 Created by Ant UED

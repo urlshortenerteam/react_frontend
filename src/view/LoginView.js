@@ -31,7 +31,6 @@ class LogInBlock extends React.Component {
         return (
             <div className="login">
                 <Row style={{ padding: "25px" }}>
-                    <Col span={6}></Col>
                     <Col span={12}>
                         <div>
                             <div className="title">登录</div>
@@ -49,8 +48,8 @@ class LogInBlock extends React.Component {
                                         {
                                             required: true,
                                             message:
-                                                "Please input your username!",
-                                        },
+                                                "Please input your username!"
+                                        }
                                     ]}
                                 >
                                     <Input
@@ -70,8 +69,8 @@ class LogInBlock extends React.Component {
                                         {
                                             required: true,
                                             message:
-                                                "Please input your password!",
-                                        },
+                                                "Please input your password!"
+                                        }
                                     ]}
                                 >
                                     <Input.Password
@@ -106,7 +105,6 @@ class LogInBlock extends React.Component {
                         </div>
                     </Col>
 
-                    <Col span={6}></Col>
                 </Row>
             </div>
         );
@@ -123,7 +121,7 @@ class LoginView extends Component {
     render() {
         return (
             <div>
-                <LogInBlock />
+                <LogInBlock/>
             </div>
         );
     }
