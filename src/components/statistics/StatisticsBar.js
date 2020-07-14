@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Button, Menu} from 'antd'
+import {  Button , Menu} from "antd";
 import {
     AppstoreOutlined,
     HeatMapOutlined,
@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 
 
-const {SubMenu}=Menu;
+const { SubMenu } = Menu;
 /*
 StatisticsBar
 @author Zhuohao Shen
@@ -19,28 +19,34 @@ StatisticsBar
 @params toggleSwitch - function({key}) handle switch function
 @description Navigation bar for statistic page
 */
-export default class StatisticsBar extends React.Component{
-    state={
-        collapsed:false,
+export default class StatisticsBar extends React.Component {
+    state = {
+        collapsed: false,
     };
-    toggleCollapsed=()=>{
-        this.setState(
-            {collapsed:!this.state.collapsed}
-        )
-    }
-    toggleSwitch=({key})=>{
-        this.props.toggleSwitch({key: key});
-    }
-    render(){
+    toggleCollapsed = () => {
+        this.setState({ collapsed: !this.state.collapsed });
+    };
+    toggleSwitch = ({ key }) => {
+        this.props.toggleSwitch({ key: key });
+    };
+    render() {
         return (
-            <div style={{ "maxWidth": 256,margin:"auto" }}>
-                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-                    {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
+            <div style={{ maxWidth: 256, margin: "auto" }}>
+                <Button
+                    type="primary"
+                    onClick={this.toggleCollapsed}
+                    style={{ marginBottom: 16 }}
+                >
+                    {React.createElement(
+                        this.state.collapsed
+                            ? MenuUnfoldOutlined
+                            : MenuFoldOutlined
+                    )}
                 </Button>
                 <Menu
                     onClick={this.toggleSwitch}
-                    defaultSelectedKeys={['overview']}
-                    defaultOpenKeys={['source']}
+                    defaultSelectedKeys={["overview"]}
+                    defaultOpenKeys={["source"]}
                     mode="inline"
                     theme="dark"
                     inlineCollapsed={this.state.collapsed}
@@ -60,7 +66,11 @@ export default class StatisticsBar extends React.Component{
                         <Menu.Item key="7">供应链</Menu.Item>
                         <Menu.Item key="8">问卷</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="commission" icon={<AppstoreOutlined />} title="佣金">
+                    <SubMenu
+                        key="commission"
+                        icon={<AppstoreOutlined />}
+                        title="佣金"
+                    >
                         <Menu.Item key="9">Option 9</Menu.Item>
                         <Menu.Item key="10">Option 10</Menu.Item>
                         <SubMenu key="sub3" title="Submenu">
@@ -70,6 +80,6 @@ export default class StatisticsBar extends React.Component{
                     </SubMenu>
                 </Menu>
             </div>
-        )
+        );
     }
 }

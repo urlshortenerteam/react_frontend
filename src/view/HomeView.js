@@ -1,9 +1,9 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import {Col, Layout, Row,Button} from 'antd';
-import "../css/HomeCss.css"
-import {hostUrl} from "../Services/ajax";
-import {RightOutlined} from "@ant-design/icons";
+import { Row, Col } from "antd";
+import "../css/HomeCss.css";
+import SearchBar from "../components/SearchBar";
+import { Layout } from "antd";
 
 const {Header, Content, Footer} = Layout;
 
@@ -16,14 +16,12 @@ HomeView
 class HomeView extends Component {
     render() {
         return (
-            <Layout style={{backgroundColor: '#001529',height:'100%'}}>
+            <Layout style={{ backgroundColor: "#001529" }}>
                 <Header>
-
                     <Row>
                         <Col span={20} offset={2}>
-                            <Navigation/>
+                            <Navigation />
                         </Col>
-
                     </Row>
                 </Header>
                 <Content style={{display:'flex',height:'100%'}}>
@@ -40,10 +38,8 @@ class HomeView extends Component {
                 <Footer style={{textAlign: 'center', backgroundColor: '#001529', color: '#d8e3e7'}}>Reevoo ShortLink
                     ©2020 Created by Reevoo Team</Footer>
             </Layout>
-
         );
     }
-
 }
 
 export default HomeView;

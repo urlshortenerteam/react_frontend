@@ -1,7 +1,8 @@
-import '../../css/Carousel.css'
+import "../../css/Carousel.css";
 import React from "react";
 import RealTimeTrack from "./RealTimeTrack";
-import {StackedArea} from "@ant-design/charts";
+import { StackedArea, Liquid } from "@ant-design/charts";
+import { Row, Col } from "antd";
 
 /*
 Overview
@@ -9,37 +10,44 @@ Overview
 @date July 8th 2020
 @description show overview for current user
 */
-export default class OverView extends React.Component{
-    StackedLines= (data) => {
+export default class OverView extends React.Component {
+    StackedLines = (data) => {
         const config = {
             title: {
                 visible: true,
-                text: '访问量趋势',
+                text: "访问量趋势",
             },
             description: {
                 visible: true,
-                text:
-                    '近24小时访问量概览',
+                text: "近24小时访问量概览",
             },
             data,
-            xField: 'time',
-            yField: 'value',
-            theme:'dark',
-            stackField: 'url',
-            color: ['#6897a7', '#8bc0d6', '#60d7a7', '#dedede', '#fedca9', '#fab36f', '#d96d6f'],
+            xField: "time",
+            yField: "value",
+            theme: "dark",
+            stackField: "url",
+            color: [
+                "#6897a7",
+                "#8bc0d6",
+                "#60d7a7",
+                "#dedede",
+                "#fedca9",
+                "#fab36f",
+                "#d96d6f",
+            ],
             xAxis: {
-                type: 'dateTime',
+                type: "dateTime",
                 tickCount: 5,
             },
             label: {
                 visible: true,
-                type: 'area',
+                type: "area",
                 autoScale: true,
             },
             legend: {
                 visible: true,
-                offsetX:-10,
-                position: 'right-top',
+                offsetX: -10,
+                position: "right-top",
             },
             responsive: true,
         };
