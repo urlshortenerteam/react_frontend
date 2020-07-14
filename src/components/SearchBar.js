@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, Input, message, Row} from "antd";
+import { Button, Col, Input, message, Row } from "antd";
 
 const { Search } = Input;
 

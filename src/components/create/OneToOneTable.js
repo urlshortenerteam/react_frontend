@@ -1,9 +1,20 @@
-import React, {useContext, useEffect, useRef, useState,} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
-import {Button, Col, Divider, Form, Input, message, Popconfirm, Row, Table, Tooltip,} from "antd";
+import {
+    Button,
+    Col,
+    Divider,
+    Form,
+    Input,
+    message,
+    Popconfirm,
+    Row,
+    Table,
+    Tooltip,
+} from "antd";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
-import {getBatchOneToOne} from "../../Services/CreateService";
+import { getBatchOneToOne } from "../../Services/CreateService";
 
 const EditableContext = React.createContext();
 
@@ -80,11 +91,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
                     },
                 ]}
             >
-                <Input
-                    ref={inputRef}
-                    onPressEnter={save}
-                    onBlur={save}
-                />
+                <Input ref={inputRef} onPressEnter={save} onBlur={save} />
             </Form.Item>
         ) : (
             <div
@@ -153,7 +160,7 @@ export default class OneToOneTable extends React.Component {
                 dataIndex: "short",
                 align: "center",
                 width: "30%",
-                render: short => (
+                render: (short) => (
                     <Tooltip placement="topLeft" title={short}>
                         {short}
                     </Tooltip>
@@ -290,7 +297,7 @@ export default class OneToOneTable extends React.Component {
         const callBack = (res) => {
             console.log(res.data);
             let result = [];
-            let shorts=res.data;
+            let shorts = res.data;
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,
@@ -337,56 +344,63 @@ export default class OneToOneTable extends React.Component {
             <div>
                 <Table
                     components={components}
-                    rowClassName={() => 'editable-row'}
+                    rowClassName={() => "editable-row"}
                     bordered
                     dataSource={dataSource}
                     columns={columns}
-                    pagination={{ position: ['bottomCenter'] }}
-                    footer={() =>
+                    pagination={{ position: ["bottomCenter"] }}
+                    footer={() => (
                         <Row>
                             <Col span={8}></Col>
                             <Col span={2} offset={1}>
-                                {!this.state.created ?
+                                {!this.state.created ? (
                                     <Button
-                            onClick={this.handleAdd}
-                            type="primary"
-                            style={{ marginBottom: 16 }}
-                        >
+                                        onClick={this.handleAdd}
+                                        type="primary"
+                                        style={{ marginBottom: 16 }}
+                                    >
                                         添加
-                                    </Button>:
-                                    <Button type="primary" disabled>添加</Button>
-                                }
-
-                    </Col>
-                    <Col span={2}>
-                        {!this.state.created ?
-                            <Button type="primary" onClick={this.oneToOne}>
-                                生成
-                            </Button> :
-                            <Button type="primary" disabled>生成</Button>
-                        }
-                    </Col>
-                    <Col span={1}>
-                        <Button type="primary" onClick={this.reset}>
-                            重置
-                        </Button>
-                    </Col>
-                    <Col span={9} offset={1}>
-                        <Divider  dashed />
-                    </Col>
-                </Row>}
+                                    </Button>
+                                ) : (
+                                    <Button type="primary" disabled>
+                                        添加
+                                    </Button>
+                                )}
+                            </Col>
+                            <Col span={2}>
+                                {!this.state.created ? (
+                                    <Button
+                                        type="primary"
+                                        onClick={this.oneToOne}
+                                    >
+                                        生成
+                                    </Button>
+                                ) : (
+                                    <Button type="primary" disabled>
+                                        生成
+                                    </Button>
+                                )}
+                            </Col>
+                            <Col span={1}>
+                                <Button type="primary" onClick={this.reset}>
+                                    重置
+                                </Button>
+                            </Col>
+                            <Col span={9} offset={1}>
+                                <Divider dashed />
+                            </Col>
+                        </Row>
+                    )}
                 />
-
-                <br/>
+                <br />
                 <Table
                     components={components}
                     rowClassName={() => "editable-row"}
                     bordered
                     dataSource={dataSource}
                     columns={columns}
-                    pagination={{ position: ['bottomCenter'] }}
+                    pagination={{ position: ["bottomCenter"] }}
                 />
-
             </div>
         );
     }

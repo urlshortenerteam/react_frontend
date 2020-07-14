@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Dropdown, Menu, PageHeader} from 'antd';
+import { Button, Dropdown, Menu, PageHeader } from "antd";
 import {
     AlignCenterOutlined,
     AppstoreOutlined,
@@ -7,9 +7,9 @@ import {
     BankOutlined,
     EllipsisOutlined,
     PicLeftOutlined,
-    SettingOutlined
-} from '@ant-design/icons';
-import "../css/NavigationCss.css"
+    SettingOutlined,
+} from "@ant-design/icons";
+import "../css/NavigationCss.css";
 
 const menu = (
     <Menu>
@@ -83,14 +83,14 @@ export default class Navigation extends React.Component {
         return (
             <div>
                 <PageHeader
-
-                        ghost
-                        className="site-page-header"
-                        title="Reevoo"
-                        avatar={{src: "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
+                    ghost
+                    className="site-page-header"
+                    title="Reevoo"
+                    avatar={{
+                        src:
+                            "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
                     }}
-    subTitle={[
-
+                    subTitle={[
                         <Menu
                             onClick={this.handleClick}
                             selectedKeys={[current]}
@@ -129,10 +129,10 @@ export default class Navigation extends React.Component {
                     ]}
                     extra={[
                         <Button key="3" ghost href="#/login">
-                                登录
+                            登录
                         </Button>,
                         <Button ghost key="2" href="#/register">
-                                注册
+                            注册
                         </Button>,
                         // <Button key="1" type="primary">
                         //     Primary

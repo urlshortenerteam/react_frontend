@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Button, Menu} from "antd";
+import { Button, Menu } from "antd";
 import {
     AppstoreOutlined,
     HeatMapOutlined,
@@ -7,9 +7,8 @@ import {
     MailOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    PieChartOutlined
-} from '@ant-design/icons';
-
+    PieChartOutlined,
+} from "@ant-design/icons";
 
 const { SubMenu } = Menu;
 /*

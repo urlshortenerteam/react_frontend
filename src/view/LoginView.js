@@ -1,11 +1,11 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
-import {Button, Col, Form, Input, Row} from "antd";
+import { Button, Col, Form, Input, Row } from "antd";
 import "../css/LoginCss.css";
 import "antd/dist/antd.css";
-import * as userService from "../Services/userService"
-import {LockOutlined, UserOutlined,} from "@ant-design/icons";
-import {withRouter} from "react-router-dom";
+import * as userService from "../Services/userService";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { withRouter } from "react-router-dom";
 
 const onFinish = (values) => {
     console.log("Success:", values);
@@ -84,12 +84,16 @@ class LogInBlock extends React.Component {
                                     />
                                 </Form.Item>
 
-
                                 <Row justify="space-between">
                                     <Col>
-                                    {" "}
+                                        {" "}
                                         <a href="#/register">
-                                            {" "} <Button ghost><span>注册</span></Button></a></Col>
+                                            {" "}
+                                            <Button ghost>
+                                                <span>注册</span>
+                                            </Button>
+                                        </a>
+                                    </Col>
                                     <Col>
                                         <Form.Item>
                                             <Button ghost htmlType="submit">
@@ -104,8 +108,6 @@ class LogInBlock extends React.Component {
 
                     <Col span={6}></Col>
                 </Row>
-
-
             </div>
         );
     }
@@ -121,7 +123,7 @@ class LoginView extends Component {
     render() {
         return (
             <div>
-                    <LogInBlock/>
+                <LogInBlock />
             </div>
         );
     }

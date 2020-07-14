@@ -1,11 +1,11 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import {Col, Layout, Row,Button} from "antd";
+import { Col, Layout, Row, Button } from "antd";
 import "../css/HomeCss.css";
-import {hostUrl} from "../Services/ajax"
-import {RightOutlined} from "@ant-design/icons";
+import { hostUrl } from "../Services/ajax";
+import { RightOutlined } from "@ant-design/icons";
 
-const {Header, Footer} = Layout;
+const { Header, Footer } = Layout;
 
 /*
 HomeView
@@ -24,19 +24,43 @@ class HomeView extends Component {
                         </Col>
                     </Row>
                 </Header>
-                <div style={{display:'flex',height:'100%'}}>
+                <div style={{ display: "flex", height: "100%" }}>
                     <h1 className="centerDesc">
-                        短链接<br/>
-                        从未如此<br/>
-                        简单易用<br style={{padding: 0}}/>
-                        <Button icon={<RightOutlined/>} href='#/create' ghost>开始探索</Button>
+                        短链接
+                        <br />
+                        从未如此
+                        <br />
+                        简单易用
+                        <br style={{ padding: 0 }} />
+                        <Button icon={<RightOutlined />} href="#/create" ghost>
+                            开始探索
+                        </Button>
                     </h1>
-                    <img className="leftDesc" src={hostUrl + "/flow.png"} alt={''}/>
-                    <img className="rightBottomDesc" src={hostUrl + "/people.png"} alt={''}/>
-                    <img className="rightTopDesc" src={hostUrl + "/trans.png"} alt={''}/>
+                    <img
+                        className="leftDesc"
+                        src={hostUrl + "/flow.png"}
+                        alt={""}
+                    />
+                    <img
+                        className="rightBottomDesc"
+                        src={hostUrl + "/people.png"}
+                        alt={""}
+                    />
+                    <img
+                        className="rightTopDesc"
+                        src={hostUrl + "/trans.png"}
+                        alt={""}
+                    />
                 </div>
-                <Footer style={{textAlign: 'center', backgroundColor: '#001529', color: '#d8e3e7'}}>Reevoo ShortLink
-                    ©2020 Created by Reevoo Team</Footer>
+                <Footer
+                    style={{
+                        textAlign: "center",
+                        backgroundColor: "#001529",
+                        color: "#d8e3e7",
+                    }}
+                >
+                    Reevoo ShortLink ©2020 Created by Reevoo Team
+                </Footer>
             </Layout>
         );
     }

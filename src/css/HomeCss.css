@@ -12,7 +12,7 @@
 }
 
 body {
-    background-color:#001529;
+    background-color: #001529;
 }
 /*#000000   黑色*/
 /*#333333   灰色*/
@@ -24,7 +24,7 @@ body {
     text-align: center;
     font-weight: bold;
 }
-.centerDesc{
+.centerDesc {
     max-width: 400px;
     color: white;
     text-align: center;
@@ -36,26 +36,24 @@ body {
     font-size: 55px;
     z-index: 3;
     line-height: 70px;
-    margin-top:5%
+    margin-top: 5%;
 }
-.leftDesc{
+.leftDesc {
     width: 40%;
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
 }
-.rightBottomDesc{
+.rightBottomDesc {
     max-height: 200px;
     margin-left: auto;
     margin-top: auto;
-
 }
-.rightTopDesc{
-     margin-left: auto;
+.rightTopDesc {
+    margin-left: auto;
     width: 30%;
-     margin-bottom: auto;
-
+    margin-bottom: auto;
 }
-#root{
+#root {
     height: 100%;
 }

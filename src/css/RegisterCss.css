@@ -30,7 +30,7 @@
 
     text-align: center;
     font-weight: bold;
-    text-shadow: 0 0 5px #3399CC;
+    text-shadow: 0 0 5px #3399cc;
 }
 
 .ant-input {
@@ -39,8 +39,8 @@
     margin: 0;
     font-variant: tabular-nums;
     list-style: none;
-    -webkit-font-feature-settings: 'tnum';
-    font-feature-settings: 'tnum', "tnum";
+    -webkit-font-feature-settings: "tnum";
+    font-feature-settings: "tnum", "tnum";
     position: relative;
     display: inline-block;
     width: 100%;
