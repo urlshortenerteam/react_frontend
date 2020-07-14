@@ -13,6 +13,7 @@ export default class RealTimeTrack extends React.Component {
         data: [],
         columns: [],
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -45,12 +46,14 @@ export default class RealTimeTrack extends React.Component {
             ],
         };
     }
+
     componentDidMount() {
         getRequest("/getReal", this.handleData, {
             params: { id: 0 },
             errorCallback: this.handleError,
         });
     }
+
     handleData = (response) => {
         this.setState({ data: response.data.logs });
     };

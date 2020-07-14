@@ -5,6 +5,7 @@ import "../css/HomeCss.css";
 
 const { TabPane } = Tabs;
 const { Header, Content, Footer } = Layout;
+
 class ManageView extends Component {
     render() {
         return (

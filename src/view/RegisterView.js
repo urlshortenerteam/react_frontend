@@ -10,12 +10,6 @@ import {
     Steps,
 } from "antd";
 import "../css/RegisterCss.css";
-import {
-    PaperClipOutlined,
-    PhoneOutlined,
-    UnlockOutlined,
-    UserOutlined,
-} from "@ant-design/icons";
 import { register } from "../Services/userService";
 
 const { Step } = Steps;
@@ -231,4 +225,5 @@ class RegisterView extends Component {
         );
     }
 }
+
 export default RegisterView;

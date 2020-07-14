@@ -28,6 +28,7 @@ export default class StatisticsBar extends React.Component {
     toggleSwitch = ({ key }) => {
         this.props.toggleSwitch({ key: key });
     };
+
     render() {
         return (
             <div style={{ maxWidth: 256, margin: "auto" }}>

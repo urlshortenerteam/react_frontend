@@ -13,12 +13,14 @@ export default class TrendingLines extends Component {
     state = {
         data: [],
     };
+
     constructor(props) {
         super(props);
         this.state = {
             data: props.data,
         };
     }
+
     render() {
         return (
             <Collapse

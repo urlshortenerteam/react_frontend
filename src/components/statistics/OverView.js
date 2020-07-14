@@ -52,6 +52,7 @@ export default class OverView extends React.Component {
         };
         return <StackedArea {...config} />;
     };
+
     render() {
         return (
             <div style={{ position: "relative" }}>

@@ -1,25 +1,12 @@
 import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import { PicRightOutlined, PicCenterOutlined } from "@ant-design/icons";
-import {
-    Row,
-    Col,
-    Tooltip,
-    Layout,
-    Table,
-    Input,
-    Button,
-    message,
-    Form,
-    Popconfirm,
-    Tabs,
-    Divider,
-} from "antd";
-import { getBatchManyToOne, getBatchOneToOne } from "../Services/CreateService";
+import { PicCenterOutlined, PicRightOutlined } from "@ant-design/icons";
+import { Col, Input, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 import "../css/CreateCss.css";
 import ManyToOneTable from "../components/create/ManyToOneTable";
 import OneToOneTable from "../components/create/OneToOneTable";
+
 const { Header, Content, Footer } = Layout;
 const { TextArea } = Input;
 const { TabPane } = Tabs;

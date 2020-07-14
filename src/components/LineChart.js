@@ -13,6 +13,7 @@ export default class LineChart extends React.Component {
         data: [],
         config: {},
     };
+
     constructor(props) {
         super(props);
         console.log(props.data);
@@ -87,6 +88,7 @@ export default class LineChart extends React.Component {
             },
         };
     }
+
     render() {
         return <Line {...this.state.config} />;
     }
