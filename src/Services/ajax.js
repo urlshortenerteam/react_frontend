@@ -1,17 +1,15 @@
-export const hostUrl='http://localhost:4000';
+export const hostUrl = "http://localhost:4000";
 let postRequest = (url, json, callback) => {
-
     let opts = {
         method: "POST",
         body: JSON.stringify(json),
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
         },
-
     };
-    fetch(hostUrl+url,opts)
+    fetch(hostUrl + url, opts)
         .then((response) => {
-            return response.json()
+            return response.json();
         })
         .then((data) => {
             callback(data);
@@ -21,13 +19,12 @@ let postRequest = (url, json, callback) => {
         });
 };
 
-
-let getRequest = (url, callback,{errorCallback,params}) => {
-    let _url=new URL(hostUrl+url);
-    _url.search=new URLSearchParams(params).toString();
+let getRequest = (url, callback, { errorCallback, params }) => {
+    let _url = new URL(hostUrl + url);
+    _url.search = new URLSearchParams(params).toString();
     fetch(_url)
         .then((response) => {
-            return response.json()
+            return response.json();
         })
         .then((data) => {
             callback(data);
@@ -39,10 +36,9 @@ let getRequest = (url, callback,{errorCallback,params}) => {
 };
 
 let deleteRequest = (url, callback) => {
-
-    fetch(hostUrl+url,{method: "DELETE"})
+    fetch(hostUrl + url, { method: "DELETE" })
         .then((response) => {
-            return response.json()
+            return response.json();
         })
         .then((data) => {
             callback(data);
@@ -52,4 +48,4 @@ let deleteRequest = (url, callback) => {
         });
 };
 
-export {postRequest,getRequest,deleteRequest};
+export { postRequest, getRequest, deleteRequest };
