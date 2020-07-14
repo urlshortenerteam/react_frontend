@@ -394,8 +394,7 @@ export default class ManyToOneTable extends React.Component {
                     pagination={{ position: ["bottomCenter"] }}
                     footer={() => (
                         <Row>
-                            <Col span={8}></Col>
-                            <Col span={2} offset={1}>
+                            <Col span={2} offset={8}>
                                 {!this.state.created ? (
                                     <Button
                                         onClick={this.handleAdd}
@@ -429,7 +428,6 @@ export default class ManyToOneTable extends React.Component {
                                     重置
                                 </Button>
                             </Col>
-                            <Col span={9} offset={1}></Col>
                         </Row>
                     )}
                 />
