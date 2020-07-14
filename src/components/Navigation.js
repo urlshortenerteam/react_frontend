@@ -1,68 +1,13 @@
 import React from "react";
-import { Col, Menu, Row } from "antd";
-import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
-import { PageHeader, Dropdown, Button, Tag, Typography } from "antd";
+import { Button, Menu, PageHeader } from "antd";
 import {
-    EllipsisOutlined,
-    AreaChartOutlined,
-    PicLeftOutlined,
-    BankOutlined,
     AlignCenterOutlined,
+    AppstoreOutlined,
+    AreaChartOutlined,
+    BankOutlined,
+    PicLeftOutlined,
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
-const { Paragraph } = Typography;
-
-const menu = (
-    <Menu>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.alipay.com/"
-            >
-                1st menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.taobao.com/"
-            >
-                2nd menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.tmall.com/"
-            >
-                3rd menu item
-            </a>
-        </Menu.Item>
-    </Menu>
-);
-const { SubMenu } = Menu;
-const DropdownMenu = () => {
-    return (
-        <Dropdown key="more" overlay={menu}>
-            <Button
-                style={{
-                    border: "none",
-                    padding: 0,
-                }}
-            >
-                <EllipsisOutlined
-                    style={{
-                        fontSize: 20,
-                        verticalAlign: "top",
-                    }}
-                />
-            </Button>
-        </Dropdown>
-    );
-};
 
 /*
 Navigation:
@@ -86,13 +31,12 @@ export default class Navigation extends React.Component {
                 <PageHeader
                     ghost
                     className="site-page-header"
-                    title="暑假福报 短链接 "
+                    title="Reevoo"
                     avatar={{
                         src:
                             "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
                     }}
                     subTitle={[
-                        // theme={"dark"}
                         <Menu
                             onClick={this.handleClick}
                             selectedKeys={[current]}
@@ -102,21 +46,7 @@ export default class Navigation extends React.Component {
                             <Menu.Item key="home" icon={<BankOutlined />}>
                                 <a href="#">首页</a>
                             </Menu.Item>
-                            <SubMenu
-                                icon={<SettingOutlined />}
-                                title="产品功能"
-                            >
-                                <Menu.ItemGroup title="访问统计">
-                                    {/*<Menu.Item key="setting:1">Option 1</Menu.Item>*/}
-                                    {/*<Menu.Item key="setting:2">Option 2</Menu.Item>*/}
-                                </Menu.ItemGroup>
-                                <Menu.ItemGroup title="报表分享"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="随时修改"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="批量创建"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="随机跳转"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="分类管理"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="生成二维码"></Menu.ItemGroup>
-                            </SubMenu>
+
                             <Menu.Item
                                 key="statistics"
                                 icon={<AreaChartOutlined />}
@@ -144,16 +74,12 @@ export default class Navigation extends React.Component {
                         </Menu>,
                     ]}
                     extra={[
-                        <Button key="3" ghost>
-                            <a href="#/login">登录</a>
+                        <Button key="2" ghost href="#/login">
+                            登录
                         </Button>,
-                        <Button ghost key="2">
-                            <a href="#/register">注册</a>
+                        <Button ghost key="1" href="#/register">
+                            注册
                         </Button>,
-                        // <Button key="1" type="primary">
-                        //     Primary
-                        // </Button>,
-                        // <DropdownMenu ghost key="more" />,
                     ]}
                 />
                 ,

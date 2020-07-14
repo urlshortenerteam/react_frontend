@@ -15,12 +15,14 @@ export default class MapBox extends React.Component {
     state = {
         statisticData: [],
     };
+
     constructor(props) {
         super(props);
         this.state = {
             statisticData: props.data,
         };
     }
+
     componentDidMount() {
         const scene = new Scene({
             id: "map",
@@ -64,6 +66,7 @@ export default class MapBox extends React.Component {
         });
         this.scene = scene;
     }
+
     componentWillUnmount() {
         this.scene.destroy();
     }

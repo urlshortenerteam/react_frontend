@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Collapse } from "antd";
 import LineChart from "../LineChart";
+
 const { Panel } = Collapse;
 /*
 TrendingLines
@@ -12,12 +13,14 @@ export default class TrendingLines extends Component {
     state = {
         data: [],
     };
+
     constructor(props) {
         super(props);
         this.state = {
             data: props.data,
         };
     }
+
     render() {
         return (
             <Collapse

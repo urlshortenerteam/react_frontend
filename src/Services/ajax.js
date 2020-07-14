@@ -1,4 +1,4 @@
-const hostUrl = "http://localhost:4000";
+export const hostUrl = "http://localhost:4000";
 let postRequest = (url, json, callback) => {
     let opts = {
         method: "POST",

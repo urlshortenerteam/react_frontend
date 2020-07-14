@@ -1,33 +1,19 @@
 import React, { Component } from "react";
 
-import { Row, Col } from "antd";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Button, Col, Form, Input, Row } from "antd";
 import "../css/LoginCss.css";
 import "antd/dist/antd.css";
-
-import {
-    AccountBookOutlined,
-    LockOutlined,
-    UserOutlined,
-} from "@ant-design/icons";
+import * as userService from "../Services/userService";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
-
-const onFinish = (values) => {
-    console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-};
 
 class LogInBlock extends React.Component {
     formRef = React.createRef();
 
     render() {
-        // const { getFieldDecorator } = this.props.form;
         const onFinish = (values) => {
             console.log("Received values of form: ", values);
-            // userService.login(values);
+            userService.login(values);
         };
 
         const onFinishFailed = (errorInfo) => {
@@ -36,8 +22,7 @@ class LogInBlock extends React.Component {
         return (
             <div className="login">
                 <Row style={{ padding: "25px" }}>
-                    <Col span={6}></Col>
-                    <Col span={12}>
+                    <Col span={12} offset={6}>
                         <div>
                             <div className="title">登录</div>
                             <Form
@@ -47,7 +32,6 @@ class LogInBlock extends React.Component {
                                 onFinishFailed={onFinishFailed}
                                 ref={this.formRef}
                             >
-                                {/*<span className="myh4">Username  </span>*/}
                                 <Form.Item
                                     name="username"
                                     rules={[
@@ -68,7 +52,6 @@ class LogInBlock extends React.Component {
                                     />
                                 </Form.Item>
 
-                                {/*<span className="myh4">Password   </span>*/}
                                 <Form.Item
                                     name="password"
                                     rules={[
@@ -110,8 +93,6 @@ class LogInBlock extends React.Component {
                             </Form>
                         </div>
                     </Col>
-
-                    <Col span={6}></Col>
                 </Row>
             </div>
         );
@@ -128,9 +109,7 @@ class LoginView extends Component {
     render() {
         return (
             <div>
-                <div className="myBack">
-                    <LogInBlock />
-                </div>
+                <LogInBlock />
             </div>
         );
     }

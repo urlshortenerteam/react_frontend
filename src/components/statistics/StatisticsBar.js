@@ -1,13 +1,13 @@
 import * as React from "react";
-import { Menu, Button } from "antd";
+import { Button, Menu } from "antd";
 import {
     AppstoreOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    PieChartOutlined,
-    LineChartOutlined,
     HeatMapOutlined,
+    LineChartOutlined,
     MailOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    PieChartOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -28,6 +28,7 @@ export default class StatisticsBar extends React.Component {
     toggleSwitch = ({ key }) => {
         this.props.toggleSwitch({ key: key });
     };
+
     render() {
         return (
             <div style={{ maxWidth: 256, margin: "auto" }}>

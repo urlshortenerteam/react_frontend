@@ -1,6 +1,6 @@
 import React from "react";
 import StatisticsBar from "../components/statistics/StatisticsBar";
-import { Row, Col } from "antd";
+import { Col, Row } from "antd";
 import MapBox from "../components/MapBox";
 import Navigation from "../components/Navigation";
 import TrendingLines from "../components/statistics/TrendingLines";
@@ -23,12 +23,14 @@ export default class StatisticsView extends React.Component {
     toggleSwitch = ({ key }) => {
         this.setState({ display: key });
     };
+
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
             params: { id: 0 },
             errorCallback: this.handleError,
         });
     }
+
     handleData = (response) => {
         this.setState({ data: response.data });
         let lines = [];
@@ -44,6 +46,7 @@ export default class StatisticsView extends React.Component {
     handleError = (error) => {
         console.log(error);
     };
+
     render() {
         return (
             <div>

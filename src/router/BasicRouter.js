@@ -7,6 +7,7 @@ import CreateView from "../view/CreateView";
 import StatisticsView from "../view/StatisticsView";
 import ManageView from "../view/ManageView";
 import RegisterView from "../view/RegisterView";
+
 const BasicRouter = () => (
     <HashRouter>
         <Switch>

@@ -1,18 +1,8 @@
 import React, { Component } from "react";
-import { Steps, message, Alert } from "antd";
+import { Button, Col, Form, Input, message, Row } from "antd";
 import "../css/RegisterCss.css";
-import { Form, Input, Row, Col, Button, AutoComplete } from "antd";
-import {
-    UserOutlined,
-    UnlockOutlined,
-    PhoneOutlined,
-    PaperClipOutlined,
-} from "@ant-design/icons";
-import { register } from "../Services/userService";
-import "../css/RegisterCss.css";
-const { Step } = Steps;
 
-const AutoCompleteOption = AutoComplete.Option;
+import { register } from "../Services/userService";
 
 const formItemLayout = {
     labelCol: {
@@ -47,12 +37,12 @@ const tailFormItemLayout = {
 
 const RegistrationForm = () => {
     const [form] = Form.useForm();
-    const callback = (data) => {
-        if (data.status > 0) {
-            message.success(data.msg);
+    const callback = (res) => {
+        if (res.data.success) {
+            message.success("注册成功");
             window.location.href = "#/login";
         } else {
-            message.error(data.msg);
+            message.error("注册失败:用户名重复");
         }
     };
     const onFinish = (values) => {
@@ -70,8 +60,8 @@ const RegistrationForm = () => {
             scrollToFirstError
         >
             <Form.Item
-                name="username"
-                label="Username"
+                name="name"
+                label="用户名"
                 rules={[
                     {
                         required: true,
@@ -123,7 +113,7 @@ const RegistrationForm = () => {
             </Form.Item>
             <Form.Item
                 name="password"
-                label="Password"
+                label="密码"
                 rules={[
                     {
                         required: true,
@@ -137,7 +127,7 @@ const RegistrationForm = () => {
 
             <Form.Item
                 name="confirm"
-                label="Confirm Password"
+                label="确认密码"
                 dependencies={["password"]}
                 hasFeedback
                 rules={[
@@ -150,7 +140,6 @@ const RegistrationForm = () => {
                             if (!value || getFieldValue("password") === value) {
                                 return Promise.resolve();
                             }
-
                             return Promise.reject(
                                 "The two passwords that you entered do not match!"
                             );
@@ -180,50 +169,16 @@ const RegistrationForm = () => {
             <br />
             <Form.Item {...tailFormItemLayout}>
                 <Row>
-                    <Col span={5}></Col>
-                    <Col span={8}>
+                    <Col span={8} offset={6}>
                         <Button ghost htmlType="submit">
-                            Register
+                            注册
                         </Button>
                     </Col>
-                    <Col span={8}></Col>
                 </Row>
             </Form.Item>
         </Form>
     );
 };
-
-class StepBar extends React.Component {
-    render() {
-        return (
-            <div>
-                <Steps>
-                    <Step
-                        status="finish"
-                        title="Username"
-                        icon={<UserOutlined />}
-                    />
-                    <Step
-                        status="finish"
-                        title="Phone"
-                        icon={<PhoneOutlined />}
-                    />
-                    <Step
-                        status="finish"
-                        title="Password"
-                        icon={<UnlockOutlined />}
-                    />
-                    <Step
-                        status="finish"
-                        title="E-mail"
-                        icon={<PaperClipOutlined />}
-                    />
-                </Steps>
-                ,
-            </div>
-        );
-    }
-}
 
 /*
 RegisterView
@@ -238,23 +193,21 @@ class RegisterView extends Component {
                 <div className="container ">
                     <div className="col-md-12 column">
                         <br /> <br /> <br />
-                        {/*<StepBar  num={0}/>*/}
                         <br />
                         <br />
                     </div>
-                    {/*<br/><br/><br/><br/><br/><br/><br/><br/>*/}
-
                     <div className="registerBlock">
                         <div className="registerTitle">
-                            <span>REGISTER</span>
+                            <span>注册</span>
                         </div>
                         <Row>
-                            <Col span={2}></Col>
-                            <Col span={18}>
+                            <Col span={14} offset={4}>
                                 <br />
-                                <RegistrationForm />
+                                <br />
+                                <div className="register">
+                                    <RegistrationForm />
+                                </div>
                             </Col>
-                            <Col span={3}></Col>
                         </Row>
                     </div>
                 </div>
@@ -262,4 +215,5 @@ class RegisterView extends Component {
         );
     }
 }
+
 export default RegisterView;

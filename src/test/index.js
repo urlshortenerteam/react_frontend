@@ -13,7 +13,7 @@ apiRoutes.get("/getReal", function (req, res) {
             data: Mock.mock({
                 "logs|1-5": [
                     {
-                        shortUrl: /[a-z][A-Z][0-9][a-z][0-9][A-Z]/,
+                        shortUrl: /[a-zA-Z0-9]{6}/,
                         long: '@url("http")',
                         ip: "@ip",
                         source: "@domain",
@@ -31,7 +31,7 @@ apiRoutes.get("/getStat", function (req, res) {
         Mock.mock({
             "data|1-10": [
                 {
-                    shortUrl: /[a-z][A-Z][0-9][a-z][0-9][A-Z]/,
+                    shortUrl: /[a-zA-Z0-9]{6}/,
                     count: "@natural(0,100000)",
                     long: '@url("http")',
                     area_distr: [
@@ -249,7 +249,93 @@ apiRoutes.post("/getOneShort", function (req, res) {
     Object.assign(
         jsonResponse,
         Mock.mock({
-            data: /[a-z][A-Z][0-9][a-z][0-9][A-Z]/,
+            data: /[a-zA-Z0-9]{6}/,
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.post("/getShort", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|10": [/[a-z][A-Z][0-9][a-z][0-9][A-Z]/],
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.post("/loginReq", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1": [
+                {
+                    "loginStatus|1-2": true,
+                    "type|1": [1, 2, 0],
+                    "id|1-100": 100,
+                },
+            ],
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.post("/logoutReq", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1": [
+                {
+                    "status|1-2": true,
+                },
+            ],
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.post("/register", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1": [
+                {
+                    "success|1-2": true,
+                },
+            ],
         })
     );
 

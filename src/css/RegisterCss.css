@@ -1,4 +1,4 @@
-.ant-form-item-label > label {
+.register .ant-form-item-label > label {
     position: relative;
     display: -ms-inline-flexbox;
     display: inline-flex;
@@ -11,12 +11,12 @@
 
 .registerBlock {
     width: 800px;
-    top: 10%;
+    top: 15%;
     position: fixed;
-    height: 580px;
+    height: 460px;
     border-radius: 25px;
-    box-shadow: 10px 10px 50px #3399cc;
-    background-color: #336699;
+    box-shadow: 10px 10px 30px #3399cc;
+    /*background-color: #336699;*/
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -26,7 +26,50 @@
 .registerTitle {
     color: #d8e3e7;
     font-size: 37px;
-    padding: 5px;
+    padding-top: 30px;
+
     text-align: center;
     font-weight: bold;
+    text-shadow: 0 0 5px #3399cc;
+}
+
+.register .ant-input {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    font-variant: tabular-nums;
+    list-style: none;
+    -webkit-font-feature-settings: "tnum";
+    font-feature-settings: "tnum", "tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: white;
+    font-size: 14px;
+    line-height: 1.5715;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    background: transparent;
+}
+
+.register .ant-input-affix-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: white;
+    font-size: 14px;
+    line-height: 1.5715;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    background: transparent;
 }
