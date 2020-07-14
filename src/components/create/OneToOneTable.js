@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import {
-    Button,
-    Col,
-    Divider,
+import {Button, Col,
     Form,
     Input,
     message,
@@ -190,7 +187,7 @@ export default class OneToOneTable extends React.Component {
     };
 
     handleAdd = () => {
-        const { count, dataSource } = this.state;
+        const {  dataSource } = this.state;
         const newData = {
             key: this.state.count + 1,
             long: "以http://或https://开头",
