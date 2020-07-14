@@ -257,7 +257,7 @@ export default class OneToOneTable extends React.Component {
             dataSource: [
                 {
                     key: 0,
-                    long: "请输入长链接，可输入多个，以空格切分",
+                    long: "以http://或https://开头",
                     short: "",
                 },
             ],
