@@ -21,11 +21,7 @@ export const login = (data) => {
             // history.push("/");
 
             message.success("登录成功");
-
-            // message.success(JSON.parse(localStorage.getItem("user")).userId);
-
             window.location.href = "/";
-            // +JSON.parse(localStorage.getItem("user")).userId;
         } else {
             if (res.data.type === 1) {
                 message.error("用户名或密码错误");
