@@ -1,67 +1,13 @@
 import React from "react";
-import {Button, Dropdown, Menu, PageHeader} from 'antd';
+import { Button,  Menu, PageHeader } from "antd";
 import {
     AlignCenterOutlined,
     AppstoreOutlined,
     AreaChartOutlined,
     BankOutlined,
-    EllipsisOutlined,
-    PicLeftOutlined,
-    SettingOutlined
-} from '@ant-design/icons';
-import "../css/NavigationCss.css"
-
-const menu = (
-    <Menu>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.alipay.com/"
-            >
-                1st menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.taobao.com/"
-            >
-                2nd menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.tmall.com/"
-            >
-                3rd menu item
-            </a>
-        </Menu.Item>
-    </Menu>
-);
-const { SubMenu } = Menu;
-const DropdownMenu = () => {
-    return (
-        <Dropdown key="more" overlay={menu}>
-            <Button
-                style={{
-                    border: "none",
-                    padding: 0,
-                }}
-            >
-                <EllipsisOutlined
-                    style={{
-                        fontSize: 20,
-                        verticalAlign: "top",
-                    }}
-                />
-            </Button>
-        </Dropdown>
-    );
-};
+    PicLeftOutlined
+} from "@ant-design/icons";
+import "../css/NavigationCss.css";
 
 /*
 Navigation:
@@ -70,7 +16,7 @@ Navigation:
 */
 export default class Navigation extends React.Component {
     state = {
-        current: "mail",
+        current: "mail"
     };
 
     handleClick = (e) => {
@@ -84,39 +30,39 @@ export default class Navigation extends React.Component {
             <div>
                 <PageHeader
 
-                        ghost
-                        className="site-page-header"
-                        title="Reevoo"
-                        avatar={{src: "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
+                    ghost
+                    className="site-page-header"
+                    title="Reevoo"
+                    avatar={{
+                        src: "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4"
                     }}
-    subTitle={[
-
+                    subTitle={[
                         <Menu
                             onClick={this.handleClick}
                             selectedKeys={[current]}
                             mode="horizontal"
                             theme={"dark"}
                         >
-                            <Menu.Item key="home" icon={<BankOutlined />}>
+                            <Menu.Item key="home" icon={<BankOutlined/>}>
                                 <a href="#">首页</a>
                             </Menu.Item>
 
                             <Menu.Item
                                 key="statistics"
-                                icon={<AreaChartOutlined />}
+                                icon={<AreaChartOutlined/>}
                             >
                                 <a href="#/statistics">统计图表</a>
                             </Menu.Item>
-                            <Menu.Item key="create" icon={<PicLeftOutlined />}>
+                            <Menu.Item key="create" icon={<PicLeftOutlined/>}>
                                 <a href="#/create">批量生成</a>
                             </Menu.Item>
                             <Menu.Item
                                 key="manage"
-                                icon={<AlignCenterOutlined />}
+                                icon={<AlignCenterOutlined/>}
                             >
                                 <a href="#/manage">管理链接</a>
                             </Menu.Item>
-                            <Menu.Item key="other" icon={<AppstoreOutlined />}>
+                            <Menu.Item key="other" icon={<AppstoreOutlined/>}>
                                 <a
                                     href="https://xiaomark.com/"
                                     target="_blank"
@@ -125,19 +71,15 @@ export default class Navigation extends React.Component {
                                     其他
                                 </a>
                             </Menu.Item>
-                        </Menu>,
+                        </Menu>
                     ]}
                     extra={[
-                        <Button key="3" ghost href="#/login">
-                                登录
+                        <Button key="2" ghost href="#/login">
+                            登录
                         </Button>,
-                        <Button ghost key="2" href="#/register">
-                                注册
-                        </Button>,
-                        // <Button key="1" type="primary">
-                        //     Primary
-                        // </Button>,
-                        // <DropdownMenu ghost key="more" />,
+                        <Button ghost key="1" href="#/register">
+                            注册
+                        </Button>
                     ]}
                 />
                 ,
