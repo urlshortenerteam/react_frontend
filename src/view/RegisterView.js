@@ -1,21 +1,9 @@
 import React, { Component } from "react";
-import {
-    AutoComplete,
-    Button,
-    Col,
-    Form,
-    Input,
-    message,
-    Row,
-    Steps,
-} from "antd";
+import { AutoComplete, Button, Col, Form, Input, message, Row, Steps } from "antd";
 import "../css/RegisterCss.css";
 
 import { register } from "../Services/userService";
 
-const { Step } = Steps;
-
-const AutoCompleteOption = AutoComplete.Option;
 
 const formItemLayout = {
     labelCol: {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import { Button, Col, Layout, Row  } from "antd";
+import { Button, Col, Layout, Row } from "antd";
 import "../css/HomeCss.css";
 import { hostUrl } from "../Services/ajax";
 import { RightOutlined } from "@ant-design/icons";

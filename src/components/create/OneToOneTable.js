@@ -1,16 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import {
-    Button,
-    Col,
-    Form,
-    Input,
-    message,
-    Popconfirm,
-    Row,
-    Table,
-    Tooltip,
-} from "antd";
+import { Button, Col, Form, Input, message, Popconfirm, Row, Table, Tooltip } from "antd";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
 import { getBatchOneToOne } from "../../Services/CreateService";
@@ -191,7 +181,7 @@ export default class OneToOneTable extends React.Component {
     };
 
     handleAdd = () => {
-        const {  dataSource } = this.state;
+        const { dataSource } = this.state;
         const newData = {
             key: this.state.count + 1,
             long: "以http://或https://开头",
@@ -214,8 +204,7 @@ export default class OneToOneTable extends React.Component {
 
         //check the format
         let flag = true;
-        if(urlArray.length>1)
-        {
+        if (urlArray.length > 1) {
             urlArray.forEach((item, index) => {
                 newRow.push({
                     key: index + this.state.count,
@@ -246,21 +235,21 @@ export default class OneToOneTable extends React.Component {
 
             this.setState({ dataSource: newData });
             // console.log(newData);
-        }
-        else {
+        } else {
             const item = newData[index];
-            if (urlArray[0].indexOf("https://") !== 0 &&
-                urlArray[0].indexOf("http://") !== 0) {
+            if (
+                urlArray[0].indexOf("https://") !== 0 &&
+                urlArray[0].indexOf("http://") !== 0
+            ) {
                 message.error("长链接格式错误，请以http://或https://开头");
             }
             newData.splice(index, 1, {
                 ...item,
-                ...row
+                ...row,
             });
             this.setState({ dataSource: newData });
             // console.log(newData);
         }
-
     };
 
     reset = () => {

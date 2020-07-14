@@ -1,5 +1,5 @@
 import React from "react";
-import {  Redirect , Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import * as userService from "../services/userService";
 import { message } from "antd";
 
@@ -32,7 +32,6 @@ export default class PrivateRoute extends React.Component {
             component: Component,
             path: path,
             exact = false,
-            strict = false,
         } = this.props;
         // const Component=this.props.component;
         // const path=this.props.path;
