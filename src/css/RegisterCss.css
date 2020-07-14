@@ -11,9 +11,9 @@
 
 .registerBlock {
     width: 800px;
-    top: 15%;
-    position: fixed;
-    height: 460px;
+    top: 10%;
+    /*position: fixed;*/
+    height: auto;
     border-radius: 25px;
     box-shadow: 10px 10px 30px #3399cc;
     /*background-color: #336699;*/

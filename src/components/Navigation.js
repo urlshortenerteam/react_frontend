@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Menu, PageHeader } from "antd";
+import { Button, Menu, PageHeader, Row, Col } from "antd";
 import {
     AlignCenterOutlined,
     AppstoreOutlined,
@@ -8,6 +8,7 @@ import {
     PicLeftOutlined,
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
+import { logout } from "../Services/userService";
 
 /*
 Navigation:
@@ -74,12 +75,35 @@ export default class Navigation extends React.Component {
                         </Menu>,
                     ]}
                     extra={[
-                        <Button key="2" ghost href="#/login">
-                            登录
-                        </Button>,
-                        <Button ghost key="1" href="#/register">
-                            注册
-                        </Button>,
+                        <Row>
+                            <Col>
+                                {JSON.parse(
+                                    sessionStorage.getItem("loginStatus")
+                                ) === 1 ? (
+                                    <Button key="2" ghost onClick={logout}>
+                                        登出
+                                    </Button>
+                                ) : (
+                                    <Button key="3" ghost href="#/login">
+                                        登录
+                                    </Button>
+                                )}
+                            </Col>
+                            <Col>
+                                <Button
+                                    ghost
+                                    key="1"
+                                    href="#/register"
+                                    style={{ marginLeft: 7 }}
+                                >
+                                    注册
+                                </Button>
+                            </Col>
+                        </Row>,
+
+                        // <Button key="2" ghost href="#/login">
+                        //     登录
+                        // </Button>,
                     ]}
                 />
                 ,

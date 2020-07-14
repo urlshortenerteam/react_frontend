@@ -38,13 +38,12 @@ export const login = (data) => {
 export const logout = () => {
     const url = `/logoutReq`;
     const callback = (res) => {
-        if (res.data.status === true) {
+        if (res.data.status) {
             sessionStorage.removeItem("userId");
             sessionStorage.removeItem("loginStatus");
             sessionStorage.removeItem("type");
-
-            window.location.href = "/";
             message.success("成功登出");
+            window.location.href = "/";
         } else {
             message.error("登出失败");
         }
