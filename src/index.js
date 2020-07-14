@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import "antd/dist/antd.css";
-import HomeView from "./view/HomeView";
 import * as serviceWorker from "./serviceWorker";
 
 import BasicRouter from "./router/BasicRouter";

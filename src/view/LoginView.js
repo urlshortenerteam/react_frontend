@@ -1,16 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
-import { Row, Col } from "antd";
-import { Form, Input, Button, Checkbox } from "antd";
+import {Button, Col, Form, Input, Row} from "antd";
 import "../css/LoginCss.css";
 import "antd/dist/antd.css";
-
-import {
-    AccountBookOutlined,
-    LockOutlined,
-    UserOutlined,
-} from "@ant-design/icons";
-import { withRouter } from "react-router-dom";
+import * as userService from "../Services/userService"
+import {LockOutlined, UserOutlined,} from "@ant-design/icons";
+import {withRouter} from "react-router-dom";
 
 const onFinish = (values) => {
     console.log("Success:", values);

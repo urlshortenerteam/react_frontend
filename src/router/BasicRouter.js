@@ -1,6 +1,6 @@
 import React from "react";
 
-import { HashRouter, Route, Switch } from "react-router-dom";
+import {HashRouter, Route, Switch} from "react-router-dom";
 import HomeView from "../view/HomeView";
 import LoginView from "../view/LoginView";
 import CreateView from "../view/CreateView";

@@ -1,24 +1,9 @@
-import React, {
-    useContext, useEffect, useRef, useState,
-} from "react";
+import React, {useContext, useEffect, useRef, useState,} from "react";
 
-import {
-    Row,
-    Col,
-    Tooltip,
-    Layout,
-    Table,
-    Input,
-    Button,
-    message,
-    Form,
-    Popconfirm,
-    Tabs,
-    Divider,
-} from "antd";
-import { getBatchManyToOne } from "../Services/CreateService";
-import "../css/HomeCss.css";
-import "../css/CreateCss.css";
+import {Button, Col, Divider, Form, Input, message, Popconfirm, Row, Table, Tooltip,} from "antd";
+import "../../css/HomeCss.css";
+import "../../css/CreateCss.css";
+import {getBatchOneToOne} from "../../Services/CreateService";
 
 const EditableContext = React.createContext();
 
@@ -309,7 +294,7 @@ export default class OneToOneTable extends React.Component {
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,
-                    short: rep.data,
+                    short: shorts[index],
                 });
             });
             this.setState({

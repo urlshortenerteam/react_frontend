@@ -1,15 +1,9 @@
-import React, { Component } from "react";
-import { Steps, message, Alert } from "antd";
+import React, {Component} from "react";
+import {AutoComplete, Button, Col, Form, Input, message, Row, Steps} from "antd";
 import "../css/RegisterCss.css";
-import { Form, Input, Row, Col, Button, AutoComplete } from "antd";
-import {
-    UserOutlined,
-    UnlockOutlined,
-    PhoneOutlined,
-    PaperClipOutlined,
-} from "@ant-design/icons";
-import { register } from "../Services/userService";
-import "../css/RegisterCss.css";
+import {PaperClipOutlined, PhoneOutlined, UnlockOutlined, UserOutlined,} from "@ant-design/icons";
+import {register} from "../Services/userService";
+
 const { Step } = Steps;
 
 const AutoCompleteOption = AutoComplete.Option;

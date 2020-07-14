@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Navigation from "../components/Navigation";
-import { Row, Col } from "antd";
+import {Col, Layout, Row,Button} from "antd";
 import "../css/HomeCss.css";
-import SearchBar from "../components/SearchBar";
-import { Layout } from "antd";
+import {hostUrl} from "../Services/ajax"
+import {RightOutlined} from "@ant-design/icons";
 
-const {Header, Content, Footer} = Layout;
+const {Header, Footer} = Layout;
 
 /*
 HomeView
@@ -16,7 +16,7 @@ HomeView
 class HomeView extends Component {
     render() {
         return (
-            <Layout style={{ backgroundColor: "#001529" }}>
+            <Layout style={{ backgroundColor: "#001529", height: "100%" }}>
                 <Header>
                     <Row>
                         <Col span={20} offset={2}>
@@ -24,7 +24,7 @@ class HomeView extends Component {
                         </Col>
                     </Row>
                 </Header>
-                <Content style={{display:'flex',height:'100%'}}>
+                <div style={{display:'flex',height:'100%'}}>
                     <h1 className="centerDesc">
                         短链接<br/>
                         从未如此<br/>
@@ -34,7 +34,7 @@ class HomeView extends Component {
                     <img className="leftDesc" src={hostUrl + "/flow.png"} alt={''}/>
                     <img className="rightBottomDesc" src={hostUrl + "/people.png"} alt={''}/>
                     <img className="rightTopDesc" src={hostUrl + "/trans.png"} alt={''}/>
-                </Content>
+                </div>
                 <Footer style={{textAlign: 'center', backgroundColor: '#001529', color: '#d8e3e7'}}>Reevoo ShortLink
                     ©2020 Created by Reevoo Team</Footer>
             </Layout>

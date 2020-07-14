@@ -1,8 +1,7 @@
 import "../../css/Carousel.css";
 import React from "react";
 import RealTimeTrack from "./RealTimeTrack";
-import { StackedArea, Liquid } from "@ant-design/charts";
-import { Row, Col } from "antd";
+import {StackedArea} from "@ant-design/charts";
 
 /*
 Overview

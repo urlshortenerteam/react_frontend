@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Navigation from "../components/Navigation";
-import { Row, Col } from "antd";
+import {Col, Layout, Row, Tabs} from "antd";
 import "../css/HomeCss.css";
-import { Layout } from "antd";
-import { Tabs } from "antd";
+
 const { TabPane } = Tabs;
 const { Header, Content, Footer } = Layout;
 class ManageView extends Component {

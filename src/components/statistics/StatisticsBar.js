@@ -1,5 +1,5 @@
 import * as React from "react";
-import {  Button , Menu} from "antd";
+import {Button, Menu} from "antd";
 import {
     AppstoreOutlined,
     HeatMapOutlined,

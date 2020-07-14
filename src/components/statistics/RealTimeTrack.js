@@ -1,5 +1,5 @@
 import React from "react";
-import { getRequest } from "../../Services/ajax";
+import {getRequest} from "../../Services/ajax";
 import Table from "antd/es/table";
 /*
 RealTimeTrack

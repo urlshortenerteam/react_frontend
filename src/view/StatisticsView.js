@@ -1,12 +1,12 @@
 import React from "react";
 import StatisticsBar from "../components/statistics/StatisticsBar";
-import {  Col , Row} from "antd";
+import {Col, Row} from "antd";
 import MapBox from "../components/MapBox";
 import Navigation from "../components/Navigation";
 import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
-import { getRequest } from "../Services/ajax";
+import {getRequest} from "../Services/ajax";
 
 /*
 StatisticsView
