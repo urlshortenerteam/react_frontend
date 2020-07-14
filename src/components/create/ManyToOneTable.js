@@ -11,7 +11,7 @@ import {
     Row,
     Spin,
     Table,
-    Tooltip,
+    Tooltip
 } from "antd";
 import { getBatchManyToOne } from "../../Services/CreateService";
 import "../../css/HomeCss.css";
@@ -46,14 +46,14 @@ interface EditableCellProps {
 }
 
 const EditableCell: React.FC<EditableCellProps> = ({
-    title,
-    editable,
-    children,
-    dataIndex,
-    record,
-    handleSave,
-    ...restProps
-}) => {
+                                                       title,
+                                                       editable,
+                                                       children,
+                                                       dataIndex,
+                                                       record,
+                                                       handleSave,
+                                                       ...restProps
+                                                   }) => {
     const [editing, setEditing] = useState(false);
     const inputRef = useRef();
     const form = useContext(EditableContext);
@@ -69,7 +69,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
         form.setFieldsValue({ [dataIndex]: record[dataIndex] });
     };
 
-    const save = async (e) => {
+    const save = async () => {
         try {
             const values = await form.validateFields();
 
@@ -90,11 +90,11 @@ const EditableCell: React.FC<EditableCellProps> = ({
                 rules={[
                     {
                         required: true,
-                        message: `${title} is required.`,
-                    },
+                        message: `${title} is required.`
+                    }
                 ]}
             >
-                <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+                <Input ref={inputRef} onPressEnter={save} onBlur={save}/>
             </Form.Item>
         ) : (
             <div
@@ -127,14 +127,14 @@ export default class ManyToOneTable extends React.Component {
                 align: "center",
                 colSpan: 2,
                 ellipsis: {
-                    showTitle: false,
+                    showTitle: false
                 },
                 width: "60%",
                 render: (long) => (
                     <Tooltip placement="topLeft" title={long}>
                         {long}
                     </Tooltip>
-                ),
+                )
             },
             {
                 title: "删除",
@@ -147,6 +147,8 @@ export default class ManyToOneTable extends React.Component {
                         <Popconfirm
                             title="确定删除此长链接？"
                             onConfirm={() => this.handleDelete(record.key)}
+                            okText="删除"
+                            cancelText="取消"
                         >
                             {!this.state.created ? (
                                 <Button type="primary">删除</Button>
@@ -156,7 +158,7 @@ export default class ManyToOneTable extends React.Component {
                                 </Button>
                             )}
                         </Popconfirm>
-                    ) : null,
+                    ) : null
             },
             {
                 title: "短链接",
@@ -164,14 +166,15 @@ export default class ManyToOneTable extends React.Component {
                 align: "center",
                 width: "30%",
                 render: (value, row, index) => {
-                    const obj = {
+                    let obj = {
                         children: value,
-                        props: {},
+                        props: {}
                     };
                     if (index === 0) {
                         obj.props.rowSpan = this.state.dataSource.length;
                     } else obj.props.rowSpan = 0;
-                    return (
+
+                    obj.children = (
                         <div>
                             {value}
                             {value === "" ? null : (
@@ -179,13 +182,14 @@ export default class ManyToOneTable extends React.Component {
                                     content={this.AsyncQRcode(value)}
                                     title="生成二维码"
                                 >
-                                    <QrcodeOutlined />
+                                    <QrcodeOutlined/>
                                 </Popover>
                             )}{" "}
                         </div>
                     );
-                },
-            },
+                    return obj;
+                }
+            }
         ];
 
         this.state = {
@@ -193,12 +197,12 @@ export default class ManyToOneTable extends React.Component {
                 {
                     key: 1,
                     long: "以http://或https://开头",
-                    short: "",
-                },
+                    short: ""
+                }
             ],
             count: 1,
             created: false,
-            loaded: false,
+            loaded: false
         };
     }
 
@@ -218,8 +222,9 @@ export default class ManyToOneTable extends React.Component {
                         value
                     }
                     onLoad={this.handleQRload}
+                    alt={""}
                 />
-                {this.state.loaded ? null : <Spin size="large" />}
+                {this.state.loaded ? null : <Spin size="large"/>}
             </div>
         );
     };
@@ -227,9 +232,9 @@ export default class ManyToOneTable extends React.Component {
     handleDelete = (key) => {
         const dataSource = [...this.state.dataSource];
         this.setState({
-            dataSource: dataSource.filter((item) => item.key !== key),
+            dataSource: dataSource.filter((item) => item.key !== key)
         });
-        console.log(this.state.dataSource);
+        // console.log(dataSource.filter((item) => item.key !== key));
     };
 
     handleAdd = () => {
@@ -237,13 +242,13 @@ export default class ManyToOneTable extends React.Component {
         const newData = {
             key: this.state.count + 1,
             long: "以http://或https://开头",
-            short: " ",
+            short: ""
         };
         this.setState({
             dataSource: [...dataSource, newData],
-            count: this.state.count + 1,
+            count: this.state.count + 1
         });
-        console.log(this.state.dataSource);
+        // console.log([...dataSource, newData]);
     };
 
     handleSave = (row) => {
@@ -256,48 +261,67 @@ export default class ManyToOneTable extends React.Component {
 
         //check the format
         let flag = true;
-        urlArray.forEach((item, index) => {
-            newRow.push({
-                key: index + this.state.count,
-                long: item,
-                short: "",
-            });
-            if (!item) {
-                urlArray.splice(index, 1); //删除空项
-            }
-            //check indexOf http:// 或https://
-            else {
-                if (
-                    item.indexOf("https://") !== 0 &&
-                    item.indexOf("http://") !== 0
-                ) {
-                    flag = false;
+
+        if (urlArray.length > 1) {
+            urlArray.forEach((item, index) => {
+                newRow.push({
+                    key: index + this.state.count + 1,
+                    long: item,
+                    short: ""
+                });
+                if (!item) {
+                    urlArray.splice(index, 1); //删除空项
                 }
+                //check indexOf http:// 或https://
+                else {
+                    if (
+                        item.indexOf("https://") !== 0 &&
+                        item.indexOf("http://") !== 0
+                    ) {
+                        flag = false;
+                    }
+                }
+            });
+
+            this.setState({
+                count: this.state.count + urlArray.length
+            });
+            if (!flag) {
+                message.error("长链接格式错误，请以http://或https://开头");
             }
-        });
-        this.setState({
-            count: this.state.count + urlArray.length - 1,
-        });
-        if (!flag) {
-            message.error("长链接格式错误，请以http://或https://开头");
+
+            newData.splice(index, 1, ...newRow);
+
+            this.setState({ dataSource: newData });
+            // console.log(newData);
+        } else {
+            const item = newData[index];
+            if (urlArray[0].indexOf("https://") !== 0 &&
+                urlArray[0].indexOf("http://") !== 0) {
+                message.error("长链接格式错误，请以http://或https://开头");
+            }
+            newData.splice(index, 1, {
+                ...item,
+                ...row
+            });
+            this.setState({ dataSource: newData });
+            // console.log(newData);
         }
 
-        newData.splice(index, 1, ...newRow);
 
-        this.setState({ dataSource: newData });
     };
 
     reset = () => {
         this.setState({
             dataSource: [
                 {
-                    key: 0,
-                    long: "请输入长链接，可输入多个，以空格切分",
-                    short: "",
-                },
+                    key: 1,
+                    long: "以http://或https://开头",
+                    short: ""
+                }
             ],
             count: 1,
-            created: false,
+            created: false
         });
     };
 
@@ -340,16 +364,16 @@ export default class ManyToOneTable extends React.Component {
         const callBack = (rep) => {
             console.log(rep.data);
             let result = [];
-            urlArray.forEach(function (item, index) {
+            urlArray.forEach(function(item, index) {
                 result.push({
                     long: urlArray[index].long,
-                    short: rep.data,
+                    short: rep.data
                 });
             });
             this.setState({
                 dataSource: result,
                 created: true,
-                loaded: false,
+                loaded: false
             });
             console.log(result);
         };
@@ -365,8 +389,8 @@ export default class ManyToOneTable extends React.Component {
         const components = {
             body: {
                 row: EditableRow,
-                cell: EditableCell,
-            },
+                cell: EditableCell
+            }
         };
         const columns = this.columns.map((col) => {
             if (!col.editable) {
@@ -379,12 +403,13 @@ export default class ManyToOneTable extends React.Component {
                     editable: col.editable,
                     dataIndex: col.dataIndex,
                     title: col.title,
-                    handleSave: this.handleSave,
-                }),
+                    handleSave: this.handleSave
+                })
             };
         });
         return (
             <div>
+                <br/>
                 <Table
                     components={components}
                     rowClassName={() => "editable-row"}
@@ -394,7 +419,7 @@ export default class ManyToOneTable extends React.Component {
                     pagination={{ position: ["bottomCenter"] }}
                     footer={() => (
                         <Row>
-                            <Col span={2} offset={8}>
+                            <Col span={2} offset={10}>
                                 {!this.state.created ? (
                                     <Button
                                         onClick={this.handleAdd}
@@ -423,7 +448,7 @@ export default class ManyToOneTable extends React.Component {
                                     </Button>
                                 )}
                             </Col>
-                            <Col span={1}>
+                            <Col span={2}>
                                 <Button type="primary" onClick={this.reset}>
                                     重置
                                 </Button>

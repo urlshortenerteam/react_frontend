@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import {
     Button,
     Col,
-
     Form,
     Input,
     message,
@@ -66,7 +65,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
         form.setFieldsValue({ [dataIndex]: record[dataIndex] });
     };
 
-    const save = async (e) => {
+    const save = async () => {
         try {
             const values = await form.validateFields();
 
@@ -144,6 +143,8 @@ export default class OneToOneTable extends React.Component {
                         <Popconfirm
                             title="确定删除此长链接？"
                             onConfirm={() => this.handleDelete(record.key)}
+                            okText="删除"
+                            cancelText="取消"
                         >
                             {!this.state.created ? (
                                 <Button type="primary">删除</Button>
@@ -186,7 +187,7 @@ export default class OneToOneTable extends React.Component {
         this.setState({
             dataSource: dataSource.filter((item) => item.key !== key),
         });
-        console.log(this.state.dataSource);
+        // console.log(dataSource.filter((item) => item.key !== key));
     };
 
     handleAdd = () => {
@@ -194,14 +195,13 @@ export default class OneToOneTable extends React.Component {
         const newData = {
             key: this.state.count + 1,
             long: "以http://或https://开头",
-
-            short: " ",
+            short: "",
         };
         this.setState({
             dataSource: [...dataSource, newData],
             count: this.state.count + 1,
         });
-        console.log(this.state.dataSource);
+        // console.log([...dataSource, newData]);
     };
 
     handleSave = (row) => {
@@ -214,35 +214,53 @@ export default class OneToOneTable extends React.Component {
 
         //check the format
         let flag = true;
-        urlArray.forEach((item, index) => {
-            newRow.push({
-                key: index + this.state.count,
-                long: item,
-                short: "",
-            });
-            if (!item) {
-                urlArray.splice(index, 1); //删除空项
-            }
-            //check indexOf http:// 或https://
-            else {
-                if (
-                    item.indexOf("https://") !== 0 &&
-                    item.indexOf("http://") !== 0
-                ) {
-                    flag = false;
+        if(urlArray.length>1)
+        {
+            urlArray.forEach((item, index) => {
+                newRow.push({
+                    key: index + this.state.count,
+                    long: item,
+                    short: "",
+                });
+                if (!item) {
+                    urlArray.splice(index, 1); //删除空项
                 }
+                //check indexOf http:// 或https://
+                else {
+                    if (
+                        item.indexOf("https://") !== 0 &&
+                        item.indexOf("http://") !== 0
+                    ) {
+                        flag = false;
+                    }
+                }
+            });
+            this.setState({
+                count: this.state.count + urlArray.length,
+            });
+            if (!flag) {
+                message.error("长链接格式错误，请以http://或https://开头");
             }
-        });
-        this.setState({
-            count: this.state.count + urlArray.length - 1,
-        });
-        if (!flag) {
-            message.error("长链接格式错误，请以http://或https://开头");
+
+            newData.splice(index, 1, ...newRow);
+
+            this.setState({ dataSource: newData });
+            // console.log(newData);
+        }
+        else {
+            const item = newData[index];
+            if (urlArray[0].indexOf("https://") !== 0 &&
+                urlArray[0].indexOf("http://") !== 0) {
+                message.error("长链接格式错误，请以http://或https://开头");
+            }
+            newData.splice(index, 1, {
+                ...item,
+                ...row
+            });
+            this.setState({ dataSource: newData });
+            // console.log(newData);
         }
 
-        newData.splice(index, 1, ...newRow);
-
-        this.setState({ dataSource: newData });
     };
 
     reset = () => {
@@ -342,6 +360,7 @@ export default class OneToOneTable extends React.Component {
         });
         return (
             <div>
+                <br />
                 <Table
                     components={components}
                     rowClassName={() => "editable-row"}
@@ -351,7 +370,7 @@ export default class OneToOneTable extends React.Component {
                     pagination={{ position: ["bottomCenter"] }}
                     footer={() => (
                         <Row>
-                            <Col span={2} offset={8}>
+                            <Col span={2} offset={10}>
                                 {!this.state.created ? (
                                     <Button
                                         onClick={this.handleAdd}
@@ -380,7 +399,7 @@ export default class OneToOneTable extends React.Component {
                                     </Button>
                                 )}
                             </Col>
-                            <Col span={1}>
+                            <Col span={2}>
                                 <Button type="primary" onClick={this.reset}>
                                     重置
                                 </Button>
