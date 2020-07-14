@@ -4,8 +4,8 @@ let postRequest = (url, json, callback) => {
         method: "POST",
         body: JSON.stringify(json),
         headers: {
-            "Content-Type": "application/json"
-        }
+            "Content-Type": "application/json",
+        },
     };
     fetch(hostUrl + url, opts)
         .then((response) => {

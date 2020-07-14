@@ -5,7 +5,7 @@ const apiRoutes = express.Router();
 
 let random = Math.random() * 500 + 500;
 // 访问 /getReal/ 时
-apiRoutes.get("/getReal", function(req, res) {
+apiRoutes.get("/getReal", function (req, res) {
     setTimeout(() => {
         res.json({
             status: 200,
@@ -14,17 +14,17 @@ apiRoutes.get("/getReal", function(req, res) {
                 "logs|1-5": [
                     {
                         shortUrl: /[a-zA-Z0-9]{6}/,
-                        long: "@url(\"http\")",
+                        long: '@url("http")',
                         ip: "@ip",
                         source: "@domain",
-                        time: "@now"
-                    }
-                ]
-            })
+                        time: "@now",
+                    },
+                ],
+            }),
         });
     }, random);
 });
-apiRoutes.get("/getStat", function(req, res) {
+apiRoutes.get("/getStat", function (req, res) {
     let jsonResponse = { status: 200, msg: "查询成功" };
     Object.assign(
         jsonResponse,
@@ -33,178 +33,178 @@ apiRoutes.get("/getStat", function(req, res) {
                 {
                     shortUrl: /[a-zA-Z0-9]{6}/,
                     count: "@natural(0,100000)",
-                    long: "@url(\"http\")",
+                    long: '@url("http")',
                     area_distr: [
                         {
                             name: "云南省",
                             code: 530000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "黑龙江省",
                             code: 230000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "贵州省",
                             code: 520000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "北京市",
                             code: 110000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "河北省",
                             code: 130000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "山西省",
                             code: 140000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "吉林省",
                             code: 220000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "宁夏回族自治区",
                             code: 640000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "辽宁省",
                             code: 210000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "海南省",
                             code: 460000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "内蒙古自治区",
                             code: 150000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "天津市",
                             code: 120000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "新疆维吾尔自治区",
                             code: 650000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "上海市",
                             code: 310000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "陕西省",
                             code: 610000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "甘肃省",
                             code: 620000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "安徽省",
                             code: 340000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "香港特别行政区",
                             code: 810000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "广东省",
                             code: 440000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "河南省",
                             code: 410000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "湖南省",
                             code: 430000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "江西省",
                             code: 360000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "四川省",
                             code: 510000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "广西壮族自治区",
                             code: 450000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "江苏省",
                             code: 320000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "澳门特别行政区",
                             code: 820000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "浙江省",
                             code: 330000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "山东省",
                             code: 370000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "青海省",
                             code: 630000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "重庆市",
                             code: 500000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "福建省",
                             code: 350000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "湖北省",
                             code: 420000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "西藏自治区",
                             code: 540000,
-                            value: "@natural(0,3000)"
+                            value: "@natural(0,3000)",
                         },
                         {
                             name: "台湾省",
                             code: 710000,
-                            value: "@natural(0,3000)"
-                        }
+                            value: "@natural(0,3000)",
+                        },
                     ],
                     time_distr: [
                         { time: "0", value: "@natural(0,3000)" },
@@ -230,10 +230,10 @@ apiRoutes.get("/getStat", function(req, res) {
                         { time: "20", value: "@natural(0,3000)" },
                         { time: "21", value: "@natural(0,3000)" },
                         { time: "22", value: "@natural(0,3000)" },
-                        { time: "23", value: "@natural(0,3000)" }
-                    ]
-                }
-            ]
+                        { time: "23", value: "@natural(0,3000)" },
+                    ],
+                },
+            ],
         })
     );
     setTimeout(() => {
@@ -241,15 +241,15 @@ apiRoutes.get("/getStat", function(req, res) {
     }, random);
 });
 
-apiRoutes.post("/getOneShort", function(req, res) {
+apiRoutes.post("/getOneShort", function (req, res) {
     let jsonResponse = {
         status: 200,
-        msg: "查询成功"
+        msg: "查询成功",
     };
     Object.assign(
         jsonResponse,
         Mock.mock({
-            data: /[a-zA-Z0-9]{6}/
+            data: /[a-zA-Z0-9]{6}/,
         })
     );
 
@@ -258,16 +258,16 @@ apiRoutes.post("/getOneShort", function(req, res) {
     }, random);
 });
 
-apiRoutes.post("/getShort", function(req, res) {
+apiRoutes.post("/getShort", function (req, res) {
     console.log(req);
     let jsonResponse = {
         status: 200,
-        msg: "查询成功"
+        msg: "查询成功",
     };
     Object.assign(
         jsonResponse,
         Mock.mock({
-            "data|10": [/[a-z][A-Z][0-9][a-z][0-9][A-Z]/]
+            "data|10": [/[a-z][A-Z][0-9][a-z][0-9][A-Z]/],
         })
     );
 
@@ -276,11 +276,11 @@ apiRoutes.post("/getShort", function(req, res) {
     }, random);
 });
 
-apiRoutes.post("/loginReq", function(req, res) {
+apiRoutes.post("/loginReq", function (req, res) {
     console.log(req);
     let jsonResponse = {
         status: 200,
-        msg: "查询成功"
+        msg: "查询成功",
     };
     Object.assign(
         jsonResponse,
@@ -289,9 +289,9 @@ apiRoutes.post("/loginReq", function(req, res) {
                 {
                     "loginStatus|1-2": true,
                     "type|1": [1, 2, 0],
-                    "id|1-100": 100
-                }
-            ]
+                    "id|1-100": 100,
+                },
+            ],
         })
     );
 
@@ -300,20 +300,20 @@ apiRoutes.post("/loginReq", function(req, res) {
     }, random);
 });
 
-apiRoutes.post("/logoutReq", function(req, res) {
+apiRoutes.post("/logoutReq", function (req, res) {
     console.log(req);
     let jsonResponse = {
         status: 200,
-        msg: "查询成功"
+        msg: "查询成功",
     };
     Object.assign(
         jsonResponse,
         Mock.mock({
             "data|1": [
                 {
-                    "status|1-2": true
-                }
-            ]
+                    "status|1-2": true,
+                },
+            ],
         })
     );
 
@@ -322,20 +322,20 @@ apiRoutes.post("/logoutReq", function(req, res) {
     }, random);
 });
 
-apiRoutes.post("/register", function(req, res) {
+apiRoutes.post("/register", function (req, res) {
     console.log(req);
     let jsonResponse = {
         status: 200,
-        msg: "查询成功"
+        msg: "查询成功",
     };
     Object.assign(
         jsonResponse,
         Mock.mock({
             "data|1": [
                 {
-                    "success|1-2": true
-                }
-            ]
+                    "success|1-2": true,
+                },
+            ],
         })
     );
 

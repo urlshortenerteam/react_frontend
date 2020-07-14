@@ -11,12 +11,12 @@ import RegisterView from "../view/RegisterView";
 const BasicRouter = () => (
     <HashRouter>
         <Switch>
-            <Route exact path="/" component={HomeView}/>
-            <Route exact path="/login" component={LoginView}/>
-            <Route exact path="/create" component={CreateView}/>
-            <Route exact path="/statistics" component={StatisticsView}/>
-            <Route exact path="/manage" component={ManageView}/>
-            <Route exact path="/register" component={RegisterView}/>
+            <Route exact path="/" component={HomeView} />
+            <Route exact path="/login" component={LoginView} />
+            <Route exact path="/create" component={CreateView} />
+            <Route exact path="/statistics" component={StatisticsView} />
+            <Route exact path="/manage" component={ManageView} />
+            <Route exact path="/register" component={RegisterView} />
         </Switch>
     </HashRouter>
 );

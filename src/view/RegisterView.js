@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { AutoComplete, Button, Col, Form, Input, message, Row, Steps } from "antd";
+import {
+    AutoComplete,
+    Button,
+    Col,
+    Form,
+    Input,
+    message,
+    Row,
+    Steps,
+} from "antd";
 import "../css/RegisterCss.css";
 import { register } from "../Services/userService";
 
@@ -10,32 +19,32 @@ const AutoCompleteOption = AutoComplete.Option;
 const formItemLayout = {
     labelCol: {
         xs: {
-            span: 24
+            span: 24,
         },
         sm: {
-            span: 8
-        }
+            span: 8,
+        },
     },
     wrapperCol: {
         xs: {
-            span: 24
+            span: 24,
         },
         sm: {
-            span: 16
-        }
-    }
+            span: 16,
+        },
+    },
 };
 const tailFormItemLayout = {
     wrapperCol: {
         xs: {
             span: 24,
-            offset: 0
+            offset: 0,
         },
         sm: {
             span: 16,
-            offset: 8
-        }
-    }
+            offset: 8,
+        },
+    },
 };
 
 const RegistrationForm = () => {
@@ -69,11 +78,11 @@ const RegistrationForm = () => {
                     {
                         required: true,
                         message: "Please input your username!",
-                        whitespace: true
-                    }
+                        whitespace: true,
+                    },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
             <Form.Item
                 name="nickname"
@@ -82,11 +91,11 @@ const RegistrationForm = () => {
                     {
                         required: true,
                         message: "Please input your nickname!",
-                        whitespace: true
-                    }
+                        whitespace: true,
+                    },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
             <Form.Item
                 name="tel"
@@ -95,11 +104,11 @@ const RegistrationForm = () => {
                     {
                         required: true,
                         message: "Please input your phone number!",
-                        whitespace: true
-                    }
+                        whitespace: true,
+                    },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
             <Form.Item
                 name="address"
@@ -108,11 +117,11 @@ const RegistrationForm = () => {
                     {
                         required: true,
                         message: "Please input your phone address!",
-                        whitespace: true
-                    }
+                        whitespace: true,
+                    },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
             <Form.Item
                 name="password"
@@ -120,12 +129,12 @@ const RegistrationForm = () => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input your password!"
-                    }
+                        message: "Please input your password!",
+                    },
                 ]}
                 hasFeedback
             >
-                <Input.Password/>
+                <Input.Password />
             </Form.Item>
 
             <Form.Item
@@ -136,7 +145,7 @@ const RegistrationForm = () => {
                 rules={[
                     {
                         required: true,
-                        message: "Please confirm your password!"
+                        message: "Please confirm your password!",
                     },
                     ({ getFieldValue }) => ({
                         validator(rule, value) {
@@ -146,11 +155,11 @@ const RegistrationForm = () => {
                             return Promise.reject(
                                 "The two passwords that you entered do not match!"
                             );
-                        }
-                    })
+                        },
+                    }),
                 ]}
             >
-                <Input.Password/>
+                <Input.Password />
             </Form.Item>
 
             <Form.Item
@@ -159,17 +168,17 @@ const RegistrationForm = () => {
                 rules={[
                     {
                         type: "email",
-                        message: "The input is not valid E-mail!"
+                        message: "The input is not valid E-mail!",
                     },
                     {
                         required: true,
-                        message: "Please input your E-mail!"
-                    }
+                        message: "Please input your E-mail!",
+                    },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
-            <br/>
+            <br />
             <Form.Item {...tailFormItemLayout}>
                 <Row>
                     <Col span={6}></Col>
@@ -197,10 +206,10 @@ class RegisterView extends Component {
             <div>
                 <div className="container ">
                     <div className="col-md-12 column">
-                        <br/> <br/> <br/>
+                        <br /> <br /> <br />
                         {/*<StepBar  num={0}/>*/}
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                     </div>
                     {/*<br/><br/><br/><br/><br/><br/><br/><br/>*/}
 
@@ -211,9 +220,9 @@ class RegisterView extends Component {
                         <Row>
                             <Col span={4}></Col>
                             <Col span={14}>
-                                <br/>
-                                <br/>
-                                <RegistrationForm/>
+                                <br />
+                                <br />
+                                <RegistrationForm />
                             </Col>
                             <Col span={6}></Col>
                         </Row>

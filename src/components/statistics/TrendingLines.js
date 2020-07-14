@@ -11,13 +11,13 @@ TrendingLines
 */
 export default class TrendingLines extends Component {
     state = {
-        data: []
+        data: [],
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            data: props.data
+            data: props.data,
         };
     }
 
@@ -29,7 +29,7 @@ export default class TrendingLines extends Component {
                 style={{ backgroundColor: "#011428" }}
             >
                 <Panel header="过去24小时" key="1">
-                    <LineChart data={this.state.data}/>
+                    <LineChart data={this.state.data} />
                 </Panel>
                 <Panel header="最近一周" key="2">
                     <p>test</p>

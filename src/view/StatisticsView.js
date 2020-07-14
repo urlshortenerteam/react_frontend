@@ -18,7 +18,7 @@ export default class StatisticsView extends React.Component {
     state = {
         display: "overview",
         data: [],
-        lineData: []
+        lineData: [],
     };
     toggleSwitch = ({ key }) => {
         this.setState({ display: key });
@@ -27,7 +27,7 @@ export default class StatisticsView extends React.Component {
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
             params: { id: 0 },
-            errorCallback: this.handleError
+            errorCallback: this.handleError,
         });
     }
 
@@ -50,10 +50,10 @@ export default class StatisticsView extends React.Component {
     render() {
         return (
             <div>
-                <Navigation/>
+                <Navigation />
                 <Row justify="space-between">
                     <Col style={{ background: "black", maxWidth: "20%" }}>
-                        <StatisticsBar toggleSwitch={this.toggleSwitch}/>
+                        <StatisticsBar toggleSwitch={this.toggleSwitch} />
                     </Col>
                     <Col
                         flex={20}
@@ -62,17 +62,17 @@ export default class StatisticsView extends React.Component {
                             marginLeft: 30,
                             marginRight: 32,
                             float: "right",
-                            maxWidth: "85%"
+                            maxWidth: "85%",
                         }}
                     >
                         {this.state.display === "time" ? (
-                            <TrendingLines data={this.state.lineData}/>
+                            <TrendingLines data={this.state.lineData} />
                         ) : null}
                         {this.state.display === "area" ? (
-                            <MapBox data={this.state.data[0].area_distr}/>
+                            <MapBox data={this.state.data[0].area_distr} />
                         ) : null}
                         {this.state.display === "overview" ? (
-                            <OverView data={this.state.lineData}/>
+                            <OverView data={this.state.lineData} />
                         ) : null}
                     </Col>
                 </Row>

@@ -11,7 +11,7 @@ LineChart:
 export default class LineChart extends React.Component {
     state = {
         data: [],
-        config: {}
+        config: {},
     };
 
     constructor(props) {
@@ -24,11 +24,11 @@ export default class LineChart extends React.Component {
                 title: {
                     visible: true,
                     text: "访问量",
-                    style: { fill: "white" }
+                    style: { fill: "white" },
                 },
                 description: {
                     visible: true,
-                    text: "短链接访问量分时段统计"
+                    text: "短链接访问量分时段统计",
                 },
                 xField: "time",
                 yField: "value",
@@ -36,13 +36,13 @@ export default class LineChart extends React.Component {
                     visible: true,
                     title: {
                         visible: true,
-                        text: "时间"
+                        text: "时间",
                     },
                     label: {
                         visible: true,
                         autoRotate: true,
-                        autoHide: true
-                    }
+                        autoHide: true,
+                    },
                 },
                 yAxis: {
                     visible: true,
@@ -51,18 +51,18 @@ export default class LineChart extends React.Component {
                         text: "访问量",
                         style: { fill: "white" },
                         grid: {
-                            visible: true
-                        }
+                            visible: true,
+                        },
                     },
                     label: {
                         visible: true,
                         autoRotate: true,
-                        autoHide: true
-                    }
+                        autoHide: true,
+                    },
                 },
                 legend: {
                     position: "top-left",
-                    style: { fill: "white" }
+                    style: { fill: "white" },
                 },
                 seriesField: "url",
                 theme: "dark",
@@ -71,9 +71,9 @@ export default class LineChart extends React.Component {
                     shared: true,
                     showCrosshairs: true,
                     crosshairs: {
-                        type: "y"
+                        type: "y",
                     },
-                    offset: 20
+                    offset: 20,
                 },
                 color: ["#9ad4ff", "#8df8c2", "#ffdc78", "#ff9898"],
                 interactions: [
@@ -81,11 +81,11 @@ export default class LineChart extends React.Component {
                         type: "slider",
                         cfg: {
                             start: 0.4,
-                            end: 0.8
-                        }
-                    }
-                ]
-            }
+                            end: 0.8,
+                        },
+                    },
+                ],
+            },
         };
     }
 

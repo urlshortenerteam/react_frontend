@@ -48,8 +48,8 @@ class LogInBlock extends React.Component {
                                         {
                                             required: true,
                                             message:
-                                                "Please input your username!"
-                                        }
+                                                "Please input your username!",
+                                        },
                                     ]}
                                 >
                                     <Input
@@ -69,8 +69,8 @@ class LogInBlock extends React.Component {
                                         {
                                             required: true,
                                             message:
-                                                "Please input your password!"
-                                        }
+                                                "Please input your password!",
+                                        },
                                     ]}
                                 >
                                     <Input.Password
@@ -104,7 +104,6 @@ class LogInBlock extends React.Component {
                             </Form>
                         </div>
                     </Col>
-
                 </Row>
             </div>
         );
@@ -121,7 +120,7 @@ class LoginView extends Component {
     render() {
         return (
             <div>
-                <LogInBlock/>
+                <LogInBlock />
             </div>
         );
     }
