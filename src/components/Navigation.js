@@ -90,7 +90,7 @@ export default class Navigation extends React.Component {
                         avatar={{src: "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
                     }}
     subTitle={[
-                        // theme={"dark"}
+
                         <Menu
                             onClick={this.handleClick}
                             selectedKeys={[current]}
@@ -100,21 +100,7 @@ export default class Navigation extends React.Component {
                             <Menu.Item key="home" icon={<BankOutlined />}>
                                 <a href="#">首页</a>
                             </Menu.Item>
-                            <SubMenu
-                                icon={<SettingOutlined />}
-                                title="产品功能"
-                            >
-                                <Menu.ItemGroup title="访问统计">
-                                    {/*<Menu.Item key="setting:1">Option 1</Menu.Item>*/}
-                                    {/*<Menu.Item key="setting:2">Option 2</Menu.Item>*/}
-                                </Menu.ItemGroup>
-                                <Menu.ItemGroup title="报表分享"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="随时修改"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="批量创建"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="随机跳转"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="分类管理"></Menu.ItemGroup>
-                                <Menu.ItemGroup title="生成二维码"></Menu.ItemGroup>
-                            </SubMenu>
+
                             <Menu.Item
                                 key="statistics"
                                 icon={<AreaChartOutlined />}

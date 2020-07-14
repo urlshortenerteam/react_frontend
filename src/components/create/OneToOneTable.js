@@ -335,21 +335,27 @@ export default class OneToOneTable extends React.Component {
         });
         return (
             <div>
-                <Row>
-                    <Col span={8}>
-                        <Divider dashed />
-                    </Col>
-                    <Col span={2} offset={1}>
-                        {!this.state.created ?
-                            <Button
+                <Table
+                    components={components}
+                    rowClassName={() => 'editable-row'}
+                    bordered
+                    dataSource={dataSource}
+                    columns={columns}
+                    pagination={{ position: ['bottomCenter'] }}
+                    footer={() =>
+                        <Row>
+                            <Col span={8}></Col>
+                            <Col span={2} offset={1}>
+                                {!this.state.created ?
+                                    <Button
                             onClick={this.handleAdd}
                             type="primary"
                             style={{ marginBottom: 16 }}
                         >
-                                添加
-                            </Button>:
-                            <Button type="primary" disabled>添加</Button>
-                        }
+                                        添加
+                                    </Button>:
+                                    <Button type="primary" disabled>添加</Button>
+                                }
 
                     </Col>
                     <Col span={2}>

@@ -68,3 +68,9 @@ export const logout = () => {
     };
     postRequest(url, {}, callback);
 };
+
+
+export const checkSession = (callback) => {
+    const url = `/checkSession`;
+    postRequest(url, {}, callback);
+};
