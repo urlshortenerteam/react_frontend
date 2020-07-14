@@ -14,6 +14,7 @@ import {
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
 import { getBatchOneToOne } from "../../Services/CreateService";
+import ShortWithQR from "./ShortWithQR";
 
 const EditableContext = React.createContext();
 
@@ -161,11 +162,7 @@ export default class OneToOneTable extends React.Component {
                 dataIndex: "short",
                 align: "center",
                 width: "30%",
-                render: (short) => (
-                    <Tooltip placement="topLeft" title={short}>
-                        {short}
-                    </Tooltip>
-                ),
+                render: (short) => <ShortWithQR value={short} />,
             },
         ];
 
