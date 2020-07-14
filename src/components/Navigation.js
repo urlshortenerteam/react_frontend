@@ -1,55 +1,13 @@
 import React from "react";
-import {Button, Dropdown, Menu, PageHeader, Typography} from 'antd';
+import {Button, Menu, PageHeader} from 'antd';
 import {
     AlignCenterOutlined,
     AppstoreOutlined,
     AreaChartOutlined,
     BankOutlined,
-    EllipsisOutlined,
     PicLeftOutlined,
-    SettingOutlined
 } from '@ant-design/icons';
 import "../css/NavigationCss.css"
-
-const menu = (
-    <Menu>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                1st menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                2nd menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-                3rd menu item
-            </a>
-        </Menu.Item>
-    </Menu>
-);
-const {SubMenu} = Menu;
-const DropdownMenu = () => {
-    return (
-        <Dropdown key="more" overlay={menu}>
-            <Button
-                style={{
-                    border: 'none',
-                    padding: 0,
-                }}
-            >
-                <EllipsisOutlined
-                    style={{
-                        fontSize: 20,
-                        verticalAlign: 'top',
-                    }}
-                />
-            </Button>
-        </Dropdown>
-    );
-};
 
 /*
 Navigation:

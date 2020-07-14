@@ -7,14 +7,6 @@ import * as userService from "../Services/userService"
 import { LockOutlined, UserOutlined} from '@ant-design/icons';
 import {withRouter} from "react-router-dom";
 
-const onFinish = values => {
-    console.log('Success:', values);
-};
-
-const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-};
-
 class LogInBlock extends React.Component {
     formRef = React.createRef();
 

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 
-import {Button, Col, Divider, Form, Input, message, Popconfirm, Popover, Row, Spin, Table, Tooltip} from 'antd';
+import {Button, Col, Form, Input, message, Popconfirm, Popover, Row, Spin, Table, Tooltip} from 'antd';
 import {getBatchManyToOne} from "../../Services/CreateService"
 import "../../css/HomeCss.css"
 import "../../css/CreateCss.css"
@@ -183,7 +183,7 @@ export default class ManyToOneTable extends React.Component {
     handleQRload = () => {
         console.log("hello");
         this.setState({loaded: true});
-    }
+    };
 
     AsyncQRcode = (value) => {
         return (
@@ -200,7 +200,7 @@ export default class ManyToOneTable extends React.Component {
             </div>
 
         )
-    }
+    };
 
     handleDelete = key => {
         const dataSource = [...this.state.dataSource];

@@ -1,4 +1,4 @@
-import {postRequest,getRequest,deleteRequest} from "./ajax";
+import {postRequest} from "./ajax";
 import {message} from 'antd'
 export const register=(data,callback)=>{
     const url = `/register`;
