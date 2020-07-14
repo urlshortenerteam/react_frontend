@@ -19,7 +19,7 @@ interface EditableRowProps {
     index: number;
 }
 
-const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
+const EditableRow: React.FC<EditableRowProps> = ({index, ...props}) => {
     const [form] = Form.useForm();
     return (
         <Form form={form} component={false}>
@@ -40,14 +40,14 @@ interface EditableCellProps {
 }
 
 const EditableCell: React.FC<EditableCellProps> = ({
-    title,
-    editable,
-    children,
-    dataIndex,
-    record,
-    handleSave,
-    ...restProps
-}) => {
+                                                       title,
+                                                       editable,
+                                                       children,
+                                                       dataIndex,
+                                                       record,
+                                                       handleSave,
+                                                       ...restProps
+                                                   }) => {
     const [editing, setEditing] = useState(false);
     const inputRef = useRef();
     const form = useContext(EditableContext);
@@ -60,7 +60,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     const toggleEdit = () => {
         setEditing(!editing);
-        form.setFieldsValue({ [dataIndex]: record[dataIndex] });
+        form.setFieldsValue({[dataIndex]: record[dataIndex]});
     };
 
     const save = async (e) => {
@@ -68,7 +68,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
             const values = await form.validateFields();
 
             toggleEdit();
-            handleSave({ ...record, ...values });
+            handleSave({...record, ...values});
         } catch (errInfo) {
             console.log("Save failed:", errInfo);
         }
@@ -79,7 +79,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     if (editable) {
         childNode = editing ? (
             <Form.Item
-                style={{ margin: 0 }}
+                style={{margin: 0}}
                 name={dataIndex}
                 rules={[
                     {
@@ -93,7 +93,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
         ) : (
             <div
                 className="editable-cell-value-wrap"
-                style={{ paddingRight: 24 }}
+                style={{paddingRight: 24}}
                 onClick={toggleEdit}
             >
                 {children}
@@ -187,7 +187,7 @@ export default class OneToOneTable extends React.Component {
     };
 
     handleAdd = () => {
-        const {  dataSource } = this.state;
+        const { dataSource} = this.state;
         const newData = {
             key: this.state.count + 1,
             long: "以http://或https://开头",
@@ -239,7 +239,7 @@ export default class OneToOneTable extends React.Component {
 
         newData.splice(index, 1, ...newRow);
 
-        this.setState({ dataSource: newData });
+        this.setState({dataSource: newData});
     };
 
     reset = () => {
@@ -315,7 +315,7 @@ export default class OneToOneTable extends React.Component {
     };
 
     render() {
-        const { dataSource } = this.state;
+        const {dataSource} = this.state;
         const components = {
             body: {
                 row: EditableRow,
@@ -345,7 +345,7 @@ export default class OneToOneTable extends React.Component {
                     bordered
                     dataSource={dataSource}
                     columns={columns}
-                    pagination={{ position: ["bottomCenter"] }}
+                    pagination={{position: ["bottomCenter"]}}
                     footer={() => (
                         <Row>
                             <Col span={8}></Col>
@@ -354,51 +354,34 @@ export default class OneToOneTable extends React.Component {
                                     <Button
                                         onClick={this.handleAdd}
                                         type="primary"
-                                        style={{ marginBottom: 16 }}
+                                        style={{marginBottom: 16}}
                                     >
                                         添加
-                                    </Button>
-                                ) : (
-                                    <Button type="primary" disabled>
-                                        添加
-                                    </Button>
-                                )}
+                                    </Button> :
+                                    <Button type="primary" disabled>添加</Button>
+                                }
+
                             </Col>
                             <Col span={2}>
-                                {!this.state.created ? (
-                                    <Button
-                                        type="primary"
-                                        onClick={this.oneToOne}
-                                    >
+                                {!this.state.created ?
+                                    <Button type="primary" onClick={this.oneToOne}>
                                         生成
-                                    </Button>
-                                ) : (
-                                    <Button type="primary" disabled>
-                                        生成
-                                    </Button>
-                                )}
+                                    </Button> :
+                                    <Button type="primary" disabled>生成</Button>
+                                }
                             </Col>
                             <Col span={1}>
                                 <Button type="primary" onClick={this.reset}>
                                     重置
                                 </Button>
                             </Col>
-                            <Col span={9} offset={1}>
-                                <Divider dashed />
-                            </Col>
+                            <Col span={9} offset={1}></Col>
                         </Row>
-                    )}
-                />
-                <br />
-                <Table
-                    components={components}
-                    rowClassName={() => "editable-row"}
-                    bordered
-                    dataSource={dataSource}
-                    columns={columns}
-                    pagination={{ position: ["bottomCenter"] }}
+                    }
                 />
             </div>
         );
     }
 }
+
+
