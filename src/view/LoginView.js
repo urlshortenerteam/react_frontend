@@ -37,8 +37,7 @@ class LogInBlock extends React.Component {
                                     rules={[
                                         {
                                             required: true,
-                                            message:
-                                                "Please input your username!",
+                                            message: "请输入用户名！",
                                         },
                                     ]}
                                 >
@@ -57,8 +56,7 @@ class LogInBlock extends React.Component {
                                     rules={[
                                         {
                                             required: true,
-                                            message:
-                                                "Please input your password!",
+                                            message: "请输入密码！",
                                         },
                                     ]}
                                 >

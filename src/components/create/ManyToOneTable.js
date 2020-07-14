@@ -144,20 +144,20 @@ export default class ManyToOneTable extends React.Component {
                 colSpan: 0,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        <Popconfirm
-                            title="确定删除此长链接？"
-                            onConfirm={() => this.handleDelete(record.key)}
-                            okText="删除"
-                            cancelText="取消"
-                        >
-                            {!this.state.created ? (
+                        !this.state.created ? (
+                            <Popconfirm
+                                title="确定删除此长链接？"
+                                onConfirm={() => this.handleDelete(record.key)}
+                                okText="删除"
+                                cancelText="取消"
+                            >
                                 <Button type="primary">删除</Button>
-                            ) : (
-                                <Button type="primary" disabled>
-                                    删除
-                                </Button>
-                            )}
-                        </Popconfirm>
+                            </Popconfirm>
+                        ) : (
+                            <Button type="primary" disabled>
+                                删除
+                            </Button>
+                        )
                     ) : null,
             },
             {
