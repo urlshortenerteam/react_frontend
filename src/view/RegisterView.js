@@ -219,7 +219,7 @@ class RegisterView extends Component {
                             <span>注册</span>
                         </div>
                         <Row>
-                            <Col span={14} offset={4}>
+                            <Col span={14}offset={4}>
                                 <br />
                                 <br />
                                 <RegistrationForm />
