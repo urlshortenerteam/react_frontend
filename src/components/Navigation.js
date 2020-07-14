@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
 import { logout } from "../Services/userService";
+import { Link } from "react-router-dom";
 
 /*
 Navigation:
@@ -17,11 +18,10 @@ Navigation:
 */
 export default class Navigation extends React.Component {
     state = {
-        current: "mail",
+        current: "home",
     };
 
     handleClick = (e) => {
-        console.log("click ", e);
         this.setState({ current: e.key });
     };
 
@@ -42,40 +42,41 @@ export default class Navigation extends React.Component {
                             onClick={this.handleClick}
                             selectedKeys={[current]}
                             mode="horizontal"
-                            theme={"dark"}
+                            theme="dark"
+                            key="menu"
                         >
                             <Menu.Item key="home" icon={<BankOutlined />}>
-                                <a href="#">首页</a>
+                                <Link to="/">首页</Link>
                             </Menu.Item>
 
                             <Menu.Item
                                 key="statistics"
                                 icon={<AreaChartOutlined />}
                             >
-                                <a href="#/statistics">统计图表</a>
+                                <Link to="/statistics">统计图表</Link>
                             </Menu.Item>
                             <Menu.Item key="create" icon={<PicLeftOutlined />}>
-                                <a href="#/create">批量生成</a>
+                                <Link to="/create">批量生成</Link>
                             </Menu.Item>
                             <Menu.Item
                                 key="manage"
                                 icon={<AlignCenterOutlined />}
                             >
-                                <a href="#/manage">管理链接</a>
+                                <Link to="/manage">管理链接</Link>
                             </Menu.Item>
                             <Menu.Item key="other" icon={<AppstoreOutlined />}>
-                                <a
-                                    href="https://xiaomark.com/"
+                                <Link
+                                    to="https://xiaomark.com/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
                                     其他
-                                </a>
+                                </Link>
                             </Menu.Item>
                         </Menu>,
                     ]}
                     extra={[
-                        <Row>
+                        <Row key="login">
                             <Col>
                                 {JSON.parse(
                                     sessionStorage.getItem("loginStatus")

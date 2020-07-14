@@ -46,7 +46,7 @@ const RegistrationForm = () => {
         }
     };
     const onFinish = (values) => {
-        console.log("Received val" + "ues of form: ", values);
+        console.log("Received values of form: ", values);
 
         register(values, callback);
     };

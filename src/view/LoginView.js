@@ -73,12 +73,9 @@ class LogInBlock extends React.Component {
                                 <Row justify="space-between">
                                     <Col>
                                         {" "}
-                                        <a href="#/register">
-                                            {" "}
-                                            <Button ghost>
+                                            <Button href="#/register" ghost>
                                                 <span>注册</span>
                                             </Button>
-                                        </a>
                                     </Col>
                                     <Col>
                                         <Form.Item>
