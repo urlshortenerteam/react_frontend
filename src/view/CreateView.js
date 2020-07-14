@@ -1,10 +1,23 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import {PicRightOutlined, PicCenterOutlined} from '@ant-design/icons';
-import {Row, Col, Tooltip, Layout, Table, Input, Button, message, Form, Popconfirm, Tabs, Divider} from 'antd';
-import {getBatchManyToOne, getBatchOneToOne} from "../Services/CreateService"
-import "../css/HomeCss.css"
-import "../css/CreateCss.css"
+import { PicRightOutlined, PicCenterOutlined } from "@ant-design/icons";
+import {
+    Row,
+    Col,
+    Tooltip,
+    Layout,
+    Table,
+    Input,
+    Button,
+    message,
+    Form,
+    Popconfirm,
+    Tabs,
+    Divider,
+} from "antd";
+import { getBatchManyToOne, getBatchOneToOne } from "../Services/CreateService";
+import "../css/HomeCss.css";
+import "../css/CreateCss.css";
 import ManyToOneTable from "../components/create/ManyToOneTable";
 import OneToOneTable from "../components/create/OneToOneTable";
 const { Header, Content, Footer } = Layout;
@@ -25,10 +38,7 @@ export default class CreateView extends Component {
         showData: [],
     };
 
-
     render() {
-
-
         return (
             <Layout style={{ backgroundColor: "#001529" }}>
                 <Header>
@@ -43,24 +53,29 @@ export default class CreateView extends Component {
                         <Col span={3}></Col>
                         <Col span={18}>
                             <Tabs defaultActiveKey="1" centered>
-
-                                <TabPane key="1" tab={
-                                    <span>
-                                     <PicRightOutlined/>
-                                         多对一
-                                    </span>
-                                }>
-                                    <br/>
+                                <TabPane
+                                    key="1"
+                                    tab={
+                                        <span>
+                                            <PicRightOutlined />
+                                            多对一
+                                        </span>
+                                    }
+                                >
+                                    <br />
                                     <ManyToOneTable />
                                 </TabPane>
-                                <TabPane tab={
-                                    <span>
-                                         <PicCenterOutlined/>
-                                             一对一
-                                    </span>
-                                } key="2">
-                                    <br/>
-                                    <OneToOneTable/>
+                                <TabPane
+                                    tab={
+                                        <span>
+                                            <PicCenterOutlined />
+                                            一对一
+                                        </span>
+                                    }
+                                    key="2"
+                                >
+                                    <br />
+                                    <OneToOneTable />
                                 </TabPane>
                             </Tabs>
                         </Col>
@@ -68,8 +83,11 @@ export default class CreateView extends Component {
                     </Row>
                     <br /> <br />
                 </Content>
-                <br/> <br/> <br/> <br/> <br/> <br/><br/>
-                <Footer style={{textAlign: "center",
+                <br /> <br /> <br /> <br /> <br /> <br />
+                <br />
+                <Footer
+                    style={{
+                        textAlign: "center",
                         backgroundColor: "#001529",
                         color: "#d8e3e7",
                     }}

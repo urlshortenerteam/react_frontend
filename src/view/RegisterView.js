@@ -1,8 +1,22 @@
-import React, {Component} from "react";
-import {AutoComplete, Button, Col, Form, Input, message, Row, Steps} from "antd";
+import React, { Component } from "react";
+import {
+    AutoComplete,
+    Button,
+    Col,
+    Form,
+    Input,
+    message,
+    Row,
+    Steps,
+} from "antd";
 import "../css/RegisterCss.css";
-import {PaperClipOutlined, PhoneOutlined, UnlockOutlined, UserOutlined,} from "@ant-design/icons";
-import {register} from "../Services/userService";
+import {
+    PaperClipOutlined,
+    PhoneOutlined,
+    UnlockOutlined,
+    UserOutlined,
+} from "@ant-design/icons";
+import { register } from "../Services/userService";
 
 const { Step } = Steps;
 
@@ -186,7 +200,6 @@ const RegistrationForm = () => {
     );
 };
 
-
 /*
 RegisterView
 @author Shuchang Liu
@@ -212,8 +225,8 @@ class RegisterView extends Component {
                         </div>
                         <Row>
                             <Col span={4}></Col>
-                            <Col span={14} >
-                                <br/>
+                            <Col span={14}>
+                                <br />
                                 <br />
                                 <RegistrationForm />
                             </Col>

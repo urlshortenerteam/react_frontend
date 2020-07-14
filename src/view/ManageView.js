@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import {Col, Layout, Row, Tabs} from "antd";
+import { Col, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 
 const { TabPane } = Tabs;

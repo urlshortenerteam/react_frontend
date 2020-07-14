@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {Collapse} from "antd";
+import React, { Component } from "react";
+import { Collapse } from "antd";
 import LineChart from "../LineChart";
 
 const { Panel } = Collapse;

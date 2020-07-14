@@ -40,7 +40,6 @@ body .login .left {
     border-bottom-left-radius: 25px;
     border-top-left-radius: 25px;
     padding: 55px;
-
 }
 body .login {
     color: #d8e3e7;
@@ -56,7 +55,7 @@ body .login {
     padding: 0;
     border: none;
     outline: none;
-    color:white;
+    color: white;
 }
 
 .login .ant-input-affix-wrapper {
