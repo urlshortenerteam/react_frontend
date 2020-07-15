@@ -233,8 +233,8 @@ class userManage extends Component {
     render() {
         return (
             <div>
-                <br />
-                <UserTable />
+                <br/>
+                <UserTable/>
             </div>
         );
     }
