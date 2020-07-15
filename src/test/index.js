@@ -32,6 +32,15 @@ apiRoutes.get("/getStat", function (req, res) {
             "data|1-10": [
                 {
                     shortUrl: /[a-zA-Z0-9]{6}/,
+                    "longUrl|1-5": [
+                        {
+                            "url|1": [
+                                "https://www.baidu.com",
+                                "https://www.taobao.com",
+                                "https://mockjs.com/examples.html",
+                            ],
+                        },
+                    ],
                     count: "@natural(0,100000)",
                     long: '@url("http")',
                     area_distr: [
@@ -343,5 +352,25 @@ apiRoutes.post("/register", function (req, res) {
         res.json(jsonResponse);
     }, random);
 });
+apiRoutes.post("/editUrl", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1": [
+                {
+                    "status|1": true,
+                },
+            ],
+        })
+    );
 
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
 module.exports = apiRoutes;

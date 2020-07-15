@@ -19,7 +19,11 @@ export default class ShortWithQR extends Component {
 
     AsyncQRcode = (value) => {
         return (
-            <div style={{ textAlign: "center" }}>
+            <Spin
+                spinning={!this.state.loaded}
+                size="large"
+                style={{ textAlign: "center" }}
+            >
                 <img
                     src={
                         "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
@@ -30,8 +34,7 @@ export default class ShortWithQR extends Component {
                     onLoad={this.handleQRload}
                     alt={""}
                 />
-                {this.state.loaded ? null : <Spin size="large" />}
-            </div>
+            </Spin>
         );
     };
     render() {
