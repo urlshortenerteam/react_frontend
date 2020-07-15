@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Menu, PageHeader, Row, Col } from "antd";
+import { Button, Col, Menu, PageHeader, Row } from "antd";
 import {
     AlignCenterOutlined,
     AppstoreOutlined,
