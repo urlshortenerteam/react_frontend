@@ -28,7 +28,7 @@ export default class UrlManagePanel extends Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: 0 },
+            params: { id: 1 },
             errorCallback: this.handleError,
         });
     }

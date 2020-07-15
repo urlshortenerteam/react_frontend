@@ -7,7 +7,6 @@ let postRequest = (url, json, callback, { errorCallback, params }) => {
         body: JSON.stringify(json),
         headers: {
             "Content-Type": "application/json",
-            Authorization: JSON.parse(sessionStorage.getItem("loginStatus")),
         },
     };
     fetch(_url, opts)
