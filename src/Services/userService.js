@@ -15,6 +15,7 @@ export const login = (data) => {
             sessionStorage.setItem("userId", JSON.stringify(res.data.id));
             sessionStorage.setItem("loginStatus", 1);
             sessionStorage.setItem("type", JSON.stringify(res.data.type));
+            sessionStorage.setItem("token", JSON.stringify(res.data.type));
             // localStorage.setItem('user', JSON.stringify(data.data));
             console.log(sessionStorage.getItem("userId"));
             console.log(sessionStorage.getItem("loginStatus"));
