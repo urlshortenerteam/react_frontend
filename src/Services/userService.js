@@ -19,7 +19,6 @@ export const login = (data) => {
             // localStorage.setItem('user', JSON.stringify(data.data));
             console.log(sessionStorage.getItem("userId"));
             console.log(sessionStorage.getItem("loginStatus"));
-            console.log(res.data);
             // history.push("/");
 
             message.success("登录成功");
