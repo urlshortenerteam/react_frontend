@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-
 import {
     Button,
     Col,
@@ -79,7 +78,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     let childNode = children;
 
-    if (editable) {
+    if (editable && record.edit) {
         childNode = editing ? (
             <Form.Item
                 style={{ margin: 0 }}
@@ -181,6 +180,7 @@ export default class ManyToOneTable extends React.Component {
                     key: 1,
                     long: "以http://或https://开头",
                     short: "",
+                    edit: true,
                 },
             ],
             count: 1,
@@ -203,6 +203,7 @@ export default class ManyToOneTable extends React.Component {
             key: this.state.count + 1,
             long: "以http://或https://开头",
             short: "",
+            edit: true,
         };
         this.setState({
             dataSource: [...dataSource, newData],
@@ -228,6 +229,7 @@ export default class ManyToOneTable extends React.Component {
                     key: index + this.state.count + 1,
                     long: item,
                     short: "",
+                    edit: true,
                 });
                 if (!item) {
                     urlArray.splice(index, 1); //删除空项
@@ -278,6 +280,7 @@ export default class ManyToOneTable extends React.Component {
                     key: 1,
                     long: "以http://或https://开头",
                     short: "",
+                    edit: true,
                 },
             ],
             count: 1,
@@ -327,7 +330,9 @@ export default class ManyToOneTable extends React.Component {
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,
+                    key: urlArray[index].key,
                     short: rep.data,
+                    edit: false,
                 });
             });
             this.setState({
