@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Input, message, Popconfirm, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { getAllUser } from "../../Services/adminManageService";
 
 class UserTable extends React.Component {
     constructor(props) {
@@ -69,11 +70,12 @@ class UserTable extends React.Component {
     }
 
     componentDidMount() {
-        // const callback = (data) => {
-        //     this.setState({ dataSource: data, rowData: data });
-        //     // console.log(JSON.stringify(data));
-        // };
-        // getAllUser(callback);
+        const callback = (data) => {
+            this.setState({ dataSource: data, rowData: data });
+            // console.log(JSON.stringify(data));
+        };
+
+        getAllUser(callback);
     }
 
     toggle = () => {

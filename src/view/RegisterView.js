@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Button, Col, Form, Input, message, Row } from "antd";
+import { Button, Col, Form, Input, Layout, message, Row } from "antd";
 import "../css/RegisterCss.css";
 
 import { register } from "../Services/userService";
-
+const { Content } = Layout;
 const formItemLayout = {
     labelCol: {
         xs: {
@@ -149,29 +149,22 @@ RegisterView
 class RegisterView extends Component {
     render() {
         return (
-            <div>
-                <div className="container ">
-                    <div className="col-md-12 column">
-                        <br /> <br /> <br />
-                        <br />
-                        <br />
+            <Content style={{ display: "flex", height: "100%" }}>
+                <div className="registerBlock">
+                    <div className="registerTitle">
+                        <span>注册</span>
                     </div>
-                    <div className="registerBlock">
-                        <div className="registerTitle">
-                            <span>注册</span>
-                        </div>
-                        <Row>
-                            <Col span={14} offset={4}>
-                                <br />
-                                <br />
-                                <div className="register">
-                                    <RegistrationForm />
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
+                    <Row>
+                        <Col span={14} offset={4}>
+                            <br />
+                            <br />
+                            <div className="register">
+                                <RegistrationForm />
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
-            </div>
+            </Content>
         );
     }
 }

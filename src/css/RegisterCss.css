@@ -11,15 +11,14 @@
 
 .registerBlock {
     width: 800px;
-    top: 10%;
-    /*position: fixed;*/
-    height: auto;
+    margin-top: 4%;
+    margin-left: 24%;
+    position: relative;
+    height: 460px;
     border-radius: 25px;
     box-shadow: 10px 10px 30px #3399cc;
     /*background-color: #336699;*/
-    left: 0;
-    right: 0;
-    margin: 0 auto;
+
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
 }
 
