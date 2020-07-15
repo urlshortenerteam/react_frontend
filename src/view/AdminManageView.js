@@ -32,7 +32,7 @@ class AdminManageView extends Component {
                                         短链接管理
                                     </span>
                                 }
-                            ></TabPane>
+                            />
                             <TabPane
                                 key="2"
                                 tab={

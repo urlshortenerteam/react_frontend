@@ -64,12 +64,11 @@ export default class Navigation extends React.Component {
                             >
                                 <Link to="/manage">管理链接</Link>
                             </Menu.Item>
-                            <Menu.Item key="adminManage" icon={<AppstoreOutlined />}>
-                                <Link
-                                    to="/adminManage"
-                                >
-                                    运营管理
-                                </Link>
+                            <Menu.Item
+                                key="adminManage"
+                                icon={<AppstoreOutlined />}
+                            >
+                                <Link to="/adminManage">运营管理</Link>
                             </Menu.Item>
                         </Menu>,
                     ]}
