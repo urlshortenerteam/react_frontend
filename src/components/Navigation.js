@@ -64,13 +64,11 @@ export default class Navigation extends React.Component {
                             >
                                 <Link to="/manage">管理链接</Link>
                             </Menu.Item>
-                            <Menu.Item key="other" icon={<AppstoreOutlined />}>
+                            <Menu.Item key="adminManage" icon={<AppstoreOutlined />}>
                                 <Link
-                                    to="https://xiaomark.com/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    to="/adminManage"
                                 >
-                                    其他
+                                    运营管理
                                 </Link>
                             </Menu.Item>
                         </Menu>,
@@ -90,21 +88,17 @@ export default class Navigation extends React.Component {
                                     </Button>
                                 )}
                             </Col>
-                            <Col>
-                                <Button
-                                    ghost
-                                    key="1"
-                                    href="#/register"
-                                    style={{ marginLeft: 7 }}
-                                >
-                                    注册
-                                </Button>
-                            </Col>
+                            {/*<Col>*/}
+                            {/*    <Button*/}
+                            {/*        ghost*/}
+                            {/*        key="1"*/}
+                            {/*        href="#/register"*/}
+                            {/*        style={{ marginLeft: 7 }}*/}
+                            {/*    >*/}
+                            {/*        注册*/}
+                            {/*    </Button>*/}
+                            {/*</Col>*/}
                         </Row>,
-
-                        // <Button key="2" ghost href="#/login">
-                        //     登录
-                        // </Button>,
                     ]}
                 />
                 ,
