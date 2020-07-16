@@ -20,7 +20,7 @@ class LogInBlock extends React.Component {
             console.log("Failed:", errorInfo);
         };
         return (
-            <div className="login">
+            <Content className="login">
                 <Row style={{ padding: "25px" }}>
                     <Col span={12} offset={6}>
                         <div>
@@ -89,7 +89,7 @@ class LogInBlock extends React.Component {
                         </div>
                     </Col>
                 </Row>
-            </div>
+            </Content>
         );
     }
 }
