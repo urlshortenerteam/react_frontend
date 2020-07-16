@@ -617,6 +617,27 @@ apiRoutes.post("/editUrl", function (req, res) {
         res.json(jsonResponse);
     }, random);
 });
+apiRoutes.post("/editUrl", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1": [
+                {
+                    "status|1": true,
+                },
+            ],
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
 
 apiRoutes.get("/getUserStat", function (req, res) {
     console.log(req);
@@ -638,6 +659,79 @@ apiRoutes.get("/getUserStat", function (req, res) {
         })
     );
 
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+apiRoutes.get("/checkSession", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        msg: "查询成功",
+    };
+
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "status|1": [403, 404, 506, 200],
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getTopTen", function (req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|10": [
+                {
+                    shortUrl: /[a-zA-Z0-9]{6}/,
+                    "longUrl|1-5": [
+                        {
+                            "url|1": [
+                                "https://www.baidu.com",
+                                "https://www.taobao.com",
+                                "https://mockjs.com/examples.html",
+                            ],
+                        },
+                    ],
+                    count: "@natural(0,100000)",
+                },
+            ],
+        })
+    );
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getAllUrls", function (req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|10": [
+                {
+                    shortUrl: /[a-zA-Z0-9]{6}/,
+                    "longUrl|1-5": [
+                        {
+                            "url|1": [
+                                "https://www.baidu.com",
+                                "https://www.taobao.com",
+                                "https://mockjs.com/examples.html",
+                            ],
+                        },
+                    ],
+                    count: "@natural(0,100000)",
+                    name: /[a-z][A-Z][0-9]/,
+                    create_time: '@date("yyyy-MM-dd")',
+                },
+            ],
+        })
+    );
     setTimeout(() => {
         res.json(jsonResponse);
     }, random);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { hostUrl } from "../../Services/ajax";
 import { Popover, Spin } from "antd";
 import { QrcodeOutlined } from "@ant-design/icons";
+
 /**
  * ShortWithQR:
  * @author Zhuohao Shen <ao7777@sjtu.edu.cn>
