@@ -3,17 +3,15 @@ import { Col, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 import {
     ScheduleOutlined,
-    TableOutlined,
     TeamOutlined,
+    TableOutlined,
 } from "@ant-design/icons";
 import UserManage from "../components/adminManage/UserManage";
-import SimpleStatistics from "../components/adminManage/AdminStatistics";
-import AdminUrlManage from "../components/adminManage/AdminUrlManage";
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
 
-/**
+/*
 AdminManageView
 @author Shuchang Liu
 @date July 15th 2020
@@ -34,9 +32,7 @@ class AdminManageView extends Component {
                                         短链接管理
                                     </span>
                                 }
-                            >
-                                <AdminUrlManage />
-                            </TabPane>
+                            />
                             <TabPane
                                 key="2"
                                 tab={
@@ -56,9 +52,7 @@ class AdminManageView extends Component {
                                         统计
                                     </span>
                                 }
-                            >
-                                <SimpleStatistics />
-                            </TabPane>
+                            />
                         </Tabs>
                     </Col>
                 </Row>

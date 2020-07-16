@@ -1,19 +1,7 @@
 import React, { Component } from "react";
-import { Button, Input, message, Popconfirm, Table, Tag } from "antd";
-import {
-    FrownOutlined,
-    SearchOutlined,
-    SmileOutlined,
-    UserAddOutlined,
-} from "@ant-design/icons";
-import { banUser, getAllUser } from "../../Services/adminManageService";
+import { Button, Input, message, Popconfirm, Table } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
-/**
- * UserTable
- * @author Shuchang Liu
- * @date July 16th 2020
- * @description a table used for user management
- **/
 class UserTable extends React.Component {
     constructor(props) {
         super(props);
@@ -30,14 +18,6 @@ class UserTable extends React.Component {
                 dataIndex: "visit_count",
                 width: "5%",
                 align: "center",
-                sorter: {
-                    compare: (a, b) => a.visit_count - b.visit_count,
-                },
-                // render: (text, record) =>
-                //     this.state.dataSource.length >= 1 ? (
-                //         <Statistic title="Feedback" value={record.visit_count} prefix={<LikeOutlined />} />
-                //     ) : null,
-
                 ...this.getColumnSearchProps("visit_count"),
             },
             {
@@ -48,22 +28,16 @@ class UserTable extends React.Component {
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         <div>
-                            {record.role === 0 ? (
-                                <Tag icon={<UserAddOutlined />} color="#87d068">
-                                    管理员
-                                </Tag>
-                            ) : record.role === 1 ? (
-                                <Tag icon={<SmileOutlined />} color="#55acee">
-                                    普通用户
-                                </Tag>
+                            {record.userType === 0 ? (
+                                <Button>管理员</Button>
+                            ) : record.userType === 1 ? (
+                                <Button>普通用户</Button>
                             ) : (
-                                <Tag icon={<FrownOutlined />} color="#cd201f">
-                                    已禁用用户
-                                </Tag>
+                                <Button>已禁用用户</Button>
                             )}
                         </div>
                     ) : null,
-                // ...this.getColumnSearchProps("role")
+                ...this.getColumnSearchProps("role"),
             },
             {
                 title: "禁用/启用",
@@ -72,24 +46,16 @@ class UserTable extends React.Component {
                 width: "5%",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        record.role === 0 ? (
-                            <Button type="primary" disabled>
-                                禁用
-                            </Button>
-                        ) : (
-                            <Popconfirm
-                                title="确认修改?"
-                                okText="确认"
-                                cancelText="取消"
-                                onConfirm={() => this.handleBan(record)}
-                            >
-                                {record.role !== 2 ? (
-                                    <Button type="primary">禁用</Button>
-                                ) : (
-                                    <Button type="primary">解除</Button>
-                                )}
-                            </Popconfirm>
-                        )
+                        <Popconfirm
+                            title="确认修改?"
+                            onConfirm={() => this.handleBan(record)}
+                        >
+                            {record.isBanned !== 2 ? (
+                                <Button type="primary">禁用</Button>
+                            ) : (
+                                <Button type="primary">解除</Button>
+                            )}
+                        </Popconfirm>
                     ) : null,
             },
         ];
@@ -103,17 +69,11 @@ class UserTable extends React.Component {
     }
 
     componentDidMount() {
-        const callback = (res) => {
-            if (res.not_administrator) {
-                message.error("您不是管理员");
-                return;
-            }
-            console.log(res);
-            this.setState({ dataSource: res.data, rowData: res.data });
-            // console.log(JSON.stringify(data));
-        };
-
-        getAllUser(callback);
+        // const callback = (data) => {
+        //     this.setState({ dataSource: data, rowData: data });
+        //     // console.log(JSON.stringify(data));
+        // };
+        // getAllUser(callback);
     }
 
     toggle = () => {
@@ -122,6 +82,14 @@ class UserTable extends React.Component {
         });
     };
 
+    hide = () => {
+        this.setState({
+            visible: false,
+        });
+    };
+    handleVisibleChange = (visible) => {
+        this.setState({ visible });
+    };
     handle = () => {
         const w = window.open("about:blank");
         w.location.href = "/login";
@@ -138,7 +106,7 @@ class UserTable extends React.Component {
                     ref={(node) => {
                         this.searchInput = node;
                     }}
-                    placeholder={`search ${dataIndex}`}
+                    placeholder={`Search ${dataIndex}`}
                     value={selectedKeys[0]}
                     onChange={(e) =>
                         setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -157,14 +125,14 @@ class UserTable extends React.Component {
                     size="small"
                     style={{ width: 90, marginRight: 8 }}
                 >
-                    搜索
+                    Search
                 </Button>
                 <Button
                     onClick={() => this.handleReset(clearFilters)}
                     size="small"
                     style={{ width: 90 }}
                 >
-                    重置
+                    Reset
                 </Button>
             </div>
         ),
@@ -196,52 +164,63 @@ class UserTable extends React.Component {
         this.setState({ searchText: "" });
     };
     handleBan = (row) => {
-        let ban = false;
-        if (row.role === 2) {
+        // const dataSource = [...this.state.dataSource];
+        //alert(key);
+        if (row.isBanned === 1) {
             //说明被禁用了 点按钮要解除禁用
-            row.role = 1;
-            ban = false;
-        } else if (row.role === 0) {
-            message.error("您不能禁用管理员");
-            return;
-        } else if (row.role === 1) {
-            row.role = 2;
-            ban = true;
+            row.isBanned = 0;
+        } else if (row.isBanned === 0) {
+            row.isBanned = 1;
         }
 
-        this.handleSave(row, ban);
+        this.handleSave(row);
     };
 
-    handleSave = (row, ban) => {
-        // console.log(row);
+    handleSave = (row) => {
+        message.config({
+            top: 55,
+            duration: 5,
+            maxCount: 3,
+            rtl: true,
+        });
+        if (row.userType === "管理员") {
+            row.userType = 1;
+        } else if (row.userType === "普通用户") {
+            row.userType = 0;
+        } else if (row.userType !== 1 && row.userType !== 0) {
+            message.error(
+                "输入形式错误：请输入 管理员 或 普通用户 ； 或输入 1（代表管理员） 或 0（代表普通用户)"
+            );
+            return;
+        }
+
         const newData = [...this.state.dataSource];
-        const index = newData.findIndex((item) => row.id === item.id);
+        const index = newData.findIndex((item) => row.userId === item.userId);
         const item = newData[index];
 
         newData.splice(index, 1, { ...item, ...row });
-        const callback = (res) => {
-            if (res.not_administrator) {
-                message.error("您不是管理员:无法禁用用户");
-                return;
-            }
-            if (res.data.status) {
-                this.setState({
-                    dataSource: newData,
-                });
-                message.success("修改成功");
-            } else message.error("修改失败");
-        };
-        banUser(ban, row.id, callback);
+        // const callback = (data) => {
+        //     message.config({
+        //         top: 55,
+        //         duration: 2,
+        //         maxCount: 3,
+        //         rtl: true,
+        //     });
+        //     if (data.status > 0) {
+        //         this.setState({
+        //             dataSource: newData,
+        //         });
+        //         // message.success(data.msg)
+        //     } else message.error(data.msg);
+        // };
     };
 
     render() {
         return (
             <div>
                 <Table
-                    pagination={{ position: ["bottomCenter"] }}
                     rowClassName={() => "editable-row"}
                     bordered
-                    rowKey="id"
                     dataSource={this.state.dataSource}
                     columns={this.columns}
                 />
@@ -250,12 +229,6 @@ class UserTable extends React.Component {
     }
 }
 
-/**
- * userManage
- * @author Shuchang Liu
- * @date July 16th 2020
- * @description userManage used in adminManageService
- **/
 class userManage extends Component {
     render() {
         return (

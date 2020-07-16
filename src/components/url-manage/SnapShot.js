@@ -30,13 +30,7 @@ export default class SnapShot extends React.Component {
                 content={this.AsyncSnapShot(this.props.value)}
                 title="网页预览"
             >
-                {this.props.black ? (
-                    <PictureFilled
-                        style={{ color: "#1890ff", marginLeft: 8 }}
-                    />
-                ) : (
-                    <PictureFilled style={{ color: "white", marginLeft: 8 }} />
-                )}
+                <PictureFilled style={{ color: "white" }} />
             </Popover>
         );
     }

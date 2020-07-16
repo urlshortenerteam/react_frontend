@@ -1,15 +1,13 @@
 import React from "react";
 import StatisticsBar from "../components/statistics/StatisticsBar";
-import { Layout, Typography } from "antd";
+import { Col, Row } from "antd";
 import MapBox from "../components/MapBox";
 import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
 import { getRequest } from "../Services/ajax";
-import { hostUrl } from "../Services/ajax";
-const { Sider, Content } = Layout;
-const { Text } = Typography;
-/**
+
+/*
 StatisticsView
 @author Zhuohao Shen
 @date July 7th 2020
@@ -20,7 +18,6 @@ export default class StatisticsView extends React.Component {
         display: "overview",
         data: [],
         lineData: [],
-        collapsed: false,
     };
     toggleSwitch = ({ key }) => {
         this.setState({ display: key });
@@ -28,7 +25,7 @@ export default class StatisticsView extends React.Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: sessionStorage.getItem("userId") },
+            params: { id: 0 },
             errorCallback: this.handleError,
         });
     }
@@ -38,7 +35,7 @@ export default class StatisticsView extends React.Component {
         let lines = [];
         this.state.data.forEach((url) => {
             url.time_distr.forEach((time) => {
-                time.url = hostUrl + url.shortUrl;
+                time.url = "short.cn/" + url.shortUrl;
                 lines.push(time);
             });
         });
@@ -51,41 +48,31 @@ export default class StatisticsView extends React.Component {
 
     render() {
         return (
-            <Layout justify="space-between">
-                <Sider
-                    style={{ background: "black", maxWidth: "20%" }}
-                    collapsible
-                    collapsed={this.state.collapsed}
-                    onCollapse={(collapsed) => {
-                        this.setState({ collapsed });
-                    }}
-                >
+            <Row justify="space-between">
+                <Col style={{ background: "black", maxWidth: "20%" }}>
                     <StatisticsBar toggleSwitch={this.toggleSwitch} />
-                </Sider>
-                <Content
-                    flex="auto"
+                </Col>
+                <Col
+                    flex={20}
                     style={{
+                        height: 800,
                         marginLeft: 30,
-                        marginRight: 30,
+                        marginRight: 32,
                         float: "right",
-                        background: "black",
+                        maxWidth: "85%",
                     }}
                 >
                     {this.state.display === "time" ? (
                         <TrendingLines data={this.state.lineData} />
                     ) : null}
                     {this.state.display === "area" ? (
-                        this.state.data === null ? (
-                            <MapBox data={this.state.data[0].area_distr} />
-                        ) : (
-                            <Text>暂无数据</Text>
-                        )
+                        <MapBox data={this.state.data[0].area_distr} />
                     ) : null}
                     {this.state.display === "overview" ? (
                         <OverView data={this.state.lineData} />
                     ) : null}
-                </Content>
-            </Layout>
+                </Col>
+            </Row>
         );
     }
 }

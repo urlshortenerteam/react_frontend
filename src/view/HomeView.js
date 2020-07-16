@@ -3,10 +3,9 @@ import { Button, Layout } from "antd";
 import "../css/HomeCss.css";
 import { hostUrl } from "../Services/ajax";
 import { RightOutlined } from "@ant-design/icons";
-
 const { Content } = Layout;
 
-/**
+/*
 HomeView
 @author Shuchang Liu
 @date July 6th 2020
@@ -23,23 +22,23 @@ class HomeView extends Component {
                     <br />
                     简单易用
                     <br style={{ padding: 0 }} />
-                    <Button icon={<RightOutlined />} href="/create" ghost>
+                    <Button icon={<RightOutlined />} href="#/create" ghost>
                         开始探索
                     </Button>
                 </h1>
                 <img
                     className="leftDesc"
-                    src={hostUrl + "/static/flow.png"}
+                    src={hostUrl + "/flow.png"}
                     alt={""}
                 />
                 <img
                     className="rightBottomDesc"
-                    src={hostUrl + "/static/people.png"}
+                    src={hostUrl + "/people.png"}
                     alt={""}
                 />
                 <img
                     className="rightTopDesc"
-                    src={hostUrl + "/static/trans.png"}
+                    src={hostUrl + "/trans.png"}
                     alt={""}
                 />
             </Content>
