@@ -639,7 +639,7 @@ apiRoutes.post("/editUrl", function (req, res) {
     }, random);
 });
 
-apiRoutes.post("/editUrl", function (req, res) {
+apiRoutes.get("/getUserStat", function (req, res) {
     console.log(req);
     let jsonResponse = {
         status: 200,
@@ -648,28 +648,14 @@ apiRoutes.post("/editUrl", function (req, res) {
     Object.assign(
         jsonResponse,
         Mock.mock({
-            "data|1": [
+            "data|1-10": [
                 {
-                    "status|1": true,
+                    "id|1-1000": 4,
+                    "name|1": /[a-z][A-Z][0-9]/,
+                    "role|0-2": 0,
+                    "visit_count|1-1000": 1000,
                 },
             ],
-        })
-    );
-
-    setTimeout(() => {
-        res.json(jsonResponse);
-    }, random);
-});
-apiRoutes.get("/checkSession", function (req, res) {
-    console.log(req);
-    let jsonResponse = {
-        msg: "查询成功",
-    };
-
-    Object.assign(
-        jsonResponse,
-        Mock.mock({
-            "status|1": [403, 404, 506, 200],
         })
     );
 
