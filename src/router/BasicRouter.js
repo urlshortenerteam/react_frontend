@@ -10,7 +10,7 @@ import RegisterView from "../view/RegisterView";
 import { Col, Layout, Row } from "antd";
 import Navigation from "../components/Navigation";
 import AdminManageView from "../view/AdminManageView";
-
+import PrivateRoute from "./PrivateRoute";
 const { Header, Footer } = Layout;
 
 const BasicRouter = () => (
@@ -26,7 +26,7 @@ const BasicRouter = () => (
             <Switch>
                 <Route exact path="/" component={HomeView} />
                 <Route exact path="/login" component={LoginView} />
-                <Route exact path="/create" component={CreateView} />
+                <PrivateRoute exact path="/create" component={CreateView} />
                 <Route exact path="/statistics" component={StatisticsView} />
                 <Route exact path="/manage" component={ManageView} />
                 <Route exact path="/register" component={RegisterView} />
