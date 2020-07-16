@@ -15,10 +15,11 @@ export const login = (data) => {
             sessionStorage.setItem("userId", JSON.stringify(res.data.id));
             sessionStorage.setItem("loginStatus", 1);
             sessionStorage.setItem("type", JSON.stringify(res.data.type));
-            sessionStorage.setItem("token", JSON.stringify(res.data.type));
+            sessionStorage.setItem("token", JSON.stringify(res.data.token));
             // localStorage.setItem('user', JSON.stringify(data.data));
             console.log(sessionStorage.getItem("userId"));
             console.log(sessionStorage.getItem("loginStatus"));
+            console.log(res.data);
             // history.push("/");
 
             message.success("登录成功");
@@ -33,7 +34,7 @@ export const login = (data) => {
             }
         }
     };
-    postRequest(url, data, callback);
+    postRequest(url, data, callback, { errorCallback: () => {} });
 };
 
 export const logout = () => {

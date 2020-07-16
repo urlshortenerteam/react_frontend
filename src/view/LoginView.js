@@ -33,7 +33,7 @@ class LogInBlock extends React.Component {
                                 ref={this.formRef}
                             >
                                 <Form.Item
-                                    name="username"
+                                    name="name"
                                     rules={[
                                         {
                                             required: true,
