@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Col, List, Row, Skeleton, Tag } from "antd";
+import { Card, Col, List, message, Row, Skeleton, Tag } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import "../../css/AdminStatisticsCss.css";
 import { getTopTen } from "../../Services/adminManageService";
@@ -56,7 +56,7 @@ export default class VisitRankingList extends Component {
         });
     };
     handleError = (error) => {
-        console.log(error);
+        message.error(error);
     };
 
     render() {

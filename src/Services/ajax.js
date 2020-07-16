@@ -52,7 +52,7 @@ let getRequest = (url, callback, { errorCallback, params }) => {
         },
     };
 
-    fetch(_url,opts)
+    fetch(_url, opts)
         .then((response) => {
             return response.json();
         })
