@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-    Button,
-    Input,
-    message,
-    Popconfirm,
-    Table,
-    Tag,
-} from "antd";
+import { Button, Input, message, Popconfirm, Table, Tag } from "antd";
 import {
     SearchOutlined,
     FrownOutlined,
@@ -75,6 +68,8 @@ class UserTable extends React.Component {
                     this.state.dataSource.length >= 1 ? (
                         <Popconfirm
                             title="确认修改?"
+                            okText="确认"
+                            cancelText="取消"
                             onConfirm={() => this.handleBan(record)}
                         >
                             {record.role !== 2 ? (
