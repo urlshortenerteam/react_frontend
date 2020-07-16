@@ -44,7 +44,15 @@ let postRequest = (url, json, callback, { errorCallback, params }) => {
 let getRequest = (url, callback, { errorCallback, params }) => {
     let _url = new URL(hostUrl + url);
     _url.search = new URLSearchParams(params).toString();
-    fetch(_url)
+    let opts = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: JSON.parse(sessionStorage.getItem("token")),
+        },
+    };
+
+    fetch(_url,opts)
         .then((response) => {
             return response.json();
         })

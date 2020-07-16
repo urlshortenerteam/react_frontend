@@ -33,23 +33,31 @@ export const login = (data) => {
             }
         }
     };
-    postRequest(url, data, callback, { errorCallback: () => {} });
+    postRequest(url, data, callback, {
+        errorCallback: () => {},
+    });
 };
 
 export const logout = () => {
-    const url = `/logoutReq`;
-    const callback = (res) => {
-        if (res.data.status) {
-            sessionStorage.removeItem("userId");
-            sessionStorage.removeItem("loginStatus");
-            sessionStorage.removeItem("type");
-            message.success("成功登出");
-            window.location.href = "/";
-        } else {
-            message.error("登出失败");
-        }
-    };
-    postRequest(url, {}, callback);
+    // const url = `/logoutReq`;
+    // const callback = (res) => {
+    //     if (res.data.status) {
+    //         sessionStorage.removeItem("userId");
+    //         sessionStorage.removeItem("loginStatus");
+    //         sessionStorage.removeItem("type");
+    //         message.success("成功登出");
+    //         window.location.href = "/";
+    //     } else {
+    //         message.error("登出失败");
+    //     }
+    // };
+    // postRequest(url, {}, callback);
+
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("loginStatus");
+    sessionStorage.removeItem("type");
+    message.success("成功登出");
+    window.location.href = "/";
 };
 
 export const checkSession = (callback) => {

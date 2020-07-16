@@ -7,6 +7,7 @@ import {
     TableOutlined,
 } from "@ant-design/icons";
 import UserManage from "../components/adminManage/UserManage";
+import SimpleStatistics from "../components/adminManage/AdminStatistics";
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -52,7 +53,9 @@ class AdminManageView extends Component {
                                         统计
                                     </span>
                                 }
-                            />
+                            >
+                                <SimpleStatistics />
+                            </TabPane>
                         </Tabs>
                     </Col>
                 </Row>
