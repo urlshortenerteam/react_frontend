@@ -331,6 +331,28 @@ apiRoutes.post("/logoutReq", function (req, res) {
     }, random);
 });
 
+apiRoutes.get("/banUser", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1": [
+                {
+                    status: true,
+                },
+            ],
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
 apiRoutes.post("/register", function (req, res) {
     console.log(req);
     let jsonResponse = {
@@ -364,6 +386,31 @@ apiRoutes.post("/editUrl", function (req, res) {
             "data|1": [
                 {
                     "status|1": true,
+                },
+            ],
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getUserStat", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1-10": [
+                {
+                    "id|1-1000": 4,
+                    "name|1": /[a-z][A-Z][0-9]/,
+                    "role|0-2": 0,
+                    "visit_count|1-1000": 1000,
                 },
             ],
         })
