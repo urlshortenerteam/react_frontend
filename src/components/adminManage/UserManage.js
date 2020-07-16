@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Button, Input, message, Popconfirm, Table, Tag } from "antd";
 import {
-    SearchOutlined,
     FrownOutlined,
+    SearchOutlined,
     SmileOutlined,
     UserAddOutlined,
 } from "@ant-design/icons";
@@ -218,6 +218,7 @@ class UserTable extends React.Component {
         return (
             <div>
                 <Table
+                    pagination={{ position: ["bottomCenter"] }}
                     rowClassName={() => "editable-row"}
                     bordered
                     rowKey="id"

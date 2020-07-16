@@ -23,3 +23,17 @@ export const banUser = (ban, ban_id, callback) => {
         },
     });
 };
+
+export const getTopTen = (callBack, errorHandler) => {
+    getRequest("/getTopTen", callBack, {
+        params: {},
+        errorCallback: errorHandler,
+    });
+};
+
+export const getAllUrls = (callBack, errorHandler) => {
+    getRequest("/getAllUrls", callBack, {
+        params: {},
+        errorCallback: errorHandler,
+    });
+};

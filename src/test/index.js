@@ -642,4 +642,60 @@ apiRoutes.get("/getUserStat", function (req, res) {
         res.json(jsonResponse);
     }, random);
 });
+
+apiRoutes.get("/getTopTen", function (req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|10": [
+                {
+                    shortUrl: /[a-zA-Z0-9]{6}/,
+                    "longUrl|1-5": [
+                        {
+                            "url|1": [
+                                "https://www.baidu.com",
+                                "https://www.taobao.com",
+                                "https://mockjs.com/examples.html",
+                            ],
+                        },
+                    ],
+                    count: "@natural(0,100000)",
+                },
+            ],
+        })
+    );
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getAllUrls", function (req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|10": [
+                {
+                    shortUrl: /[a-zA-Z0-9]{6}/,
+                    "longUrl|1-5": [
+                        {
+                            "url|1": [
+                                "https://www.baidu.com",
+                                "https://www.taobao.com",
+                                "https://mockjs.com/examples.html",
+                            ],
+                        },
+                    ],
+                    count: "@natural(0,100000)",
+                    name: /[a-z][A-Z][0-9]/,
+                    create_time: '@date("yyyy-MM-dd")',
+                },
+            ],
+        })
+    );
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
 module.exports = apiRoutes;

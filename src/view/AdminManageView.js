@@ -3,11 +3,12 @@ import { Col, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 import {
     ScheduleOutlined,
-    TeamOutlined,
     TableOutlined,
+    TeamOutlined,
 } from "@ant-design/icons";
 import UserManage from "../components/adminManage/UserManage";
 import SimpleStatistics from "../components/adminManage/AdminStatistics";
+import AdminUrlManage from "../components/adminManage/AdminUrlManage";
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -33,7 +34,9 @@ class AdminManageView extends Component {
                                         短链接管理
                                     </span>
                                 }
-                            />
+                            >
+                                <AdminUrlManage />
+                            </TabPane>
                             <TabPane
                                 key="2"
                                 tab={

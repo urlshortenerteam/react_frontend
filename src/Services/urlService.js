@@ -1,4 +1,5 @@
 import { getRequest, postRequest } from "./ajax";
+
 /**
  * BanUrl
  * @author Zhuohao Shen <ao7777@sjtu.edu.cn>

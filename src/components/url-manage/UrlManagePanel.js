@@ -1,28 +1,27 @@
 import React, { Component } from "react";
 import {
-    List,
-    Skeleton,
-    Row,
     Col,
-    Statistic,
+    Input,
+    List,
     message,
     Modal,
-    Input,
+    Row,
     Select,
+    Skeleton,
+    Statistic,
 } from "antd";
 import {
     CloseOutlined,
-    StarOutlined,
+    CoffeeOutlined,
     EditOutlined,
     EyeOutlined,
-    CoffeeOutlined,
-    StopOutlined,
     LinkOutlined,
+    StarOutlined,
+    StopOutlined,
 } from "@ant-design/icons";
-import { getRequest } from "../../Services/ajax";
+import { getRequest, hostUrl } from "../../Services/ajax";
 import SnapShot from "./SnapShot";
-import { hostUrl } from "../../Services/ajax";
-import { BanUrl, EditUrl, LiftUrl, GetUrl } from "../../Services/urlService";
+import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../Services/urlService";
 
 const { Option } = Select;
 const IconText = ({ icon, text, action }) => (
@@ -169,7 +168,10 @@ export default class UrlManagePanel extends Component {
                                         >
                                             {long.url}
                                         </span>
-                                        <SnapShot value={long.url} />
+                                        <SnapShot
+                                            value={long.url}
+                                            black={false}
+                                        />
                                     </Row>
                                 );
                             });

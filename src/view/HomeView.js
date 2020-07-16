@@ -3,6 +3,7 @@ import { Button, Layout } from "antd";
 import "../css/HomeCss.css";
 import { hostUrl } from "../Services/ajax";
 import { RightOutlined } from "@ant-design/icons";
+
 const { Content } = Layout;
 
 /*

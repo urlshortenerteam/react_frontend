@@ -3,6 +3,7 @@ import { Button, Col, Form, Input, Layout, message, Row } from "antd";
 import "../css/RegisterCss.css";
 
 import { register } from "../Services/userService";
+
 const { Content } = Layout;
 const formItemLayout = {
     labelCol: {

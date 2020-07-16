@@ -60,3 +60,52 @@
     background: #0c1112;
     border-radius: 2px;
 }
+
+.number .ant-card-head-title {
+    display: inline-block;
+    -ms-flex: 1;
+    flex: 1 1;
+    padding: 16px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: white;
+    font-size: 23px;
+}
+/*for VisitRankingList*/
+
+.topRank .donutPlot {
+    margin-top: 14%;
+    align-content: center;
+}
+.topRank .topList {
+    margin: 20px;
+}
+.topRank {
+    background: #0c1112;
+    height: auto;
+    box-shadow: 1px 1px 10px #3399cc;
+    margin: 30px;
+}
+.topRank .ant-pagination-item-active {
+    font-weight: 500;
+    background: #151414;
+    border-color: white;
+}
+.topRank .ant-pagination-item-active a {
+    color: #ffffff;
+}
+
+.topRank .ant-pagination-item a {
+    display: block;
+    padding: 0 6px;
+    color: rgb(255, 255, 255);
+    transition: none;
+}
+
+.topRank .ant-pagination.mini .ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination.mini .ant-pagination-next .ant-pagination-item-link {
+    background: transparent;
+    border-color: #ee808000;
+    color: white;
+}
