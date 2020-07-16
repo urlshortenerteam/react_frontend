@@ -134,9 +134,9 @@ class AdminUrlManage extends Component {
                     this.state.dataSource.length >= 1 ? (
                         record.longUrl[0].url === "BANNED" ? (
                             <Tag color="#cb0000">
-                                <a style={{ color: "white" }}>
+                                <text style={{ color: "white" }}>
                                     {record.shortUrl}
-                                </a>
+                                </text>
                             </Tag>
                         ) : (
                             <Tag color="#3b5999">
