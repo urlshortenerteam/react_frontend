@@ -14,6 +14,7 @@ import {
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
 import { getBatchOneToOne } from "../../Services/CreateService";
+import ShortWithQR from "./ShortWithQR";
 
 const EditableContext = React.createContext();
 
@@ -78,7 +79,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     let childNode = children;
 
-    if (editable) {
+    if (editable && record.edit !== 0) {
         childNode = editing ? (
             <Form.Item
                 style={{ margin: 0 }}
@@ -115,6 +116,17 @@ OneToOneTable
 export default class OneToOneTable extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            dataSource: [
+                {
+                    key: 1,
+                    long: "以http://或https://开头",
+                    short: "",
+                },
+            ],
+            count: 1,
+            created: false,
+        };
         this.columns = [
             {
                 title: "长链接",
@@ -140,20 +152,20 @@ export default class OneToOneTable extends React.Component {
                 colSpan: 0,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        <Popconfirm
-                            title="确定删除此长链接？"
-                            onConfirm={() => this.handleDelete(record.key)}
-                            okText="删除"
-                            cancelText="取消"
-                        >
-                            {!this.state.created ? (
+                        !this.state.created ? (
+                            <Popconfirm
+                                title="确定删除此长链接？"
+                                onConfirm={() => this.handleDelete(record.key)}
+                                okText="删除"
+                                cancelText="取消"
+                            >
                                 <Button type="primary">删除</Button>
-                            ) : (
-                                <Button type="primary" disabled>
-                                    删除
-                                </Button>
-                            )}
-                        </Popconfirm>
+                            </Popconfirm>
+                        ) : (
+                            <Button type="primary" disabled>
+                                删除
+                            </Button>
+                        )
                     ) : null,
             },
             {
@@ -161,25 +173,9 @@ export default class OneToOneTable extends React.Component {
                 dataIndex: "short",
                 align: "center",
                 width: "30%",
-                render: (short) => (
-                    <Tooltip placement="topLeft" title={short}>
-                        {short}
-                    </Tooltip>
-                ),
+                render: (short) => <ShortWithQR value={short} />,
             },
         ];
-
-        this.state = {
-            dataSource: [
-                {
-                    key: 1,
-                    long: "以http://或https://开头",
-                    short: "",
-                },
-            ],
-            count: 1,
-            created: false,
-        };
     }
 
     handleDelete = (key) => {
@@ -194,6 +190,7 @@ export default class OneToOneTable extends React.Component {
         const { dataSource } = this.state;
         const newData = {
             key: this.state.count + 1,
+            edit: true,
             long: "以http://或https://开头",
             short: "",
         };
@@ -201,7 +198,7 @@ export default class OneToOneTable extends React.Component {
             dataSource: [...dataSource, newData],
             count: this.state.count + 1,
         });
-        // console.log([...dataSource, newData]);
+        console.log([...dataSource, newData]);
     };
 
     handleSave = (row) => {
@@ -220,6 +217,7 @@ export default class OneToOneTable extends React.Component {
                     key: index + this.state.count,
                     long: item,
                     short: "",
+                    edit: true,
                 });
                 if (!item) {
                     urlArray.splice(index, 1); //删除空项
@@ -244,7 +242,7 @@ export default class OneToOneTable extends React.Component {
             newData.splice(index, 1, ...newRow);
 
             this.setState({ dataSource: newData });
-            // console.log(newData);
+            console.log(newData);
         } else {
             const item = newData[index];
             if (
@@ -258,7 +256,7 @@ export default class OneToOneTable extends React.Component {
                 ...row,
             });
             this.setState({ dataSource: newData });
-            // console.log(newData);
+            console.log(newData);
         }
     };
 
@@ -266,9 +264,10 @@ export default class OneToOneTable extends React.Component {
         this.setState({
             dataSource: [
                 {
-                    key: 0,
+                    key: 1,
                     long: "以http://或https://开头",
                     short: "",
+                    edit: true,
                 },
             ],
             count: 1,
@@ -318,7 +317,9 @@ export default class OneToOneTable extends React.Component {
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,
+                    key: urlArray[index].key,
                     short: shorts[index],
+                    edit: false,
                 });
             });
             this.setState({
@@ -333,7 +334,6 @@ export default class OneToOneTable extends React.Component {
             getBatchOneToOne(req, callBack);
         }
     };
-
     render() {
         const { dataSource } = this.state;
         const components = {

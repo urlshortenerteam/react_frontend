@@ -1,5 +1,7 @@
 export const hostUrl = "http://localhost:4000";
-let postRequest = (url, json, callback) => {
+let postRequest = (url, json, callback, { errorCallback, params }) => {
+    let _url = new URL(hostUrl + url);
+    _url.search = new URLSearchParams(params).toString();
     let opts = {
         method: "POST",
         body: JSON.stringify(json),
@@ -7,7 +9,7 @@ let postRequest = (url, json, callback) => {
             "Content-Type": "application/json",
         },
     };
-    fetch(hostUrl + url, opts)
+    fetch(_url, opts)
         .then((response) => {
             return response.json();
         })
@@ -15,6 +17,7 @@ let postRequest = (url, json, callback) => {
             callback(data);
         })
         .catch((error) => {
+            errorCallback(error);
             console.log(error);
         });
 };

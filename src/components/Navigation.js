@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Menu, PageHeader } from "antd";
+import { Button, Col, Menu, PageHeader, Row } from "antd";
 import {
     AlignCenterOutlined,
     AppstoreOutlined,
@@ -8,6 +8,8 @@ import {
     PicLeftOutlined,
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
+import { logout } from "../Services/userService";
+import { Link } from "react-router-dom";
 
 /*
 Navigation:
@@ -16,11 +18,10 @@ Navigation:
 */
 export default class Navigation extends React.Component {
     state = {
-        current: "mail",
+        current: "home",
     };
 
     handleClick = (e) => {
-        console.log("click ", e);
         this.setState({ current: e.key });
     };
 
@@ -41,45 +42,62 @@ export default class Navigation extends React.Component {
                             onClick={this.handleClick}
                             selectedKeys={[current]}
                             mode="horizontal"
-                            theme={"dark"}
+                            theme="dark"
+                            key="menu"
                         >
                             <Menu.Item key="home" icon={<BankOutlined />}>
-                                <a href="#">首页</a>
+                                <Link to="/">首页</Link>
                             </Menu.Item>
 
                             <Menu.Item
                                 key="statistics"
                                 icon={<AreaChartOutlined />}
                             >
-                                <a href="#/statistics">统计图表</a>
+                                <Link to="/statistics">统计图表</Link>
                             </Menu.Item>
                             <Menu.Item key="create" icon={<PicLeftOutlined />}>
-                                <a href="#/create">批量生成</a>
+                                <Link to="/create">批量生成</Link>
                             </Menu.Item>
                             <Menu.Item
                                 key="manage"
                                 icon={<AlignCenterOutlined />}
                             >
-                                <a href="#/manage">管理链接</a>
+                                <Link to="/manage">管理链接</Link>
                             </Menu.Item>
-                            <Menu.Item key="other" icon={<AppstoreOutlined />}>
-                                <a
-                                    href="https://xiaomark.com/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    其他
-                                </a>
+                            <Menu.Item
+                                key="adminManage"
+                                icon={<AppstoreOutlined />}
+                            >
+                                <Link to="/adminManage">运营管理</Link>
                             </Menu.Item>
                         </Menu>,
                     ]}
                     extra={[
-                        <Button key="2" ghost href="#/login">
-                            登录
-                        </Button>,
-                        <Button ghost key="1" href="#/register">
-                            注册
-                        </Button>,
+                        <Row key="login">
+                            <Col>
+                                {JSON.parse(
+                                    sessionStorage.getItem("loginStatus")
+                                ) === 1 ? (
+                                    <Button key="2" ghost onClick={logout}>
+                                        登出
+                                    </Button>
+                                ) : (
+                                    <Button key="3" ghost href="#/login">
+                                        登录
+                                    </Button>
+                                )}
+                            </Col>
+                            {/*<Col>*/}
+                            {/*    <Button*/}
+                            {/*        ghost*/}
+                            {/*        key="1"*/}
+                            {/*        href="#/register"*/}
+                            {/*        style={{ marginLeft: 7 }}*/}
+                            {/*    >*/}
+                            {/*        注册*/}
+                            {/*    </Button>*/}
+                            {/*</Col>*/}
+                        </Row>,
                     ]}
                 />
                 ,

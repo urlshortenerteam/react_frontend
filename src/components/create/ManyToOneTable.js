@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-
 import {
     Button,
     Col,
@@ -7,17 +6,14 @@ import {
     Input,
     message,
     Popconfirm,
-    Popover,
     Row,
-    Spin,
     Table,
     Tooltip,
 } from "antd";
 import { getBatchManyToOne } from "../../Services/CreateService";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
-import { hostUrl } from "../../Services/ajax";
-import { QrcodeOutlined } from "@ant-design/icons";
+import ShortWithQR from "./ShortWithQR";
 
 const EditableContext = React.createContext();
 
@@ -82,7 +78,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     let childNode = children;
 
-    if (editable) {
+    if (editable && record.edit) {
         childNode = editing ? (
             <Form.Item
                 style={{ margin: 0 }}
@@ -144,20 +140,20 @@ export default class ManyToOneTable extends React.Component {
                 colSpan: 0,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        <Popconfirm
-                            title="确定删除此长链接？"
-                            onConfirm={() => this.handleDelete(record.key)}
-                            okText="删除"
-                            cancelText="取消"
-                        >
-                            {!this.state.created ? (
+                        !this.state.created ? (
+                            <Popconfirm
+                                title="确定删除此长链接？"
+                                onConfirm={() => this.handleDelete(record.key)}
+                                okText="删除"
+                                cancelText="取消"
+                            >
                                 <Button type="primary">删除</Button>
-                            ) : (
-                                <Button type="primary" disabled>
-                                    删除
-                                </Button>
-                            )}
-                        </Popconfirm>
+                            </Popconfirm>
+                        ) : (
+                            <Button type="primary" disabled>
+                                删除
+                            </Button>
+                        )
                     ) : null,
             },
             {
@@ -166,27 +162,13 @@ export default class ManyToOneTable extends React.Component {
                 align: "center",
                 width: "30%",
                 render: (value, row, index) => {
-                    let obj = {
-                        children: value,
+                    const obj = {
+                        children: <ShortWithQR value={value} />,
                         props: {},
                     };
                     if (index === 0) {
                         obj.props.rowSpan = this.state.dataSource.length;
                     } else obj.props.rowSpan = 0;
-
-                    obj.children = (
-                        <div>
-                            {value}
-                            {value === "" ? null : (
-                                <Popover
-                                    content={this.AsyncQRcode(value)}
-                                    title="生成二维码"
-                                >
-                                    <QrcodeOutlined />
-                                </Popover>
-                            )}{" "}
-                        </div>
-                    );
                     return obj;
                 },
             },
@@ -198,6 +180,7 @@ export default class ManyToOneTable extends React.Component {
                     key: 1,
                     long: "以http://或https://开头",
                     short: "",
+                    edit: true,
                 },
             ],
             count: 1,
@@ -205,29 +188,6 @@ export default class ManyToOneTable extends React.Component {
             loaded: false,
         };
     }
-
-    handleQRload = () => {
-        console.log("hello");
-        this.setState({ loaded: true });
-    };
-
-    AsyncQRcode = (value) => {
-        return (
-            <div style={{ textAlign: "center" }}>
-                <img
-                    src={
-                        "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
-                        hostUrl +
-                        "/" +
-                        value
-                    }
-                    onLoad={this.handleQRload}
-                    alt={""}
-                />
-                {this.state.loaded ? null : <Spin size="large" />}
-            </div>
-        );
-    };
 
     handleDelete = (key) => {
         const dataSource = [...this.state.dataSource];
@@ -243,6 +203,7 @@ export default class ManyToOneTable extends React.Component {
             key: this.state.count + 1,
             long: "以http://或https://开头",
             short: "",
+            edit: true,
         };
         this.setState({
             dataSource: [...dataSource, newData],
@@ -268,6 +229,7 @@ export default class ManyToOneTable extends React.Component {
                     key: index + this.state.count + 1,
                     long: item,
                     short: "",
+                    edit: true,
                 });
                 if (!item) {
                     urlArray.splice(index, 1); //删除空项
@@ -318,6 +280,7 @@ export default class ManyToOneTable extends React.Component {
                     key: 1,
                     long: "以http://或https://开头",
                     short: "",
+                    edit: true,
                 },
             ],
             count: 1,
@@ -367,7 +330,9 @@ export default class ManyToOneTable extends React.Component {
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,
+                    key: urlArray[index].key,
                     short: rep.data,
+                    edit: false,
                 });
             });
             this.setState({

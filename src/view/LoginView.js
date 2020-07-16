@@ -33,12 +33,11 @@ class LogInBlock extends React.Component {
                                 ref={this.formRef}
                             >
                                 <Form.Item
-                                    name="username"
+                                    name="name"
                                     rules={[
                                         {
                                             required: true,
-                                            message:
-                                                "Please input your username!",
+                                            message: "请输入用户名！",
                                         },
                                     ]}
                                 >
@@ -57,8 +56,7 @@ class LogInBlock extends React.Component {
                                     rules={[
                                         {
                                             required: true,
-                                            message:
-                                                "Please input your password!",
+                                            message: "请输入密码！",
                                         },
                                     ]}
                                 >
@@ -75,12 +73,9 @@ class LogInBlock extends React.Component {
                                 <Row justify="space-between">
                                     <Col>
                                         {" "}
-                                        <a href="#/register">
-                                            {" "}
-                                            <Button ghost>
-                                                <span>注册</span>
-                                            </Button>
-                                        </a>
+                                        <Button href="#/register" ghost>
+                                            <span>注册</span>
+                                        </Button>
                                     </Col>
                                     <Col>
                                         <Form.Item>

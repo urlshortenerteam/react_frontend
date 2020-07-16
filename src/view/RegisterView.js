@@ -46,7 +46,7 @@ const RegistrationForm = () => {
         }
     };
     const onFinish = (values) => {
-        console.log("Received val" + "ues of form: ", values);
+        console.log("Received values of form: ", values);
 
         register(values, callback);
     };
@@ -65,46 +65,7 @@ const RegistrationForm = () => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input your username!",
-                        whitespace: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name="nickname"
-                label="Nickname"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input your nickname!",
-                        whitespace: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name="tel"
-                label="Phone"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input your phone number!",
-                        whitespace: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name="address"
-                label="Address"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input your phone address!",
+                        message: "请输入您的用户名",
                         whitespace: true,
                     },
                 ]}
@@ -117,7 +78,7 @@ const RegistrationForm = () => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input your password!",
+                        message: "请输入您的密码",
                     },
                 ]}
                 hasFeedback
@@ -133,16 +94,14 @@ const RegistrationForm = () => {
                 rules={[
                     {
                         required: true,
-                        message: "Please confirm your password!",
+                        message: "请确认您的密码",
                     },
                     ({ getFieldValue }) => ({
                         validator(rule, value) {
                             if (!value || getFieldValue("password") === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(
-                                "The two passwords that you entered do not match!"
-                            );
+                            return Promise.reject("密码不一致");
                         },
                     }),
                 ]}
@@ -156,11 +115,11 @@ const RegistrationForm = () => {
                 rules={[
                     {
                         type: "email",
-                        message: "The input is not valid E-mail!",
+                        message: "请输入合法邮件格式",
                     },
                     {
                         required: true,
-                        message: "Please input your E-mail!",
+                        message: "请输入您的邮件",
                     },
                 ]}
             >
@@ -176,6 +135,7 @@ const RegistrationForm = () => {
                     </Col>
                 </Row>
             </Form.Item>
+            <br />
         </Form>
     );
 };

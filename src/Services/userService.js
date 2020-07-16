@@ -15,9 +15,11 @@ export const login = (data) => {
             sessionStorage.setItem("userId", JSON.stringify(res.data.id));
             sessionStorage.setItem("loginStatus", 1);
             sessionStorage.setItem("type", JSON.stringify(res.data.type));
+            sessionStorage.setItem("token", JSON.stringify(res.data.token));
             // localStorage.setItem('user', JSON.stringify(data.data));
             console.log(sessionStorage.getItem("userId"));
             console.log(sessionStorage.getItem("loginStatus"));
+            console.log(res.data);
             // history.push("/");
 
             message.success("登录成功");
@@ -32,19 +34,18 @@ export const login = (data) => {
             }
         }
     };
-    postRequest(url, data, callback);
+    postRequest(url, data, callback, { errorCallback: () => {} });
 };
 
 export const logout = () => {
     const url = `/logoutReq`;
     const callback = (res) => {
-        if (res.data.status === true) {
+        if (res.data.status) {
             sessionStorage.removeItem("userId");
             sessionStorage.removeItem("loginStatus");
             sessionStorage.removeItem("type");
-
-            window.location.href = "/";
             message.success("成功登出");
+            window.location.href = "/";
         } else {
             message.error("登出失败");
         }
