@@ -63,7 +63,7 @@ export default class UrlManagePanel extends Component {
         console.log(this.state);
     };
     handleError = (error) => {
-        message.error(error);
+        console.log(error);
     };
 
     handleToggleBan = (item) => {

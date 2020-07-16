@@ -32,7 +32,7 @@ export default class PrivateRoute extends React.Component {
     };
 
     errorHandler = (error) => {
-        message.error(error);
+        console.log(error);
     };
     componentDidMount() {
         userService.checkSession(this.checkAuth, this.errorHandler);
