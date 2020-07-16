@@ -1,12 +1,14 @@
 import React from "react";
 import StatisticsBar from "../components/statistics/StatisticsBar";
-import { Layout } from "antd";
+import { Layout, Typography } from "antd";
 import MapBox from "../components/MapBox";
 import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
 import { getRequest } from "../Services/ajax";
+
 const { Sider, Content } = Layout;
+const { Text } = Typography;
 /**
 StatisticsView
 @author Zhuohao Shen
@@ -73,7 +75,11 @@ export default class StatisticsView extends React.Component {
                         <TrendingLines data={this.state.lineData} />
                     ) : null}
                     {this.state.display === "area" ? (
-                        <MapBox data={this.state.data[0].area_distr} />
+                        this.state.data === null ? (
+                            <MapBox data={this.state.data[0].area_distr}/>
+                        ) : (
+                            <Text>暂无数据</Text>
+                        )
                     ) : null}
                     {this.state.display === "overview" ? (
                         <OverView data={this.state.lineData} />

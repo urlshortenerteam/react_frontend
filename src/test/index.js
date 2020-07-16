@@ -527,8 +527,7 @@ apiRoutes.post("/loginReq", function (req, res) {
         })
     );
 
-    if (jsonResponse.data.loginStatus && jsonResponse.data.type !== 2)
-        loginMock = true;
+    if (jsonResponse.data.loginStatus) loginMock = true;
     setTimeout(() => {
         res.json(jsonResponse);
     }, random);
@@ -642,28 +641,6 @@ apiRoutes.post("/editUrl", function (req, res) {
     }, random);
 });
 
-apiRoutes.post("/editUrl", function (req, res) {
-    console.log(req);
-    let jsonResponse = {
-        status: 200,
-        msg: "查询成功",
-    };
-    Object.assign(
-        jsonResponse,
-        Mock.mock({
-            "data|1": [
-                {
-                    "status|1": true,
-                },
-            ],
-        })
-    );
-
-    setTimeout(() => {
-        res.json(jsonResponse);
-    }, random);
-});
-
 apiRoutes.get("/getUserStat", function (req, res) {
     console.log(req);
     let jsonResponse = {
@@ -681,23 +658,6 @@ apiRoutes.get("/getUserStat", function (req, res) {
                     "visit_count|1-1000": 1000,
                 },
             ],
-        })
-    );
-
-    setTimeout(() => {
-        res.json(jsonResponse);
-    }, random);
-});
-apiRoutes.get("/checkSession", function (req, res) {
-    console.log(req);
-    let jsonResponse = {
-        msg: "查询成功",
-    };
-
-    Object.assign(
-        jsonResponse,
-        Mock.mock({
-            "status|1": [403, 404, 506, 200],
         })
     );
 
@@ -778,9 +738,29 @@ apiRoutes.get("/getAllUrls", function (req, res) {
                     ],
                     count: "@natural(0,100000)",
                     name: /[a-z][A-Z][0-9]/,
-                    create_time: '@date("yyyy-MM-dd")',
+                    create_time: "@date(\"yyyy-MM-dd\")"
                 },
             ],
+        })
+    );
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getNumberCount", function(req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1": [
+                {
+                    userCount: "@natural(0,100000)",
+                    shortUrlCount: "@natural(0,100000)",
+                    visitCountTotal: "@natural(0,100000)",
+                    shortUrl: /[a-zA-Z0-9]{6}/
+                }
+            ]
         })
     );
     setTimeout(() => {

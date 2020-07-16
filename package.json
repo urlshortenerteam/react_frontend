@@ -9,6 +9,7 @@
     "@antv/l7": "^2.2.20",
     "@antv/l7-district": "^2.2.20",
     "@antv/l7-maps": "^2.2.20",
+    "@rckeller/cypress-unfetch": "^1.0.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -52,6 +53,7 @@
   "devDependencies": {
     "cors": "^2.8.5",
     "eslint-config-prettier": "6.11.0",
+    "history": "^5.0.0",
     "prettier": "2.0.5",
     "react-router-dom": "^5.2.0"
   }

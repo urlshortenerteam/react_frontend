@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import {
-    Col,
-    Input,
-    List,
-    message,
-    Modal,
-    Row,
-    Select,
-    Skeleton,
-    Statistic,
-} from "antd";
+import { Col, Input, List, message, Modal, Row, Select, Skeleton, Statistic } from "antd";
 import {
     CloseOutlined,
     CoffeeOutlined,
@@ -17,7 +7,7 @@ import {
     EyeOutlined,
     LinkOutlined,
     StarOutlined,
-    StopOutlined,
+    StopOutlined
 } from "@ant-design/icons";
 import { getRequest, hostUrl } from "../../Services/ajax";
 import SnapShot from "./SnapShot";
@@ -316,10 +306,18 @@ export default class UrlManagePanel extends Component {
             url: editShort,
             newLong: prefix + editValue,
             callback: () => {
+                let { listData } = this.state;
                 this.setState({
                     editing: false,
-                    confirmLoading: false,
+                    confirmLoading: false
                 });
+                message.success("编辑成功");
+                let index = listData.findIndex(
+                    (item) => item.shortUrl === editShort
+                );
+                listData[index].longUrl[0].url = prefix + editValue;
+                console.log(listData[index]);
+                this.setState({ listData: listData });
             },
             errorCallback: this.handleError,
         });

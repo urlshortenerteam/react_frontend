@@ -5,7 +5,7 @@ import {
     AppstoreOutlined,
     AreaChartOutlined,
     BankOutlined,
-    PicLeftOutlined,
+    PicLeftOutlined
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
 import { logout } from "../Services/userService";
@@ -78,7 +78,7 @@ export default class Navigation extends React.Component {
                                         登出
                                     </Button>
                                 ) : (
-                                    <Button key="3" ghost href="#/login">
+                                    <Button key="3" ghost href="/login">
                                         登录
                                     </Button>
                                 )}
