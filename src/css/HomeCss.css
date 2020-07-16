@@ -61,7 +61,7 @@ body {
 .select-before {
     width: 90px;
 }
-[data-theme='compact'] .select-before {
+[data-theme="compact"] .select-before {
     width: 71px;
 }
 

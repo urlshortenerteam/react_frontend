@@ -1,5 +1,15 @@
 import React, { Component } from "react";
-import { List, Skeleton, Row, Col, Statistic, message, Modal, Input, Select } from "antd";
+import {
+    List,
+    Skeleton,
+    Row,
+    Col,
+    Statistic,
+    message,
+    Modal,
+    Input,
+    Select,
+} from "antd";
 import {
     CloseOutlined,
     StarOutlined,
@@ -7,7 +17,7 @@ import {
     EyeOutlined,
     CoffeeOutlined,
     StopOutlined,
-    LinkOutlined
+    LinkOutlined,
 } from "@ant-design/icons";
 import { getRequest } from "../../Services/ajax";
 import SnapShot from "./SnapShot";
@@ -26,12 +36,12 @@ const IconText = ({ icon, text, action }) => (
 export default class UrlManagePanel extends Component {
     state = {
         loading: true,
-        editing:false,
-        editValue:"",
-        prefix:"http://",
-        editShort:"",
+        editing: false,
+        editValue: "",
+        prefix: "http://",
+        editShort: "",
         listData: [],
-        confirmLoading:false,
+        confirmLoading: false,
     };
 
     async componentDidMount() {
@@ -57,75 +67,83 @@ export default class UrlManagePanel extends Component {
         message.error(error);
     };
 
-    handleToggleBan=(item)=>{
+    handleToggleBan = (item) => {
         Modal.confirm({
-            content:"确定禁用这条链接吗？",
-            okText:"确认",
-            cancelText:"取消",
-            onOk:()=> {
-                this.setState({editShort:item.shortUrl})
+            content: "确定禁用这条链接吗？",
+            okText: "确认",
+            cancelText: "取消",
+            onOk: () => {
+                this.setState({ editShort: item.shortUrl });
                 BanUrl({
                     url: item.shortUrl,
                     callback: this.handleBan,
-                    errorCallback: this.handleError
+                    errorCallback: this.handleError,
                 });
-            }
-        })
-    }
-    handleToggleLift=(item)=>{
+            },
+        });
+    };
+    handleToggleLift = (item) => {
         Modal.confirm({
-            content:"确定解禁这条链接吗？",
-            okText:"确认",
-            cancelText:"取消",
-            onOk:()=> {
-                this.setState({editShort:item.shortUrl})
+            content: "确定解禁这条链接吗？",
+            okText: "确认",
+            cancelText: "取消",
+            onOk: () => {
+                this.setState({ editShort: item.shortUrl });
                 LiftUrl({
                     url: item.shortUrl,
                     callback: this.handleLift,
-                    errorCallback: this.handleError
+                    errorCallback: this.handleError,
                 });
-            }
-        })
-    }
+            },
+        });
+    };
     handleBan = (response) => {
         console.log(response.data);
-        const {editShort,listData} = this.state;
+        const { editShort, listData } = this.state;
         if (response.data.status === true) {
             message.success("禁用成功");
-            let index=listData.findIndex((item)=>item.shortUrl===editShort)
-            listData[index].longUrl[0].url="BANNED"
-            this.setState({listData: listData})
-        }
-        else message.error("禁用失败，状态码" + response.status);
+            let index = listData.findIndex(
+                (item) => item.shortUrl === editShort
+            );
+            listData[index].longUrl[0].url = "BANNED";
+            this.setState({ listData: listData });
+        } else message.error("禁用失败，状态码" + response.status);
     };
     handleLift = (response) => {
         console.log(response.data);
-        const {editShort,listData} = this.state;
+        const { editShort, listData } = this.state;
         if (response.data.status === true) {
             message.success("解禁成功");
-            let index=listData.findIndex((item)=>{return item.shortUrl===editShort})
-            GetUrl({url:editShort,callback:res=> {
+            let index = listData.findIndex((item) => {
+                return item.shortUrl === editShort;
+            });
+            GetUrl({
+                url: editShort,
+                callback: (res) => {
                     listData[index].longUrl = res.data.longUrl;
-                    this.setState({listData: listData})
-                }
-                ,errorCallback:this.handleError })
-        }
-        else message.error("解禁失败，状态码" + response.status);
+                    this.setState({ listData: listData });
+                },
+                errorCallback: this.handleError,
+            });
+        } else message.error("解禁失败，状态码" + response.status);
     };
 
     handleEdit = (item) => {
-        if(item.longUrl.length!==1)
-        message.warning("修改链接" + item.shortUrl + "的功能尚未开放");
+        if (item.longUrl.length !== 1)
+            message.warning("修改链接" + item.shortUrl + "的功能尚未开放");
         else {
-           this.setState({editing:true,editShort:item.shortUrl});
+            this.setState({ editing: true, editShort: item.shortUrl });
         }
     };
     render() {
         const { loading, listData, editing, confirmLoading } = this.state;
         const selectBefore = (
-            <Select defaultValue="http://"
-                    className="select-before"
-                    onChange={value=>{this.setState({prefix:value})}}
+            <Select
+                defaultValue="http://"
+                className="select-before"
+                onChange={(value) => {
+                    this.setState({ prefix: value });
+                }}
             >
                 <Option value="http://">http://</Option>
                 <Option value="https://">https://</Option>
@@ -139,25 +157,30 @@ export default class UrlManagePanel extends Component {
                     dataSource={listData}
                     renderItem={(item) => {
                         let longList = [];
-                        if(item.longUrl[0].url!=="BANNED")
-                        item.longUrl.forEach((long, index) => {
+                        if (item.longUrl[0].url !== "BANNED")
+                            item.longUrl.forEach((long, index) => {
+                                longList.push(
+                                    <Row key={index} align="middle">
+                                        <span
+                                            style={{
+                                                padding: "7px",
+                                                color: "#cccccc",
+                                            }}
+                                        >
+                                            {long.url}
+                                        </span>
+                                        <SnapShot value={long.url} />
+                                    </Row>
+                                );
+                            });
+                        else
                             longList.push(
-                                <Row key={index} align="middle">
-                                    <span
-                                        style={{
-                                            padding: "7px",
-                                            color: "#cccccc",
-                                        }}
-                                    >
-                                        {long.url}
-                                    </span>
-                                    <SnapShot value={long.url} />
-                                </Row>
+                                <IconText
+                                    key="banned"
+                                    icon={StopOutlined}
+                                    text={"该链接已被禁用"}
+                                />
                             );
-                        });
-                        else longList.push(
-                            <IconText key="banned" icon={StopOutlined} text={"该链接已被禁用"}/>
-                        )
                         return (
                             <List.Item
                                 key={item.shortUrl}
@@ -165,10 +188,22 @@ export default class UrlManagePanel extends Component {
                                     !loading && [
                                         <IconText
                                             icon={CloseOutlined}
-                                            text={item.longUrl[0].url==="BANNED"?"解禁":"禁用"}
+                                            text={
+                                                item.longUrl[0].url === "BANNED"
+                                                    ? "解禁"
+                                                    : "禁用"
+                                            }
                                             key="list-vertical-star-o"
-                                            action={item.longUrl[0].url==="BANNED"?()=>this.handleToggleLift(item):() =>
-                                                this.handleToggleBan(item)
+                                            action={
+                                                item.longUrl[0].url === "BANNED"
+                                                    ? () =>
+                                                          this.handleToggleLift(
+                                                              item
+                                                          )
+                                                    : () =>
+                                                          this.handleToggleBan(
+                                                              item
+                                                          )
                                             }
                                         />,
                                         <IconText
@@ -180,9 +215,7 @@ export default class UrlManagePanel extends Component {
                                             icon={EditOutlined}
                                             text="编辑"
                                             key="list-vertical-message"
-                                            action={
-                                                ()=>this.handleEdit(item)
-                                            }
+                                            action={() => this.handleEdit(item)}
                                         />,
                                     ]
                                 }
@@ -252,11 +285,14 @@ export default class UrlManagePanel extends Component {
                     confirmLoading={confirmLoading}
                     onCancel={this.handleCancel}
                 >
-                    <Input addonBefore={selectBefore}
-                           placeholder="请输入新Url"
-                           prefix={<LinkOutlined />}
-                           onChange={event => {this.setState({editValue:event.target.value})}}
-                           allowClear
+                    <Input
+                        addonBefore={selectBefore}
+                        placeholder="请输入新Url"
+                        prefix={<LinkOutlined />}
+                        onChange={(event) => {
+                            this.setState({ editValue: event.target.value });
+                        }}
+                        allowClear
                     />
                 </Modal>
             </>
@@ -266,22 +302,22 @@ export default class UrlManagePanel extends Component {
         this.setState({
             confirmLoading: true,
         });
-        const {prefix,editValue,editShort}=this.state;
+        const { prefix, editValue, editShort } = this.state;
         EditUrl({
-            url:editShort,
-            newLong:prefix+editValue,
-            callback:() => {
+            url: editShort,
+            newLong: prefix + editValue,
+            callback: () => {
                 this.setState({
                     editing: false,
                     confirmLoading: false,
                 });
             },
-            errorCallback:this.handleError
-        })
+            errorCallback: this.handleError,
+        });
     };
 
     handleCancel = () => {
-        console.log('Clicked cancel button');
+        console.log("Clicked cancel button");
         this.setState({
             editing: false,
         });
