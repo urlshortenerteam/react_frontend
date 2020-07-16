@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-    Button,
-    List,
-    message,
-    Popconfirm,
-    Row,
-    Table,
-    Tag,
-} from "antd";
+import { Button, List, message, Popconfirm, Row, Table, Tag } from "antd";
 import { getAllUrls } from "../../Services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
 import { StopOutlined } from "@ant-design/icons";
