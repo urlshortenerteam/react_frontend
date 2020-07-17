@@ -150,21 +150,23 @@ RegisterView
 class RegisterView extends Component {
     render() {
         return (
-            <Content style={{ display: "flex", height: "100%" }}>
-                <div className="registerBlock">
-                    <div className="registerTitle">
-                        <span>注册</span>
+            <Content>
+                <Row justify="center">
+                    <div className="registerBlock">
+                        <div className="registerTitle">
+                            <span>注册</span>
+                        </div>
+                        <Row>
+                            <Col span={14} offset={4}>
+                                <br />
+                                <br />
+                                <div className="register">
+                                    <RegistrationForm />
+                                </div>
+                            </Col>
+                        </Row>
                     </div>
-                    <Row>
-                        <Col span={14} offset={4}>
-                            <br />
-                            <br />
-                            <div className="register">
-                                <RegistrationForm />
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
+                </Row>
             </Content>
         );
     }
