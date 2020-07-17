@@ -672,7 +672,7 @@ apiRoutes.get("/checkSession", function (req, res) {
     Object.assign(
         jsonResponse,
         Mock.mock({
-            "status|1": [403, 404, 506, 200],
+            "status|1": [404, 200],
         })
     );
 

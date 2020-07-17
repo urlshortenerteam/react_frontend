@@ -61,7 +61,7 @@ export default class NumberCount extends Component {
                         <Card hoverable={true}>
                             <div style={{ margin: 10 }}>
                                 <Statistic
-                                    title="总访问量"
+                                    title="最高访问量"
                                     value={9.3}
                                     precision={2}
                                     valueStyle={{ color: "#cf1322" }}

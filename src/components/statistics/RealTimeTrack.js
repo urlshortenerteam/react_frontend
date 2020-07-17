@@ -70,6 +70,7 @@ export default class RealTimeTrack extends React.Component {
                 rowKey={(record) => {
                     return record.time + record.ip.toString();
                 }}
+                style={{ marginTop: 30 }}
             />
         );
     }
