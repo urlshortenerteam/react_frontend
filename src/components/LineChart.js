@@ -62,6 +62,7 @@ export default class LineChart extends React.Component {
                 },
                 legend: {
                     position: "top-left",
+                    offsetX: 10,
                     style: { fill: "white" },
                 },
                 seriesField: "url",

@@ -235,7 +235,14 @@ export default class UrlManagePanel extends Component {
                                                     valueStyle={{
                                                         color: "#cccccc",
                                                     }}
-                                                    prefix={<EyeOutlined />}
+                                                    prefix={
+                                                        <EyeOutlined
+                                                            style={{
+                                                                marginLeft:
+                                                                    "auto",
+                                                            }}
+                                                        />
+                                                    }
                                                     suffix="k"
                                                 />
                                             </Col>

@@ -1,12 +1,12 @@
 import React from "react";
 import StatisticsBar from "../components/statistics/StatisticsBar";
-import { Col, Row } from "antd";
+import { Layout } from "antd";
 import MapBox from "../components/MapBox";
 import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
 import { getRequest } from "../Services/ajax";
-
+const { Sider, Content } = Layout;
 /**
 StatisticsView
 @author Zhuohao Shen
@@ -18,6 +18,7 @@ export default class StatisticsView extends React.Component {
         display: "overview",
         data: [],
         lineData: [],
+        collapsed: false,
     };
     toggleSwitch = ({ key }) => {
         this.setState({ display: key });
@@ -48,18 +49,24 @@ export default class StatisticsView extends React.Component {
 
     render() {
         return (
-            <Row justify="space-between">
-                <Col style={{ background: "black", maxWidth: "20%" }}>
+            <Layout justify="space-between">
+                <Sider
+                    style={{ background: "black", maxWidth: "20%" }}
+                    collapsible
+                    collapsed={this.state.collapsed}
+                    onCollapse={(collapsed) => {
+                        this.setState({ collapsed });
+                    }}
+                >
                     <StatisticsBar toggleSwitch={this.toggleSwitch} />
-                </Col>
-                <Col
-                    flex={20}
+                </Sider>
+                <Content
+                    flex="auto"
                     style={{
-                        height: 800,
                         marginLeft: 30,
-                        marginRight: 32,
+                        marginRight: 30,
                         float: "right",
-                        maxWidth: "85%",
+                        background: "black",
                     }}
                 >
                     {this.state.display === "time" ? (
@@ -71,8 +78,8 @@ export default class StatisticsView extends React.Component {
                     {this.state.display === "overview" ? (
                         <OverView data={this.state.lineData} />
                     ) : null}
-                </Col>
-            </Row>
+                </Content>
+            </Layout>
         );
     }
 }
