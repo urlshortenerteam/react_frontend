@@ -23,24 +23,15 @@ class AdminUrlManage extends Component {
             subTabData: [],
             search: 0,
             editShort: null,
-            visitRankData: [],
-            urlCount: 0,
-        };
-    }
-    compare(property) {
-        return function (a, b) {
-            let value1 = a[property];
-            let value2 = b[property];
-            return value2 - value1;
         };
     }
 
     componentDidMount() {
         const callback = (res) => {
-            let data = res.data;
+            console.log(res.data);
             this.setState({
-                dataSource: data,
-                rawData: data,
+                dataSource: res.data,
+                rawData: res.data,
             });
         };
         getAllUrls(callback, (error) => {
