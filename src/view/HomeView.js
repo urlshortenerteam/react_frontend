@@ -29,17 +29,17 @@ class HomeView extends Component {
                 </h1>
                 <img
                     className="leftDesc"
-                    src={hostUrl + "/flow.png"}
+                    src={hostUrl + "/static/flow.png"}
                     alt={""}
                 />
                 <img
                     className="rightBottomDesc"
-                    src={hostUrl + "/people.png"}
+                    src={hostUrl + "/static/people.png"}
                     alt={""}
                 />
                 <img
                     className="rightTopDesc"
-                    src={hostUrl + "/trans.png"}
+                    src={hostUrl + "/static/trans.png"}
                     alt={""}
                 />
             </Content>
