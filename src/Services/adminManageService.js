@@ -37,3 +37,10 @@ export const getAllUrls = (callBack, errorHandler) => {
         errorCallback: errorHandler,
     });
 };
+
+export const getNumberCount = (callBack, errorHandler) => {
+    getRequest("/getNumberCount", callBack, {
+        params: {},
+        errorCallback: errorHandler,
+    });
+};

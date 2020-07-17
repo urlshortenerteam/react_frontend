@@ -1,14 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {
-    Button,
-    Col,
-    Form,
-    Input,
-    message,
-    Row,
-    Table,
-    Tooltip,
-} from "antd";
+import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
 import { getBatchManyToOne } from "../../Services/CreateService";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
@@ -118,11 +109,11 @@ const EditableCell = ({
 };
 
 /**
-* ManyToOneTable
-* @author Shuchang Liu
-* @date July 10th 2020
-* @description ManyToOneTable used in CreateView.js
-**/
+ * ManyToOneTable
+ * @author Shuchang Liu
+ * @date July 10th 2020
+ * @description ManyToOneTable used in CreateView.js
+ **/
 export default class ManyToOneTable extends React.Component {
     constructor(props) {
         super(props);

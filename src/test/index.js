@@ -736,4 +736,24 @@ apiRoutes.get("/getAllUrls", function (req, res) {
         res.json(jsonResponse);
     }, random);
 });
+
+apiRoutes.get("/getNumberCount", function (req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            "data|1": [
+                {
+                    userCount: "@natural(0,100000)",
+                    shortUrlCount: "@natural(0,100000)",
+                    visitCountTotal: "@natural(0,100000)",
+                    shortUrl: /[a-zA-Z0-9]{6}/,
+                },
+            ],
+        })
+    );
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
 module.exports = apiRoutes;
