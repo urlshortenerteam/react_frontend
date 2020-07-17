@@ -3,7 +3,6 @@ import "../../css/AdminStatisticsCss.css";
 import NumberCount from "./NumberCount";
 import VisitRankingList from "./VisitRankingList";
 
-
 /**
  * simpleStatic
  * @author Shuchang Liu
