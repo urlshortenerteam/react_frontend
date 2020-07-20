@@ -1,30 +1,22 @@
 import * as React from "react";
-import { Button, Menu } from "antd";
+import { Menu } from "antd";
 import {
     AppstoreOutlined,
     HeatMapOutlined,
     LineChartOutlined,
     MailOutlined,
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
     PieChartOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
-/*
+/**
 StatisticsBar
 @author Zhuohao Shen
 @date July 8th 2020
-@params toggleSwitch - function({key}) handle switch function
+@param toggleSwitch - function({key}) handle switch function
 @description Navigation bar for statistic page
 */
 export default class StatisticsBar extends React.Component {
-    state = {
-        collapsed: false,
-    };
-    toggleCollapsed = () => {
-        this.setState({ collapsed: !this.state.collapsed });
-    };
     toggleSwitch = ({ key }) => {
         this.props.toggleSwitch({ key: key });
     };
@@ -32,24 +24,12 @@ export default class StatisticsBar extends React.Component {
     render() {
         return (
             <div style={{ maxWidth: 256, margin: "auto" }}>
-                <Button
-                    type="primary"
-                    onClick={this.toggleCollapsed}
-                    style={{ marginBottom: 16 }}
-                >
-                    {React.createElement(
-                        this.state.collapsed
-                            ? MenuUnfoldOutlined
-                            : MenuFoldOutlined
-                    )}
-                </Button>
                 <Menu
                     onClick={this.toggleSwitch}
                     defaultSelectedKeys={["overview"]}
                     defaultOpenKeys={["source"]}
                     mode="inline"
                     theme="dark"
-                    inlineCollapsed={this.state.collapsed}
                 >
                     <Menu.Item key="overview" icon={<PieChartOutlined />}>
                         概览

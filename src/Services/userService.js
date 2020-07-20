@@ -1,5 +1,6 @@
-import { postRequest, getRequest } from "./ajax";
+import { getRequest, postRequest } from "./ajax";
 import { message } from "antd";
+
 /**
  * register
  * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>

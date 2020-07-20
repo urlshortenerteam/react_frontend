@@ -3,8 +3,7 @@ import { Collapse } from "antd";
 import LineChart from "../LineChart";
 
 const { Panel } = Collapse;
-/*
-TrendingLines
+/**TrendingLines
 @author Zhuohao Shen
 @date July 8th 2020
 @description Show all the trending of the user

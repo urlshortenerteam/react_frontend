@@ -235,7 +235,14 @@ export default class UrlManagePanel extends Component {
                                                     valueStyle={{
                                                         color: "#cccccc",
                                                     }}
-                                                    prefix={<EyeOutlined />}
+                                                    prefix={
+                                                        <EyeOutlined
+                                                            style={{
+                                                                marginLeft:
+                                                                    "auto",
+                                                            }}
+                                                        />
+                                                    }
                                                     suffix="k"
                                                 />
                                             </Col>
@@ -309,10 +316,18 @@ export default class UrlManagePanel extends Component {
             url: editShort,
             newLong: prefix + editValue,
             callback: () => {
+                let { listData } = this.state;
                 this.setState({
                     editing: false,
                     confirmLoading: false,
                 });
+                message.success("编辑成功");
+                let index = listData.findIndex(
+                    (item) => item.shortUrl === editShort
+                );
+                listData[index].longUrl[0].url = prefix + editValue;
+                console.log(listData[index]);
+                this.setState({ listData: listData });
             },
             errorCallback: this.handleError,
         });

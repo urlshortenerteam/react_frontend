@@ -3,7 +3,7 @@ import { Button, Col, Input, message, Row } from "antd";
 
 const { Search } = Input;
 
-/*
+/**
 SearchBar
 @author Shuchang Liu
 @date July 6th 2020

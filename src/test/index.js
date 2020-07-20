@@ -527,8 +527,7 @@ apiRoutes.post("/loginReq", function (req, res) {
         })
     );
 
-    if (jsonResponse.data.loginStatus && jsonResponse.data.type !== 2)
-        loginMock = true;
+    if (jsonResponse.data.loginStatus) loginMock = true;
     setTimeout(() => {
         res.json(jsonResponse);
     }, random);
