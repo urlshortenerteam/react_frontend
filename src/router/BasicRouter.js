@@ -19,29 +19,29 @@ const BasicRouter = () => (
             <Header>
                 <Row>
                     <Col span={20} offset={2}>
-                        <Navigation/>
+                        <Navigation />
                     </Col>
                 </Row>
             </Header>
             <Switch>
-                <Route exact path="/" component={HomeView}/>
-                <Route exact path="/login" component={LoginView}/>
-                <PrivateRoute exact path="/create" component={CreateView}/>
+                <Route exact path="/" component={HomeView} />
+                <Route exact path="/login" component={LoginView} />
+                <PrivateRoute exact path="/create" component={CreateView} />
                 <PrivateRoute
                     exact
                     path="/statistics"
                     component={StatisticsView}
                 />
-                <Route exact path="/manage" component={ManageView}/>
-                <Route exact path="/register" component={RegisterView}/>
-                <Route exact path="/adminManage" component={AdminManageView}/>
+                <Route exact path="/manage" component={ManageView} />
+                <Route exact path="/register" component={RegisterView} />
+                <Route exact path="/adminManage" component={AdminManageView} />
             </Switch>
 
             <Footer
                 style={{
                     textAlign: "center",
                     backgroundColor: "#001529",
-                    color: "#d8e3e7"
+                    color: "#d8e3e7",
                 }}
             >
                 Reevoo ShortLink ©2020 Created by Reevoo Team
