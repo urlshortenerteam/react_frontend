@@ -309,7 +309,7 @@ export default class UrlManagePanel extends Component {
                 let { listData } = this.state;
                 this.setState({
                     editing: false,
-                    confirmLoading: false
+                    confirmLoading: false,
                 });
                 message.success("编辑成功");
                 let index = listData.findIndex(

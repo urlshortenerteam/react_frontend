@@ -732,13 +732,13 @@ apiRoutes.get("/getAllUrls", function (req, res) {
                             "url|1": [
                                 "https://www.baidu.com",
                                 "https://www.taobao.com",
-                                "https://mockjs.com/examples.html"
-                            ]
-                        }
+                                "https://mockjs.com/examples.html",
+                            ],
+                        },
                     ],
                     count: "@natural(0,100000)",
                     name: /[a-z][A-Z][0-9]/,
-                    create_time: "@date(\"yyyy-MM-dd\")"
+                    create_time: '@date("yyyy-MM-dd")',
                 },
             ],
         })
@@ -748,7 +748,7 @@ apiRoutes.get("/getAllUrls", function (req, res) {
     }, random);
 });
 
-apiRoutes.get("/getNumberCount", function(req, res) {
+apiRoutes.get("/getNumberCount", function (req, res) {
     let jsonResponse = { status: 200, msg: "查询成功" };
     Object.assign(
         jsonResponse,
@@ -758,9 +758,9 @@ apiRoutes.get("/getNumberCount", function(req, res) {
                     userCount: "@natural(0,100000)",
                     shortUrlCount: "@natural(0,100000)",
                     visitCountTotal: "@natural(0,100000)",
-                    shortUrl: /[a-zA-Z0-9]{6}/
-                }
-            ]
+                    shortUrl: /[a-zA-Z0-9]{6}/,
+                },
+            ],
         })
     );
     setTimeout(() => {

@@ -76,7 +76,7 @@ export default class StatisticsView extends React.Component {
                     ) : null}
                     {this.state.display === "area" ? (
                         this.state.data === null ? (
-                            <MapBox data={this.state.data[0].area_distr}/>
+                            <MapBox data={this.state.data[0].area_distr} />
                         ) : (
                             <Text>暂无数据</Text>
                         )
