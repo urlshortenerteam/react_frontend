@@ -12,3 +12,5 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run build
+      - name: Cypress.io
+        uses: cypress-io/github-action@v1.16.1
