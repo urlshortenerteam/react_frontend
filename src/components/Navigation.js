@@ -5,7 +5,7 @@ import {
     AppstoreOutlined,
     AreaChartOutlined,
     BankOutlined,
-    PicLeftOutlined
+    PicLeftOutlined,
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
 import { logout } from "../Services/userService";

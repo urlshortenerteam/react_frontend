@@ -1,5 +1,15 @@
 import React, { Component } from "react";
-import { Col, Input, List, message, Modal, Row, Select, Skeleton, Statistic } from "antd";
+import {
+    Col,
+    Input,
+    List,
+    message,
+    Modal,
+    Row,
+    Select,
+    Skeleton,
+    Statistic,
+} from "antd";
 import {
     CloseOutlined,
     CoffeeOutlined,
@@ -7,7 +17,7 @@ import {
     EyeOutlined,
     LinkOutlined,
     StarOutlined,
-    StopOutlined
+    StopOutlined,
 } from "@ant-design/icons";
 import { getRequest, hostUrl } from "../../Services/ajax";
 import SnapShot from "./SnapShot";
