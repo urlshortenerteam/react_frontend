@@ -11,7 +11,7 @@ import "../css/NavigationCss.css";
 import { logout } from "../Services/userService";
 import { Link } from "react-router-dom";
 
-/*
+/**
 Navigation:
 @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
 @date July 7th 2020

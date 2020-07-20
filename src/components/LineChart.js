@@ -1,6 +1,6 @@
 import React from "react";
 import { Line } from "@ant-design/charts";
-/*
+/**
 LineChart:
 @author Zhuohao Shen <ao7777@sjtu.edu.cn>
 @date July 7th 2020

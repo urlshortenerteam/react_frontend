@@ -9,11 +9,11 @@ import {
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
-/*
+/**
 StatisticsBar
 @author Zhuohao Shen
 @date July 8th 2020
-@params toggleSwitch - function({key}) handle switch function
+@param toggleSwitch - function({key}) handle switch function
 @description Navigation bar for statistic page
 */
 export default class StatisticsBar extends React.Component {

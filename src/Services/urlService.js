@@ -32,7 +32,10 @@ let EditUrl = ({ url, newLong, callback, errorCallback }) => {
     console.log(url);
     postRequest("/editUrl", newLong, callback, {
         errorCallback: errorCallback,
-        params: { id: JSON.parse(sessionStorage.getItem("userId")), shortUrl: url },
+        params: {
+            id: JSON.parse(sessionStorage.getItem("userId")),
+            shortUrl: url,
+        },
     });
 };
 /**
@@ -48,7 +51,10 @@ let EditUrl = ({ url, newLong, callback, errorCallback }) => {
 let LiftUrl = ({ url, callback, errorCallback }) => {
     postRequest("/editUrl", "LIFT", callback, {
         errorCallback: errorCallback,
-        params: { id: JSON.parse(sessionStorage.getItem("userId")), shortUrl: url },
+        params: {
+            id: JSON.parse(sessionStorage.getItem("userId")),
+            shortUrl: url,
+        },
     });
 };
 /**
@@ -64,7 +70,10 @@ let LiftUrl = ({ url, callback, errorCallback }) => {
 let GetUrl = ({ url, callback, errorCallback }) => {
     getRequest("/getShortStat", callback, {
         errorCallback: errorCallback,
-        params: { id: JSON.parse(sessionStorage.getItem("userId")), shortUrl: url },
+        params: {
+            id: JSON.parse(sessionStorage.getItem("userId")),
+            shortUrl: url,
+        },
     });
 };
 
