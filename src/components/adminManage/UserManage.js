@@ -8,6 +8,12 @@ import {
 } from "@ant-design/icons";
 import { banUser, getAllUser } from "../../Services/adminManageService";
 
+/**
+ * UserTable
+ * @author Shuchang Liu
+ * @date July 16th 2020
+ * @description a table used for user management
+ **/
 class UserTable extends React.Component {
     constructor(props) {
         super(props);

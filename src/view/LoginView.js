@@ -107,7 +107,7 @@ class LogInBlock extends React.Component {
     }
 }
 
-/*
+/**
 LoginView
 @author Shuchang Liu
 @date July 8th 2020

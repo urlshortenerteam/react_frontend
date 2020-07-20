@@ -16,6 +16,12 @@ const IconText = ({ icon, text, action }) => (
     </span>
 );
 
+/**
+ * VisitRankingList
+ * @author Shuchang Liu
+ * @date July 16th 2020
+ * @description show the top ten urls
+ **/
 export default class VisitRankingList extends Component {
     state = {
         loading: true,

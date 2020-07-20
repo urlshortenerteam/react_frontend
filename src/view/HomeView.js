@@ -6,7 +6,7 @@ import { RightOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
-/*
+/**
 HomeView
 @author Shuchang Liu
 @date July 6th 2020

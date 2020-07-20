@@ -2,7 +2,7 @@
 const express = require("express");
 const Mock = require("mockjs");
 const apiRoutes = express.Router();
-
+let loginMock = false;
 let random = Math.random() * 500 + 500;
 // 访问 /getReal/ 时
 apiRoutes.get("/getReal", function (req, res) {
@@ -521,18 +521,20 @@ apiRoutes.post("/loginReq", function (req, res) {
                     "loginStatus|1-2": true,
                     "type|1": [1, 2, 0],
                     "id|1-100": 100,
+                    token: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
                 },
             ],
         })
     );
 
+    if (jsonResponse.data.loginStatus && jsonResponse.data.type !== 2)
+        loginMock = true;
     setTimeout(() => {
         res.json(jsonResponse);
     }, random);
 });
 
 apiRoutes.post("/logoutReq", function (req, res) {
-    console.log(req);
     let jsonResponse = {
         status: 200,
         msg: "查询成功",
@@ -542,12 +544,13 @@ apiRoutes.post("/logoutReq", function (req, res) {
         Mock.mock({
             "data|1": [
                 {
-                    "status|1-2": true,
+                    "status|1": true,
                 },
             ],
         })
     );
 
+    loginMock = false;
     setTimeout(() => {
         res.json(jsonResponse);
     }, random);
@@ -669,12 +672,21 @@ apiRoutes.get("/checkSession", function (req, res) {
         msg: "查询成功",
     };
 
-    Object.assign(
-        jsonResponse,
-        Mock.mock({
-            "status|1": [404, 200],
-        })
-    );
+    if (!loginMock) {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "status|1": [404, 500, 403],
+            })
+        );
+    } else {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                status: 200,
+            })
+        );
+    }
 
     setTimeout(() => {
         res.json(jsonResponse);

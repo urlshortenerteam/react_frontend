@@ -1,6 +1,13 @@
 import React from "react";
 import { Donut } from "@ant-design/charts";
 
+/**
+ * DonutPlot
+ * @author Shuchang Liu
+ * @date July 16th 2020
+ * @description DonutPlot
+ * @property data
+ **/
 class DonutPlot extends React.Component {
     render() {
         let data = this.props.data;
