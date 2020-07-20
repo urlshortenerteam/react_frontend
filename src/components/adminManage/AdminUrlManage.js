@@ -141,7 +141,7 @@ class AdminUrlManage extends Component {
                             <Tag color="#cb0000">
                                 <a
                                     style={{ color: "white" }}
-                                    href={item.longUrl[0].url}
+                                    href={record.longUrl[0].url}
                                 >
                                     {record.shortUrl}
                                 </a>
