@@ -159,8 +159,8 @@ class AdminUrlManage extends Component {
                     ) : null,
             },
             { title: "访问量", align: "center", dataIndex: "count" },
-            { title: "创建用户", align: "center", dataIndex: "name" },
-            { title: "创建日期", align: "center", dataIndex: "create_time" },
+            { title: "创建用户", align: "center", dataIndex: "creatorName" },
+            { title: "创建日期", align: "center", dataIndex: "createTime" },
             {
                 title: "禁用/启用",
                 align: "center",
