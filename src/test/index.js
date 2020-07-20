@@ -732,9 +732,9 @@ apiRoutes.get("/getAllUrls", function (req, res) {
                             "url|1": [
                                 "https://www.baidu.com",
                                 "https://www.taobao.com",
-                                "https://mockjs.com/examples.html",
-                            ],
-                        },
+                                "https://mockjs.com/examples.html"
+                            ]
+                        }
                     ],
                     count: "@natural(0,100000)",
                     name: /[a-z][A-Z][0-9]/,
