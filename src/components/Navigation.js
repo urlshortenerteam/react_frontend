@@ -33,10 +33,6 @@ export default class Navigation extends React.Component {
                     ghost
                     className="site-page-header"
                     title="Reevoo"
-                    avatar={{
-                        src:
-                            "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
-                    }}
                     subTitle={[
                         <Menu
                             onClick={this.handleClick}

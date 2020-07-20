@@ -49,3 +49,4 @@ yarn.lock
 .idea
 /.idea/
 package-lock.json
+/cypress/integration/examples
