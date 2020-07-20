@@ -13,7 +13,7 @@ import AdminUrlManage from "../components/adminManage/AdminUrlManage";
 const { TabPane } = Tabs;
 const { Content } = Layout;
 
-/*
+/**
 AdminManageView
 @author Shuchang Liu
 @date July 15th 2020

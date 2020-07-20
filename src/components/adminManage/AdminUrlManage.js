@@ -13,7 +13,12 @@ const IconText = ({ icon, text, action }) => (
         {text}
     </span>
 );
-
+/**
+ * AdminUrlManage
+ * @author Shuchang Liu
+ * @date July 16th 2020
+ * @description Admin Url Management
+ **/
 class AdminUrlManage extends Component {
     constructor(props) {
         super(props);

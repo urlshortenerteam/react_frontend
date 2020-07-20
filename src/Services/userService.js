@@ -1,11 +1,29 @@
 import { postRequest, getRequest } from "./ajax";
 import { message } from "antd";
-
-export const register = (data, callback) => {
+/**
+ * register
+ * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
+ * @date July 10th 2020
+ * @description register
+ * @param data - { name:String , password:String , email:String }
+ * @param callback - The callback for successful return
+ * @param errorHandler - The callback for errors
+ * */
+export const register = (data, callback, errorHandler) => {
     const url = `/register`;
-    postRequest(url, data, callback);
+    postRequest(url, data, callback, {
+        errorCallback: errorHandler,
+        params: {},
+    });
 };
 
+/**
+ * login
+ * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
+ * @date July 10th 2020
+ * @description login request to get the token , and set the sessionStorage
+ * @param data - { name: String , password: String }
+ * */
 export const login = (data) => {
     console.log(data);
     const url = "/loginReq";
@@ -17,9 +35,7 @@ export const login = (data) => {
             sessionStorage.setItem("type", JSON.stringify(res.data.type));
             sessionStorage.setItem("token", JSON.stringify(res.data.token));
             // localStorage.setItem('user', JSON.stringify(data.data));
-            console.log(sessionStorage.getItem("userId"));
-            console.log(sessionStorage.getItem("loginStatus"));
-            // history.push("/");
+            console.log(res.data);
 
             message.success("登录成功");
             window.location.href = "/";
@@ -38,6 +54,12 @@ export const login = (data) => {
     });
 };
 
+/**
+ * logout
+ * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
+ * @date July 10th 2020
+ * @description logout , and remove the sessionStorage
+ * */
 export const logout = () => {
     sessionStorage.removeItem("userId");
     sessionStorage.removeItem("loginStatus");
@@ -45,8 +67,17 @@ export const logout = () => {
     sessionStorage.removeItem("token");
     message.success("成功登出");
     window.location.href = "/";
+
+    //used for mock
+    postRequest("/logoutReq", {}, {}, { errorCallback: {}, params: {} });
 };
 
+/**
+ * checkSession
+ * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
+ * @date July 10th 2020
+ * @description checkSession when checkout
+ * */
 export const checkSession = (callback, errorCallback) => {
     const url = `/checkSession`;
     getRequest(url, callback, {

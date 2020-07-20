@@ -13,7 +13,7 @@ import { getNumberCount } from "../../Services/adminManageService";
  * NumberCount
  * @author Shuchang Liu
  * @date July 16th 2020
- * @description NumberCountc used in adminManageService
+ * @description NumberCount used in adminManageService
  **/
 export default class NumberCount extends Component {
     constructor(props) {

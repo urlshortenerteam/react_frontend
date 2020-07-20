@@ -7,7 +7,7 @@ import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
 import { getRequest } from "../Services/ajax";
 
-/*
+/**
 StatisticsView
 @author Zhuohao Shen
 @date July 7th 2020

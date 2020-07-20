@@ -141,7 +141,7 @@ const RegistrationForm = () => {
     );
 };
 
-/*
+/**
 RegisterView
 @author Shuchang Liu
 @date July 8th 2020

@@ -9,7 +9,7 @@ import OneToOneTable from "../components/create/OneToOneTable";
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
-/*
+/**
 CreateView
 @author Shuchang Liu
 @date July 7th 2020
