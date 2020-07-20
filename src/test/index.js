@@ -527,7 +527,8 @@ apiRoutes.post("/loginReq", function (req, res) {
         })
     );
 
-    if (jsonResponse.data.loginStatus) loginMock = true;
+    if (jsonResponse.data.loginStatus)
+        loginMock = true;
     setTimeout(() => {
         res.json(jsonResponse);
     }, random);
@@ -737,8 +738,8 @@ apiRoutes.get("/getAllUrls", function (req, res) {
                         },
                     ],
                     count: "@natural(0,100000)",
-                    name: /[a-z][A-Z][0-9]/,
-                    create_time: '@date("yyyy-MM-dd")',
+                    creatorName: /[a-z][A-Z][0-9]/,
+                    createTime: '@date("yyyy-MM-dd")',
                 },
             ],
         })
