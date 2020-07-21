@@ -33,6 +33,10 @@ class AdminUrlManage extends Component {
 
     componentDidMount() {
         const callback = (res) => {
+            if (res.not_administrator) {
+                message.error("您不是管理员");
+                return;
+            }
             console.log(res.data);
             this.setState({
                 dataSource: res.data,

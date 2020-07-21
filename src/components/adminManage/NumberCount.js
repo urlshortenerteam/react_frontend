@@ -1,4 +1,4 @@
-import { Card, Col, Row, Statistic, Empty } from "antd";
+import { Card, Col, Row, Statistic, Empty, message } from "antd";
 import {
     SmileOutlined,
     TeamOutlined,
@@ -27,6 +27,10 @@ export default class NumberCount extends Component {
     }
     componentDidMount() {
         const callback = (res) => {
+            if (res.not_administrator) {
+                message.error("您不是管理员！！！");
+                return;
+            }
             let data = res.data;
             this.setState({
                 userCount: data.userCount,

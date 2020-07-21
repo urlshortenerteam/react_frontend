@@ -85,6 +85,7 @@ const EditableCell = ({
             >
                 {/*<Input ref={inputRef} onPressEnter={save} onBlur={save} />*/}
                 <Search
+                    name="urlInput"
                     ref={inputRef}
                     onPressEnter={save}
                     onBlur={save}
