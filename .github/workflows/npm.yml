@@ -41,6 +41,7 @@ jobs:
           CI: 1
         run: |
           npm i
+          npm run build
           npx cypress verify
           npx cypress info
 

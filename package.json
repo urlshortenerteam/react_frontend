@@ -25,7 +25,7 @@
     "react-router": "^5.2.0",
     "react-scripts": "3.4.1",
     "typescript": "^3.9.7",
-    "serve": "11.3.0"
+    "serve": "11.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,7 +34,7 @@
     "eject": "react-scripts eject",
     "lint": "prettier --check src",
     "prettier": "prettier --write src",
-    "start:ci": "serve --no-clipboard --listen ${PORT:-3000}",
+    "start:ci": "serve --no-clipboard --listen ${PORT:-3000} build",
     "e2e:record": "cypress run --record",
     "test:ci:record": "run-p --race start:ci e2e:record",
     "cypress": "cypress open"
