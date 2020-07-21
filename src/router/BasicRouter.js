@@ -34,7 +34,11 @@ const BasicRouter = () => (
                 />
                 <Route exact path="/manage" component={ManageView} />
                 <Route exact path="/register" component={RegisterView} />
-                <Route exact path="/adminManage" component={AdminManageView} />
+                <PrivateRoute
+                    exact
+                    path="/adminManage"
+                    component={AdminManageView}
+                />
             </Switch>
 
             <Footer
