@@ -3,7 +3,7 @@ const express = require("express");
 const Mock = require("mockjs");
 const apiRoutes = express.Router();
 let loginMock = false;
-let not_admin = true;
+let not_admin = false;
 let random = Math.random() * 500 + 500;
 // 访问 /getReal/ 时
 apiRoutes.get("/getReal", function (req, res) {
