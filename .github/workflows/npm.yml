@@ -2,7 +2,7 @@ name: CI
 on: [push, pull_request]
 jobs:
   build:
-    name: Test
+    name: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,6 +12,19 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run build
+  test:
+    name: e2e test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Print env variables
+        run: |
+          npm i -g @bahmutov/print-env
+          print-env GITHUB
       - name: Cache node modules
         uses: actions/cache@v1
         with:
@@ -29,12 +42,8 @@ jobs:
       - name: Cypress tests
         run: npm run test:ci:record
         env:
-          # place your secret record key at
-          # https://github.com/cypress-io/cypress-example-kitchensink/settings/secrets
           CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
           TERM: xterm
-      # Save videos and screenshots as test artifacts
-      # https://github.com/actions/upload-artifact
       - uses: actions/upload-artifact@master
         with:
           name: screenshots
