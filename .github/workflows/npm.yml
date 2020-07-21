@@ -12,7 +12,39 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run build
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+      - name: Cache node modules
+        uses: actions/cache@v1
         with:
-          start: npm start
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Cache Cypress binary
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-
+      - name: Cypress tests
+        run: npm run test:ci:record
+        env:
+          # place your secret record key at
+          # https://github.com/cypress-io/cypress-example-kitchensink/settings/secrets
+          CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
+          TERM: xterm
+      # Save videos and screenshots as test artifacts
+      # https://github.com/actions/upload-artifact
+      - uses: actions/upload-artifact@master
+        with:
+          name: screenshots
+          path: cypress/screenshots
+          # there might be no screenshots created when:
+          # - there are no test failures
+          # so only upload screenshots if previous step has failed
+          if: failure()
+      # video should always be generated
+      - uses: actions/upload-artifact@master
+        with:
+          name: videos
+          path: cypress/videos
