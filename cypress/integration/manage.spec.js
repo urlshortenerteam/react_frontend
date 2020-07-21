@@ -15,11 +15,12 @@ describe("Manage", () => {
             .click()
             .get(".ant-message-custom-content > :nth-child(2)")
             .contains("禁用成功")
-            .wait(500)
+            .wait(2000)
             .get(":nth-child(1) > .ant-list-item-main > .ant-list-item-action > :nth-child(1) > [style=\"color: white;\"]")
             .click()
             .get(".ant-btn-primary > span")
             .click()
+            .wait(500)
             .get(".ant-message-custom-content > :nth-child(2)")
             .contains("解禁成功");
     });

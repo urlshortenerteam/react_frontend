@@ -23,7 +23,7 @@ class HomeView extends Component {
                     <br />
                     简单易用
                     <br style={{ padding: 0 }} />
-                    <Button icon={<RightOutlined />} href="#/create" ghost>
+                    <Button icon={<RightOutlined />} href="/create" ghost>
                         开始探索
                     </Button>
                 </h1>
