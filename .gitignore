@@ -50,3 +50,4 @@ yarn.lock
 /.idea/
 package-lock.json
 /cypress/integration/examples
+/cypress/videos/
