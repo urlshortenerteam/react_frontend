@@ -25,7 +25,8 @@ describe("Manage", () => {
             .contains("解禁成功");
     });
     it("test edit url", () => {
-        cy.get(":nth-child(2) > .ant-list-item-main > .ant-list-item-action > :nth-child(3) > [style=\"color: white;\"]")
+        cy.get(".ant-list-items > :nth-child(2)")
+            .contains("编辑")
             .click()
             .get(".ant-input")
             .type("baidu.com")
@@ -37,8 +38,9 @@ describe("Manage", () => {
             .click()
             .get(".ant-message-custom-content > :nth-child(2)")
             .contains("编辑成功")
-            .get(":nth-child(2) > .ant-list-item-main > .ant-row > [style=\"padding: 7px; color: rgb(204, 204, 204);\"]")
-            .contains("https://baidu.com");
+            .get(".ant-list-items > :nth-child(2)")
+            .find("span")
+            .contains("https://baidu.com")
     });
 });
 const stubData = () => {
