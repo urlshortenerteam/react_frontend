@@ -16,15 +16,11 @@ jobs:
     name: e2e test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
       - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Print env variables
-        run: |
-          npm i -g @bahmutov/print-env
-          print-env GITHUB
       - name: Cache node modules
         uses: actions/cache@v1
         with:
@@ -39,6 +35,15 @@ jobs:
           key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
           restore-keys: |
             cypress-${{ runner.os }}-cypress-
+      - name: install dependencies and verify Cypress
+        env:
+          # make sure every Cypress install prints minimal information
+          CI: 1
+        run: |
+          npm ci
+          npx cypress verify
+          npx cypress info
+
       - name: Cypress tests
         run: npm run test:ci:record
         env:
