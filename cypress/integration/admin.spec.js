@@ -85,9 +85,9 @@ describe("AdminManage", () => {
             .contains("解 除");
         cy.get('[data-row-key="1"] > :nth-child(4) > .ant-btn')
             .click()
-            .get(':nth-child(9) > :nth-child(1) > .ant-popover > .ant-popover-content > .ant-popover-inner > .ant-popover-inner-content > .ant-popover-buttons > .ant-btn-primary')
-            .click()
-            .get('[data-row-key="1"] > :nth-child(4) > .ant-btn')
+            .get(':nth-child(10) > :nth-child(1) > .ant-popover > .ant-popover-content > .ant-popover-inner > .ant-popover-inner-content > .ant-popover-buttons > .ant-btn-primary')
+            .click();
+        cy.get('[data-row-key="1"] > :nth-child(4) > .ant-btn > span')
             .contains("禁 用");
         cy.get('[data-row-key="4"] > :nth-child(4) > .ant-btn')
             .click()
@@ -123,6 +123,98 @@ const stubData = () => {
             data: {
                 status: true
             }
+        }
+    });
+    cy.route({
+        method: "GET",
+        url: "**/getShortStat?**",
+        response: {
+            status: 200,
+            msg: "查询成功",
+            data: {
+                    shortUrl: "o47Q22",
+                    longUrl: [
+                        { url: "https://mockjs.com/examples.html" },
+                        { url: "https://www.taobao.com" }
+                    ],
+                    count: 43834,
+                    long: "http://xihj.om/smmzh",
+                    area_distr: [
+                        { name: "云南省", code: 530000, value: 220 },
+                        { name: "黑龙江省", code: 230000, value: 2448 },
+                        { name: "贵州省", code: 520000, value: 1394 },
+                        { name: "北京市", code: 110000, value: 2325 },
+                        { name: "河北省", code: 130000, value: 890 },
+                        { name: "山西省", code: 140000, value: 1573 },
+                        { name: "吉林省", code: 220000, value: 920 },
+                        { name: "宁夏回族自治区", code: 640000, value: 2129 },
+                        { name: "辽宁省", code: 210000, value: 2139 },
+                        { name: "海南省", code: 460000, value: 491 },
+                        { name: "内蒙古自治区", code: 150000, value: 29 },
+                        { name: "天津市", code: 120000, value: 1011 },
+                        { name: "新疆维吾尔自治区", code: 650000, value: 1343 },
+                        { name: "上海市", code: 310000, value: 1174 },
+                        { name: "陕西省", code: 610000, value: 1223 },
+                        { name: "甘肃省", code: 620000, value: 2963 },
+                        { name: "安徽省", code: 340000, value: 39 },
+                        { name: "香港特别行政区", code: 810000, value: 1248 },
+                        { name: "广东省", code: 440000, value: 744 },
+                        { name: "河南省", code: 410000, value: 2589 },
+                        { name: "湖南省", code: 430000, value: 570 },
+                        { name: "江西省", code: 360000, value: 1951 },
+                        { name: "四川省", code: 510000, value: 1993 },
+                        { name: "广西壮族自治区", code: 450000, value: 726 },
+                        { name: "江苏省", code: 320000, value: 1721 },
+                        { name: "澳门特别行政区", code: 820000, value: 2671 },
+                        { name: "浙江省", code: 330000, value: 1582 },
+                        { name: "山东省", code: 370000, value: 1566 },
+                        { name: "青海省", code: 630000, value: 539 },
+                        { name: "重庆市", code: 500000, value: 611 },
+                        { name: "福建省", code: 350000, value: 1281 },
+                        { name: "湖北省", code: 420000, value: 2061 },
+                        { name: "西藏自治区", code: 540000, value: 955 },
+                        { name: "台湾省", code: 710000, value: 2700 }
+                    ],
+                    time_distr: [
+                        { time: "0", value: 2852 },
+                        { time: "1", value: 837 },
+                        { time: "2", value: 2574 },
+                        { time: "3", value: 17 },
+                        { time: "4", value: 237 },
+                        { time: "5", value: 2234 },
+                        { time: "6", value: 2940 },
+                        { time: "7", value: 686 },
+                        { time: "8", value: 2200 },
+                        { time: "9", value: 1530 },
+                        { time: "10", value: 1955 },
+                        { time: "11", value: 954 },
+                        { time: "12", value: 2729 },
+                        { time: "13", value: 865 },
+                        { time: "14", value: 1463 },
+                        { time: "15", value: 2800 },
+                        { time: "16", value: 483 },
+                        { time: "17", value: 49 },
+                        { time: "18", value: 290 },
+                        { time: "19", value: 1693 },
+                        { time: "20", value: 532 },
+                        { time: "21", value: 1681 },
+                        { time: "22", value: 2837 },
+                        { time: "23", value: 1262 }
+                    ]
+                },
+
+        }
+    });
+    cy.route({
+        method: "GET",
+        url: "**/banUser?**",
+        response: {
+            status: 200,
+            msg: "查询成功",
+            data: {
+                status: true
+            },
+            not_administrator: false,
         }
     });
     cy.route({
