@@ -72,7 +72,7 @@ let GetUrl = ({ url, callback, errorCallback }) => {
         errorCallback: errorCallback,
         params: {
             id: JSON.parse(sessionStorage.getItem("userId")),
-            shortUrl: url,
+            short: url,
         },
     });
 };

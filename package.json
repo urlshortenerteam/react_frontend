@@ -37,10 +37,7 @@
     "start:ci": "serve --no-clipboard --listen ${PORT:-3000} -s  build",
     "e2e:record": "cypress run --record",
     "test:ci:record": "run-p --race start:ci e2e:record",
-    "cypress": "cypress open",
-    "start:ci": "serve --no-clipboard --listen ${PORT:-3000} -s  build",
-    "e2e:record": "cypress run --record",
-    "test:ci:record": "run-p --race start:ci e2e:record"
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": [
