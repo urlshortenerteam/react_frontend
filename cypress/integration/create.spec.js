@@ -1,6 +1,7 @@
 describe("Create", () => {
     beforeEach(() => {
         fakeLogin();
+        stubData();
         cy.visit("/create");
     });
     it("display the tabs", () => {
@@ -75,7 +76,6 @@ describe("Create", () => {
         cy.get(':nth-child(2) > div > .ant-btn')
             .click()
             .get('.ant-table-row > :nth-child(2)')
-            .get('div > .anticon > svg')            //二维码
             .get('.ant-row > :nth-child(1) > div > .ant-btn')
             .should('be.disabled')
             .get(':nth-child(2) > div > .ant-btn')
@@ -159,7 +159,6 @@ describe("Create", () => {
         cy.get('#rc-tabs-0-panel-2 > :nth-child(2) > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-footer > .ant-row > :nth-child(2) > div > .ant-btn')
             .click()
             .get('.ant-table-row > :nth-child(2)')
-            .get('div > .anticon > svg')            //二维码
             .get('.ant-row > :nth-child(1) > div > .ant-btn')
             .should('be.disabled')
             .get(':nth-child(2) > div > .ant-btn')
@@ -195,7 +194,32 @@ describe("Create", () => {
             .should('not.have.value')
     })
 });
+const stubData = () => {
+    cy.route({
+        method: "POST",
+        url: "**/getShort?**",
+        response: {
+            status: 200,
+            msg: "查询成功",
+            data: [
+                "dfg89s",
+                "678skw",
+                "yj9wos"
+            ]
+        }
+    });
+    cy.route({
+        method: "POST",
+        url: "**/getOneShort?**",
+        response: {
+            status: 200,
+            msg: "查询成功",
+            data:  "dfg89s"
 
+        }
+    });
+
+};
 const fakeLogin = () => {
     cy.server();
     cy.route({

@@ -23,5 +23,6 @@ Cypress.on("uncaught:exception", () => {
     // failing the test
     return false
 });
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
