@@ -98,6 +98,10 @@ class UserTable extends React.Component {
 
     componentDidMount() {
         const callback = (res) => {
+            if (res.not_administrator) {
+                message.error("您不是管理员");
+                return;
+            }
             console.log(res);
             this.setState({ dataSource: res.data, rowData: res.data });
             // console.log(JSON.stringify(data));
@@ -210,6 +214,10 @@ class UserTable extends React.Component {
 
         newData.splice(index, 1, { ...item, ...row });
         const callback = (res) => {
+            if (res.not_administrator) {
+                message.error("您不是管理员:无法禁用用户");
+                return;
+            }
             if (res.data.status) {
                 this.setState({
                     dataSource: newData,

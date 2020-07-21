@@ -46,7 +46,7 @@ export const login = (data) => {
             } else if (res.data.type === 2) {
                 message.error("您已被禁用");
             } else {
-                message.error("登录失败");
+                message.error("登陆失败：不会出现此情况");
             }
         }
     };

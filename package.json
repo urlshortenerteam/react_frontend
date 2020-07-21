@@ -37,7 +37,10 @@
     "start:ci": "serve --no-clipboard --listen ${PORT:-3000} -s  build",
     "e2e:record": "cypress run --record",
     "test:ci:record": "run-p --race start:ci e2e:record",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "start:ci": "serve --no-clipboard --listen ${PORT:-3000} -s  build",
+    "e2e:record": "cypress run --record",
+    "test:ci:record": "run-p --race start:ci e2e:record"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +62,7 @@
   },
   "devDependencies": {
     "cors": "^2.8.5",
+    "cypress": "^4.10.0",
     "eslint-config-prettier": "6.11.0",
     "npm-run-all": "^4.1.5",
     "prettier": "2.0.5",
