@@ -38,14 +38,14 @@ export default class UrlManagePanel extends Component {
         editing: false,
         editValue: "",
         prefix: "http://",
-        editShort: "",
+        editIndex: "",
         listData: [],
         confirmLoading: false,
     };
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: 1 },
+            params: { id: sessionStorage.getItem("userId") },
             errorCallback: this.handleError,
         });
     }
@@ -66,13 +66,13 @@ export default class UrlManagePanel extends Component {
         console.log(error);
     };
 
-    handleToggleBan = (item) => {
+    handleToggleBan = (item, index) => {
         Modal.confirm({
             content: "确定禁用这条链接吗？",
             okText: "确认",
             cancelText: "取消",
             onOk: () => {
-                this.setState({ editShort: item.shortUrl });
+                this.setState({ editIndex: index });
                 BanUrl({
                     url: item.shortUrl,
                     callback: this.handleBan,
@@ -81,13 +81,13 @@ export default class UrlManagePanel extends Component {
             },
         });
     };
-    handleToggleLift = (item) => {
+    handleToggleLift = (item, index) => {
         Modal.confirm({
             content: "确定解禁这条链接吗？",
             okText: "确认",
             cancelText: "取消",
             onOk: () => {
-                this.setState({ editShort: item.shortUrl });
+                this.setState({ editIndex: index });
                 LiftUrl({
                     url: item.shortUrl,
                     callback: this.handleLift,
@@ -98,28 +98,22 @@ export default class UrlManagePanel extends Component {
     };
     handleBan = (response) => {
         console.log(response.data);
-        const { editShort, listData } = this.state;
+        const { editIndex, listData } = this.state;
         if (response.data.status === true) {
             message.success("禁用成功");
-            let index = listData.findIndex(
-                (item) => item.shortUrl === editShort
-            );
-            listData[index].longUrl[0].url = "BANNED";
+            listData[editIndex].longUrl[0].url = "BANNED";
             this.setState({ listData: listData });
         } else message.error("禁用失败，状态码" + response.status);
     };
     handleLift = (response) => {
         console.log(response.data);
-        const { editShort, listData } = this.state;
+        const { editIndex, listData } = this.state;
         if (response.data.status === true) {
             message.success("解禁成功");
-            let index = listData.findIndex((item) => {
-                return item.shortUrl === editShort;
-            });
             GetUrl({
-                url: editShort,
+                url: listData[editIndex].shortUrl,
                 callback: (res) => {
-                    listData[index].longUrl = res.data.longUrl;
+                    listData[editIndex].longUrl = res.data.longUrl;
                     this.setState({ listData: listData });
                 },
                 errorCallback: this.handleError,
@@ -127,11 +121,11 @@ export default class UrlManagePanel extends Component {
         } else message.error("解禁失败，状态码" + response.status);
     };
 
-    handleEdit = (item) => {
+    handleEdit = (item, index) => {
         if (item.longUrl.length !== 1)
             message.warning("修改链接" + item.shortUrl + "的功能尚未开放");
         else {
-            this.setState({ editing: true, editShort: item.shortUrl });
+            this.setState({ editing: true, editIndex: index });
         }
     };
     render() {
@@ -154,7 +148,7 @@ export default class UrlManagePanel extends Component {
                     itemLayout="vertical"
                     size="large"
                     dataSource={listData}
-                    renderItem={(item) => {
+                    renderItem={(item, index) => {
                         let longList = [];
                         if (item.longUrl[0].url !== "BANNED")
                             item.longUrl.forEach((long, index) => {
@@ -200,11 +194,13 @@ export default class UrlManagePanel extends Component {
                                                 item.longUrl[0].url === "BANNED"
                                                     ? () =>
                                                           this.handleToggleLift(
-                                                              item
+                                                              item,
+                                                              index
                                                           )
                                                     : () =>
                                                           this.handleToggleBan(
-                                                              item
+                                                              item,
+                                                              index
                                                           )
                                             }
                                         />,
@@ -217,7 +213,9 @@ export default class UrlManagePanel extends Component {
                                             icon={EditOutlined}
                                             text="编辑"
                                             key="list-vertical-message"
-                                            action={() => this.handleEdit(item)}
+                                            action={() =>
+                                                this.handleEdit(item, index)
+                                            }
                                         />,
                                     ]
                                 }
@@ -311,9 +309,9 @@ export default class UrlManagePanel extends Component {
         this.setState({
             confirmLoading: true,
         });
-        const { prefix, editValue, editShort } = this.state;
+        const { prefix, editValue, editIndex, listData } = this.state;
         EditUrl({
-            url: editShort,
+            url: listData[editIndex].shortUrl,
             newLong: prefix + editValue,
             callback: () => {
                 let { listData } = this.state;
@@ -322,11 +320,8 @@ export default class UrlManagePanel extends Component {
                     confirmLoading: false,
                 });
                 message.success("编辑成功");
-                let index = listData.findIndex(
-                    (item) => item.shortUrl === editShort
-                );
-                listData[index].longUrl[0].url = prefix + editValue;
-                console.log(listData[index]);
+                listData[editIndex].longUrl[0].url = prefix + editValue;
+                console.log(listData[editIndex]);
                 this.setState({ listData: listData });
             },
             errorCallback: this.handleError,
