@@ -65,7 +65,7 @@ jobs:
           # there might be no screenshots created when:
           # - there are no test failures
           # so only upload screenshots if previous step has failed
-          if: failure()
+        if: failure()
       # video should always be generated
       - uses: actions/upload-artifact@master
         with:
