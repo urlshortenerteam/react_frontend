@@ -7,7 +7,7 @@ on:
   push:
     tags: 
       - "v*"
-
+        
 jobs:
   check:
     name: check linter
