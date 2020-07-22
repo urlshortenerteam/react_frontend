@@ -72,18 +72,24 @@ class UserTable extends React.Component {
                 width: "5%",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        <Popconfirm
-                            title="确认修改?"
-                            okText="确认"
-                            cancelText="取消"
-                            onConfirm={() => this.handleBan(record)}
-                        >
-                            {record.role !== 2 ? (
-                                <Button type="primary">禁用</Button>
-                            ) : (
-                                <Button type="primary">解除</Button>
-                            )}
-                        </Popconfirm>
+                        record.role === 0 ? (
+                            <Button type="primary" disabled>
+                                禁用
+                            </Button>
+                        ) : (
+                            <Popconfirm
+                                title="确认修改?"
+                                okText="确认"
+                                cancelText="取消"
+                                onConfirm={() => this.handleBan(record)}
+                            >
+                                {record.role !== 2 ? (
+                                    <Button type="primary">禁用</Button>
+                                ) : (
+                                    <Button type="primary">解除</Button>
+                                )}
+                            </Popconfirm>
+                        )
                     ) : null,
             },
         ];

@@ -32,7 +32,7 @@ const BasicRouter = () => (
                     path="/statistics"
                     component={StatisticsView}
                 />
-                <Route exact path="/manage" component={ManageView} />
+                <PrivateRoute exact path="/manage" component={ManageView} />
                 <Route exact path="/register" component={RegisterView} />
                 <PrivateRoute
                     exact
