@@ -1,7 +1,7 @@
 import React from "react";
 import { getRequest } from "../../Services/ajax";
 import Table from "antd/es/table";
-/*
+/**
 RealTimeTrack
 @author Zhuohao Shen
 @date July 6th 2020
@@ -70,6 +70,7 @@ export default class RealTimeTrack extends React.Component {
                 rowKey={(record) => {
                     return record.time + record.ip.toString();
                 }}
+                style={{ marginTop: 15 }}
             />
         );
     }

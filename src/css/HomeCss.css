@@ -58,6 +58,12 @@ body {
     width: 30%;
     margin-bottom: auto;
 }
+.select-before {
+    width: 90px;
+}
+[data-theme="compact"] .select-before {
+    width: 71px;
+}
 
 #root {
     height: 100%;

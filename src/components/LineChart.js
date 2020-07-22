@@ -1,6 +1,6 @@
 import React from "react";
 import { Line } from "@ant-design/charts";
-/*
+/**
 LineChart:
 @author Zhuohao Shen <ao7777@sjtu.edu.cn>
 @date July 7th 2020
@@ -62,6 +62,7 @@ export default class LineChart extends React.Component {
                 },
                 legend: {
                     position: "top-left",
+                    offsetX: 10,
                     style: { fill: "white" },
                 },
                 seriesField: "url",

@@ -1,27 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {
-    Button,
-    Col,
-    Form,
-    Input,
-    message,
-    Popconfirm,
-    Row,
-    Table,
-    Tooltip,
-} from "antd";
+import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
 import { getBatchManyToOne } from "../../Services/CreateService";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
 import ShortWithQR from "./ShortWithQR";
 
+const { Search } = Input;
+
 const EditableContext = React.createContext();
 
-interface EditableRowProps {
-    index: number;
-}
-
-const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
+const EditableRow = ({ index, ...props }) => {
     const [form] = Form.useForm();
     return (
         <Form form={form} component={false}>
@@ -32,28 +20,19 @@ const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
     );
 };
 
-interface EditableCellProps {
-    title: React.ReactNode;
-    editable: boolean;
-    children: React.ReactNode;
-    dataIndex: string;
-    record: Item;
-    handleSave: (record: Item) => void;
-}
-
-const EditableCell: React.FC<EditableCellProps> = ({
+const EditableCell = ({
     title,
     editable,
     children,
     dataIndex,
     record,
     handleSave,
+    handleDelete,
     ...restProps
 }) => {
     const [editing, setEditing] = useState(false);
     const inputRef = useRef();
     const form = useContext(EditableContext);
-
     useEffect(() => {
         if (editing) {
             inputRef.current.focus();
@@ -62,15 +41,27 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     const toggleEdit = () => {
         setEditing(!editing);
-        form.setFieldsValue({ [dataIndex]: record[dataIndex] });
+        form.setFieldsValue({
+            [dataIndex]: record[dataIndex],
+        });
     };
 
     const save = async () => {
         try {
             const values = await form.validateFields();
-
             toggleEdit();
             handleSave({ ...record, ...values });
+        } catch (errInfo) {
+            console.log("Save failed:", errInfo);
+        }
+    };
+
+    const deleteHandle = async () => {
+        try {
+            console.log("delete");
+            // const values = await form.validateFields();
+            toggleEdit();
+            handleDelete(record.key);
         } catch (errInfo) {
             console.log("Save failed:", errInfo);
         }
@@ -81,7 +72,9 @@ const EditableCell: React.FC<EditableCellProps> = ({
     if (editable && record.edit) {
         childNode = editing ? (
             <Form.Item
-                style={{ margin: 0 }}
+                style={{
+                    margin: 0,
+                }}
                 name={dataIndex}
                 rules={[
                     {
@@ -90,12 +83,22 @@ const EditableCell: React.FC<EditableCellProps> = ({
                     },
                 ]}
             >
-                <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+                {/*<Input ref={inputRef} onPressEnter={save} onBlur={save} />*/}
+                <Search
+                    name="urlInput"
+                    ref={inputRef}
+                    onPressEnter={save}
+                    onBlur={save}
+                    enterButton="删除"
+                    onSearch={deleteHandle}
+                />
             </Form.Item>
         ) : (
             <div
                 className="editable-cell-value-wrap"
-                style={{ paddingRight: 24 }}
+                style={{
+                    paddingRight: 24,
+                }}
                 onClick={toggleEdit}
             >
                 {children}
@@ -106,12 +109,12 @@ const EditableCell: React.FC<EditableCellProps> = ({
     return <td {...restProps}>{childNode}</td>;
 };
 
-/*
-ManyToOneTable
-@author Shuchang Liu
-@date July 10th 2020
-@description ManyToOneTable used in CreateView.js
-*/
+/**
+ * ManyToOneTable
+ * @author Shuchang Liu
+ * @date July 10th 2020
+ * @description ManyToOneTable used in CreateView.js
+ **/
 export default class ManyToOneTable extends React.Component {
     constructor(props) {
         super(props);
@@ -121,7 +124,7 @@ export default class ManyToOneTable extends React.Component {
                 dataIndex: "long",
                 editable: true,
                 align: "center",
-                colSpan: 2,
+                colSpan: 1,
                 ellipsis: {
                     showTitle: false,
                 },
@@ -131,30 +134,6 @@ export default class ManyToOneTable extends React.Component {
                         {long}
                     </Tooltip>
                 ),
-            },
-            {
-                title: "删除",
-                dataIndex: "operation",
-                align: "center",
-                width: "10%",
-                colSpan: 0,
-                render: (text, record) =>
-                    this.state.dataSource.length >= 1 ? (
-                        !this.state.created ? (
-                            <Popconfirm
-                                title="确定删除此长链接？"
-                                onConfirm={() => this.handleDelete(record.key)}
-                                okText="删除"
-                                cancelText="取消"
-                            >
-                                <Button type="primary">删除</Button>
-                            </Popconfirm>
-                        ) : (
-                            <Button type="primary" disabled>
-                                删除
-                            </Button>
-                        )
-                    ) : null,
             },
             {
                 title: "短链接",
@@ -369,6 +348,7 @@ export default class ManyToOneTable extends React.Component {
                     dataIndex: col.dataIndex,
                     title: col.title,
                     handleSave: this.handleSave,
+                    handleDelete: this.handleDelete,
                 }),
             };
         });
@@ -383,40 +363,59 @@ export default class ManyToOneTable extends React.Component {
                     columns={columns}
                     pagination={{ position: ["bottomCenter"] }}
                     footer={() => (
-                        <Row>
-                            <Col span={2} offset={10}>
-                                {!this.state.created ? (
-                                    <Button
-                                        onClick={this.handleAdd}
-                                        type="primary"
-                                        style={{ marginBottom: 16 }}
-                                    >
-                                        添加
-                                    </Button>
-                                ) : (
-                                    <Button type="primary" disabled>
-                                        添加
-                                    </Button>
-                                )}
+                        <Row justify="center">
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
+                                    {!this.state.created ? (
+                                        <Button
+                                            onClick={this.handleAdd}
+                                            type="primary"
+                                            block={true}
+                                        >
+                                            添加
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            type="primary"
+                                            block={true}
+                                            disabled
+                                        >
+                                            添加
+                                        </Button>
+                                    )}
+                                </div>
                             </Col>
-                            <Col span={2}>
-                                {!this.state.created ? (
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
+                                    {!this.state.created ? (
+                                        <Button
+                                            type="primary"
+                                            onClick={this.manyToOne}
+                                            block={true}
+                                        >
+                                            生成
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            type="primary"
+                                            block={true}
+                                            disabled
+                                        >
+                                            生成
+                                        </Button>
+                                    )}
+                                </div>
+                            </Col>
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
                                     <Button
                                         type="primary"
-                                        onClick={this.manyToOne}
+                                        block={true}
+                                        onClick={this.reset}
                                     >
-                                        生成
+                                        重置
                                     </Button>
-                                ) : (
-                                    <Button type="primary" disabled>
-                                        生成
-                                    </Button>
-                                )}
-                            </Col>
-                            <Col span={2}>
-                                <Button type="primary" onClick={this.reset}>
-                                    重置
-                                </Button>
+                                </div>
                             </Col>
                         </Row>
                     )}

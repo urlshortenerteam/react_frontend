@@ -1,28 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import {
-    Button,
-    Col,
-    Form,
-    Input,
-    message,
-    Popconfirm,
-    Row,
-    Table,
-    Tooltip,
-} from "antd";
+import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
 import { getBatchOneToOne } from "../../Services/CreateService";
 import ShortWithQR from "./ShortWithQR";
 
+const { Search } = Input;
+
 const EditableContext = React.createContext();
 
-interface EditableRowProps {
-    index: number;
-}
-
-const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
+const EditableRow = ({ index, ...props }) => {
     const [form] = Form.useForm();
     return (
         <Form form={form} component={false}>
@@ -33,28 +21,19 @@ const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
     );
 };
 
-interface EditableCellProps {
-    title: React.ReactNode;
-    editable: boolean;
-    children: React.ReactNode;
-    dataIndex: string;
-    record: Item;
-    handleSave: (record: Item) => void;
-}
-
-const EditableCell: React.FC<EditableCellProps> = ({
+const EditableCell = ({
     title,
     editable,
     children,
     dataIndex,
     record,
     handleSave,
+    handleDelete,
     ...restProps
 }) => {
     const [editing, setEditing] = useState(false);
     const inputRef = useRef();
     const form = useContext(EditableContext);
-
     useEffect(() => {
         if (editing) {
             inputRef.current.focus();
@@ -63,13 +42,14 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     const toggleEdit = () => {
         setEditing(!editing);
-        form.setFieldsValue({ [dataIndex]: record[dataIndex] });
+        form.setFieldsValue({
+            [dataIndex]: record[dataIndex],
+        });
     };
 
     const save = async () => {
         try {
             const values = await form.validateFields();
-
             toggleEdit();
             handleSave({ ...record, ...values });
         } catch (errInfo) {
@@ -77,26 +57,48 @@ const EditableCell: React.FC<EditableCellProps> = ({
         }
     };
 
+    const deleteHandle = async () => {
+        try {
+            console.log("delete");
+            // const values = await form.validateFields();
+            toggleEdit();
+            handleDelete(record.key);
+        } catch (errInfo) {
+            console.log("Save failed:", errInfo);
+        }
+    };
+
     let childNode = children;
 
-    if (editable && record.edit !== 0) {
+    if (editable && record.edit) {
         childNode = editing ? (
             <Form.Item
-                style={{ margin: 0 }}
+                style={{
+                    margin: 0,
+                }}
                 name={dataIndex}
                 rules={[
                     {
                         required: true,
-                        message: `${title} 需填入`,
+                        message: `${title} is required.`,
                     },
                 ]}
             >
-                <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+                {/*<Input ref={inputRef} onPressEnter={save} onBlur={save} />*/}
+                <Search
+                    ref={inputRef}
+                    onPressEnter={save}
+                    onBlur={save}
+                    enterButton="删除"
+                    onSearch={deleteHandle}
+                />
             </Form.Item>
         ) : (
             <div
                 className="editable-cell-value-wrap"
-                style={{ paddingRight: 24 }}
+                style={{
+                    paddingRight: 24,
+                }}
                 onClick={toggleEdit}
             >
                 {children}
@@ -107,7 +109,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     return <td {...restProps}>{childNode}</td>;
 };
 
-/*
+/**
 OneToOneTable
 @author Shuchang Liu
 @date July 10th 2020
@@ -122,6 +124,7 @@ export default class OneToOneTable extends React.Component {
                     key: 1,
                     long: "以http://或https://开头",
                     short: "",
+                    edit: true,
                 },
             ],
             count: 1,
@@ -133,7 +136,7 @@ export default class OneToOneTable extends React.Component {
                 dataIndex: "long",
                 editable: true,
                 align: "center",
-                colSpan: 2,
+                colSpan: 1,
                 ellipsis: {
                     showTitle: false,
                 },
@@ -143,30 +146,6 @@ export default class OneToOneTable extends React.Component {
                         {long}
                     </Tooltip>
                 ),
-            },
-            {
-                title: "删除",
-                dataIndex: "operation",
-                align: "center",
-                width: "10%",
-                colSpan: 0,
-                render: (text, record) =>
-                    this.state.dataSource.length >= 1 ? (
-                        !this.state.created ? (
-                            <Popconfirm
-                                title="确定删除此长链接？"
-                                onConfirm={() => this.handleDelete(record.key)}
-                                okText="删除"
-                                cancelText="取消"
-                            >
-                                <Button type="primary">删除</Button>
-                            </Popconfirm>
-                        ) : (
-                            <Button type="primary" disabled>
-                                删除
-                            </Button>
-                        )
-                    ) : null,
             },
             {
                 title: "短链接",
@@ -334,6 +313,7 @@ export default class OneToOneTable extends React.Component {
             getBatchOneToOne(req, callBack);
         }
     };
+
     render() {
         const { dataSource } = this.state;
         const components = {
@@ -354,6 +334,7 @@ export default class OneToOneTable extends React.Component {
                     dataIndex: col.dataIndex,
                     title: col.title,
                     handleSave: this.handleSave,
+                    handleDelete: this.handleDelete,
                 }),
             };
         });
@@ -368,40 +349,45 @@ export default class OneToOneTable extends React.Component {
                     columns={columns}
                     pagination={{ position: ["bottomCenter"] }}
                     footer={() => (
-                        <Row>
-                            <Col span={2} offset={10}>
-                                {!this.state.created ? (
-                                    <Button
-                                        onClick={this.handleAdd}
-                                        type="primary"
-                                        style={{ marginBottom: 16 }}
-                                    >
-                                        添加
-                                    </Button>
-                                ) : (
-                                    <Button type="primary" disabled>
-                                        添加
-                                    </Button>
-                                )}
+                        <Row justify="center">
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
+                                    {!this.state.created ? (
+                                        <Button
+                                            onClick={this.handleAdd}
+                                            type="primary"
+                                        >
+                                            添加
+                                        </Button>
+                                    ) : (
+                                        <Button type="primary" disabled>
+                                            添加
+                                        </Button>
+                                    )}
+                                </div>
                             </Col>
-                            <Col span={2}>
-                                {!this.state.created ? (
-                                    <Button
-                                        type="primary"
-                                        onClick={this.oneToOne}
-                                    >
-                                        生成
-                                    </Button>
-                                ) : (
-                                    <Button type="primary" disabled>
-                                        生成
-                                    </Button>
-                                )}
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
+                                    {!this.state.created ? (
+                                        <Button
+                                            type="primary"
+                                            onClick={this.oneToOne}
+                                        >
+                                            生成
+                                        </Button>
+                                    ) : (
+                                        <Button type="primary" disabled>
+                                            生成
+                                        </Button>
+                                    )}
+                                </div>
                             </Col>
-                            <Col span={2}>
-                                <Button type="primary" onClick={this.reset}>
-                                    重置
-                                </Button>
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
+                                    <Button type="primary" onClick={this.reset}>
+                                        重置
+                                    </Button>
+                                </div>
                             </Col>
                         </Row>
                     )}
