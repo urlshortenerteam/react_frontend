@@ -12,28 +12,21 @@ export default class PrivateRoute extends React.Component {
         };
     }
 
-    checkAuth = (res) => {
-        console.log(res.status);
-        if (res.status === 200) {
-            this.setState({ isAuthed: true, hasAuthed: true });
-        } else {
-            message.info(res.status);
-            message.error("您需登录");
-            if (sessionStorage.getItem("userId"))
-                sessionStorage.removeItem("userId");
-            if (sessionStorage.getItem("loginStatus"))
-                sessionStorage.removeItem("loginStatus");
-            if (sessionStorage.getItem("type"))
-                sessionStorage.removeItem("type");
-            if (sessionStorage.getItem("token"))
-                sessionStorage.removeItem("token");
-
-            this.setState({ isAuthed: false, hasAuthed: true });
-        }
+    checkAuth = () => {
+        this.setState({ isAuthed: true, hasAuthed: true });
     };
 
-    errorHandler = (error) => {
-        console.log(error);
+    errorHandler = () => {
+        // console.log(error);
+        message.error("您需登录");
+        if (sessionStorage.getItem("userId"))
+            sessionStorage.removeItem("userId");
+        if (sessionStorage.getItem("loginStatus"))
+            sessionStorage.removeItem("loginStatus");
+        if (sessionStorage.getItem("type")) sessionStorage.removeItem("type");
+        if (sessionStorage.getItem("token")) sessionStorage.removeItem("token");
+
+        this.setState({ isAuthed: false, hasAuthed: true });
     };
     componentDidMount() {
         userService.checkSession(this.checkAuth, this.errorHandler);

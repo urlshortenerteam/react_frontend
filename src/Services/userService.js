@@ -1,4 +1,4 @@
-import { getRequest, postRequest } from "./ajax";
+import { postRequest, getRequest_checkSession } from "./ajax";
 import { message } from "antd";
 
 /**
@@ -11,8 +11,7 @@ import { message } from "antd";
  * @param errorHandler - The callback for errors
  * */
 export const register = (data, callback, errorHandler) => {
-    const url = `/register`;
-    postRequest(url, data, callback, {
+    postRequest("/register", data, callback, {
         errorCallback: errorHandler,
         params: {},
     });
@@ -27,7 +26,6 @@ export const register = (data, callback, errorHandler) => {
  * */
 export const login = (data) => {
     console.log(data);
-    const url = "/loginReq";
 
     const callback = (res) => {
         if (res.data.loginStatus) {
@@ -35,8 +33,7 @@ export const login = (data) => {
             sessionStorage.setItem("loginStatus", 1);
             sessionStorage.setItem("type", JSON.stringify(res.data.type));
             sessionStorage.setItem("token", JSON.stringify(res.data.token));
-            // localStorage.setItem('user', JSON.stringify(data.data));
-            console.log(res.data);
+            // console.log(res.data);
 
             message.success("登录成功");
             window.location.href = "/";
@@ -50,7 +47,7 @@ export const login = (data) => {
             }
         }
     };
-    postRequest(url, data, callback, {
+    postRequest("/loginReq", data, callback, {
         errorCallback: () => {},
     });
 };
@@ -81,7 +78,7 @@ export const logout = () => {
  * */
 export const checkSession = (callback, errorCallback) => {
     const url = `/checkSession`;
-    getRequest(url, callback, {
+    getRequest_checkSession(url, callback, {
         errorCallback: errorCallback,
         params: {},
     });

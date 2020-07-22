@@ -602,11 +602,9 @@ apiRoutes.post("/register", function (req, res) {
     Object.assign(
         jsonResponse,
         Mock.mock({
-            "data|1": [
-                {
-                    "success|1-2": true,
-                },
-            ],
+            data: {
+                success: true,
+            },
         })
     );
 
@@ -686,19 +684,21 @@ apiRoutes.get("/checkSession", function (req, res) {
     };
 
     if (!loginMock) {
-        Object.assign(
-            jsonResponse,
-            Mock.mock({
-                "status|1": [404, 500, 403],
-            })
-        );
+        // Object.assign(
+        //     jsonResponse,
+        //     Mock.mock({
+        //         "status|1": [404, 500, 403],
+        //     })
+        // );
+        res.status(404);
     } else {
-        Object.assign(
-            jsonResponse,
-            Mock.mock({
-                status: 200,
-            })
-        );
+        res.status(200);
+        // Object.assign(
+        //     jsonResponse,
+        //     Mock.mock({
+        //         status: 200,
+        //     })
+        // );
     }
 
     setTimeout(() => {
