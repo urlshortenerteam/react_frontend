@@ -3,7 +3,7 @@
 
 name: CD
 
-on: [ release, tag ]
+on: [release]
 
 jobs:
   check:
