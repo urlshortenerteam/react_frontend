@@ -5,9 +5,9 @@ name: CD
 
 on:
   push:
-    tags: 
+    tags:
       - "v*"
-        
+
 jobs:
   check:
     name: check linter
