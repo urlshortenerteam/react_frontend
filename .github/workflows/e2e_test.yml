@@ -1,0 +1,64 @@
+name: E2E testing
+on: [pull_request]
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - run: npm install
+      - run: npm run lint
+  test:
+    name: e2e test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Cache Cypress binary
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-
+      - name: install dependencies and verify Cypress
+        env:
+          # make sure every Cypress install prints minimal information
+          CI: 1
+        run: |
+          npm i
+          npm run build
+          npx cypress verify
+          npx cypress info
+
+      - name: Cypress tests
+        run: npm run test:ci:record
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
+          TERM: xterm
+      - uses: actions/upload-artifact@master
+        with:
+          name: screenshots
+          path: cypress/screenshots
+          # there might be no screenshots created when:
+          # - there are no test failures
+          # so only upload screenshots if previous step has failed
+          if: failure()
+      # video should always be generated
+      - uses: actions/upload-artifact@master
+        with:
+          name: videos
+          path: cypress/videos

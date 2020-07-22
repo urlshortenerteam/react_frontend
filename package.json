@@ -14,6 +14,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "latest",
+    "aws-sdk": "^2.717.0",
     "cypress": "^4.10.0",
     "dayjs": "^1.8.18",
     "express": "^4.17.1",
@@ -24,8 +25,9 @@
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",
     "react-scripts": "3.4.1",
-    "typescript": "^3.9.7",
-    "serve": "11.3.2"
+    "serve": "11.3.2",
+    "serverless-finch": "^2.6.0",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,7 +37,7 @@
     "lint": "prettier --check src",
     "prettier": "prettier --write src",
     "start:ci": "serve --no-clipboard --listen ${PORT:-3000} -s  build",
-    "e2e:record": "cypress run --record",
+    "e2e:record": "cypress run",
     "test:ci:record": "run-p --race start:ci e2e:record",
     "cypress": "cypress open"
   },
