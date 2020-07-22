@@ -71,7 +71,7 @@ jobs:
         with:
           name: videos
           path: cypress/videos
-  build & deploy:
+  deploy:
     name: deploy
     runs-on: ubuntu-latest
     steps:
