@@ -65,6 +65,33 @@ let getRequest = (url, callback, { errorCallback, params }) => {
         });
 };
 
+let getRequest_checkSession = (url, callback, { errorCallback, params }) => {
+    let _url = new URL(hostUrl + url);
+    _url.search = new URLSearchParams(params).toString();
+    let opts = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: JSON.parse(sessionStorage.getItem("token")),
+        },
+    };
+
+    fetch(_url, opts)
+        .then((response) => {
+            if (response.status !== 200) {
+                errorCallback();
+            }
+            return response.json();
+        })
+        .then((data) => {
+            callback(data);
+        })
+        .catch((error) => {
+            console.log(error);
+            errorCallback(error);
+        });
+};
+
 let deleteRequest = (url, callback) => {
     fetch(hostUrl + url, { method: "DELETE" })
         .then((response) => {
@@ -78,4 +105,4 @@ let deleteRequest = (url, callback) => {
         });
 };
 
-export { postRequest, getRequest, deleteRequest };
+export { postRequest, getRequest, deleteRequest, getRequest_checkSession };

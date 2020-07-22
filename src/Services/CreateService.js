@@ -1,5 +1,4 @@
 import { postRequest } from "./ajax";
-
 /**
  * getBatchOneToOne
  * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
