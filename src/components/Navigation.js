@@ -73,7 +73,7 @@ export default class Navigation extends React.Component {
                             <Col>
                                 {JSON.parse(sessionStorage.getItem("user")) ? (
                                     JSON.parse(sessionStorage.getItem("user"))
-                                        .loginStatus === 1 ? (
+                                        .loginStatus ? (
                                         <Button key="2" ghost onClick={logout}>
                                             登出
                                         </Button>

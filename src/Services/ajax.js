@@ -86,6 +86,7 @@ let resetToken = (url, json, callback, { errorCallback, params }) => {
                 });
             } else {
                 sessionStorage.removeItem("user");
+                window.location.href = "/login";
             }
         })
         .catch((error) => {
@@ -109,7 +110,21 @@ let getRequest = (url, callback, { errorCallback, params }) => {
 
     fetch(_url, opts)
         .then((response) => {
-            return response.json();
+            // login timeout
+            if (response.status === 404) {
+                if (
+                    JSON.parse(sessionStorage.getItem("uesr")) !== null &&
+                    JSON.parse(sessionStorage.getItem("uesr")).loginStatus
+                ) {
+                    resetToken(url, json, callback, {
+                        errorCallback: errorCallback,
+                        params: params,
+                    });
+                }
+                return response;
+            } else {
+                return response.json();
+            }
         })
         .then((data) => {
             callback(data);
