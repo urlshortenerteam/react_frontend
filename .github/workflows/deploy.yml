@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm i
+      - run: npm install
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
@@ -61,7 +61,7 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
           TERM: xterm
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         with:
           name: screenshots
           path: cypress/screenshots
@@ -70,7 +70,7 @@ jobs:
           # so only upload screenshots if previous step has failed
         if: failure()
       # video should always be generated
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         with:
           name: videos
           path: cypress/videos
@@ -78,8 +78,13 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+      - name: npm install
+        uses: actions/npm@master
+        with:
+          args: install
       - run: npm build
-      - name: serverless deploy
+      - name: Serverless deploy
         uses: serverless/github-action@master
         with:
           args: deploy
