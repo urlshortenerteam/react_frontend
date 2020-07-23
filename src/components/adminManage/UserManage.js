@@ -35,7 +35,7 @@ class UserTable extends React.Component {
                 },
                 // render: (text, record) =>
                 //     this.state.dataSource.length >= 1 ? (
-                //         <Statistic title="Feedback" value={record.visit_count} prefix={<LikeOutlined />} />
+                //         <Statistic title="Feedback" value={record.visitCount} prefix={<LikeOutlined />} />
                 //     ) : null,
 
                 ...this.getColumnSearchProps("visitCount"),

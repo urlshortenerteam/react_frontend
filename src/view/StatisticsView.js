@@ -10,11 +10,11 @@ import { getRequest } from "../Services/ajax";
 const { Sider, Content } = Layout;
 const { Text } = Typography;
 /**
-StatisticsView
-@author Zhuohao Shen
-@date July 7th 2020
-@description Statistics page
-*/
+ StatisticsView
+ @author Zhuohao Shen
+ @date July 7th 2020
+ @description Statistics page
+ */
 export default class StatisticsView extends React.Component {
     state = {
         display: "overview",
