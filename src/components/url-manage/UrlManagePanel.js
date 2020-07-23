@@ -8,7 +8,8 @@ import {
     Row,
     Select,
     Skeleton,
-    Statistic, Tag
+    Statistic,
+    Tag,
 } from "antd";
 import {
     CloseOutlined,
@@ -264,20 +265,24 @@ export default class UrlManagePanel extends Component {
                                     <List.Item.Meta
                                         style={{ color: "white" }}
                                         title={
-                                                item.longUrl[0].url === "BANNED" ? (
-                                                    <Tag color="#cb0000">
+                                            item.longUrl[0].url === "BANNED" ? (
+                                                <Tag color="#cb0000">
+                                                    {item.shortUrl}
+                                                </Tag>
+                                            ) : (
+                                                <Tag color="#3b5999">
+                                                    <a
+                                                        href={
+                                                            item.longUrl[0].url
+                                                        }
+                                                        style={{
+                                                            color: "white",
+                                                        }}
+                                                    >
                                                         {item.shortUrl}
-                                                    </Tag>
-                                                ) : (
-                                                    <Tag color="#3b5999">
-                                                        <a
-                                                            href={item.longUrl[0].url}
-                                                            style={{ color: "white" }}
-                                                        >
-                                                            {item.shortUrl}
-                                                        </a>
-                                                    </Tag>
-                                                )
+                                                    </a>
+                                                </Tag>
+                                            )
                                         }
                                         description={
                                             <span style={{ color: "white" }}>

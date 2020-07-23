@@ -6,7 +6,7 @@ import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
 import { getRequest } from "../Services/ajax";
-import {hostUrl} from "../Services/ajax";
+import { hostUrl } from "../Services/ajax";
 const { Sider, Content } = Layout;
 const { Text } = Typography;
 /**
@@ -28,7 +28,7 @@ export default class StatisticsView extends React.Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: sessionStorage.getItem('userId') },
+            params: { id: sessionStorage.getItem("userId") },
             errorCallback: this.handleError,
         });
     }
