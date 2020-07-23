@@ -28,7 +28,7 @@ export default class StatisticsView extends React.Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: 0 },
+            params: { id: JSON.parse(sessionStorage.getItem("user")).id },
             errorCallback: this.handleError,
         });
     }
