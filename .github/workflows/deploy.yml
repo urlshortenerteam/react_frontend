@@ -78,13 +78,8 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: npm install
-        uses: actions/npm@master
-        with:
-          args: install
       - run: npm build
-      - name: Serverless deploy
+      - name: serverless deploy
         uses: serverless/github-action@master
         with:
           args: deploy
