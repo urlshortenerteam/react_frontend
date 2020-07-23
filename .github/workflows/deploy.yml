@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm i
+      - run: npm install
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
@@ -61,7 +61,7 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
           TERM: xterm
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         with:
           name: screenshots
           path: cypress/screenshots
@@ -70,7 +70,7 @@ jobs:
           # so only upload screenshots if previous step has failed
         if: failure()
       # video should always be generated
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         with:
           name: videos
           path: cypress/videos
@@ -78,11 +78,14 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - run: npm build
-      - name: serverless deploy
-        uses: serverless/github-action@master
+      - uses: actions/checkout@v2
+      - name: npm install
+        uses: actions/npm@v2
         with:
-          args: deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AO_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AO_AWS_SECRET_ACCESS_KEY }}
+          args: install
+      - run: npm build
+      - run: npm install -g serverless
+      - name: Serverless AWS authentication
+        run: sls config credentials --provider aws --key ${{ secrets.AO_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AO_AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy assets to S3
+        run: sls client deploy --no-delete-contents --no-confirm -s prod
