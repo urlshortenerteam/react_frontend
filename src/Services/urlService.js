@@ -12,7 +12,7 @@ import { getRequest, postRequest } from "./ajax";
 let BanUrl = ({ url, callback, errorCallback }) => {
     postRequest("/editUrl", "BANNED", callback, {
         errorCallback: errorCallback,
-        params: { id: sessionStorage.getItem("userId"), shortUrl: url },
+        params: { id: sessionStorage.getItem("user").id, shortUrl: url },
     });
 };
 /**
@@ -32,7 +32,7 @@ let EditUrl = ({ url, newLong, callback, errorCallback }) => {
     postRequest("/editUrl", newLong, callback, {
         errorCallback: errorCallback,
         params: {
-            id: JSON.parse(sessionStorage.getItem("userId")),
+            id: JSON.parse(sessionStorage.getItem("user")).id,
             shortUrl: url,
         },
     });
@@ -51,7 +51,7 @@ let LiftUrl = ({ url, callback, errorCallback }) => {
     postRequest("/editUrl", "LIFT", callback, {
         errorCallback: errorCallback,
         params: {
-            id: JSON.parse(sessionStorage.getItem("userId")),
+            id: JSON.parse(sessionStorage.getItem("user")).id,
             shortUrl: url,
         },
     });
@@ -70,7 +70,7 @@ let GetUrl = ({ url, callback, errorCallback }) => {
     getRequest("/getShortStat", callback, {
         errorCallback: errorCallback,
         params: {
-            id: JSON.parse(sessionStorage.getItem("userId")),
+            id: JSON.parse(sessionStorage.getItem("user")).id,
             short: url,
         },
     });

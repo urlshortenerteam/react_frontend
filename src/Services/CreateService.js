@@ -14,7 +14,7 @@ export const getBatchOneToOne = (data, callback) => {
         errorCallback: (error) => {
             console.log(error);
         },
-        params: { id: JSON.parse(sessionStorage.getItem("userId")) },
+        params: { id: JSON.parse(sessionStorage.getItem("user")).id },
     });
 };
 
@@ -33,6 +33,6 @@ export const getBatchManyToOne = (data, callback) => {
         errorCallback: (error) => {
             console.log(error);
         },
-        params: { id: JSON.parse(sessionStorage.getItem("userId")) },
+        params: { id: JSON.parse(sessionStorage.getItem("user")).id },
     });
 };

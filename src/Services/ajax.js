@@ -4,8 +4,9 @@
  * @type string
  * @default http://localhost:4000
  * */
-export const hostUrl = "http://localhost:4000";
-
+export const hostUrl = "http://3.81.71.37:8080";
+// export const hostUrl = "http://localhost:4000";
+// export const hostUrl = "http://111.186.46.37:4000";
 /**
  * postRequest
  * @author Shuchang Liu & Zhuohao Shen <ao7777@sjtu.edu.cn>
@@ -25,15 +26,67 @@ let postRequest = (url, json, callback, { errorCallback, params }) => {
         body: JSON.stringify(json),
         headers: {
             "Content-Type": "application/json",
-            Authorization: JSON.parse(sessionStorage.getItem("token")),
+            Authorization: JSON.parse(sessionStorage.getItem("user"))
+                ? JSON.parse(sessionStorage.getItem("user")).token
+                : null,
         },
     };
     fetch(_url, opts)
         .then((response) => {
-            return response.json();
+            // login timeout
+            if (response.status === 404) {
+                if (
+                    JSON.parse(sessionStorage.getItem("uesr")) !== null &&
+                    JSON.parse(sessionStorage.getItem("uesr")).loginStatus
+                ) {
+                    resetToken(url, json, callback, {
+                        errorCallback: errorCallback,
+                        params: params,
+                    });
+                }
+                return response;
+            } else {
+                return response.json();
+            }
         })
         .then((data) => {
             callback(data);
+        })
+        .catch((error) => {
+            errorCallback(error);
+            console.log(error);
+        });
+};
+
+let resetToken = (url, json, callback, { errorCallback, params }) => {
+    let _url = new URL(hostUrl + "/refresh");
+    _url.search = new URLSearchParams(params).toString();
+    let opts = {
+        method: "POST",
+        body: JSON.stringify({
+            refresh: JSON.parse(sessionStorage.getItem("user"))
+                ? JSON.parse(sessionStorage.getItem("user")).refreshToken
+                : null,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    fetch(_url, opts)
+        .then((response) => {
+            // login timeout
+            return response.json();
+        })
+        .then((res) => {
+            if (res.success) {
+                sessionStorage.setItem("user", res.data);
+                postRequest(url, json, callback, {
+                    errorCallback: errorCallback,
+                    params: params,
+                });
+            } else {
+                sessionStorage.removeItem("user");
+            }
         })
         .catch((error) => {
             errorCallback(error);
@@ -48,7 +101,9 @@ let getRequest = (url, callback, { errorCallback, params }) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            Authorization: JSON.parse(sessionStorage.getItem("token")),
+            Authorization: JSON.parse(sessionStorage.getItem("user"))
+                ? JSON.parse(sessionStorage.getItem("user")).token
+                : null,
         },
     };
 
@@ -72,7 +127,9 @@ let getRequest_checkSession = (url, callback, { errorCallback, params }) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            Authorization: JSON.parse(sessionStorage.getItem("token")),
+            Authorization: JSON.parse(sessionStorage.getItem("user"))
+                ? JSON.parse(sessionStorage.getItem("user")).token
+                : null,
         },
     };
 
@@ -81,7 +138,7 @@ let getRequest_checkSession = (url, callback, { errorCallback, params }) => {
             if (response.status !== 200) {
                 errorCallback();
             }
-            return response.json();
+            return response;
         })
         .then((data) => {
             callback(data);

@@ -517,14 +517,13 @@ apiRoutes.post("/loginReq", function (req, res) {
     Object.assign(
         jsonResponse,
         Mock.mock({
-            "data|1": [
-                {
-                    "loginStatus|1-2": true,
-                    "type|1": [1, 2, 0],
-                    "id|1-100": 100,
-                    token: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
-                },
-            ],
+            data: {
+                loginStatus: true,
+                "type|1": [1, 2, 0],
+                "id|1-100": 100,
+                token: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
+                refreshToken: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
+            },
         })
     );
 
@@ -849,6 +848,27 @@ apiRoutes.get("/getNumberCount", function (req, res) {
             })
         );
     }
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.post("/refresh", function (req, res) {
+    let jsonResponse = {};
+
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            data: {
+                loginStatus: true,
+                "type|1": [1, 2, 0],
+                "id|1-100": 100,
+                token: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
+                refreshToken: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
+            },
+        })
+    );
 
     setTimeout(() => {
         res.json(jsonResponse);
