@@ -49,7 +49,7 @@ export default class RealTimeTrack extends React.Component {
 
     componentDidMount() {
         getRequest("/getReal", this.handleData, {
-            params: { id: 0 },
+            params: { id: sessionStorage.getItem('userId') },
             errorCallback: this.handleError,
         });
     }
