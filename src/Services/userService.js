@@ -29,10 +29,11 @@ export const login = (data) => {
 
     const callback = (res) => {
         if (res.data.loginStatus) {
-            sessionStorage.setItem("userId", JSON.stringify(res.data.id));
-            sessionStorage.setItem("loginStatus", 1);
-            sessionStorage.setItem("type", JSON.stringify(res.data.type));
-            sessionStorage.setItem("token", JSON.stringify(res.data.token));
+            sessionStorage.setItem("user", JSON.stringify(res.data));
+            // sessionStorage.setItem("userId", JSON.stringify(res.data.id));
+            // sessionStorage.setItem("loginStatus", 1);
+            // sessionStorage.setItem("type", JSON.stringify(res.data.type));
+            // sessionStorage.setItem("token", JSON.stringify(res.data.token));
             // console.log(res.data);
 
             message.success("登录成功");
@@ -59,10 +60,10 @@ export const login = (data) => {
  * @description logout , and remove the sessionStorage
  * */
 export const logout = () => {
-    sessionStorage.removeItem("userId");
-    sessionStorage.removeItem("loginStatus");
-    sessionStorage.removeItem("type");
-    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    // sessionStorage.removeItem("loginStatus");
+    // sessionStorage.removeItem("type");
+    // sessionStorage.removeItem("token");
     message.success("成功登出");
     window.location.href = "/";
 

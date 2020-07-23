@@ -19,12 +19,7 @@ export default class PrivateRoute extends React.Component {
     errorHandler = () => {
         // console.log(error);
         message.error("您需登录");
-        if (sessionStorage.getItem("userId"))
-            sessionStorage.removeItem("userId");
-        if (sessionStorage.getItem("loginStatus"))
-            sessionStorage.removeItem("loginStatus");
-        if (sessionStorage.getItem("type")) sessionStorage.removeItem("type");
-        if (sessionStorage.getItem("token")) sessionStorage.removeItem("token");
+        if (sessionStorage.getItem("user")) sessionStorage.removeItem("user");
 
         this.setState({ isAuthed: false, hasAuthed: true });
     };

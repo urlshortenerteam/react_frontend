@@ -6,9 +6,16 @@ import "../../css/CreateCss.css";
 import ShortWithQR from "./ShortWithQR";
 
 const { Search } = Input;
-
+const pattern = {
+    url: new RegExp(
+        "^(?!mailto:)(?:(?:http|https)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:([/?#])[^\\s]*)?$",
+        "i"
+    ),
+};
 const EditableContext = React.createContext();
-
+function checkUrl(URL) {
+    return !!URL.match(pattern.url);
+}
 const EditableRow = ({ index, ...props }) => {
     const [form] = Form.useForm();
     return (
@@ -78,12 +85,12 @@ const EditableCell = ({
                 name={dataIndex}
                 rules={[
                     {
+                        // type:"url",
                         required: true,
-                        message: `${title} is required.`,
+                        message: `请输入合法长链接`,
                     },
                 ]}
             >
-                {/*<Input ref={inputRef} onPressEnter={save} onBlur={save} />*/}
                 <Search
                     ref={inputRef}
                     onPressEnter={save}
@@ -203,23 +210,20 @@ export default class ManyToOneTable extends React.Component {
 
         if (urlArray.length > 1) {
             urlArray.forEach((item, index) => {
-                newRow.push({
-                    key: index + this.state.count + 1,
-                    long: item,
-                    short: "",
-                    edit: true,
-                });
                 if (!item) {
                     urlArray.splice(index, 1); //删除空项
                 }
                 //check indexOf http:// 或https://
                 else {
-                    if (
-                        item.indexOf("https://") !== 0 &&
-                        item.indexOf("http://") !== 0
-                    ) {
+                    if (!checkUrl(item)) {
                         flag = false;
                     }
+                    newRow.push({
+                        key: index + this.state.count + 1,
+                        long: item,
+                        short: "",
+                        edit: true,
+                    });
                 }
             });
 
@@ -227,7 +231,9 @@ export default class ManyToOneTable extends React.Component {
                 count: this.state.count + urlArray.length,
             });
             if (!flag) {
-                message.error("长链接格式错误，请以http://或https://开头");
+                message.error(
+                    "长链接格式错误，请输入合法长链接，请以http://或https://开头"
+                );
             }
 
             newData.splice(index, 1, ...newRow);
@@ -236,12 +242,13 @@ export default class ManyToOneTable extends React.Component {
             // console.log(newData);
         } else {
             const item = newData[index];
-            if (
-                urlArray[0].indexOf("https://") !== 0 &&
-                urlArray[0].indexOf("http://") !== 0
-            ) {
-                message.error("长链接格式错误，请以http://或https://开头");
+
+            if (!checkUrl(urlArray[0])) {
+                message.error(
+                    "长链接格式错误，请输入合法长链接，请以http://或https://开头"
+                );
             }
+
             newData.splice(index, 1, {
                 ...item,
                 ...row,
@@ -278,10 +285,7 @@ export default class ManyToOneTable extends React.Component {
             }
             //检查是否为 http:// 或https://
             else {
-                if (
-                    item.long.indexOf("https://") !== 0 &&
-                    item.long.indexOf("http://") !== 0
-                ) {
+                if (!checkUrl(item.long)) {
                     flag = false;
                     messages += index + 1;
                     messages += "、";
