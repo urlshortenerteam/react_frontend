@@ -4,7 +4,7 @@
  * @type string
  * @default http://localhost:4000
  * */
-export const hostUrl = "http://localhost:4000";
+export const hostUrl = "http://3.81.71.37:8080";
 
 /**
  * postRequest
@@ -81,7 +81,7 @@ let getRequest_checkSession = (url, callback, { errorCallback, params }) => {
             if (response.status !== 200) {
                 errorCallback();
             }
-            return response.json();
+            return response;
         })
         .then((data) => {
             callback(data);
