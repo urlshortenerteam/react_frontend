@@ -4,8 +4,8 @@
  * @type string
  * @default http://localhost:4000
  * */
-export const hostUrl = "http://3.81.71.37:8080";
-// export const hostUrl = "http://localhost:4000";
+// export const hostUrl = "http://3.81.71.37:8080";
+export const hostUrl = "http://localhost:4000";
 // export const hostUrl = "http://111.186.46.37:4000";
 /**
  * postRequest
@@ -34,10 +34,11 @@ let postRequest = (url, json, callback, { errorCallback, params }) => {
     fetch(_url, opts)
         .then((response) => {
             // login timeout
+            console.log(response.status === 404);
             if (response.status === 404) {
                 if (
-                    JSON.parse(sessionStorage.getItem("uesr")) !== null &&
-                    JSON.parse(sessionStorage.getItem("uesr")).loginStatus
+                    JSON.parse(sessionStorage.getItem("user")) !== null &&
+                    JSON.parse(sessionStorage.getItem("user")).loginStatus
                 ) {
                     resetToken(url, json, callback, {
                         errorCallback: errorCallback,
@@ -78,14 +79,17 @@ let resetToken = (url, json, callback, { errorCallback, params }) => {
             return response.json();
         })
         .then((res) => {
+            console.log(res);
             if (res.success) {
-                sessionStorage.setItem("user", res.data);
+                sessionStorage.setItem("user", JSON.stringify(res.data));
+                console.log(url);
                 postRequest(url, json, callback, {
                     errorCallback: errorCallback,
                     params: params,
                 });
             } else {
                 sessionStorage.removeItem("user");
+                window.location.href = "/login";
             }
         })
         .catch((error) => {

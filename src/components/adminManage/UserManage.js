@@ -27,18 +27,18 @@ class UserTable extends React.Component {
             },
             {
                 title: "访问次数",
-                dataIndex: "visit_count",
+                dataIndex: "visitCount",
                 width: "5%",
                 align: "center",
                 sorter: {
-                    compare: (a, b) => a.visit_count - b.visit_count,
+                    compare: (a, b) => a.visitCount - b.visitCount,
                 },
                 // render: (text, record) =>
                 //     this.state.dataSource.length >= 1 ? (
-                //         <Statistic title="Feedback" value={record.visit_count} prefix={<LikeOutlined />} />
+                //         <Statistic title="Feedback" value={record.visitCount} prefix={<LikeOutlined />} />
                 //     ) : null,
 
-                ...this.getColumnSearchProps("visit_count"),
+                ...this.getColumnSearchProps("visitCount"),
             },
             {
                 title: "用户类型",

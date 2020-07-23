@@ -179,7 +179,7 @@ export default class VisitRankingList extends Component {
                     </Col>
                     <Col span={10} offset={1}>
                         <div className="donutPlot">
-                            {this.state.showData.length > 1 ? (
+                            {this.state.showData.length >= 1 ? (
                                 <DonutPlot data={this.state.showData} />
                             ) : null}
                         </div>
