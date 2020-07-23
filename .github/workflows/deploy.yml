@@ -78,11 +78,7 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: npm install
-        uses: actions/npm@v1
-        with:
-          args: install
+      - run: npm install
       - run: npm build
       - run: npm install -g serverless
       - name: Serverless AWS authentication
