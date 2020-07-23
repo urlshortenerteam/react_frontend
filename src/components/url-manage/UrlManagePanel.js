@@ -47,7 +47,7 @@ export default class UrlManagePanel extends Component {
         getRequest("/getStat", this.handleData, {
             params: {
                 id: sessionStorage.getItem("user")
-                    ? sessionStorage.getItem("user").id
+                    ? JSON.parse(sessionStorage.getItem("user")).id
                     : null,
             },
             errorCallback: this.handleError,

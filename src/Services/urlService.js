@@ -1,4 +1,5 @@
 import { getRequest, postRequest } from "./ajax";
+
 /**
  * BanUrl
  * @author Zhuohao Shen <ao7777@sjtu.edu.cn>
@@ -12,7 +13,10 @@ import { getRequest, postRequest } from "./ajax";
 let BanUrl = ({ url, callback, errorCallback }) => {
     postRequest("/editUrl", "BANNED", callback, {
         errorCallback: errorCallback,
-        params: { id: sessionStorage.getItem("user").id, shortUrl: url },
+        params: {
+            id: JSON.parse(sessionStorage.getItem("user")).id,
+            shortUrl: url,
+        },
     });
 };
 /**
