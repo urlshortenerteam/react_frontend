@@ -58,13 +58,13 @@ export default class UrlManagePanel extends Component {
         this.setState({ listData: response.data, loading: false });
         this.state.listData.forEach((short) => {
             let idle = 0;
-            short.time_distr.forEach((time) => {
+            short.timeDistr.forEach((time) => {
                 //visit less than 2000 is seen as an idle hour
                 if (time.value <= 2000) idle++;
             });
             short.idle = idle;
         });
-        console.log(this.state);
+        console.log(JSON.stringify(this.state));
     };
     handleError = (error) => {
         console.log(error);

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { createBrowserHistory } from "history";
 
 import HomeView from "../view/HomeView";
 import LoginView from "../view/LoginView";
@@ -12,7 +11,7 @@ import { Layout } from "antd";
 import Navigation from "../components/Navigation";
 import AdminManageView from "../view/AdminManageView";
 import PrivateRoute from "./PrivateRoute";
-export const history = createBrowserHistory();
+
 const { Header, Footer } = Layout;
 const BasicRouter = () => (
     <BrowserRouter>
@@ -23,7 +22,7 @@ const BasicRouter = () => (
             <Switch>
                 <Route exact path="/" component={HomeView} />
                 <Route exact path="/login" component={LoginView} />
-                <Route exact path="/create" component={CreateView} />
+                <PrivateRoute exact path="/create" component={CreateView} />
                 <PrivateRoute
                     exact
                     path="/statistics"

@@ -75,6 +75,12 @@ export default class VisitRankingList extends Component {
                         <div className="number">
                             <Card title="访问量排行榜--TOP 10">
                                 <List
+                                    style={{
+                                        outline: " none",
+                                        overflow: "hidden",
+                                        whiteSpace: "nowrap",
+                                        textOverflow: "ellipsis",
+                                    }}
                                     pagination={{
                                         pageSize: 2,
                                         size: "small",
@@ -91,7 +97,7 @@ export default class VisitRankingList extends Component {
                                                         // <div>
                                                         <Row
                                                             key={index}
-                                                            align="right"
+                                                            align="middle"
                                                         >
                                                             {/*<Col span={2}>*/}
                                                             <SnapShot

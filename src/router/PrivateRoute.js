@@ -23,7 +23,7 @@ export default class PrivateRoute extends React.Component {
         console.log(this.state);
         // message.error("您需登录");
         if (sessionStorage.getItem("user")) sessionStorage.removeItem("user");
-        // window.location.href='/login';
+        window.location.href = "/login";
     };
     componentDidMount() {
         if (sessionStorage.getItem("user")) {

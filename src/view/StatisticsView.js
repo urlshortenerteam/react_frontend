@@ -79,7 +79,7 @@ class StatisticsView extends React.Component {
                         <TrendingLines data={this.state.lineData} />
                     ) : null}
                     {this.state.display === "area" ? (
-                        this.state.data === null ? (
+                        this.state.data !== null ? (
                             <MapBox data={this.state.data[0].areaDistr} />
                         ) : (
                             <Text>暂无数据</Text>

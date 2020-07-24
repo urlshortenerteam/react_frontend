@@ -76,7 +76,7 @@ export default class Navigation extends React.Component {
                     extra={[
                         <Row key="login">
                             <Col>
-                                {JSON.parse(sessionStorage.getItem("user")) ? (
+                                {sessionStorage.getItem("user") ? (
                                     JSON.parse(sessionStorage.getItem("user"))
                                         .loginStatus ? (
                                         <Button key="2" ghost onClick={logout}>

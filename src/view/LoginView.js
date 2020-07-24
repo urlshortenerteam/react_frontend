@@ -22,11 +22,6 @@ class LoginView extends Component {
             if (res.data.loginStatus) {
                 sessionStorage.setItem("user", JSON.stringify(res.data));
 
-                // sessionStorage.setItem("userId", JSON.stringify(res.data.id));
-                // sessionStorage.setItem("loginStatus", 1);
-                // sessionStorage.setItem("type", JSON.stringify(res.data.type));
-                // sessionStorage.setItem("token", JSON.stringify(res.data.token));
-                // console.log(res.data);
                 if (sessionStorage.getItem("user")) {
                     console.log(JSON.parse(sessionStorage.getItem("user")));
                     message.success("登录成功");

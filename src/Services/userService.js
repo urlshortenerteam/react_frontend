@@ -40,7 +40,10 @@ export const login = (data, callback) => {
  * @description logout , and remove the sessionStorage
  * */
 export const logout = () => {
-    sessionStorage.removeItem("user");
+    if (sessionStorage.getItem("user")) {
+        sessionStorage.removeItem("user");
+    }
+
     // sessionStorage.removeItem("loginStatus");
     // sessionStorage.removeItem("type");
     // sessionStorage.removeItem("token");

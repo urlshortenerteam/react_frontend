@@ -287,6 +287,7 @@ apiRoutes.post("/getShort", function (req, res) {
 });
 
 apiRoutes.post("/loginReq", function (req, res) {
+    loginMock = true;
     console.log(req);
     let jsonResponse = {
         status: 200,
@@ -312,6 +313,7 @@ apiRoutes.post("/loginReq", function (req, res) {
 
 apiRoutes.post("/logoutReq", function (req, res) {
     console.log(req);
+    loginMock = false;
     let jsonResponse = {
         status: 200,
         msg: "查询成功",
@@ -423,23 +425,11 @@ apiRoutes.get("/checkSession", function (req, res) {
         msg: "查询成功",
     };
 
-    if (!loginMock) {
-        // Object.assign(
-        //     jsonResponse,
-        //     Mock.mock({
-        //         "status|1": [404, 500, 403],
-        //     })
-        // );
-        res.status(404);
-    } else {
-        res.status(200);
-        // Object.assign(
-        //     jsonResponse,
-        //     Mock.mock({
-        //         status: 200,
-        //     })
-        // );
-    }
+    // if (!loginMock) {
+    //     res.status(404);
+    // } else {
+    res.status(200);
+    // }
 
     setTimeout(() => {
         res.json(jsonResponse);
@@ -458,9 +448,9 @@ apiRoutes.get("/getTopTen", function (req, res) {
                         "longUrl|1-5": [
                             {
                                 "url|1": [
-                                    "https://www.baidu.com",
-                                    "https://www.taobao.com",
-                                    "https://mockjs.com/examples.html",
+                                    "https://www.baidertyuiop[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhdfghu.com",
+                                    "https://www.taob[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglh[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhao.com",
+                                    "https://mockjs.co[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhm/examples.html",
                                 ],
                             },
                         ],
@@ -480,9 +470,9 @@ apiRoutes.get("/getTopTen", function (req, res) {
                         "longUrl|1-5": [
                             {
                                 "url|1": [
-                                    "https://www.baidu.com",
-                                    "https://www.taobao.com",
-                                    "https://mockjs.com/examples.html",
+                                    "https://www.baidertyuiop[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhdfghu.com",
+                                    "https://www.taob[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglh[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhao.com",
+                                    "https://mockjs.co[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhm/examples.html",
                                 ],
                             },
                         ],
