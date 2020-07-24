@@ -6,7 +6,7 @@ import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
 import { withRouter } from "react-router-dom";
-import { getRequest } from "../Services/ajax";
+import { getRequest } from "../services/ajax";
 const { Sider, Content } = Layout;
 const { Text } = Typography;
 /**

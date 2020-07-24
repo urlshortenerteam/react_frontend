@@ -14,9 +14,7 @@ let BanUrl = ({ url, callback, errorCallback }) => {
     postRequest("/editUrl", "BANNED", callback, {
         errorCallback: errorCallback,
         params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
+            id:sessionStorage.getItem("user")? JSON.parse(sessionStorage.getItem("user")).id:null,
             shortUrl: url,
         },
     });
@@ -38,9 +36,7 @@ let EditUrl = ({ url, newLong, callback, errorCallback }) => {
     postRequest("/editUrl", newLong, callback, {
         errorCallback: errorCallback,
         params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
+            id:sessionStorage.getItem("user")? JSON.parse(sessionStorage.getItem("user")).id:null,
             shortUrl: url,
         },
     });
@@ -59,9 +55,7 @@ let LiftUrl = ({ url, callback, errorCallback }) => {
     postRequest("/editUrl", "LIFT", callback, {
         errorCallback: errorCallback,
         params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
+            id:sessionStorage.getItem("user")? JSON.parse(sessionStorage.getItem("user")).id:null,
             shortUrl: url,
         },
     });
@@ -80,9 +74,7 @@ let GetUrl = ({ url, callback, errorCallback }) => {
     getRequest("/getShortStat", callback, {
         errorCallback: errorCallback,
         params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
+            id:sessionStorage.getItem("user")? JSON.parse(sessionStorage.getItem("user")).id:null,
             short: url,
         },
     });
