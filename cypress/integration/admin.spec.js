@@ -116,7 +116,7 @@ describe("AdminManage", () => {
 const stubData = () => {
     cy.route({
         method: "POST",
-        url: "**/editUrl?**",
+        url: "**/editUrl",
         response: {
             status: 200,
             msg: "查询成功",

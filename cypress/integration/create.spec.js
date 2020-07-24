@@ -197,7 +197,7 @@ describe("Create", () => {
 const stubData = () => {
     cy.route({
         method: "POST",
-        url: "**/getShort?**",
+        url: "**/getShort",
         response: {
             status: 200,
             msg: "查询成功",
@@ -210,7 +210,7 @@ const stubData = () => {
     });
     cy.route({
         method: "POST",
-        url: "**/getOneShort?**",
+        url: "**/getOneShort",
         response: {
             status: 200,
             msg: "查询成功",

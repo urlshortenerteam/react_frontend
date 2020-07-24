@@ -5,17 +5,17 @@ import MapBox from "../components/MapBox";
 import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
-import { getRequest } from "../Services/ajax";
-
+import { withRouter } from "react-router-dom";
+import { getRequest } from "../services/ajax";
 const { Sider, Content } = Layout;
 const { Text } = Typography;
 /**
-StatisticsView
-@author Zhuohao Shen
-@date July 7th 2020
-@description Statistics page
-*/
-export default class StatisticsView extends React.Component {
+ StatisticsView
+ @author Zhuohao Shen
+ @date July 7th 2020
+ @description Statistics page
+ */
+class StatisticsView extends React.Component {
     state = {
         display: "overview",
         data: [],
@@ -28,7 +28,11 @@ export default class StatisticsView extends React.Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: 0 },
+            params: {
+                id: sessionStorage.getItem("user")
+                    ? JSON.parse(sessionStorage.getItem("user")).id
+                    : null,
+            },
             errorCallback: this.handleError,
         });
     }
@@ -75,7 +79,7 @@ export default class StatisticsView extends React.Component {
                         <TrendingLines data={this.state.lineData} />
                     ) : null}
                     {this.state.display === "area" ? (
-                        this.state.data === null ? (
+                        this.state.data !== null ? (
                             <MapBox data={this.state.data[0].areaDistr} />
                         ) : (
                             <Text>暂无数据</Text>
@@ -89,3 +93,4 @@ export default class StatisticsView extends React.Component {
         );
     }
 }
+export default withRouter(StatisticsView);
