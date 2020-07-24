@@ -141,15 +141,9 @@ class AdminUrlManage extends Component {
                 dataIndex: "shortUrl",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
+                        record.longUrl.length === 0 ||
                         record.longUrl[0].url === "BANNED" ? (
-                            <Tag color="#cb0000">
-                                <a
-                                    style={{ color: "white" }}
-                                    href={record.longUrl[0].url}
-                                >
-                                    {record.shortUrl}
-                                </a>
-                            </Tag>
+                            <Tag color="#cb0000">{record.shortUrl}</Tag>
                         ) : (
                             <Tag color="#3b5999">
                                 <a
@@ -170,6 +164,7 @@ class AdminUrlManage extends Component {
                 align: "center",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
+                        record.longUrl.length === 0 ||
                         record.longUrl[0].url !== "BANNED" ? (
                             <Popconfirm
                                 title="确认禁用?"

@@ -4,7 +4,7 @@
  * @type string
  * @default http://localhost:4000
  * */
-export const hostUrl = "http://localhost:4000";
+export const hostUrl = "http://3.81.71.37:8080";
 
 /**
  * postRequest

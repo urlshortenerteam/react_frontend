@@ -5,9 +5,9 @@ name: CD
 
 on:
   push:
-    tags: 
+    tags:
       - "v*"
-        
+
 jobs:
   check:
     name: check linter
@@ -17,11 +17,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm i
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: "12"
+      - run: npm install
       - run: npm run lint
   test:
     name: e2e test
@@ -61,7 +61,7 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
           TERM: xterm
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         with:
           name: screenshots
           path: cypress/screenshots
@@ -70,7 +70,7 @@ jobs:
           # so only upload screenshots if previous step has failed
         if: failure()
       # video should always be generated
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         with:
           name: videos
           path: cypress/videos

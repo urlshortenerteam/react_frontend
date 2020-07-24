@@ -20,7 +20,7 @@ export default class StatisticsView extends React.Component {
         display: "overview",
         data: [],
         lineData: [],
-        collapsed: false,
+        collapsed: true,
     };
     toggleSwitch = ({ key }) => {
         this.setState({ display: key });
@@ -37,7 +37,7 @@ export default class StatisticsView extends React.Component {
         this.setState({ data: response.data });
         let lines = [];
         this.state.data.forEach((url) => {
-            url.time_distr.forEach((time) => {
+            url.timeDistr.forEach((time) => {
                 time.url = "short.cn/" + url.shortUrl;
                 lines.push(time);
             });
@@ -76,7 +76,7 @@ export default class StatisticsView extends React.Component {
                     ) : null}
                     {this.state.display === "area" ? (
                         this.state.data === null ? (
-                            <MapBox data={this.state.data[0].area_distr} />
+                            <MapBox data={this.state.data[0].areaDistr} />
                         ) : (
                             <Text>暂无数据</Text>
                         )

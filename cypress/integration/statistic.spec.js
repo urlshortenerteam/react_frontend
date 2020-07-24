@@ -9,7 +9,7 @@ describe("Statistic", () => {
     });
     it("check lines", () => {
         cy.get(
-            "[style=\"max-width: 256px; margin: auto;\"] > .ant-menu-dark > :nth-child(2)"
+            ".ant-layout-sider-children > .ant-menu > :nth-child(2)"
         )
             .click()
             .get(".ant-collapse-item-active > .ant-collapse-header")
@@ -18,7 +18,7 @@ describe("Statistic", () => {
     });
     it("check area distribution", () => {
         cy.get(
-            "[style=\"max-width: 256px; margin: auto;\"] > .ant-menu-dark > :nth-child(3)"
+            ".ant-layout-sider-children > .ant-menu > :nth-child(3)"
         ).click();
     });
 });

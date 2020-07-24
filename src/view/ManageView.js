@@ -3,6 +3,7 @@ import { Col, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 import UrlManagePanel from "../components/url-manage/UrlManagePanel";
 import CategoryManage from "../components/url-manage/CategoryManage";
+
 import { ScheduleOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
@@ -35,7 +36,6 @@ class ManageView extends Component {
                                     </span>
                                 }
                             >
-                                >
                                 <CategoryManage />
                             </TabPane>
                         </Tabs>

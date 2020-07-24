@@ -16,3 +16,8 @@
     /*background-color: #6699cc;*/
     background-color: transparent;
 }
+
+.ant-page-header-compact .ant-page-header-heading {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}

@@ -18,6 +18,7 @@
     "cypress": "^4.10.0",
     "dayjs": "^1.8.18",
     "express": "^4.17.1",
+    "magic.css": "^1.4.6",
     "minimist": "^1.2.5",
     "mockjs": "^1.1.0",
     "moment": "^2.27.0",

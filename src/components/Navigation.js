@@ -83,20 +83,9 @@ export default class Navigation extends React.Component {
                                     </Button>
                                 )}
                             </Col>
-                            {/*<Col>*/}
-                            {/*    <Button*/}
-                            {/*        ghost*/}
-                            {/*        key="1"*/}
-                            {/*        href="#/register"*/}
-                            {/*        style={{ marginLeft: 7 }}*/}
-                            {/*    >*/}
-                            {/*        注册*/}
-                            {/*    </Button>*/}
-                            {/*</Col>*/}
                         </Row>,
                     ]}
                 />
-                ,
             </div>
         );
     }
