@@ -1,5 +1,5 @@
 import React from "react";
-import { getRequest } from "../../Services/ajax";
+import { getRequest } from "../../services/ajax";
 import Table from "antd/es/table";
 
 /**
@@ -50,7 +50,11 @@ export default class RealTimeTrack extends React.Component {
 
     componentDidMount() {
         getRequest("/getReal", this.handleData, {
-            params: { id: JSON.parse(sessionStorage.getItem("user")).id },
+            params: {
+                id: sessionStorage.getItem("user")
+                    ? JSON.parse(sessionStorage.getItem("user")).id
+                    : null,
+            },
             errorCallback: this.handleError,
         });
     }

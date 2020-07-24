@@ -5,8 +5,8 @@ import MapBox from "../components/MapBox";
 import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
-import { getRequest } from "../Services/ajax";
-
+import { withRouter } from "react-router-dom";
+import { getRequest } from "../services/ajax";
 const { Sider, Content } = Layout;
 const { Text } = Typography;
 /**
@@ -15,7 +15,7 @@ const { Text } = Typography;
  @date July 7th 2020
  @description Statistics page
  */
-export default class StatisticsView extends React.Component {
+class StatisticsView extends React.Component {
     state = {
         display: "overview",
         data: [],
@@ -28,7 +28,11 @@ export default class StatisticsView extends React.Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: JSON.parse(sessionStorage.getItem("user")).id },
+            params: {
+                id: sessionStorage.getItem("user")
+                    ? JSON.parse(sessionStorage.getItem("user")).id
+                    : null,
+            },
             errorCallback: this.handleError,
         });
     }
@@ -89,3 +93,4 @@ export default class StatisticsView extends React.Component {
         );
     }
 }
+export default withRouter(StatisticsView);

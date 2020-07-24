@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import React, { Component } from "react";
 import "../../css/AdminStatisticsCss.css";
-import { getNumberCount } from "../../Services/adminManageService";
+import { getNumberCount } from "../../services/adminManageService";
 
 /**
  * NumberCount
@@ -28,6 +28,10 @@ export default class NumberCount extends Component {
     componentDidMount() {
         const callback = (res) => {
             if (res.not_administrator) {
+                if (sessionStorage.getItem("user")) {
+                    sessionStorage.removeItem("user");
+                }
+                window.location.href = "/login";
                 message.error("您不是管理员！！！");
                 return;
             }
@@ -89,7 +93,7 @@ export default class NumberCount extends Component {
                     <Col span={5} offset={1}>
                         <Card hoverable={true}>
                             <div style={{ margin: 10 }}>
-                                {this.state.visitCountTotal ? (
+                                {this.state.visitCountTotal !== null ? (
                                     <Statistic
                                         title="总访问量"
                                         value={this.state.visitCountTotal}

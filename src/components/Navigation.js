@@ -8,7 +8,7 @@ import {
     PicLeftOutlined,
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
-import { logout } from "../Services/userService";
+import { logout } from "../services/userService";
 import { Link } from "react-router-dom";
 
 /**
@@ -60,12 +60,17 @@ export default class Navigation extends React.Component {
                             >
                                 <Link to="/manage">管理链接</Link>
                             </Menu.Item>
-                            <Menu.Item
-                                key="adminManage"
-                                icon={<AppstoreOutlined />}
-                            >
-                                <Link to="/adminManage">运营管理</Link>
-                            </Menu.Item>
+                            {sessionStorage.getItem("user") ? (
+                                JSON.parse(sessionStorage.getItem("user"))
+                                    .type === 0 ? (
+                                    <Menu.Item
+                                        key="adminManage"
+                                        icon={<AppstoreOutlined />}
+                                    >
+                                        <Link to="/adminManage">运营管理</Link>
+                                    </Menu.Item>
+                                ) : null
+                            ) : null}
                         </Menu>,
                     ]}
                     extra={[
@@ -101,7 +106,6 @@ export default class Navigation extends React.Component {
                         </Row>,
                     ]}
                 />
-                ,
             </div>
         );
     }

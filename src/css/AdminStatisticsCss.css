@@ -1,3 +1,4 @@
+/*@import '~antd/dist/antd.dark.css';*/
 .number .ant-statistic-title {
     color: white;
 }
@@ -108,4 +109,11 @@
     background: transparent;
     border-color: #ee808000;
     color: white;
+}
+
+.ant-list * {
+    outline: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

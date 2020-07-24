@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
-import { getBatchManyToOne } from "../../Services/CreateService";
+import { getBatchManyToOne } from "../../services/CreateService";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
 import ShortWithQR from "./ShortWithQR";
@@ -135,7 +135,6 @@ export default class ManyToOneTable extends React.Component {
                 ellipsis: {
                     showTitle: false,
                 },
-                width: "60%",
                 render: (long) => (
                     <Tooltip placement="topLeft" title={long}>
                         {long}
