@@ -20,7 +20,7 @@ export default class StatisticsView extends React.Component {
         display: "overview",
         data: [],
         lineData: [],
-        collapsed:true
+        collapsed: true,
     };
     toggleSwitch = ({ key }) => {
         this.setState({ display: key });

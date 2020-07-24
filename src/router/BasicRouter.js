@@ -17,7 +17,7 @@ const BasicRouter = () => (
     <BrowserRouter>
         <Layout style={{ backgroundColor: "#001529", minHeight: "100%" }}>
             <Header>
-                        <Navigation />
+                <Navigation />
             </Header>
             <Switch>
                 <Route exact path="/" component={HomeView} />

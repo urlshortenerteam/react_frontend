@@ -13,74 +13,82 @@ HomeView
 @description Home View
 */
 class HomeView extends Component {
-   constructor() {
-       super();
-       setTimeout(()=>{
-           this.setState({
-               showLeft:true
-           })
-       },300)
-       setTimeout(()=>{
-           this.setState({
-               showRight:true
-           })
-       },600)
-       setTimeout(()=>{
-           this.setState({
-               showBottom:true
-           })
-       },900)
-       setTimeout(()=>{
-           this.setState({
-               showExplorer:true
-           })
-       },1000)
-       this.state={
-           showExplorer:false,
-           showLeft:false,
-           showBottom:false,
-           showRight:false
-       }
-   }
+    constructor() {
+        super();
+        setTimeout(() => {
+            this.setState({
+                showLeft: true,
+            });
+        }, 300);
+        setTimeout(() => {
+            this.setState({
+                showRight: true,
+            });
+        }, 600);
+        setTimeout(() => {
+            this.setState({
+                showBottom: true,
+            });
+        }, 900);
+        setTimeout(() => {
+            this.setState({
+                showExplorer: true,
+            });
+        }, 1000);
+        this.state = {
+            showExplorer: false,
+            showLeft: false,
+            showBottom: false,
+            showRight: false,
+        };
+    }
 
     render() {
         return (
             <Content style={{ display: "flex" }}>
-                {this.state.showExplorer?
+                {this.state.showExplorer ? (
                     <h1 className={`centerDesc magictime puffIn`}>
                         短链接
-                        <br/>
+                        <br />
                         从未如此
-                        <br/>
+                        <br />
                         简单易用
-                        <br style={{ padding: 0 }}/>
+                        <br style={{ padding: 0 }} />
                         <Button
-                            icon={<RightOutlined/>}
+                            icon={<RightOutlined />}
                             href="/create"
-                            className={this.state.showExplorer?"magictime vanishIn":null}
+                            className={
+                                this.state.showExplorer
+                                    ? "magictime vanishIn"
+                                    : null
+                            }
                             ghost
                         >
                             开始探索
                         </Button>
-                    </h1>:null}
-                {this.state.showLeft?
+                    </h1>
+                ) : null}
+                {this.state.showLeft ? (
                     <img
                         className="leftDesc magictime puffIn"
                         src={hostUrl + "/static/flow.png"}
                         alt={""}
-
-                    />:null}
-                {this.state.showBottom?
+                    />
+                ) : null}
+                {this.state.showBottom ? (
                     <img
-                    className="rightBottomDesc magictime puffIn"
-                    src={hostUrl + "/static/people.png"}
-                    alt={""}
-                />:null}
-                {this.state.showRight?<img
-                    className="rightTopDesc magictime puffIn"
-                    src={hostUrl + "/static/trans.png"}
-                    alt={""}
-                />:null}
+                        className="rightBottomDesc magictime puffIn"
+                        src={hostUrl + "/static/people.png"}
+                        alt={""}
+                    />
+                ) : null}
+                {this.state.showRight ? (
+                    <img
+                        className="rightTopDesc magictime puffIn"
+                        src={hostUrl + "/static/trans.png"}
+                        alt={""}
+                    />
+                ) : null}
             </Content>
         );
     }

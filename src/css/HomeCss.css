@@ -15,7 +15,7 @@ body {
 }
 
 .centerDesc {
-    width:50vw;
+    width: 50vw;
     color: white;
     text-align: center;
     position: absolute;
@@ -62,4 +62,3 @@ body {
 #root {
     height: 100vh;
 }
-
