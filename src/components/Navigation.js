@@ -11,7 +11,7 @@ import "../css/NavigationCss.css";
 import { logout } from "../Services/userService";
 import { Link } from "react-router-dom";
 
-/*
+/**
 Navigation:
 @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
 @date July 7th 2020
@@ -33,10 +33,6 @@ export default class Navigation extends React.Component {
                     ghost
                     className="site-page-header"
                     title="Reevoo"
-                    avatar={{
-                        src:
-                            "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
-                    }}
                     subTitle={[
                         <Menu
                             onClick={this.handleClick}
@@ -82,25 +78,14 @@ export default class Navigation extends React.Component {
                                         登出
                                     </Button>
                                 ) : (
-                                    <Button key="3" ghost href="#/login">
+                                    <Button key="3" ghost href="/login">
                                         登录
                                     </Button>
                                 )}
                             </Col>
-                            {/*<Col>*/}
-                            {/*    <Button*/}
-                            {/*        ghost*/}
-                            {/*        key="1"*/}
-                            {/*        href="#/register"*/}
-                            {/*        style={{ marginLeft: 7 }}*/}
-                            {/*    >*/}
-                            {/*        注册*/}
-                            {/*    </Button>*/}
-                            {/*</Col>*/}
                         </Row>,
                     ]}
                 />
-                ,
             </div>
         );
     }

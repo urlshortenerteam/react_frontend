@@ -1,15 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {
-    Button,
-    Col,
-    Form,
-    Input,
-    message,
-    Popconfirm,
-    Row,
-    Table,
-    Tooltip,
-} from "antd";
+import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
 import { getBatchManyToOne } from "../../Services/CreateService";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
@@ -95,7 +85,6 @@ const EditableCell = ({
             >
                 {/*<Input ref={inputRef} onPressEnter={save} onBlur={save} />*/}
                 <Search
-                    name="urlInput"
                     ref={inputRef}
                     onPressEnter={save}
                     onBlur={save}
@@ -144,30 +133,6 @@ export default class ManyToOneTable extends React.Component {
                         {long}
                     </Tooltip>
                 ),
-            },
-            {
-                title: "删除",
-                dataIndex: "operation",
-                align: "center",
-                width: "10%",
-                colSpan: 0,
-                render: (text, record) =>
-                    this.state.dataSource.length >= 1 ? (
-                        !this.state.created ? (
-                            <Popconfirm
-                                title="确定删除此长链接？"
-                                onConfirm={() => this.handleDelete(record.key)}
-                                okText="删除"
-                                cancelText="取消"
-                            >
-                                <Button type="primary">删除</Button>
-                            </Popconfirm>
-                        ) : (
-                            <Button type="primary" disabled>
-                                删除
-                            </Button>
-                        )
-                    ) : null,
             },
             {
                 title: "短链接",

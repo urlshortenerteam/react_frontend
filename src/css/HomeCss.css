@@ -1,16 +1,4 @@
-.Block {
-    width: 100%;
-    height: 400px;
-    /*top: 23%;*/
-    /*position: relative;*/
-    margin-top: 8%;
-    /*border-radius: 25px;*/
-    box-shadow: 0 0 10px 0 #132c33;
-    background-color: #6699cc;
-
-    /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
-}
-
+@import "../../node_modules/magic.css/dist/magic.css";
 body {
     background-color: #001529;
 }
@@ -27,35 +15,35 @@ body {
 }
 
 .centerDesc {
-    max-width: 400px;
+    width:50vw;
     color: white;
     text-align: center;
     position: absolute;
     top: auto;
     bottom: auto;
-    left: 40%;
-    font-size: 55px;
-    z-index: 3;
+    left: 25vw;
+    font-size: calc(35px + 2.5vmin);
     line-height: 70px;
-    margin-top: 5%;
+    margin-top: 8vh;
+    z-index: 3;
 }
 
 .leftDesc {
-    width: 40%;
+    width: 40vw;
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
 }
 
 .rightBottomDesc {
-    max-height: 200px;
+    width: 30vmin;
     margin-left: auto;
     margin-top: auto;
 }
 
 .rightTopDesc {
     margin-left: auto;
-    width: 30%;
+    width: 30vw;
     margin-bottom: auto;
 }
 .select-before {
@@ -64,7 +52,14 @@ body {
 [data-theme="compact"] .select-before {
     width: 71px;
 }
-
-#root {
-    height: 100%;
+.ant-layout-header {
+    height: 64px;
+    padding: 0 1vw;
+    color: rgba(0, 0, 0, 0.65);
+    line-height: 64px;
+    background: #001529;
 }
+#root {
+    height: 100vh;
+}
+

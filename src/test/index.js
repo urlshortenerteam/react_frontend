@@ -43,7 +43,7 @@ apiRoutes.get("/getStat", function (req, res) {
                     ],
                     count: "@natural(0,100000)",
                     long: '@url("http")',
-                    area_distr: [
+                    areaDistr: [
                         {
                             name: "云南省",
                             code: 530000,
@@ -215,7 +215,7 @@ apiRoutes.get("/getStat", function (req, res) {
                             value: "@natural(0,3000)",
                         },
                     ],
-                    time_distr: [
+                    timeDistr: [
                         { time: "0", value: "@natural(0,3000)" },
                         { time: "1", value: "@natural(0,3000)" },
                         { time: "2", value: "@natural(0,3000)" },

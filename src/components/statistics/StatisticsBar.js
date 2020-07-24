@@ -23,7 +23,6 @@ export default class StatisticsBar extends React.Component {
 
     render() {
         return (
-            <div style={{ maxWidth: 256, margin: "auto" }}>
                 <Menu
                     onClick={this.toggleSwitch}
                     defaultSelectedKeys={["overview"]}
@@ -59,7 +58,6 @@ export default class StatisticsBar extends React.Component {
                         </SubMenu>
                     </SubMenu>
                 </Menu>
-            </div>
         );
     }
 }
