@@ -6,7 +6,7 @@ import {
     SmileOutlined,
     UserAddOutlined,
 } from "@ant-design/icons";
-import { banUser, getAllUser } from "../../Services/adminManageService";
+import { banUser, getAllUser } from "../../services/adminManageService";
 
 /**
  * UserTable
@@ -86,7 +86,9 @@ class UserTable extends React.Component {
                                 {record.role !== 2 ? (
                                     <Button type="primary">禁用</Button>
                                 ) : (
-                                    <Button type="primary">解除</Button>
+                                    <Button type="primary" danger>
+                                        解除
+                                    </Button>
                                 )}
                             </Popconfirm>
                         )
@@ -105,6 +107,10 @@ class UserTable extends React.Component {
     componentDidMount() {
         const callback = (res) => {
             if (res.not_administrator) {
+                if (sessionStorage.getItem("user")) {
+                    sessionStorage.removeItem("user");
+                }
+                window.location.href = "/login";
                 message.error("您不是管理员");
                 return;
             }

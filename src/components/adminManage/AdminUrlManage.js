@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Button, List, message, Popconfirm, Row, Table, Tag } from "antd";
-import { getAllUrls } from "../../Services/adminManageService";
+import { getAllUrls } from "../../services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
 import { StopOutlined } from "@ant-design/icons";
-import { BanUrl, GetUrl, LiftUrl } from "../../Services/urlService";
+import { BanUrl, GetUrl, LiftUrl } from "../../services/urlService";
+import { hostUrl } from "../../services/ajax";
 
 const IconText = ({ icon, text, action }) => (
     <span onClick={action} style={{ marginLeft: 32, color: "red" }}>
@@ -13,6 +14,7 @@ const IconText = ({ icon, text, action }) => (
         {text}
     </span>
 );
+
 /**
  * AdminUrlManage
  * @author Shuchang Liu
@@ -34,7 +36,12 @@ class AdminUrlManage extends Component {
     componentDidMount() {
         const callback = (res) => {
             if (res.not_administrator) {
+                if (sessionStorage.getItem("user")) {
+                    sessionStorage.removeItem("user");
+                }
                 message.error("您不是管理员");
+                window.location.href = "/login";
+
                 return;
             }
             console.log(res.data);
@@ -141,9 +148,17 @@ class AdminUrlManage extends Component {
                 dataIndex: "shortUrl",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        record.longUrl.length === 0 ||
-                        record.longUrl[0].url === "BANNED" ? (
-                            <Tag color="#cb0000">{record.shortUrl}</Tag>
+                        record.longUrl.length === 0 ? (
+                            <Tag color="#3b5999">{record.shortUrl}</Tag>
+                        ) : record.longUrl[0].url === "BANNED" ? (
+                            <Tag color="#cb0000">
+                                <a
+                                    style={{ color: "white" }}
+                                    href={hostUrl + "/" + record.longUrl[0].url}
+                                >
+                                    {record.shortUrl}
+                                </a>
+                            </Tag>
                         ) : (
                             <Tag color="#3b5999">
                                 <a
@@ -158,7 +173,20 @@ class AdminUrlManage extends Component {
             },
             { title: "访问量", align: "center", dataIndex: "count" },
             { title: "创建用户", align: "center", dataIndex: "creatorName" },
-            { title: "创建日期", align: "center", dataIndex: "createTime" },
+            {
+                title: "创建日期",
+                align: "center",
+                dataIndex: "createTime",
+                render: (text, record) => {
+                    let time =
+                        new Date(record.createTime)
+                            .toLocaleDateString()
+                            .replace(/\//g, "-") +
+                        " " +
+                        new Date(record.createTime).toTimeString().substr(0, 8);
+                    return <span> {time}</span>;
+                },
+            },
             {
                 title: "禁用/启用",
                 align: "center",

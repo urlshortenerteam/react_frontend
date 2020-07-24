@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Card, Col, List, message, Row, Skeleton, Tag } from "antd";
+import { Card, Col, List, message, Row, Skeleton, Tag, Tooltip } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import "../../css/AdminStatisticsCss.css";
-import { getTopTen } from "../../Services/adminManageService";
+import { getTopTen } from "../../services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
-import { hostUrl } from "../../Services/ajax";
+import { hostUrl } from "../../services/ajax";
 import DonutPlot from "./DonutPlot";
 
 const IconText = ({ icon, text, action }) => (
@@ -41,18 +41,22 @@ export default class VisitRankingList extends Component {
             return;
         }
         console.log(this.state);
-
+        let lists = [];
         let temp = [];
-        response.data.forEach(function (item) {
+        response.data.forEach(function (item, index) {
             temp.push({
                 value: item.count,
 
                 type: item.shortUrl,
             });
+            lists.push({
+                ...item,
+                index: index + 1,
+            });
         });
         console.log(temp);
         this.setState({
-            listData: response.data,
+            listData: lists,
             loading: false,
             showData: temp,
         });
@@ -84,25 +88,38 @@ export default class VisitRankingList extends Component {
                                             item.longUrl.forEach(
                                                 (long, index) => {
                                                     longList.push(
+                                                        // <div>
                                                         <Row
                                                             key={index}
-                                                            align="middle"
+                                                            align="right"
                                                         >
+                                                            {/*<Col span={2}>*/}
+                                                            <SnapShot
+                                                                value={long.url}
+                                                                black={false}
+                                                            />
+                                                            {/*</Col>*/}
+                                                            {/*<Col span={22}>*/}
                                                             <span
                                                                 style={{
-                                                                    marginLeft: 20,
+                                                                    marginLeft: 8,
                                                                     marginBottom: 4,
                                                                     color:
                                                                         "#cccccc",
                                                                 }}
                                                             >
-                                                                {long.url}
+                                                                <Tooltip
+                                                                    placement="topLeft"
+                                                                    title={
+                                                                        long.url
+                                                                    }
+                                                                >
+                                                                    {long.url}
+                                                                </Tooltip>
                                                             </span>
-                                                            <SnapShot
-                                                                value={long.url}
-                                                                black={false}
-                                                            />
+                                                            {/*</Col>*/}
                                                         </Row>
+                                                        // </div>
                                                     );
                                                 }
                                             );
@@ -126,22 +143,96 @@ export default class VisitRankingList extends Component {
                                                         }}
                                                         title={
                                                             <div>
-                                                                <Tag color="#3b5999">
-                                                                    <a
-                                                                        href={
-                                                                            item
-                                                                                .longUrl[0]
-                                                                                .url
-                                                                        }
+                                                                {item.longUrl
+                                                                    .length ===
+                                                                0 ? (
+                                                                    <Tag color="#3b5999">
+                                                                        <span
+                                                                            style={{
+                                                                                color:
+                                                                                    "white",
+                                                                                fontSize: 16,
+                                                                                fontWeight:
+                                                                                    "bold",
+                                                                            }}
+                                                                        >
+                                                                            {
+                                                                                item.shortUrl
+                                                                            }
+                                                                        </span>
+                                                                    </Tag>
+                                                                ) : item
+                                                                      .longUrl[0]
+                                                                      .url ===
+                                                                  "BANNED" ? (
+                                                                    <Tag
+                                                                        color="#cb0000"
                                                                         style={{
-                                                                            color:
-                                                                                "white",
+                                                                            height:
+                                                                                "auto",
                                                                         }}
                                                                     >
+                                                                        <a
+                                                                            style={{
+                                                                                color:
+                                                                                    "white",
+                                                                                fontSize: 16,
+                                                                                fontWeight:
+                                                                                    "bold",
+                                                                            }}
+                                                                            href={
+                                                                                hostUrl +
+                                                                                "/" +
+                                                                                item
+                                                                                    .longUrl[0]
+                                                                                    .url
+                                                                            }
+                                                                        >
+                                                                            {
+                                                                                item.shortUrl
+                                                                            }
+                                                                        </a>
+                                                                    </Tag>
+                                                                ) : (
+                                                                    <Tag color="#3b5999">
+                                                                        <a
+                                                                            href={
+                                                                                item
+                                                                                    .longUrl[0]
+                                                                                    .url
+                                                                            }
+                                                                            style={{
+                                                                                color:
+                                                                                    "white",
+                                                                                fontSize: 17,
+                                                                                fontWeight:
+                                                                                    "bold",
+                                                                            }}
+                                                                        >
+                                                                            {
+                                                                                item.shortUrl
+                                                                            }
+                                                                        </a>
+                                                                    </Tag>
+                                                                )}
+                                                                <Tag
+                                                                    color="#f39142"
+                                                                    style={{
+                                                                        marginLeft: 10,
+                                                                    }}
+                                                                >
+                                                                    <span
+                                                                        style={{
+                                                                            fontWeight:
+                                                                                "lighter",
+                                                                            fontSize: 10,
+                                                                        }}
+                                                                    >
+                                                                        NO.{" "}
                                                                         {
-                                                                            item.shortUrl
+                                                                            item.index
                                                                         }
-                                                                    </a>
+                                                                    </span>
                                                                 </Tag>
                                                                 <Tag
                                                                     color="#87d068"
@@ -149,6 +240,7 @@ export default class VisitRankingList extends Component {
                                                                         marginLeft: 10,
                                                                     }}
                                                                 >
+                                                                    访问量：
                                                                     {item.count}
                                                                 </Tag>
                                                             </div>
@@ -168,6 +260,7 @@ export default class VisitRankingList extends Component {
                                                             </span>
                                                         }
                                                     />
+
                                                     {longList}
                                                 </Skeleton>
                                             </List.Item>
