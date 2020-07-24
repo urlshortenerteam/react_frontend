@@ -37,28 +37,28 @@ describe("AdminManage", () => {
             .should('not.be.visible');
     });
 
-    // it("url manage : ban and lift",()=>{
-    //     cy.get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn')
-    //         .click()
-    //         .get('.ant-popover-buttons > :nth-child(1) > span')
-    //         .click()
-    //         .get('.ant-popover-inner-content');
-    //         // .should('not.be.visible');
-    //
-    //     cy.get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn')
-    //         .click()
-    //         .get('.ant-popover-buttons > .ant-btn-primary')
-    //         .click()
-    //         .get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn > span')
-    //         .contains("启 用");
-    //
-    //     cy.get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn')
-    //         .click()
-    //         .get('.ant-popover-buttons > .ant-btn-primary')
-    //         .click()
-    //         .get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn > span')
-    //         .contains("禁 用")
-    // });
+    it("url manage : ban and lift",()=>{
+        cy.get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn')
+            .click()
+            .get('.ant-popover-buttons > :nth-child(1) > span')
+            .click()
+            .get('.ant-popover-inner-content');
+            // .should('not.be.visible');
+
+        cy.get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn')
+            .click()
+            .get('.ant-popover-buttons > .ant-btn-primary')
+            .click()
+            .get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn > span')
+            .contains("启 用");
+
+        cy.get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn')
+            .click()
+            .get('.ant-popover-buttons > .ant-btn-primary')
+            .click()
+            .get('[data-row-key="1XK6lw"] > :nth-child(6) > .ant-btn > span')
+            .contains("禁 用")
+    });
 
     it("user manage : display",()=>{
         cy.get('#rc-tabs-0-tab-2 > :nth-child(1)')

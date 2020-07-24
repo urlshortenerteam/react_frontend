@@ -77,12 +77,12 @@ describe("Create", () => {
             .click()
             .get('.ant-table-row > :nth-child(2)')
             .get('.ant-row > :nth-child(1) > div > .ant-btn')
-            // .should('be.disabled')
+            .should('be.disabled')
             .get(':nth-child(2) > div > .ant-btn')
-            // .should('be.disabled')
+            .should('be.disabled')
             .get('.ant-table-cell-ellipsis > span')
             .click()
-            // .should('not.be.focused')
+            .should('not.be.focused')
     });
 
     it("manyToOne: test reset btn -- before create",()=>{
