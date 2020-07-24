@@ -8,7 +8,7 @@ import {
     PicLeftOutlined,
 } from "@ant-design/icons";
 import "../css/NavigationCss.css";
-import { logout } from "../Services/userService";
+import { logout } from "../services/userService";
 import { Link } from "react-router-dom";
 
 /**

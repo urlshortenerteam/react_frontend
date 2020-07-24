@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
-import { getBatchOneToOne } from "../../Services/CreateService";
+import { getBatchOneToOne } from "../../services/CreateService";
 import ShortWithQR from "./ShortWithQR";
 
 const { Search } = Input;

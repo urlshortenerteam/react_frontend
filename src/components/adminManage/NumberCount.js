@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import React, { Component } from "react";
 import "../../css/AdminStatisticsCss.css";
-import { getNumberCount } from "../../Services/adminManageService";
+import { getNumberCount } from "../../services/adminManageService";
 
 /**
  * NumberCount
