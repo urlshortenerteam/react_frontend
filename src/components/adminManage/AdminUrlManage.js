@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Button, List, message, Popconfirm, Row, Table, Tag } from "antd";
-import { getAllUrls } from "../../services/adminManageService";
+import { getAllUrls } from "../../Services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
 import { StopOutlined } from "@ant-design/icons";
-import { BanUrl, GetUrl, LiftUrl } from "../../services/urlService";
-import { hostUrl } from "../../services/ajax";
+import { BanUrl, GetUrl, LiftUrl } from "../../Services/urlService";
+import { hostUrl } from "../../Services/ajax";
 
 const IconText = ({ icon, text, action }) => (
     <span onClick={action} style={{ marginLeft: 32, color: "red" }}>

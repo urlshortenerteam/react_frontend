@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Col, Form, Input, Layout, message, Row } from "antd";
 import "../css/RegisterCss.css";
 import { withRouter } from "react-router-dom";
-import { register } from "../services/userService";
+import { register } from "../Services/userService";
 
 const { Content } = Layout;
 const formItemLayout = {

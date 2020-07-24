@@ -6,7 +6,7 @@ import {
     SmileOutlined,
     UserAddOutlined,
 } from "@ant-design/icons";
-import { banUser, getAllUser } from "../../services/adminManageService";
+import { banUser, getAllUser } from "../../Services/adminManageService";
 
 /**
  * UserTable

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { hostUrl } from "../../services/ajax";
+import { hostUrl } from "../../Services/ajax";
 import { Popover, Spin } from "antd";
 import { QrcodeOutlined } from "@ant-design/icons";
 /*ShortWithQR:

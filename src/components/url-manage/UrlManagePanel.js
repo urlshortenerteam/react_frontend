@@ -19,9 +19,9 @@ import {
     StarOutlined,
     StopOutlined,
 } from "@ant-design/icons";
-import { getRequest, hostUrl } from "../../services/ajax";
+import { getRequest, hostUrl } from "../../Services/ajax";
 import SnapShot from "./SnapShot";
-import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
+import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../Services/urlService";
 
 const { Option } = Select;
 const IconText = ({ icon, text, action }) => (

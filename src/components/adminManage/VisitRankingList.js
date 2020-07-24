@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Card, Col, List, message, Row, Skeleton, Tag, Tooltip } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import "../../css/AdminStatisticsCss.css";
-import { getTopTen } from "../../services/adminManageService";
+import { getTopTen } from "../../Services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
-import { hostUrl } from "../../services/ajax";
+import { hostUrl } from "../../Services/ajax";
 import DonutPlot from "./DonutPlot";
 
 const IconText = ({ icon, text, action }) => (
