@@ -46,7 +46,7 @@ describe("Manage", () => {
 const stubData = () => {
     cy.route({
         method: "POST",
-        url: "**/editUrl?**",
+        url: "**/editUrl",
         response: {
             status: 200,
             msg: "查询成功",
@@ -431,6 +431,7 @@ const stubData = () => {
         }
     });
 };
+
 const fakeLogin = () => {
     cy.server();
     cy.route({
