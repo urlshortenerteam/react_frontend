@@ -187,11 +187,14 @@ export default class VisitRankingList extends Component {
                                                                                     "bold",
                                                                             }}
                                                                             href={
+                                                                                // hostUrl +
+                                                                                // "/" +
+                                                                                // item
+                                                                                //     .longUrl[0]
+                                                                                //     .url
                                                                                 hostUrl +
                                                                                 "/" +
-                                                                                item
-                                                                                    .longUrl[0]
-                                                                                    .url
+                                                                                item.shortUrl
                                                                             }
                                                                         >
                                                                             {
@@ -203,9 +206,9 @@ export default class VisitRankingList extends Component {
                                                                     <Tag color="#3b5999">
                                                                         <a
                                                                             href={
-                                                                                item
-                                                                                    .longUrl[0]
-                                                                                    .url
+                                                                                hostUrl +
+                                                                                "/" +
+                                                                                item.shortUrl
                                                                             }
                                                                             style={{
                                                                                 color:

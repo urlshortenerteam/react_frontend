@@ -18,11 +18,10 @@ export const hostUrl = "http://3.81.71.37:8080";
  * @param {function} callback - the callback function for successful returns
  * @param {Object} extra - extra options for request
  * @param {function} extra.errorCallback - the callback function for errors
- * @param {Object} extra.params - the parameters in url
  * */
-let postRequest = (url, json, callback, { errorCallback, params }) => {
+let postRequest = (url, json, callback, { errorCallback }) => {
     let _url = new URL(hostUrl + url);
-    _url.search = new URLSearchParams(params).toString();
+    // _url.search = new URLSearchParams(params).toString();
     let opts = {
         method: "POST",
         body: JSON.stringify(json),
@@ -49,7 +48,7 @@ let postRequest = (url, json, callback, { errorCallback, params }) => {
                 ) {
                     resetToken(url, json, callback, true, false, {
                         errorCallback: errorCallback,
-                        params: params,
+                        params: {},
                     });
                 } else {
                     if (sessionStorage.getItem("user")) {
@@ -121,7 +120,6 @@ let resetToken = (
                 if (post) {
                     postRequest(url, json, callback, {
                         errorCallback: errorCallback,
-                        params: params,
                     });
                 }
                 //send get request again

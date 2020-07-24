@@ -13,7 +13,6 @@ import { message } from "antd";
 export const register = (data, callback, errorHandler) => {
     postRequest("/register", data, callback, {
         errorCallback: errorHandler,
-        params: {},
     });
 };
 
@@ -51,7 +50,7 @@ export const logout = () => {
     window.location.href = "/";
 
     //used for mock
-    postRequest("/logoutReq", {}, {}, { errorCallback: {}, params: {} });
+    // postRequest("/logoutReq", {}, {}, { errorCallback: {} });
 };
 
 /**

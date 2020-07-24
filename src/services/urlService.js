@@ -11,15 +11,17 @@ import { getRequest, postRequest } from "./ajax";
  * @param {function} parameters.errorCallback - The callback for errors
  * */
 let BanUrl = ({ url, callback, errorCallback }) => {
-    postRequest("/editUrl", "BANNED", callback, {
-        errorCallback: errorCallback,
-        params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
+    postRequest(
+        "/editUrl",
+        {
+            longUrl: "BANNED",
             shortUrl: url,
         },
-    });
+        callback,
+        {
+            errorCallback: errorCallback,
+        }
+    );
 };
 /**
  * EditUrl
@@ -35,15 +37,17 @@ let BanUrl = ({ url, callback, errorCallback }) => {
 let EditUrl = ({ url, newLong, callback, errorCallback }) => {
     console.log(newLong);
     console.log(url);
-    postRequest("/editUrl", newLong, callback, {
-        errorCallback: errorCallback,
-        params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
+    postRequest(
+        "/editUrl",
+        {
+            longUrl: newLong,
             shortUrl: url,
         },
-    });
+        callback,
+        {
+            errorCallback: errorCallback,
+        }
+    );
 };
 /**
  * LiftUrl
@@ -56,15 +60,18 @@ let EditUrl = ({ url, newLong, callback, errorCallback }) => {
  * @param {function} parameters.errorCallback - The callback for errors
  * */
 let LiftUrl = ({ url, callback, errorCallback }) => {
-    postRequest("/editUrl", "LIFT", callback, {
-        errorCallback: errorCallback,
-        params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
+    postRequest(
+        "/editUrl",
+        {
+            longUrl: "LIFT",
             shortUrl: url,
         },
-    });
+        callback,
+        {
+            errorCallback: errorCallback,
+            params: {},
+        }
+    );
 };
 /**
  * GetUrl

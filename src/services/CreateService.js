@@ -14,11 +14,6 @@ export const getBatchOneToOne = (data, callback) => {
         errorCallback: (error) => {
             console.log(error);
         },
-        params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
-        },
     });
 };
 
@@ -36,11 +31,6 @@ export const getBatchManyToOne = (data, callback) => {
     postRequest(url, data, callback, {
         errorCallback: (error) => {
             console.log(error);
-        },
-        params: {
-            id: sessionStorage.getItem("user")
-                ? JSON.parse(sessionStorage.getItem("user")).id
-                : null,
         },
     });
 };

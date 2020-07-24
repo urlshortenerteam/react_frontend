@@ -233,7 +233,7 @@ export default class UrlManagePanel extends Component {
                                                 <Statistic
                                                     title="访问量"
                                                     value={item.count / 1000.0}
-                                                    precision={2}
+                                                    precision={3}
                                                     valueStyle={{
                                                         color: "#cccccc",
                                                     }}
@@ -269,7 +269,11 @@ export default class UrlManagePanel extends Component {
                                         style={{ color: "white" }}
                                         title={
                                             <a
-                                                href={item.longUrl[0].url}
+                                                href={
+                                                    hostUrl +
+                                                    "/" +
+                                                    item.shortUrl
+                                                }
                                                 style={{ color: "white" }}
                                             >
                                                 {item.shortUrl}
