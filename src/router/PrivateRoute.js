@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import * as userService from "../services/userService";
-
+import LoginView from "../view/LoginView";
 
 export default class PrivateRoute extends React.Component {
     constructor(props) {
@@ -53,12 +53,12 @@ export default class PrivateRoute extends React.Component {
                 render={(props) => <Component {...props} />}
             />
         ) : (
-            <Route
-                path={path}
-                exact={exact}
-                render={(props) => <Component {...props} />}
-            />
-            // <Route exact path="/login" component={LoginView} />
+            // <Route
+            //     path={path}
+            //     exact={exact}
+            //     render={(props) => <Component {...props} />}
+            // />
+            <Route exact path="/login" component={LoginView} />
             // <Redirect
             //     push
             //     // to={{
