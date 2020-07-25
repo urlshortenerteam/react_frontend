@@ -81,7 +81,7 @@ jobs:
     steps:
       - run: npm install
       - run: npm build
-      - run: npm install -g serverless
+      - run: npm install serverless
       - name: Serverless AWS authentication
         run: sls config credentials --provider aws --key ${{ secrets.AO_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AO_AWS_SECRET_ACCESS_KEY }}
       - name: Deploy assets to S3
