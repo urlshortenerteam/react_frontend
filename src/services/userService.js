@@ -1,4 +1,4 @@
-import { getRequest_checkSession, postRequest } from "./ajax";
+import { postRequest, getRequest_checkSession } from "./ajax";
 import { message } from "antd";
 
 /**
@@ -13,7 +13,6 @@ import { message } from "antd";
 export const register = (data, callback, errorHandler) => {
     postRequest("/register", data, callback, {
         errorCallback: errorHandler,
-        params: {},
     });
 };
 
@@ -23,30 +22,11 @@ export const register = (data, callback, errorHandler) => {
  * @date July 10th 2020
  * @description login request to get the token , and set the sessionStorage
  * @param data - { name: String , password: String }
+ * @param callback
  * */
-export const login = (data) => {
+export const login = (data, callback) => {
     console.log(data);
 
-    const callback = (res) => {
-        if (res.data.loginStatus) {
-            sessionStorage.setItem("userId", JSON.stringify(res.data.id));
-            sessionStorage.setItem("loginStatus", 1);
-            sessionStorage.setItem("type", JSON.stringify(res.data.type));
-            sessionStorage.setItem("token", JSON.stringify(res.data.token));
-            // console.log(res.data);
-
-            message.success("登录成功");
-            window.location.href = "/";
-        } else {
-            if (res.data.type === 1) {
-                message.error("用户名或密码错误");
-            } else if (res.data.type === 2) {
-                message.error("您已被禁用");
-            } else {
-                message.error("登陆失败：不会出现此情况");
-            }
-        }
-    };
     postRequest("/loginReq", data, callback, {
         errorCallback: () => {},
     });
@@ -59,15 +39,18 @@ export const login = (data) => {
  * @description logout , and remove the sessionStorage
  * */
 export const logout = () => {
-    sessionStorage.removeItem("userId");
-    sessionStorage.removeItem("loginStatus");
-    sessionStorage.removeItem("type");
-    sessionStorage.removeItem("token");
+    if (sessionStorage.getItem("user")) {
+        sessionStorage.removeItem("user");
+    }
+
+    // sessionStorage.removeItem("loginStatus");
+    // sessionStorage.removeItem("type");
+    // sessionStorage.removeItem("token");
     message.success("成功登出");
     window.location.href = "/";
 
     //used for mock
-    postRequest("/logoutReq", {}, {}, { errorCallback: {}, params: {} });
+    // postRequest("/logoutReq", {}, {}, { errorCallback: {} });
 };
 
 /**

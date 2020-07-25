@@ -3,7 +3,7 @@ import { Button, Layout } from "antd";
 import "../css/HomeCss.css";
 import { hostUrl } from "../services/ajax";
 import { RightOutlined } from "@ant-design/icons";
-
+import { withRouter } from "react-router-dom";
 const { Content } = Layout;
 
 /**
@@ -101,4 +101,4 @@ class HomeView extends Component {
     }
 }
 
-export default HomeView;
+export default withRouter(HomeView);

@@ -60,23 +60,33 @@ export default class Navigation extends React.Component {
                             >
                                 <Link to="/manage">管理链接</Link>
                             </Menu.Item>
-                            <Menu.Item
-                                key="adminManage"
-                                icon={<AppstoreOutlined />}
-                            >
-                                <Link to="/adminManage">运营管理</Link>
-                            </Menu.Item>
+                            {sessionStorage.getItem("user") ? (
+                                JSON.parse(sessionStorage.getItem("user"))
+                                    .type === 0 ? (
+                                    <Menu.Item
+                                        key="adminManage"
+                                        icon={<AppstoreOutlined />}
+                                    >
+                                        <Link to="/adminManage">运营管理</Link>
+                                    </Menu.Item>
+                                ) : null
+                            ) : null}
                         </Menu>,
                     ]}
                     extra={[
                         <Row key="login">
                             <Col>
-                                {JSON.parse(
-                                    sessionStorage.getItem("loginStatus")
-                                ) === 1 ? (
-                                    <Button key="2" ghost onClick={logout}>
-                                        登出
-                                    </Button>
+                                {sessionStorage.getItem("user") ? (
+                                    JSON.parse(sessionStorage.getItem("user"))
+                                        .loginStatus ? (
+                                        <Button key="2" ghost onClick={logout}>
+                                            登出
+                                        </Button>
+                                    ) : (
+                                        <Button key="3" ghost href="/login">
+                                            登录
+                                        </Button>
+                                    )
                                 ) : (
                                     <Button key="3" ghost href="/login">
                                         登录

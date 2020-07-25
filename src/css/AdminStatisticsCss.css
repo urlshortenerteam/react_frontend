@@ -111,3 +111,9 @@
     border-color: #ee808000;
     color: white;
 }
+.rank .ant-list * {
+    outline: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

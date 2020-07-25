@@ -49,7 +49,11 @@ export default class UrlManagePanel extends Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: sessionStorage.getItem("userId") },
+            params: {
+                id: sessionStorage.getItem("user")
+                    ? JSON.parse(sessionStorage.getItem("user")).id
+                    : null,
+            },
             errorCallback: this.handleError,
         });
     }
@@ -58,7 +62,7 @@ export default class UrlManagePanel extends Component {
         this.setState({ listData: response.data, loading: false });
         this.state.listData.forEach((short) => {
             let idle = 0;
-            short.time_distr.forEach((time) => {
+            short.timeDistr.forEach((time) => {
                 //visit less than 2000 is seen as an idle hour
                 if (time.value <= 2000) idle++;
             });
@@ -233,7 +237,7 @@ export default class UrlManagePanel extends Component {
                                                 <Statistic
                                                     title="访问量"
                                                     value={item.count / 1000.0}
-                                                    precision={2}
+                                                    precision={3}
                                                     valueStyle={{
                                                         color: "#cccccc",
                                                     }}
@@ -269,7 +273,11 @@ export default class UrlManagePanel extends Component {
                                         style={{ color: "white" }}
                                         title={
                                             <a
-                                                href={item.longUrl[0].url}
+                                                href={
+                                                    hostUrl +
+                                                    "/" +
+                                                    item.shortUrl
+                                                }
                                                 style={{ color: "white" }}
                                             >
                                                 {item.shortUrl}

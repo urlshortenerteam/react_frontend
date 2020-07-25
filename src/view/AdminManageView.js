@@ -9,7 +9,7 @@ import {
 import UserManage from "../components/adminManage/UserManage";
 import SimpleStatistics from "../components/adminManage/AdminStatistics";
 import AdminUrlManage from "../components/adminManage/AdminUrlManage";
-
+import { withRouter } from "react-router-dom";
 const { TabPane } = Tabs;
 const { Content } = Layout;
 
@@ -67,4 +67,4 @@ class AdminManageView extends Component {
     }
 }
 
-export default AdminManageView;
+export default withRouter(AdminManageView);

@@ -1,7 +1,6 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import * as userService from "../services/userService";
-import { message } from "antd";
 
 export default class PrivateRoute extends React.Component {
     constructor(props) {
@@ -18,17 +17,14 @@ export default class PrivateRoute extends React.Component {
 
     errorHandler = () => {
         // console.log(error);
-        message.error("您需登录");
-        if (sessionStorage.getItem("userId"))
-            sessionStorage.removeItem("userId");
-        if (sessionStorage.getItem("loginStatus"))
-            sessionStorage.removeItem("loginStatus");
-        if (sessionStorage.getItem("type")) sessionStorage.removeItem("type");
-        if (sessionStorage.getItem("token")) sessionStorage.removeItem("token");
-
         this.setState({ isAuthed: false, hasAuthed: true });
+        if (sessionStorage.getItem("user")) sessionStorage.removeItem("user");
+        window.location.href = "/login";
     };
     componentDidMount() {
+        if (sessionStorage.getItem("user")) {
+            console.log(JSON.parse(sessionStorage.getItem("user")));
+        }
         userService.checkSession(this.checkAuth, this.errorHandler);
     }
 
@@ -44,23 +40,27 @@ export default class PrivateRoute extends React.Component {
             return null;
         }
 
-        return (
+        return this.state.isAuthed ? (
             <Route
                 path={path}
                 exact={exact}
-                render={(props) =>
-                    this.state.isAuthed ? (
-                        <Component {...props} />
-                    ) : (
-                        <Redirect
-                            to={{
-                                pathname: "/login",
-                                state: { from: props.location },
-                            }}
-                        />
-                    )
-                }
+                render={(props) => <Component {...props} />}
             />
+        ) : (
+            // <Route
+            //     path={path}
+            //     exact={exact}
+            //     render={(props) => <Component {...props} />}
+            // />
+            <Route exact path="/login" component={LoginView} />
+            // <Redirect
+            //     push
+            //     // to={{
+            //     //     pathname: "/login",
+            //     //     state: { from: props.location },
+            //     // }}
+            //     to="/login"
+            // />
         );
     }
 }

@@ -35,7 +35,11 @@ class AdminUrlManage extends Component {
     componentDidMount() {
         const callback = (res) => {
             if (res.not_administrator) {
+                if (sessionStorage.getItem("user")) {
+                    sessionStorage.removeItem("user");
+                }
                 message.error("您不是管理员");
+                window.location.href = "/login";
                 return;
             }
             console.log(res.data);
@@ -164,7 +168,20 @@ class AdminUrlManage extends Component {
             },
             { title: "访问量", align: "center", dataIndex: "count" },
             { title: "创建用户", align: "center", dataIndex: "creatorName" },
-            { title: "创建日期", align: "center", dataIndex: "createTime" },
+            {
+                title: "创建日期",
+                align: "center",
+                dataIndex: "createTime",
+                render: (text, record) => {
+                    let time =
+                        new Date(record.createTime)
+                            .toLocaleDateString()
+                            .replace(/\//g, "-") +
+                        " " +
+                        new Date(record.createTime).toTimeString().substr(0, 8);
+                    return <span> {time}</span>;
+                },
+            },
             {
                 title: "禁用/启用",
                 align: "center",
