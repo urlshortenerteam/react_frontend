@@ -3,8 +3,9 @@ import { Col, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 import UrlManagePanel from "../components/url-manage/UrlManagePanel";
 import CategoryManage from "../components/url-manage/CategoryManage";
-import { ScheduleOutlined } from "@ant-design/icons";
 
+import { ScheduleOutlined } from "@ant-design/icons";
+import { withRouter } from "react-router-dom";
 const { TabPane } = Tabs;
 const { Content } = Layout;
 
@@ -35,7 +36,6 @@ class ManageView extends Component {
                                     </span>
                                 }
                             >
-                                >
                                 <CategoryManage />
                             </TabPane>
                         </Tabs>
@@ -46,4 +46,4 @@ class ManageView extends Component {
     }
 }
 
-export default ManageView;
+export default withRouter(ManageView);

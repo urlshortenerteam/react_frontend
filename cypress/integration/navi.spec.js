@@ -29,15 +29,7 @@ describe('Navigation',()=>{
             .url()
             .should('contain','/manage')
     });
-    it('adminManage button navigates to right url',()=>{
-        cy.get('[style=""] > .ant-menu-submenu-title > span')
-            .trigger('mouseover')
-            .get('.ant-menu-submenu-popup')
-            .get('ul:nth-child(1) > li:nth-child(10) > :nth-child(2) > a')
-            .click({force:true})
-            .url()
-            .should('contain','/adminManage')
-    });
+
     it('start exploration navigates to right url',()=>{
         cy.get('.centerDesc > .ant-btn')
             .click()
