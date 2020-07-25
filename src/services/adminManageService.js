@@ -33,7 +33,8 @@ export const banUser = (ban, ban_id, callback) => {
             console.log(error);
         },
         params: {
-            banId: ban_id,
+            id: JSON.parse(sessionStorage.getItem("userId")),
+            ban_id: ban_id,
             ban: ban,
         },
     });

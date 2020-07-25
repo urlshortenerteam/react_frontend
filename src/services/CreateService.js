@@ -1,4 +1,5 @@
 import { postRequest } from "./ajax";
+
 /**
  * getBatchOneToOne
  * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
@@ -14,6 +15,7 @@ export const getBatchOneToOne = (data, callback) => {
         errorCallback: (error) => {
             console.log(error);
         },
+        params: { id: JSON.parse(sessionStorage.getItem("userId")) },
     });
 };
 
@@ -32,5 +34,6 @@ export const getBatchManyToOne = (data, callback) => {
         errorCallback: (error) => {
             console.log(error);
         },
+        params: { id: JSON.parse(sessionStorage.getItem("userId")) },
     });
 };

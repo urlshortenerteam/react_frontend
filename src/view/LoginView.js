@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Col, Form, Input, Layout, message, Row } from "antd";
+
+import { Button, Col, Form, Input, Layout, Row } from "antd";
 import "../css/LoginCss.css";
 import "antd/dist/antd.css";
 import * as userService from "../services/userService";
@@ -7,43 +8,13 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 
 const { Content } = Layout;
-
-/**
-LoginView
-@author Shuchang Liu
-@date July 8th 2020
-@description Login View
-*/
-class LoginView extends Component {
+class LogInBlock extends React.Component {
     formRef = React.createRef();
 
     render() {
-        const callback = (res) => {
-            if (res.data.loginStatus) {
-                sessionStorage.setItem("user", JSON.stringify(res.data));
-
-                if (sessionStorage.getItem("user")) {
-                    console.log(JSON.parse(sessionStorage.getItem("user")));
-                    message.success("登录成功");
-                    this.props.history.goBack();
-                } else {
-                    console.log("no data");
-                }
-
-                // window.location.href = "/";
-            } else {
-                if (res.data.type === 1) {
-                    message.error("用户名或密码错误");
-                } else if (res.data.type === 2) {
-                    message.error("您已被禁用");
-                } else {
-                    message.error("登陆失败：不会出现此情况");
-                }
-            }
-        };
         const onFinish = (values) => {
             console.log("Received values of form: ", values);
-            userService.login(values, callback);
+            userService.login(values);
         };
 
         const onFinishFailed = (errorInfo) => {
@@ -51,6 +22,7 @@ class LoginView extends Component {
         };
         return (
             <Content>
+                {" "}
                 <Row justify="center">
                     <div className="login">
                         <Row style={{ padding: "25px" }}>
@@ -135,5 +107,20 @@ class LoginView extends Component {
     }
 }
 
+/**
+LoginView
+@author Shuchang Liu
+@date July 8th 2020
+@description Login View
+*/
+class LoginView extends Component {
+    render() {
+        return (
+            <Content style={{ display: "flex", height: "100%" }}>
+                <LogInBlock />
+            </Content>
+        );
+    }
+}
+
 export default withRouter(LoginView);
-// withRouter(LogInBlock);

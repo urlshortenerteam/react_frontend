@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
     Col,
+    Collapse,
     Input,
     List,
     message,
@@ -9,6 +10,7 @@ import {
     Select,
     Skeleton,
     Statistic,
+    Typography,
 } from "antd";
 import {
     CloseOutlined,
@@ -22,6 +24,8 @@ import {
 import { getRequest, hostUrl } from "../../services/ajax";
 import SnapShot from "./SnapShot";
 import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
+
+const { Panel } = Collapse;
 
 const { Option } = Select;
 const IconText = ({ icon, text, action }) => (
@@ -45,11 +49,7 @@ export default class UrlManagePanel extends Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: {
-                id: sessionStorage.getItem("user")
-                    ? JSON.parse(sessionStorage.getItem("user")).id
-                    : null,
-            },
+            params: { id: sessionStorage.getItem("userId") },
             errorCallback: this.handleError,
         });
     }
@@ -58,13 +58,13 @@ export default class UrlManagePanel extends Component {
         this.setState({ listData: response.data, loading: false });
         this.state.listData.forEach((short) => {
             let idle = 0;
-            short.timeDistr.forEach((time) => {
+            short.time_distr.forEach((time) => {
                 //visit less than 2000 is seen as an idle hour
                 if (time.value <= 2000) idle++;
             });
             short.idle = idle;
         });
-        console.log(JSON.stringify(this.state));
+        console.log(this.state);
     };
     handleError = (error) => {
         console.log(error);
@@ -233,7 +233,7 @@ export default class UrlManagePanel extends Component {
                                                 <Statistic
                                                     title="访问量"
                                                     value={item.count / 1000.0}
-                                                    precision={3}
+                                                    precision={2}
                                                     valueStyle={{
                                                         color: "#cccccc",
                                                     }}
@@ -269,23 +269,34 @@ export default class UrlManagePanel extends Component {
                                         style={{ color: "white" }}
                                         title={
                                             <a
-                                                href={
-                                                    hostUrl +
-                                                    "/" +
-                                                    item.shortUrl
-                                                }
+                                                href={item.longUrl[0].url}
                                                 style={{ color: "white" }}
                                             >
                                                 {item.shortUrl}
                                             </a>
                                         }
                                         description={
-                                            <span style={{ color: "white" }}>
+                                            <Typography.Text
+                                                copyable={{
+                                                    tooltips: [
+                                                        "复制",
+                                                        "复制成功",
+                                                    ],
+                                                }}
+                                                style={{ color: "white" }}
+                                            >
                                                 {hostUrl + "/" + item.shortUrl}
-                                            </span>
+                                            </Typography.Text>
                                         }
                                     />
-                                    {longList}
+                                    <Collapse
+                                        ghost
+                                        style={{ backgroundColor: "#011428" }}
+                                    >
+                                        <Panel header="详情" key="1">
+                                            {longList}
+                                        </Panel>
+                                    </Collapse>
                                 </Skeleton>
                             </List.Item>
                         );

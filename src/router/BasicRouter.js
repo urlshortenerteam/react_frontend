@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomeView from "../view/HomeView";
 import LoginView from "../view/LoginView";
 import CreateView from "../view/CreateView";
@@ -15,7 +15,7 @@ import PrivateRoute from "./PrivateRoute";
 const { Header, Footer } = Layout;
 const BasicRouter = () => (
     <BrowserRouter>
-        <Layout style={{ backgroundColor: "#001529", minHeight: "100%" }}>
+        <Layout style={{ backgroundColor: "#001529", minHeight: "100vh" }}>
             <Header>
                 <Navigation />
             </Header>

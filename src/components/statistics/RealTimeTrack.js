@@ -3,12 +3,12 @@ import { getRequest } from "../../services/ajax";
 import Table from "antd/es/table";
 
 /**
- RealTimeTrack
- @author Zhuohao Shen
- @date July 6th 2020
- @params {JSON Array} - current status of visits from shorten urls
- @description Real-time Tracker of current user
- */
+RealTimeTrack
+@author Zhuohao Shen
+@date July 6th 2020
+@params {JSON Array} - current status of visits from shorten urls
+@description Real-time Tracker of current user
+*/
 export default class RealTimeTrack extends React.Component {
     state = {
         data: [],
@@ -50,11 +50,7 @@ export default class RealTimeTrack extends React.Component {
 
     componentDidMount() {
         getRequest("/getReal", this.handleData, {
-            params: {
-                id: sessionStorage.getItem("user")
-                    ? JSON.parse(sessionStorage.getItem("user")).id
-                    : null,
-            },
+            params: { id: sessionStorage.getItem("userId") },
             errorCallback: this.handleError,
         });
     }

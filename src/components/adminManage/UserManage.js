@@ -27,18 +27,18 @@ class UserTable extends React.Component {
             },
             {
                 title: "访问次数",
-                dataIndex: "visitCount",
+                dataIndex: "visit_count",
                 width: "5%",
                 align: "center",
                 sorter: {
-                    compare: (a, b) => a.visitCount - b.visitCount,
+                    compare: (a, b) => a.visit_count - b.visit_count,
                 },
                 // render: (text, record) =>
                 //     this.state.dataSource.length >= 1 ? (
-                //         <Statistic title="Feedback" value={record.visitCount} prefix={<LikeOutlined />} />
+                //         <Statistic title="Feedback" value={record.visit_count} prefix={<LikeOutlined />} />
                 //     ) : null,
 
-                ...this.getColumnSearchProps("visitCount"),
+                ...this.getColumnSearchProps("visit_count"),
             },
             {
                 title: "用户类型",
@@ -86,9 +86,7 @@ class UserTable extends React.Component {
                                 {record.role !== 2 ? (
                                     <Button type="primary">禁用</Button>
                                 ) : (
-                                    <Button type="primary" danger>
-                                        解除
-                                    </Button>
+                                    <Button type="primary">解除</Button>
                                 )}
                             </Popconfirm>
                         )
@@ -107,10 +105,6 @@ class UserTable extends React.Component {
     componentDidMount() {
         const callback = (res) => {
             if (res.not_administrator) {
-                if (sessionStorage.getItem("user")) {
-                    sessionStorage.removeItem("user");
-                }
-                window.location.href = "/login";
                 message.error("您不是管理员");
                 return;
             }

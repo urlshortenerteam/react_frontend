@@ -3,7 +3,7 @@ import { Button, Layout } from "antd";
 import "../css/HomeCss.css";
 import { hostUrl } from "../services/ajax";
 import { RightOutlined } from "@ant-design/icons";
-import { withRouter } from "react-router-dom";
+
 const { Content } = Layout;
 
 /**
@@ -32,11 +32,18 @@ class HomeView extends Component {
         }, 900);
         setTimeout(() => {
             this.setState({
-                showExplorer: true,
+                showDesc: true,
             });
         }, 1000);
+        setTimeout(() => {
+            this.setState({
+                showExplorer: true,
+            });
+        }, 1600);
+
         this.state = {
             showExplorer: false,
+            showDesc: false,
             showLeft: false,
             showBottom: false,
             showRight: false,
@@ -46,7 +53,7 @@ class HomeView extends Component {
     render() {
         return (
             <Content style={{ display: "flex" }}>
-                {this.state.showExplorer ? (
+                {this.state.showDesc ? (
                     <h1 className={`centerDesc magictime puffIn`}>
                         短链接
                         <br />
@@ -54,18 +61,18 @@ class HomeView extends Component {
                         <br />
                         简单易用
                         <br style={{ padding: 0 }} />
-                        <Button
-                            icon={<RightOutlined />}
-                            href="/create"
-                            className={
-                                this.state.showExplorer
-                                    ? "magictime vanishIn"
-                                    : null
-                            }
-                            ghost
-                        >
-                            开始探索
-                        </Button>
+                        {this.state.showExplorer ? (
+                            <Button
+                                icon={<RightOutlined />}
+                                href="/create"
+                                className="magictime vanishIn"
+                                ghost
+                            >
+                                开始探索
+                            </Button>
+                        ) : (
+                            <Button href="/create" ghost />
+                        )}
                     </h1>
                 ) : null}
                 {this.state.showLeft ? (
@@ -94,4 +101,4 @@ class HomeView extends Component {
     }
 }
 
-export default withRouter(HomeView);
+export default HomeView;
