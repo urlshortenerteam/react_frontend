@@ -81,8 +81,11 @@ jobs:
     steps:
       - run: npm install
       - run: npm build
-      - run: npm install serverless
-      - name: Serverless AWS authentication
-        run: sls config credentials --provider aws --key ${{ secrets.AO_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AO_AWS_SECRET_ACCESS_KEY }}
-      - name: Deploy assets to S3
-        run: sls client deploy --no-delete-contents --no-confirm -s prod
+      - uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AO_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AO_AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: 'build'      
