@@ -5,7 +5,9 @@
 .site-collapse-custom-collapse .site-collapse-custom-panel {
     color: #ffffff;
 }
-
+.ant-layout-sider-zero-width-trigger {
+    top: 0;
+}
 .ant-collapse > .ant-collapse-item > .ant-collapse-header {
     color: #ffffff;
 }

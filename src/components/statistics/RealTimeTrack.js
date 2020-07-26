@@ -3,12 +3,12 @@ import { getRequest } from "../../services/ajax";
 import Table from "antd/es/table";
 
 /**
- RealTimeTrack
- @author Zhuohao Shen
- @date July 6th 2020
- @params {JSON Array} - current status of visits from shorten urls
- @description Real-time Tracker of current user
- */
+RealTimeTrack
+@author Zhuohao Shen
+@date July 6th 2020
+@params {JSON Array} - current status of visits from shorten urls
+@description Real-time Tracker of current user
+*/
 export default class RealTimeTrack extends React.Component {
     state = {
         data: [],

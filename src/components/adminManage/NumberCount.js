@@ -1,9 +1,9 @@
-import { Card, Col, Row, Statistic, Empty, message } from "antd";
+import { Card, Col, Empty, message, Row, Statistic } from "antd";
 import {
+    BarChartOutlined,
+    RiseOutlined,
     SmileOutlined,
     TeamOutlined,
-    RiseOutlined,
-    BarChartOutlined,
 } from "@ant-design/icons";
 import React, { Component } from "react";
 import "../../css/AdminStatisticsCss.css";

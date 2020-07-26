@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
     Col,
+    Collapse,
     Input,
     List,
     message,
@@ -9,6 +10,7 @@ import {
     Select,
     Skeleton,
     Statistic,
+    Typography,
 } from "antd";
 import {
     CloseOutlined,
@@ -22,6 +24,8 @@ import {
 import { getRequest, hostUrl } from "../../services/ajax";
 import SnapShot from "./SnapShot";
 import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
+
+const { Panel } = Collapse;
 
 const { Option } = Select;
 const IconText = ({ icon, text, action }) => (
@@ -64,7 +68,7 @@ export default class UrlManagePanel extends Component {
             });
             short.idle = idle;
         });
-        console.log(JSON.stringify(this.state));
+        console.log(this.state);
     };
     handleError = (error) => {
         console.log(error);
@@ -280,12 +284,27 @@ export default class UrlManagePanel extends Component {
                                             </a>
                                         }
                                         description={
-                                            <span style={{ color: "white" }}>
+                                            <Typography.Text
+                                                copyable={{
+                                                    tooltips: [
+                                                        "复制",
+                                                        "复制成功",
+                                                    ],
+                                                }}
+                                                style={{ color: "white" }}
+                                            >
                                                 {hostUrl + "/" + item.shortUrl}
-                                            </span>
+                                            </Typography.Text>
                                         }
                                     />
-                                    {longList}
+                                    <Collapse
+                                        ghost
+                                        style={{ backgroundColor: "#011428" }}
+                                    >
+                                        <Panel header="详情" key="1">
+                                            {longList}
+                                        </Panel>
+                                    </Collapse>
                                 </Skeleton>
                             </List.Item>
                         );

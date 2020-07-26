@@ -1,5 +1,6 @@
 import React from "react";
 import { Line } from "@ant-design/charts";
+
 /**
 LineChart:
 @author Zhuohao Shen <ao7777@sjtu.edu.cn>
@@ -86,6 +87,7 @@ export default class LineChart extends React.Component {
                         },
                     },
                 ],
+                responsive: true,
             },
         };
     }

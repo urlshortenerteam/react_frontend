@@ -19,9 +19,6 @@ export default class PrivateRoute extends React.Component {
     errorHandler = () => {
         // console.log(error);
         this.setState({ isAuthed: false, hasAuthed: true });
-        console.log("checkSession返回404");
-        console.log(this.state);
-        // message.error("您需登录");
         if (sessionStorage.getItem("user")) sessionStorage.removeItem("user");
         window.location.href = "/login";
     };
@@ -38,9 +35,7 @@ export default class PrivateRoute extends React.Component {
         const path = this.props.path;
         const exact = this.props.exact;
 
-        console.log(this.props);
-        console.log("render");
-        console.log(this.state);
+        console.log(this.state.isAuthed);
 
         if (!this.state.hasAuthed) {
             return null;
@@ -68,24 +63,5 @@ export default class PrivateRoute extends React.Component {
             //     to="/login"
             // />
         );
-        // <Route
-        //     path={path}
-        //     exact={exact}
-        //     render={(props) =>
-        //         this.state.isAuthed ? (
-        //             <Component {...props} />
-        //         ) : (
-        //             <Redirect
-        //                 push
-        //                 to={{
-        //                     pathname: "/login",
-        //                     state: { from: props.location },
-        //                 }}
-        //                 // to="/login"
-        //             />
-        //         )
-        //     }
-        // />
-        // );
     }
 }

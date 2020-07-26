@@ -1,4 +1,3 @@
-/*@import '~antd/dist/antd.dark.css';*/
 .number .ant-statistic-title {
     color: white;
 }
@@ -61,7 +60,9 @@
     background: #0c1112;
     border-radius: 2px;
 }
-
+.ant-table-thead {
+    height: 10vh;
+}
 .number .ant-card-head-title {
     display: inline-block;
     -ms-flex: 1;
@@ -110,7 +111,6 @@
     border-color: #ee808000;
     color: white;
 }
-
 .rank .ant-list * {
     outline: none;
     overflow: hidden;

@@ -6,7 +6,8 @@ import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
 import { withRouter } from "react-router-dom";
-import { getRequest } from "../services/ajax";
+import { getRequest, hostUrl } from "../services/ajax";
+
 const { Sider, Content } = Layout;
 const { Text } = Typography;
 /**
@@ -20,7 +21,7 @@ class StatisticsView extends React.Component {
         display: "overview",
         data: [],
         lineData: [],
-        collapsed: true,
+        collapsed: false,
     };
     toggleSwitch = ({ key }) => {
         this.setState({ display: key });
@@ -28,11 +29,7 @@ class StatisticsView extends React.Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: {
-                id: sessionStorage.getItem("user")
-                    ? JSON.parse(sessionStorage.getItem("user")).id
-                    : null,
-            },
+            params: { id: 0 },
             errorCallback: this.handleError,
         });
     }
@@ -42,7 +39,7 @@ class StatisticsView extends React.Component {
         let lines = [];
         this.state.data.forEach((url) => {
             url.timeDistr.forEach((time) => {
-                time.url = "short.cn/" + url.shortUrl;
+                time.url = hostUrl + "/" + url.shortUrl;
                 lines.push(time);
             });
         });
@@ -58,8 +55,10 @@ class StatisticsView extends React.Component {
             <Layout justify="space-between">
                 <Sider
                     style={{ background: "black", maxWidth: "20%" }}
-                    collapsible
+                    breakpoint="lg"
                     collapsed={this.state.collapsed}
+                    collapsible
+                    collapsedWidth="0"
                     onCollapse={(collapsed) => {
                         this.setState({ collapsed });
                     }}
@@ -69,8 +68,8 @@ class StatisticsView extends React.Component {
                 <Content
                     flex="auto"
                     style={{
-                        marginLeft: 30,
-                        marginRight: 30,
+                        marginLeft: "40px",
+                        marginRight: "2vmin",
                         float: "right",
                         background: "black",
                     }}

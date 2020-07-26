@@ -14,7 +14,6 @@ const IconText = ({ icon, text, action }) => (
         {text}
     </span>
 );
-
 /**
  * AdminUrlManage
  * @author Shuchang Liu
@@ -41,7 +40,6 @@ class AdminUrlManage extends Component {
                 }
                 message.error("您不是管理员");
                 window.location.href = "/login";
-
                 return;
             }
             console.log(res.data);
@@ -150,20 +148,17 @@ class AdminUrlManage extends Component {
                     this.state.dataSource.length >= 1 ? (
                         record.longUrl.length === 0 ? (
                             <Tag color="#3b5999">{record.shortUrl}</Tag>
-                        ) : record.longUrl[0].url === "BANNED" ? (
-                            <Tag color="#cb0000">
-                                <a
-                                    style={{ color: "white" }}
-                                    href={hostUrl + "/" + record.longUrl[0].url}
-                                >
-                                    {record.shortUrl}
-                                </a>
-                            </Tag>
                         ) : (
-                            <Tag color="#3b5999">
+                            <Tag
+                                color={
+                                    record.longUrl[0].url === "BANNED"
+                                        ? "#cb0000"
+                                        : "#3b5999"
+                                }
+                            >
                                 <a
-                                    href={record.longUrl[0].url}
                                     style={{ color: "white" }}
+                                    href={hostUrl + "/" + record.shortUrl}
                                 >
                                     {record.shortUrl}
                                 </a>

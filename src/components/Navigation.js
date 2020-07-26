@@ -12,10 +12,10 @@ import { logout } from "../services/userService";
 import { Link } from "react-router-dom";
 
 /**
- Navigation:
- @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
- @date July 7th 2020
- */
+Navigation:
+@author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
+@date July 7th 2020
+*/
 export default class Navigation extends React.Component {
     state = {
         current: "home",

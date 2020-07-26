@@ -33,18 +33,21 @@ body {
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
+    overflow: hidden;
 }
 
 .rightBottomDesc {
     width: 30vmin;
     margin-left: auto;
     margin-top: auto;
+    overflow: hidden;
 }
 
 .rightTopDesc {
     margin-left: auto;
     width: 30vw;
     margin-bottom: auto;
+    overflow: hidden;
 }
 .select-before {
     width: 90px;
@@ -60,5 +63,6 @@ body {
     background: #001529;
 }
 #root {
-    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
 }

@@ -22,9 +22,9 @@ AdminManageView
 class AdminManageView extends Component {
     render() {
         return (
-            <Content style={{ padding: "0 50px" }}>
+            <Content style={{ padding: "0 5vw" }}>
                 <Row>
-                    <Col span={18} offset={3}>
+                    <Col flex="auto">
                         <Tabs defaultActiveKey="1" centered>
                             <TabPane
                                 key="1"
