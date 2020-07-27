@@ -7,6 +7,11 @@ let not_admin = false;
 let random = Math.random() * 500 + 500;
 // 访问 /getReal/ 时
 apiRoutes.get("/getReal", function (req, res) {
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     setTimeout(() => {
         res.json({
             status: 200,
@@ -27,6 +32,11 @@ apiRoutes.get("/getReal", function (req, res) {
 });
 apiRoutes.get("/getStat", function (req, res) {
     let jsonResponse = { status: 200, msg: "查询成功" };
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     Object.assign(
         jsonResponse,
         Mock.mock({
@@ -262,7 +272,11 @@ apiRoutes.post("/getOneShort", function (req, res) {
             data: /[a-zA-Z0-9]{6}/,
         })
     );
-
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     setTimeout(() => {
         res.json(jsonResponse);
     }, random);
@@ -270,6 +284,11 @@ apiRoutes.post("/getOneShort", function (req, res) {
 
 apiRoutes.post("/getShort", function (req, res) {
     console.log(req);
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     let jsonResponse = {
         status: 200,
         msg: "查询成功",
@@ -288,6 +307,11 @@ apiRoutes.post("/getShort", function (req, res) {
 
 apiRoutes.post("/loginReq", function (req, res) {
     loginMock = true;
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     console.log(req);
     let jsonResponse = {
         status: 200,
@@ -313,6 +337,11 @@ apiRoutes.post("/loginReq", function (req, res) {
 
 apiRoutes.post("/logoutReq", function (req, res) {
     console.log(req);
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     loginMock = false;
     let jsonResponse = {
         status: 200,
@@ -336,6 +365,11 @@ apiRoutes.post("/logoutReq", function (req, res) {
 
 apiRoutes.post("/register", function (req, res) {
     console.log(req);
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     let jsonResponse = {
         status: 200,
         msg: "查询成功",
@@ -357,6 +391,11 @@ apiRoutes.post("/register", function (req, res) {
 });
 apiRoutes.post("/editUrl", function (req, res) {
     console.log(req);
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     let jsonResponse = {
         status: 200,
         msg: "查询成功",
@@ -379,6 +418,11 @@ apiRoutes.post("/editUrl", function (req, res) {
 
 apiRoutes.get("/getUserStat", function (req, res) {
     console.log(req);
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     let jsonResponse = {
         status: 200,
         msg: "查询成功",
@@ -421,15 +465,20 @@ apiRoutes.get("/getUserStat", function (req, res) {
 });
 apiRoutes.get("/checkSession", function (req, res) {
     console.log(req);
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     let jsonResponse = {
         msg: "查询成功",
     };
 
-    // if (!loginMock) {
-    //     res.status(404);
-    // } else {
-    res.status(200);
-    // }
+    if (!loginMock) {
+        res.status(404);
+    } else {
+        res.status(200);
+    }
 
     setTimeout(() => {
         res.json(jsonResponse);
@@ -438,6 +487,11 @@ apiRoutes.get("/checkSession", function (req, res) {
 
 apiRoutes.get("/getTopTen", function (req, res) {
     let jsonResponse = { status: 200, msg: "查询成功" };
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     if (not_admin) {
         Object.assign(
             jsonResponse,
@@ -491,6 +545,11 @@ apiRoutes.get("/getTopTen", function (req, res) {
 
 apiRoutes.get("/getAllUrls", function (req, res) {
     let jsonResponse = { status: 200, msg: "查询成功" };
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     if (not_admin) {
         Object.assign(
             jsonResponse,
@@ -548,6 +607,11 @@ apiRoutes.get("/getAllUrls", function (req, res) {
 
 apiRoutes.get("/getNumberCount", function (req, res) {
     let jsonResponse = { status: 200, msg: "查询成功" };
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
     if (not_admin) {
         Object.assign(
             jsonResponse,
@@ -587,6 +651,11 @@ apiRoutes.get("/getNumberCount", function (req, res) {
 
 apiRoutes.post("/refresh", function (req, res) {
     let jsonResponse = {};
+    res.vary(
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method"
+    );
 
     Object.assign(
         jsonResponse,
