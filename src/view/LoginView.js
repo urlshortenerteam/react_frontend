@@ -23,11 +23,17 @@ class LoginView extends Component {
                 sessionStorage.setItem("user", JSON.stringify(res.data));
 
                 if (sessionStorage.getItem("user")) {
-                    console.log(JSON.parse(sessionStorage.getItem("user")));
+                    if (process.env.NODE_ENV === "development") {
+                        console.log(JSON.parse(sessionStorage.getItem("user")));
+                        console.log(this.props.history);
+                    }
                     message.success("登录成功");
+
                     this.props.history.goBack();
                 } else {
-                    console.log("no data");
+                    if (process.env.NODE_ENV === "development") {
+                        console.log("no data");
+                    }
                 }
 
                 // window.location.href = "/";
@@ -42,12 +48,20 @@ class LoginView extends Component {
             }
         };
         const onFinish = (values) => {
-            console.log("Received values of form: ", values);
+            if (process.env.NODE_ENV === "development") {
+                console.log("Received values of form: ", values);
+            }
             userService.login(values, callback);
         };
 
         const onFinishFailed = (errorInfo) => {
-            console.log("Failed:", errorInfo);
+            if (process.env.NODE_ENV === "development") {
+                console.log("Failed:", errorInfo);
+            }
+        };
+
+        const goToReg = () => {
+            window.location.replace("/register");
         };
         return (
             <Content>
@@ -109,7 +123,7 @@ class LoginView extends Component {
                                         <Row justify="space-between">
                                             <Col>
                                                 {" "}
-                                                <Button href="/register" ghost>
+                                                <Button onClick={goToReg} ghost>
                                                     <span>注册</span>
                                                 </Button>
                                             </Col>

@@ -25,7 +25,9 @@ export const register = (data, callback, errorHandler) => {
  * @param callback
  * */
 export const login = (data, callback) => {
-    console.log(data);
+    if (process.env.NODE_ENV === "development") {
+        console.log(data);
+    }
 
     postRequest("/loginReq", data, callback, {
         errorCallback: () => {},

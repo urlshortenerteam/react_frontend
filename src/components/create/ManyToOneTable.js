@@ -59,18 +59,24 @@ const EditableCell = ({
             toggleEdit();
             handleSave({ ...record, ...values });
         } catch (errInfo) {
-            console.log("Save failed:", errInfo);
+            if (process.env.NODE_ENV === "development") {
+                console.log("Save failed:", errInfo);
+            }
         }
     };
 
     const deleteHandle = async () => {
         try {
-            console.log("delete");
+            if (process.env.NODE_ENV === "development") {
+                console.log("delete");
+            }
             // const values = await form.validateFields();
             toggleEdit();
             handleDelete(record.key);
         } catch (errInfo) {
-            console.log("Save failed:", errInfo);
+            if (process.env.NODE_ENV === "development") {
+                console.log("Save failed:", errInfo);
+            }
         }
     };
 

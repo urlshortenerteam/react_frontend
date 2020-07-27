@@ -24,7 +24,9 @@ export default class PrivateRoute extends React.Component {
     };
     componentDidMount() {
         if (sessionStorage.getItem("user")) {
-            console.log(JSON.parse(sessionStorage.getItem("user")));
+            if (process.env.NODE_ENV === "development") {
+                console.log(JSON.parse(sessionStorage.getItem("user")));
+            }
         }
         userService.checkSession(this.checkAuth, this.errorHandler);
     }
@@ -34,8 +36,6 @@ export default class PrivateRoute extends React.Component {
         const Component = this.props.component;
         const path = this.props.path;
         const exact = this.props.exact;
-
-        console.log(this.state.isAuthed);
 
         if (!this.state.hasAuthed) {
             return null;

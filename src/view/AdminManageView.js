@@ -20,6 +20,15 @@ AdminManageView
 @description AdminManage View
 */
 class AdminManageView extends Component {
+    componentDidMount() {
+        if (
+            sessionStorage.getItem("user") === null ||
+            (sessionStorage.getItem("user") &&
+                JSON.parse(sessionStorage.getItem("user")).type !== 0)
+        ) {
+            this.props.history.push("/404");
+        }
+    }
     render() {
         return (
             <Content style={{ padding: "0 5vw" }}>

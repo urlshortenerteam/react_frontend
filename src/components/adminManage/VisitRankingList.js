@@ -40,13 +40,14 @@ export default class VisitRankingList extends Component {
             message.error("您不是管理员！！！");
             return;
         }
-        console.log(this.state);
+        if (process.env.NODE_ENV === "development") {
+            console.log(this.state);
+        }
         let lists = [];
         let temp = [];
         response.data.forEach(function (item, index) {
             temp.push({
                 value: item.count,
-
                 type: item.shortUrl,
             });
             lists.push({
@@ -54,7 +55,10 @@ export default class VisitRankingList extends Component {
                 index: index + 1,
             });
         });
-        console.log(temp);
+
+        if (process.env.NODE_ENV === "development") {
+            console.log(temp);
+        }
         this.setState({
             listData: lists,
             loading: false,
@@ -90,53 +94,64 @@ export default class VisitRankingList extends Component {
                                     dataSource={listData}
                                     renderItem={(item) => {
                                         let longList = [];
-                                        if (item.longUrl[0].url !== "BANNED")
-                                            item.longUrl.forEach(
-                                                (long, index) => {
-                                                    longList.push(
-                                                        // <div>
-                                                        <Row
-                                                            key={index}
-                                                            align="middle"
-                                                        >
-                                                            {/*<Col span={2}>*/}
-                                                            <SnapShot
-                                                                value={long.url}
-                                                                black={false}
-                                                            />
-                                                            {/*</Col>*/}
-                                                            {/*<Col span={22}>*/}
-                                                            <span
-                                                                style={{
-                                                                    marginLeft: 8,
-                                                                    marginBottom: 4,
-                                                                    color:
-                                                                        "#cccccc",
-                                                                }}
+                                        if (item.longUrl.length !== 0) {
+                                            if (
+                                                item.longUrl[0].url !== "BANNED"
+                                            )
+                                                item.longUrl.forEach(
+                                                    (long, index) => {
+                                                        longList.push(
+                                                            // <div>
+                                                            <Row
+                                                                key={index}
+                                                                align="middle"
                                                             >
-                                                                <Tooltip
-                                                                    placement="topLeft"
-                                                                    title={
+                                                                {/*<Col span={2}>*/}
+                                                                <SnapShot
+                                                                    value={
                                                                         long.url
                                                                     }
+                                                                    black={
+                                                                        false
+                                                                    }
+                                                                />
+                                                                {/*</Col>*/}
+                                                                {/*<Col span={22}>*/}
+                                                                <span
+                                                                    style={{
+                                                                        marginLeft: 8,
+                                                                        marginBottom: 4,
+                                                                        color:
+                                                                            "#cccccc",
+                                                                    }}
                                                                 >
-                                                                    {long.url}
-                                                                </Tooltip>
-                                                            </span>
-                                                            {/*</Col>*/}
-                                                        </Row>
-                                                        // </div>
-                                                    );
-                                                }
-                                            );
-                                        else
-                                            longList.push(
-                                                <IconText
-                                                    key="banned"
-                                                    icon={StopOutlined}
-                                                    text={"该链接已被禁用"}
-                                                />
-                                            );
+                                                                    <Tooltip
+                                                                        placement="topLeft"
+                                                                        title={
+                                                                            long.url
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            long.url
+                                                                        }
+                                                                    </Tooltip>
+                                                                </span>
+                                                                {/*</Col>*/}
+                                                            </Row>
+                                                            // </div>
+                                                        );
+                                                    }
+                                                );
+                                            else
+                                                longList.push(
+                                                    <IconText
+                                                        key="banned"
+                                                        icon={StopOutlined}
+                                                        text={"该链接已被禁用"}
+                                                    />
+                                                );
+                                        }
+
                                         return (
                                             <List.Item key={item.shortUrl}>
                                                 <Skeleton
