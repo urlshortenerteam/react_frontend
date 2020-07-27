@@ -13,17 +13,7 @@ MapBox:
 */
 export default class MapBox extends React.Component {
     scene: Scene;
-    state = {
-        statisticData: [],
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            statisticData: props.data,
-        };
-    }
-
+    countryLayer: CountryLayer;
     componentDidMount() {
         const scene = new Scene({
             id: "map",
@@ -37,8 +27,8 @@ export default class MapBox extends React.Component {
             }),
         });
         scene.on("loaded", () => {
-            new CountryLayer(scene, {
-                data: this.state.statisticData,
+            this.countryLayer = new CountryLayer(scene, {
+                data: this.props.data,
                 joinBy: ["NAME_CHN", "name"],
                 depth: 1,
                 provinceStroke: "#783D2D",
@@ -66,6 +56,10 @@ export default class MapBox extends React.Component {
             });
         });
         this.scene = scene;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.countryLayer.updateData(this.props.data);
     }
 
     componentWillUnmount() {
