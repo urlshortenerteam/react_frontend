@@ -1,23 +1,27 @@
 import React from "react";
 import StatisticsBar from "../components/statistics/StatisticsBar";
-import { Col, Row } from "antd";
+import { Layout, Typography } from "antd";
 import MapBox from "../components/MapBox";
 import TrendingLines from "../components/statistics/TrendingLines";
 import "../css/Statistics.css";
 import OverView from "../components/statistics/OverView";
-import { getRequest } from "../Services/ajax";
+import { withRouter } from "react-router-dom";
+import { getRequest, hostUrl } from "../services/ajax";
 
-/*
-StatisticsView
-@author Zhuohao Shen
-@date July 7th 2020
-@description Statistics page
-*/
-export default class StatisticsView extends React.Component {
+const { Sider, Content } = Layout;
+const { Text } = Typography;
+/**
+ StatisticsView
+ @author Zhuohao Shen
+ @date July 7th 2020
+ @description Statistics page
+ */
+class StatisticsView extends React.Component {
     state = {
         display: "overview",
         data: [],
         lineData: [],
+        collapsed: false,
     };
     toggleSwitch = ({ key }) => {
         this.setState({ display: key });
@@ -34,8 +38,8 @@ export default class StatisticsView extends React.Component {
         this.setState({ data: response.data });
         let lines = [];
         this.state.data.forEach((url) => {
-            url.time_distr.forEach((time) => {
-                time.url = "short.cn/" + url.shortUrl;
+            url.timeDistr.forEach((time) => {
+                time.url = hostUrl + "/" + url.shortUrl;
                 lines.push(time);
             });
         });
@@ -48,31 +52,44 @@ export default class StatisticsView extends React.Component {
 
     render() {
         return (
-            <Row justify="space-between">
-                <Col style={{ background: "black", maxWidth: "20%" }}>
+            <Layout justify="space-between">
+                <Sider
+                    style={{ background: "black", maxWidth: "20%" }}
+                    breakpoint="lg"
+                    collapsed={this.state.collapsed}
+                    collapsible
+                    collapsedWidth="0"
+                    onCollapse={(collapsed) => {
+                        this.setState({ collapsed });
+                    }}
+                >
                     <StatisticsBar toggleSwitch={this.toggleSwitch} />
-                </Col>
-                <Col
-                    flex={20}
+                </Sider>
+                <Content
+                    flex="auto"
                     style={{
-                        height: 800,
-                        marginLeft: 30,
-                        marginRight: 32,
+                        marginLeft: "40px",
+                        marginRight: "2vmin",
                         float: "right",
-                        maxWidth: "85%",
+                        background: "black",
                     }}
                 >
                     {this.state.display === "time" ? (
                         <TrendingLines data={this.state.lineData} />
                     ) : null}
                     {this.state.display === "area" ? (
-                        <MapBox data={this.state.data[0].area_distr} />
+                        this.state.data !== null ? (
+                            <MapBox data={this.state.data[0].areaDistr} />
+                        ) : (
+                            <Text>暂无数据</Text>
+                        )
                     ) : null}
                     {this.state.display === "overview" ? (
                         <OverView data={this.state.lineData} />
                     ) : null}
-                </Col>
-            </Row>
+                </Content>
+            </Layout>
         );
     }
 }
+export default withRouter(StatisticsView);

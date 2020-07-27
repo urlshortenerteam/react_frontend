@@ -1,7 +1,7 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import * as userService from "../services/userService";
-import { message } from "antd";
+import LoginView from "../view/LoginView";
 
 export default class PrivateRoute extends React.Component {
     constructor(props) {
@@ -12,26 +12,28 @@ export default class PrivateRoute extends React.Component {
         };
     }
 
-    checkAuth = (data) => {
-        console.log(data);
-        if (data.status) {
-            this.setState({ isAuthed: true, hasAuthed: true });
-        } else {
-            message.error(data.msg);
-            localStorage.removeItem("userId");
-            this.setState({ isAuthed: false, hasAuthed: true });
-        }
+    checkAuth = () => {
+        this.setState({ isAuthed: true, hasAuthed: true });
     };
 
+    errorHandler = () => {
+        // console.log(error);
+        this.setState({ isAuthed: false, hasAuthed: true });
+        if (sessionStorage.getItem("user")) sessionStorage.removeItem("user");
+        window.location.href = "/login";
+    };
     componentDidMount() {
-        userService.checkSession(this.checkAuth);
+        if (sessionStorage.getItem("user")) {
+            console.log(JSON.parse(sessionStorage.getItem("user")));
+        }
+        userService.checkSession(this.checkAuth, this.errorHandler);
     }
 
     render() {
-        const { Component, path, exact = false } = this.props;
-        // const Component=this.props.component;
-        // const path=this.props.path;
-        // const exact=this.props.exact;
+        // const {exact = false, path, component  } = this.props;
+        const Component = this.props.component;
+        const path = this.props.path;
+        const exact = this.props.exact;
 
         console.log(this.state.isAuthed);
 
@@ -39,23 +41,27 @@ export default class PrivateRoute extends React.Component {
             return null;
         }
 
-        return (
+        return this.state.isAuthed ? (
             <Route
                 path={path}
                 exact={exact}
-                render={(props) =>
-                    this.state.isAuthed ? (
-                        <Component {...props} />
-                    ) : (
-                        <Redirect
-                            to={{
-                                pathname: "/login",
-                                state: { from: props.location },
-                            }}
-                        />
-                    )
-                }
+                render={(props) => <Component {...props} />}
             />
+        ) : (
+            // <Route
+            //     path={path}
+            //     exact={exact}
+            //     render={(props) => <Component {...props} />}
+            // />
+            <Route exact path="/login" component={LoginView} />
+            // <Redirect
+            //     push
+            //     // to={{
+            //     //     pathname: "/login",
+            //     //     state: { from: props.location },
+            //     // }}
+            //     to="/login"
+            // />
         );
     }
 }

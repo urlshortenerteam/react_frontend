@@ -1,0 +1,88 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: CD
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  check:
+    name: check linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - run: npm install
+      - run: npm run lint
+  test:
+    name: e2e test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Cache Cypress binary
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-
+      - name: install dependencies and verify Cypress
+        env:
+          # make sure every Cypress install prints minimal information
+          CI: 1
+        run: |
+          npm i
+          npm run build
+          npx cypress verify
+          npx cypress info
+
+      - name: Cypress tests
+        run: npm run test:ci:record
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
+          TERM: xterm
+      - uses: actions/upload-artifact@v2
+        with:
+          name: screenshots
+          path: cypress/screenshots
+          # there might be no screenshots created when:
+          # - there are no test failures
+          # so only upload screenshots if previous step has failed
+        if: failure()
+      # video should always be generated
+      - uses: actions/upload-artifact@v2
+        with:
+          name: videos
+          path: cypress/videos
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm build
+      - name: serverless deploy
+        uses: serverless/github-action@master
+        with:
+          args: deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AO_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AO_AWS_SECRET_ACCESS_KEY }}

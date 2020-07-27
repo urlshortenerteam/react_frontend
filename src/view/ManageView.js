@@ -3,6 +3,8 @@ import { Col, Layout, Row, Tabs } from "antd";
 import "../css/HomeCss.css";
 import UrlManagePanel from "../components/url-manage/UrlManagePanel";
 import CategoryManage from "../components/url-manage/CategoryManage";
+import { withRouter } from "react-router-dom";
+import { ScheduleOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -10,17 +12,32 @@ const { Content } = Layout;
 class ManageView extends Component {
     render() {
         return (
-            <Content style={{ padding: "0 50px" }}>
-                <Row>
-                    <Col span={20} offset={2}>
-                        <Tabs defaultActiveKey="1">
-                            <TabPane tab="我的短链接" key="1">
+            <Content style={{ padding: "0 5vw" }}>
+                <Row align="center">
+                    <Col flex="auto">
+                        <Tabs defaultActiveKey="1" centered>
+                            <TabPane
+                                key="1"
+                                tab={
+                                    <span>
+                                        <ScheduleOutlined />
+                                        我的短链接
+                                    </span>
+                                }
+                            >
                                 <UrlManagePanel />
                             </TabPane>
-                            <TabPane tab="分类管理" key="2">
+                            <TabPane
+                                key="2"
+                                tab={
+                                    <span>
+                                        <ScheduleOutlined />
+                                        分类管理
+                                    </span>
+                                }
+                            >
                                 <CategoryManage />
                             </TabPane>
-                            <TabPane tab="我的订单" key="3" />
                         </Tabs>
                     </Col>
                 </Row>
@@ -29,4 +46,4 @@ class ManageView extends Component {
     }
 }
 
-export default ManageView;
+export default withRouter(ManageView);

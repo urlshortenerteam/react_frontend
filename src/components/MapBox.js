@@ -2,13 +2,14 @@ import React from "react";
 import { Scene } from "@antv/l7";
 import { CountryLayer } from "@antv/l7-district";
 import { Mapbox } from "@antv/l7-maps";
-/*
+
+/**
 MapBox:
 @author Zhuohao Shen <ao7777@sjtu.edu.cn>
 @date July 7th 2020
 @description A flex box of map showing distribution
-@params {Array(JSON)} data - data of distribution order by province
-@contents {DOM} - a flex box of map showing distribution
+@param {Array} data - data of distribution order by province
+@returns {JSX} - a flex box of map showing distribution
 */
 export default class MapBox extends React.Component {
     scene: Scene;

@@ -2,7 +2,8 @@
 const express = require("express");
 const Mock = require("mockjs");
 const apiRoutes = express.Router();
-
+let loginMock = false;
+let not_admin = false;
 let random = Math.random() * 500 + 500;
 // 访问 /getReal/ 时
 apiRoutes.get("/getReal", function (req, res) {
@@ -43,7 +44,7 @@ apiRoutes.get("/getStat", function (req, res) {
                     ],
                     count: "@natural(0,100000)",
                     long: '@url("http")',
-                    area_distr: [
+                    areaDistr: [
                         {
                             name: "云南省",
                             code: 530000,
@@ -215,7 +216,7 @@ apiRoutes.get("/getStat", function (req, res) {
                             value: "@natural(0,3000)",
                         },
                     ],
-                    time_distr: [
+                    timeDistr: [
                         { time: "0", value: "@natural(0,3000)" },
                         { time: "1", value: "@natural(0,3000)" },
                         { time: "2", value: "@natural(0,3000)" },
@@ -286,6 +287,7 @@ apiRoutes.post("/getShort", function (req, res) {
 });
 
 apiRoutes.post("/loginReq", function (req, res) {
+    loginMock = true;
     console.log(req);
     let jsonResponse = {
         status: 200,
@@ -294,13 +296,13 @@ apiRoutes.post("/loginReq", function (req, res) {
     Object.assign(
         jsonResponse,
         Mock.mock({
-            "data|1": [
-                {
-                    "loginStatus|1-2": true,
-                    "type|1": [1, 2, 0],
-                    "id|1-100": 100,
-                },
-            ],
+            data: {
+                loginStatus: true,
+                "type|1": [1, 2, 0],
+                "id|1-100": 100,
+                token: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
+                refreshToken: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
+            },
         })
     );
 
@@ -311,6 +313,7 @@ apiRoutes.post("/loginReq", function (req, res) {
 
 apiRoutes.post("/logoutReq", function (req, res) {
     console.log(req);
+    loginMock = false;
     let jsonResponse = {
         status: 200,
         msg: "查询成功",
@@ -366,6 +369,235 @@ apiRoutes.post("/editUrl", function (req, res) {
                     "status|1": true,
                 },
             ],
+        })
+    );
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getUserStat", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        status: 200,
+        msg: "查询成功",
+    };
+    if (not_admin) {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "data|1-10": [
+                    {
+                        "id|1-1000": 4,
+                        "name|1": /[a-z][A-Z][0-9]/,
+                        "role|0-2": 0,
+                        "visit_count|1-1000": 1000,
+                    },
+                ],
+                not_administrator: true,
+            })
+        );
+    } else {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "data|1-10": [
+                    {
+                        "id|1-1000": 4,
+                        "name|1": /[a-z][A-Z][0-9]/,
+                        "role|0-2": 0,
+                        "visit_count|1-1000": 1000,
+                    },
+                ],
+                not_administrator: false,
+            })
+        );
+    }
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+apiRoutes.get("/checkSession", function (req, res) {
+    console.log(req);
+    let jsonResponse = {
+        msg: "查询成功",
+    };
+
+    // if (!loginMock) {
+    //     res.status(404);
+    // } else {
+    res.status(200);
+    // }
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getTopTen", function (req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    if (not_admin) {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "data|10": [
+                    {
+                        shortUrl: /[a-zA-Z0-9]{6}/,
+                        "longUrl|1-5": [
+                            {
+                                "url|1": [
+                                    "https://www.baidertyuiop[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhdfghu.com",
+                                    "https://www.taob[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglh[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhao.com",
+                                    "https://mockjs.co[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhm/examples.html",
+                                ],
+                            },
+                        ],
+                        count: "@natural(0,100000)",
+                    },
+                ],
+                not_administrator: true,
+            })
+        );
+    } else {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "data|10": [
+                    {
+                        shortUrl: /[a-zA-Z0-9]{6}/,
+                        "longUrl|1-5": [
+                            {
+                                "url|1": [
+                                    "https://www.baidertyuiop[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhdfghu.com",
+                                    "https://www.taob[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglh[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhao.com",
+                                    "https://mockjs.co[dfghjkldfghjkldfjkldfghjkldfghjkl45680-ghjkl;dtyufiophdghfjkglh;fgdhfjkglh;jdghfjkglhm/examples.html",
+                                ],
+                            },
+                        ],
+                        count: "@natural(0,100000)",
+                    },
+                ],
+                not_administrator: false,
+            })
+        );
+    }
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getAllUrls", function (req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    if (not_admin) {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "data|10": [
+                    {
+                        shortUrl: /[a-zA-Z0-9]{6}/,
+                        "longUrl|1-5": [
+                            {
+                                "url|1": [
+                                    "https://www.baidu.com",
+                                    "https://www.taobao.com",
+                                    "https://mockjs.com/examples.html",
+                                ],
+                            },
+                        ],
+                        count: "@natural(0,100000)",
+                        creatorName: /[a-z][A-Z][0-9]/,
+                        createTime: '@date("yyyy-MM-dd")',
+                    },
+                ],
+                not_administrator: true,
+            })
+        );
+    } else {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "data|10": [
+                    {
+                        shortUrl: /[a-zA-Z0-9]{6}/,
+                        "longUrl|1-5": [
+                            {
+                                "url|1": [
+                                    "https://www.baidu.com",
+                                    "https://www.taobao.com",
+                                    "https://mockjs.com/examples.html",
+                                ],
+                            },
+                        ],
+                        count: "@natural(0,100000)",
+                        creatorName: /[a-z][A-Z][0-9]/,
+                        createTime: '@date("yyyy-MM-dd")',
+                    },
+                ],
+                not_administrator: false,
+            })
+        );
+    }
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.get("/getNumberCount", function (req, res) {
+    let jsonResponse = { status: 200, msg: "查询成功" };
+    if (not_admin) {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "data|1": [
+                    {
+                        userCount: "@natural(0,100000)",
+                        shortUrlCount: "@natural(0,100000)",
+                        visitCountTotal: "@natural(0,100000)",
+                        shortUrl: /[a-zA-Z0-9]{6}/,
+                    },
+                ],
+                not_administrator: true,
+            })
+        );
+    } else {
+        Object.assign(
+            jsonResponse,
+            Mock.mock({
+                "data|1": [
+                    {
+                        userCount: "@natural(0,100000)",
+                        shortUrlCount: "@natural(0,100000)",
+                        visitCountTotal: "@natural(0,100000)",
+                        shortUrl: /[a-zA-Z0-9]{6}/,
+                    },
+                ],
+                not_administrator: false,
+            })
+        );
+    }
+
+    setTimeout(() => {
+        res.json(jsonResponse);
+    }, random);
+});
+
+apiRoutes.post("/refresh", function (req, res) {
+    let jsonResponse = {};
+
+    Object.assign(
+        jsonResponse,
+        Mock.mock({
+            data: {
+                loginStatus: true,
+                "type|1": [1, 2, 0],
+                "id|1-100": 100,
+                token: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
+                refreshToken: /[a-z]{50,100}\.[a-z]{50,100}\.[a-z]{50,100}/,
+            },
         })
     );
 

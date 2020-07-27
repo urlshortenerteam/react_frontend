@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Button, Col, Form, Input, message, Row } from "antd";
+import { Button, Col, Form, Input, Layout, message, Row } from "antd";
 import "../css/RegisterCss.css";
+import { withRouter } from "react-router-dom";
+import { register } from "../services/userService";
 
-import { register } from "../Services/userService";
-
+const { Content } = Layout;
 const formItemLayout = {
     labelCol: {
         xs: {
@@ -40,7 +41,7 @@ const RegistrationForm = () => {
     const callback = (res) => {
         if (res.data.success) {
             message.success("注册成功");
-            window.location.href = "#/login";
+            window.location.href = "/login";
         } else {
             message.error("注册失败:用户名重复");
         }
@@ -140,7 +141,7 @@ const RegistrationForm = () => {
     );
 };
 
-/*
+/**
 RegisterView
 @author Shuchang Liu
 @date July 8th 2020
@@ -149,13 +150,8 @@ RegisterView
 class RegisterView extends Component {
     render() {
         return (
-            <div>
-                <div className="container ">
-                    <div className="col-md-12 column">
-                        <br /> <br /> <br />
-                        <br />
-                        <br />
-                    </div>
+            <Content>
+                <Row justify="center">
                     <div className="registerBlock">
                         <div className="registerTitle">
                             <span>注册</span>
@@ -170,10 +166,10 @@ class RegisterView extends Component {
                             </Col>
                         </Row>
                     </div>
-                </div>
-            </div>
+                </Row>
+            </Content>
         );
     }
 }
 
-export default RegisterView;
+export default withRouter(RegisterView);

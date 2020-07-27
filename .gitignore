@@ -49,3 +49,10 @@ yarn.lock
 .idea
 /.idea/
 package-lock.json
+/cypress/integration/examples
+/cypress/videos/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

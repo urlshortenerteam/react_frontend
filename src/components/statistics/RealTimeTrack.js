@@ -1,7 +1,8 @@
 import React from "react";
-import { getRequest } from "../../Services/ajax";
+import { getRequest } from "../../services/ajax";
 import Table from "antd/es/table";
-/*
+
+/**
 RealTimeTrack
 @author Zhuohao Shen
 @date July 6th 2020
@@ -49,7 +50,11 @@ export default class RealTimeTrack extends React.Component {
 
     componentDidMount() {
         getRequest("/getReal", this.handleData, {
-            params: { id: 0 },
+            params: {
+                id: sessionStorage.getItem("user")
+                    ? JSON.parse(sessionStorage.getItem("user")).id
+                    : null,
+            },
             errorCallback: this.handleError,
         });
     }
@@ -70,6 +75,7 @@ export default class RealTimeTrack extends React.Component {
                 rowKey={(record) => {
                     return record.time + record.ip.toString();
                 }}
+                style={{ marginTop: 15 }}
             />
         );
     }

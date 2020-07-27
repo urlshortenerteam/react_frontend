@@ -5,10 +5,18 @@
 .site-collapse-custom-collapse .site-collapse-custom-panel {
     color: #ffffff;
 }
-
+.ant-layout-sider-zero-width-trigger {
+    top: 0;
+}
 .ant-collapse > .ant-collapse-item > .ant-collapse-header {
     color: #ffffff;
 }
 .ant-statistic-title {
     color: rgba(255, 255, 255, 0.25);
+}
+.ant-layout .ant-layout-has-sider {
+    background: #001121;
+}
+.ant-statistic-content-prefix {
+    width: 100%;
 }

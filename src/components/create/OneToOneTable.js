@@ -1,28 +1,23 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import {
-    Button,
-    Col,
-    Form,
-    Input,
-    message,
-    Popconfirm,
-    Row,
-    Table,
-    Tooltip,
-} from "antd";
+import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
 import "../../css/HomeCss.css";
 import "../../css/CreateCss.css";
-import { getBatchOneToOne } from "../../Services/CreateService";
+import { getBatchOneToOne } from "../../services/CreateService";
 import ShortWithQR from "./ShortWithQR";
 
+const { Search } = Input;
+const pattern = {
+    url: new RegExp(
+        "^(?!mailto:)(?:(?:http|https)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:([/?#])[^\\s]*)?$",
+        "i"
+    ),
+};
 const EditableContext = React.createContext();
-
-interface EditableRowProps {
-    index: number;
+function checkUrl(URL) {
+    return !!URL.match(pattern.url);
 }
-
-const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
+const EditableRow = ({ index, ...props }) => {
     const [form] = Form.useForm();
     return (
         <Form form={form} component={false}>
@@ -33,28 +28,19 @@ const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
     );
 };
 
-interface EditableCellProps {
-    title: React.ReactNode;
-    editable: boolean;
-    children: React.ReactNode;
-    dataIndex: string;
-    record: Item;
-    handleSave: (record: Item) => void;
-}
-
-const EditableCell: React.FC<EditableCellProps> = ({
+const EditableCell = ({
     title,
     editable,
     children,
     dataIndex,
     record,
     handleSave,
+    handleDelete,
     ...restProps
 }) => {
     const [editing, setEditing] = useState(false);
     const inputRef = useRef();
     const form = useContext(EditableContext);
-
     useEffect(() => {
         if (editing) {
             inputRef.current.focus();
@@ -63,13 +49,14 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     const toggleEdit = () => {
         setEditing(!editing);
-        form.setFieldsValue({ [dataIndex]: record[dataIndex] });
+        form.setFieldsValue({
+            [dataIndex]: record[dataIndex],
+        });
     };
 
     const save = async () => {
         try {
             const values = await form.validateFields();
-
             toggleEdit();
             handleSave({ ...record, ...values });
         } catch (errInfo) {
@@ -77,26 +64,48 @@ const EditableCell: React.FC<EditableCellProps> = ({
         }
     };
 
+    const deleteHandle = async () => {
+        try {
+            console.log("delete");
+            // const values = await form.validateFields();
+            toggleEdit();
+            handleDelete(record.key);
+        } catch (errInfo) {
+            console.log("Save failed:", errInfo);
+        }
+    };
+
     let childNode = children;
 
-    if (editable && record.edit !== 0) {
+    if (editable && record.edit) {
         childNode = editing ? (
             <Form.Item
-                style={{ margin: 0 }}
+                style={{
+                    margin: 0,
+                }}
                 name={dataIndex}
                 rules={[
                     {
                         required: true,
-                        message: `${title} 需填入`,
+                        message: `${title} is required.`,
                     },
                 ]}
             >
-                <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+                {/*<Input ref={inputRef} onPressEnter={save} onBlur={save} />*/}
+                <Search
+                    ref={inputRef}
+                    onPressEnter={save}
+                    onBlur={save}
+                    enterButton="删除"
+                    onSearch={deleteHandle}
+                />
             </Form.Item>
         ) : (
             <div
                 className="editable-cell-value-wrap"
-                style={{ paddingRight: 24 }}
+                style={{
+                    paddingRight: 24,
+                }}
                 onClick={toggleEdit}
             >
                 {children}
@@ -107,7 +116,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     return <td {...restProps}>{childNode}</td>;
 };
 
-/*
+/**
 OneToOneTable
 @author Shuchang Liu
 @date July 10th 2020
@@ -122,6 +131,7 @@ export default class OneToOneTable extends React.Component {
                     key: 1,
                     long: "以http://或https://开头",
                     short: "",
+                    edit: true,
                 },
             ],
             count: 1,
@@ -133,7 +143,7 @@ export default class OneToOneTable extends React.Component {
                 dataIndex: "long",
                 editable: true,
                 align: "center",
-                colSpan: 2,
+                colSpan: 1,
                 ellipsis: {
                     showTitle: false,
                 },
@@ -143,30 +153,6 @@ export default class OneToOneTable extends React.Component {
                         {long}
                     </Tooltip>
                 ),
-            },
-            {
-                title: "删除",
-                dataIndex: "operation",
-                align: "center",
-                width: "10%",
-                colSpan: 0,
-                render: (text, record) =>
-                    this.state.dataSource.length >= 1 ? (
-                        !this.state.created ? (
-                            <Popconfirm
-                                title="确定删除此长链接？"
-                                onConfirm={() => this.handleDelete(record.key)}
-                                okText="删除"
-                                cancelText="取消"
-                            >
-                                <Button type="primary">删除</Button>
-                            </Popconfirm>
-                        ) : (
-                            <Button type="primary" disabled>
-                                删除
-                            </Button>
-                        )
-                    ) : null,
             },
             {
                 title: "短链接",
@@ -213,30 +199,29 @@ export default class OneToOneTable extends React.Component {
         let flag = true;
         if (urlArray.length > 1) {
             urlArray.forEach((item, index) => {
-                newRow.push({
-                    key: index + this.state.count,
-                    long: item,
-                    short: "",
-                    edit: true,
-                });
                 if (!item) {
                     urlArray.splice(index, 1); //删除空项
                 }
                 //check indexOf http:// 或https://
                 else {
-                    if (
-                        item.indexOf("https://") !== 0 &&
-                        item.indexOf("http://") !== 0
-                    ) {
+                    if (!checkUrl(item)) {
                         flag = false;
                     }
+                    newRow.push({
+                        key: index + this.state.count,
+                        long: item,
+                        short: "",
+                        edit: true,
+                    });
                 }
             });
             this.setState({
                 count: this.state.count + urlArray.length,
             });
             if (!flag) {
-                message.error("长链接格式错误，请以http://或https://开头");
+                message.error(
+                    "长链接格式错误，请输入合法长链接，请以http://或https://开头"
+                );
             }
 
             newData.splice(index, 1, ...newRow);
@@ -245,11 +230,10 @@ export default class OneToOneTable extends React.Component {
             console.log(newData);
         } else {
             const item = newData[index];
-            if (
-                urlArray[0].indexOf("https://") !== 0 &&
-                urlArray[0].indexOf("http://") !== 0
-            ) {
-                message.error("长链接格式错误，请以http://或https://开头");
+            if (!checkUrl(urlArray[0])) {
+                message.error(
+                    "长链接格式错误，请输入合法长链接，请以http://或https://开头"
+                );
             }
             newData.splice(index, 1, {
                 ...item,
@@ -286,10 +270,7 @@ export default class OneToOneTable extends React.Component {
             }
             //检查是否为 http:// 或https://
             else {
-                if (
-                    item.long.indexOf("https://") !== 0 &&
-                    item.long.indexOf("http://") !== 0
-                ) {
+                if (!checkUrl(item.long)) {
                     flag = false;
                     messages += index + 1;
                     messages += "、";
@@ -334,6 +315,7 @@ export default class OneToOneTable extends React.Component {
             getBatchOneToOne(req, callBack);
         }
     };
+
     render() {
         const { dataSource } = this.state;
         const components = {
@@ -354,6 +336,7 @@ export default class OneToOneTable extends React.Component {
                     dataIndex: col.dataIndex,
                     title: col.title,
                     handleSave: this.handleSave,
+                    handleDelete: this.handleDelete,
                 }),
             };
         });
@@ -368,40 +351,45 @@ export default class OneToOneTable extends React.Component {
                     columns={columns}
                     pagination={{ position: ["bottomCenter"] }}
                     footer={() => (
-                        <Row>
-                            <Col span={2} offset={10}>
-                                {!this.state.created ? (
-                                    <Button
-                                        onClick={this.handleAdd}
-                                        type="primary"
-                                        style={{ marginBottom: 16 }}
-                                    >
-                                        添加
-                                    </Button>
-                                ) : (
-                                    <Button type="primary" disabled>
-                                        添加
-                                    </Button>
-                                )}
+                        <Row justify="center">
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
+                                    {!this.state.created ? (
+                                        <Button
+                                            onClick={this.handleAdd}
+                                            type="primary"
+                                        >
+                                            添加
+                                        </Button>
+                                    ) : (
+                                        <Button type="primary" disabled>
+                                            添加
+                                        </Button>
+                                    )}
+                                </div>
                             </Col>
-                            <Col span={2}>
-                                {!this.state.created ? (
-                                    <Button
-                                        type="primary"
-                                        onClick={this.oneToOne}
-                                    >
-                                        生成
-                                    </Button>
-                                ) : (
-                                    <Button type="primary" disabled>
-                                        生成
-                                    </Button>
-                                )}
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
+                                    {!this.state.created ? (
+                                        <Button
+                                            type="primary"
+                                            onClick={this.oneToOne}
+                                        >
+                                            生成
+                                        </Button>
+                                    ) : (
+                                        <Button type="primary" disabled>
+                                            生成
+                                        </Button>
+                                    )}
+                                </div>
                             </Col>
-                            <Col span={2}>
-                                <Button type="primary" onClick={this.reset}>
-                                    重置
-                                </Button>
+                            <Col span={1.5}>
+                                <div style={{ marginLeft: 5 }}>
+                                    <Button type="primary" onClick={this.reset}>
+                                        重置
+                                    </Button>
+                                </div>
                             </Col>
                         </Row>
                     )}
