@@ -19,7 +19,9 @@ describe("Statistic", () => {
     it("check area distribution", () => {
         cy.get(
             ".ant-layout-sider-children > .ant-menu > :nth-child(3)"
-        ).click();
+        ).click()
+        .get('.ant-select-selector')
+        .click();
     });
 });
 const stubData = () => {
