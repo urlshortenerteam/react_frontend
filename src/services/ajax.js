@@ -6,10 +6,10 @@
  * */
 import { message } from "antd";
 
-// export const hostUrl=process.env.REACT_APP_HOST_URL;
+export const hostUrl = process.env.REACT_APP_HOST_URL;
 // export const hostUrl = "http://3.81.71.37:8080";
-export const hostUrl = "http://localhost:4000";
-// export const hostUrl = "http://111.186.46.37:4000";
+// export const hostUrl = "http://localhost:4000";
+
 /**
  * postRequest
  * @author Shuchang Liu & Zhuohao Shen <ao7777@sjtu.edu.cn>
@@ -111,9 +111,7 @@ let resetToken = (
             return response.json();
         })
         .then((res) => {
-            if (process.env.NODE_ENV === "development") {
-                console.log(res);
-            }
+            console.log(res);
 
             // successfully renew time
             if (res.success) {

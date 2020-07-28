@@ -26,7 +26,8 @@ class AdminManageView extends Component {
             (sessionStorage.getItem("user") &&
                 JSON.parse(sessionStorage.getItem("user")).type !== 0)
         ) {
-            this.props.history.push("/404");
+            // this.props.history.push("/404");
+            window.location.href = "/404";
         }
     }
     render() {

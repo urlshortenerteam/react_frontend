@@ -36,7 +36,7 @@ class NoMatchView extends Component {
                     {/*/>*/}
 
                     <img
-                        src={hostUrl + "/static/error2.png"}
+                        src={hostUrl + "/static/alien.png"}
                         alt={""}
                         style={{
                             marginTop: "60px",

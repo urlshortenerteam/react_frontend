@@ -59,24 +59,19 @@ const EditableCell = ({
             toggleEdit();
             handleSave({ ...record, ...values });
         } catch (errInfo) {
-            if (process.env.NODE_ENV === "development") {
-                console.log("Save failed:", errInfo);
-            }
+            console.log("Save failed:", errInfo);
         }
     };
 
     const deleteHandle = async () => {
         try {
-            if (process.env.NODE_ENV === "development") {
-                console.log("delete");
-            }
+            console.log("delete");
+
             // const values = await form.validateFields();
             toggleEdit();
             handleDelete(record.key);
         } catch (errInfo) {
-            if (process.env.NODE_ENV === "development") {
-                console.log("Save failed:", errInfo);
-            }
+            console.log("Save failed:", errInfo);
         }
     };
 
@@ -314,6 +309,9 @@ export default class ManyToOneTable extends React.Component {
         const callBack = (rep) => {
             console.log(rep.data);
             let result = [];
+            if (!rep.data) {
+                return;
+            }
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,

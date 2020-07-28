@@ -60,24 +60,19 @@ const EditableCell = ({
             toggleEdit();
             handleSave({ ...record, ...values });
         } catch (errInfo) {
-            if (process.env.NODE_ENV === "development") {
-                console.log("Save failed:", errInfo);
-            }
+            console.log("Save failed:", errInfo);
         }
     };
 
     const deleteHandle = async () => {
         try {
-            if (process.env.NODE_ENV === "development") {
-                console.log("delete");
-            }
+            console.log("delete");
+
             // const values = await form.validateFields();
             toggleEdit();
             handleDelete(record.key);
         } catch (errInfo) {
-            if (process.env.NODE_ENV === "development") {
-                console.log("Save failed:", errInfo);
-            }
+            console.log("Save failed:", errInfo);
         }
     };
 
@@ -190,9 +185,8 @@ export default class OneToOneTable extends React.Component {
             dataSource: [...dataSource, newData],
             count: this.state.count + 1,
         });
-        if (process.env.NODE_ENV === "development") {
-            console.log([...dataSource, newData]);
-        }
+
+        console.log([...dataSource, newData]);
     };
 
     handleSave = (row) => {
@@ -235,9 +229,8 @@ export default class OneToOneTable extends React.Component {
             newData.splice(index, 1, ...newRow);
 
             this.setState({ dataSource: newData });
-            if (process.env.NODE_ENV === "development") {
-                console.log(newData);
-            }
+
+            console.log(newData);
         } else {
             const item = newData[index];
             if (!checkUrl(urlArray[0])) {
@@ -250,9 +243,8 @@ export default class OneToOneTable extends React.Component {
                 ...row,
             });
             this.setState({ dataSource: newData });
-            if (process.env.NODE_ENV === "development") {
-                console.log(newData);
-            }
+
+            console.log(newData);
         }
     };
 
@@ -304,9 +296,7 @@ export default class OneToOneTable extends React.Component {
 
         //将数据发给后端
         const callBack = (res) => {
-            if (process.env.NODE_ENV === "development") {
-                console.log(res.data);
-            }
+            console.log(res.data);
             let result = [];
             let shorts = res.data;
             urlArray.forEach(function (item, index) {
@@ -321,9 +311,8 @@ export default class OneToOneTable extends React.Component {
                 dataSource: result,
                 created: true,
             });
-            if (process.env.NODE_ENV === "development") {
-                console.log(result);
-            }
+
+            console.log(result);
         };
 
         // 格式正确则将数据发回后端

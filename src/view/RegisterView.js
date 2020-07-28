@@ -47,9 +47,7 @@ const RegistrationForm = () => {
         }
     };
     const onFinish = (values) => {
-        if (process.env.NODE_ENV === "development") {
-            console.log("Received values of form: ", values);
-        }
+        console.log("Received values of form: ", values);
 
         register(values, callback, (error) => {
             console.log(error);

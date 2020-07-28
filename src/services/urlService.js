@@ -35,10 +35,9 @@ let BanUrl = ({ url, callback, errorCallback }) => {
  * @param {function} parameters.errorCallback - The callback for errors
  * */
 let EditUrl = ({ url, newLong, callback, errorCallback }) => {
-    if (process.env.NODE_ENV === "development") {
-        console.log(newLong);
-        console.log(url);
-    }
+    console.log(newLong);
+    console.log(url);
+
     postRequest(
         "/editUrl",
         {

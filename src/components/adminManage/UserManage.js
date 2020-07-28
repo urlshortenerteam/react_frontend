@@ -115,9 +115,8 @@ class UserTable extends React.Component {
                 return;
             }
 
-            if (process.env.NODE_ENV === "development") {
-                console.log(res);
-            }
+            console.log(res);
+
             this.setState({ dataSource: res.data, rowData: res.data });
             // console.log(JSON.stringify(data));
         };

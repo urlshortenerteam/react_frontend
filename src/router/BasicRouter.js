@@ -36,6 +36,7 @@ const BasicRouter = () => (
                     component={AdminManageView}
                 />
 
+                <Route path="/404" component={NoMatchView} />
                 <Route component={NoMatchView} />
             </Switch>
 

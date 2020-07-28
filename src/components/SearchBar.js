@@ -22,9 +22,7 @@ export default class SearchBar extends React.Component {
                         placeholder="请输入需转换网址"
                         size="large"
                         onSearch={(value) => {
-                            if (process.env.NODE_ENV === "development") {
-                                console.log(value);
-                            }
+                            console.log(value);
                         }}
                         style={{ width: 700 }}
                     />

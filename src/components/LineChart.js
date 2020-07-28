@@ -17,9 +17,9 @@ export default class LineChart extends React.Component {
 
     constructor(props) {
         super(props);
-        if (process.env.NODE_ENV === "development") {
-            console.log(props.data);
-        }
+
+        console.log(props.data);
+
         this.state = {
             data: props.data,
             config: {

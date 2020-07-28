@@ -44,9 +44,8 @@ class AdminUrlManage extends Component {
                 return;
             }
 
-            if (process.env.NODE_ENV === "development") {
-                console.log(res.data);
-            }
+            console.log(res.data);
+
             this.setState({
                 dataSource: res.data,
                 rawData: res.data,
@@ -66,9 +65,8 @@ class AdminUrlManage extends Component {
         });
     };
     handleLift = (response) => {
-        if (process.env.NODE_ENV === "development") {
-            console.log(response.data);
-        }
+        console.log(response.data);
+
         let listData = this.state.dataSource;
         if (response.data.status === true) {
             message.success("解禁成功");
@@ -98,9 +96,7 @@ class AdminUrlManage extends Component {
         message.error(error);
     };
     handleBan = (response) => {
-        if (process.env.NODE_ENV === "development") {
-            console.log(response.data);
-        }
+        console.log(response.data);
 
         let listData = this.state.dataSource;
         if (response.data.status === true) {

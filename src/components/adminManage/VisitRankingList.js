@@ -40,9 +40,9 @@ export default class VisitRankingList extends Component {
             message.error("您不是管理员！！！");
             return;
         }
-        if (process.env.NODE_ENV === "development") {
-            console.log(this.state);
-        }
+
+        console.log(this.state);
+
         let lists = [];
         let temp = [];
         response.data.forEach(function (item, index) {
@@ -56,9 +56,8 @@ export default class VisitRankingList extends Component {
             });
         });
 
-        if (process.env.NODE_ENV === "development") {
-            console.log(temp);
-        }
+        console.log(temp);
+
         this.setState({
             listData: lists,
             loading: false,
