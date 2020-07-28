@@ -56,7 +56,7 @@ let postRequest = (url, json, callback, { errorCallback }) => {
                         sessionStorage.removeItem("user");
                     }
                     window.location.href = "/login";
-                    message.error("非法访问2");
+                    message.error("非法访问");
                 }
                 return response;
             } else {
@@ -196,7 +196,7 @@ let getRequest = (url, callback, { errorCallback, params }) => {
                         sessionStorage.removeItem("user");
                     }
                     window.location.href = "/login";
-                    message.error("非法访问1");
+                    message.error("非法访问");
                 }
                 return response;
             } else {
