@@ -1,5 +1,4 @@
 import React from "react";
-
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomeView from "../view/HomeView";
 import LoginView from "../view/LoginView";
@@ -11,6 +10,7 @@ import { Layout } from "antd";
 import Navigation from "../components/Navigation";
 import AdminManageView from "../view/AdminManageView";
 import PrivateRoute from "./PrivateRoute";
+import NoMatchView from "../view/NoMatchView";
 
 const { Header, Footer } = Layout;
 const BasicRouter = () => (
@@ -35,6 +35,9 @@ const BasicRouter = () => (
                     path="/adminManage"
                     component={AdminManageView}
                 />
+
+                <Route path="/404" component={NoMatchView} />
+                <Route component={NoMatchView} />
             </Switch>
 
             <Footer

@@ -75,6 +75,10 @@ class StatisticsView extends React.Component {
                 lines.push(time);
             });
         });
+        this.setState({ lineData: lines });
+
+        console.log(this.state);
+
         this.setState({
             lineData: lines,
             mapDisplay: this.state.data[0].areaDistr,

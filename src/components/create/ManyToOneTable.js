@@ -66,6 +66,7 @@ const EditableCell = ({
     const deleteHandle = async () => {
         try {
             console.log("delete");
+
             // const values = await form.validateFields();
             toggleEdit();
             handleDelete(record.key);
@@ -308,6 +309,9 @@ export default class ManyToOneTable extends React.Component {
         const callBack = (rep) => {
             console.log(rep.data);
             let result = [];
+            if (!rep.data) {
+                return;
+            }
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,

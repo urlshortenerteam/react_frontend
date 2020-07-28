@@ -41,7 +41,7 @@ const RegistrationForm = () => {
     const callback = (res) => {
         if (res.data.success) {
             message.success("注册成功");
-            window.location.href = "/login";
+            window.location.replace("/login");
         } else {
             message.error("注册失败:用户名重复");
         }
@@ -49,7 +49,9 @@ const RegistrationForm = () => {
     const onFinish = (values) => {
         console.log("Received values of form: ", values);
 
-        register(values, callback);
+        register(values, callback, (error) => {
+            console.log(error);
+        });
     };
 
     return (

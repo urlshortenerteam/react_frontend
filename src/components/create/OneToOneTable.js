@@ -67,6 +67,7 @@ const EditableCell = ({
     const deleteHandle = async () => {
         try {
             console.log("delete");
+
             // const values = await form.validateFields();
             toggleEdit();
             handleDelete(record.key);
@@ -184,6 +185,7 @@ export default class OneToOneTable extends React.Component {
             dataSource: [...dataSource, newData],
             count: this.state.count + 1,
         });
+
         console.log([...dataSource, newData]);
     };
 
@@ -227,6 +229,7 @@ export default class OneToOneTable extends React.Component {
             newData.splice(index, 1, ...newRow);
 
             this.setState({ dataSource: newData });
+
             console.log(newData);
         } else {
             const item = newData[index];
@@ -240,6 +243,7 @@ export default class OneToOneTable extends React.Component {
                 ...row,
             });
             this.setState({ dataSource: newData });
+
             console.log(newData);
         }
     };
@@ -307,6 +311,7 @@ export default class OneToOneTable extends React.Component {
                 dataSource: result,
                 created: true,
             });
+
             console.log(result);
         };
 

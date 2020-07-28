@@ -24,7 +24,10 @@ class LoginView extends Component {
 
                 if (sessionStorage.getItem("user")) {
                     console.log(JSON.parse(sessionStorage.getItem("user")));
+                    console.log(this.props.history);
+
                     message.success("登录成功");
+
                     this.props.history.goBack();
                 } else {
                     console.log("no data");
@@ -43,11 +46,16 @@ class LoginView extends Component {
         };
         const onFinish = (values) => {
             console.log("Received values of form: ", values);
+
             userService.login(values, callback);
         };
 
         const onFinishFailed = (errorInfo) => {
             console.log("Failed:", errorInfo);
+        };
+
+        const goToReg = () => {
+            window.location.replace("/register");
         };
         return (
             <Content>
@@ -109,7 +117,7 @@ class LoginView extends Component {
                                         <Row justify="space-between">
                                             <Col>
                                                 {" "}
-                                                <Button href="/register" ghost>
+                                                <Button onClick={goToReg} ghost>
                                                     <span>注册</span>
                                                 </Button>
                                             </Col>

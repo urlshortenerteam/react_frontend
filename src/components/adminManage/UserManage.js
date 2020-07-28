@@ -114,7 +114,9 @@ class UserTable extends React.Component {
                 message.error("您不是管理员");
                 return;
             }
+
             console.log(res);
+
             this.setState({ dataSource: res.data, rowData: res.data });
             // console.log(JSON.stringify(data));
         };

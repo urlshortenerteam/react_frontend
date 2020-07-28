@@ -35,8 +35,6 @@ export default class PrivateRoute extends React.Component {
         const path = this.props.path;
         const exact = this.props.exact;
 
-        console.log(this.state.isAuthed);
-
         if (!this.state.hasAuthed) {
             return null;
         }

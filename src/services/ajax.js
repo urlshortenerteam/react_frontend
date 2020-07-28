@@ -6,9 +6,10 @@
  * */
 import { message } from "antd";
 
-export const hostUrl = "http://3.81.71.37:8080";
+export const hostUrl = process.env.REACT_APP_HOST_URL;
+// export const hostUrl = "http://3.81.71.37:8080";
 // export const hostUrl = "http://localhost:4000";
-// export const hostUrl = "http://111.186.46.37:4000";
+
 /**
  * postRequest
  * @author Shuchang Liu & Zhuohao Shen <ao7777@sjtu.edu.cn>
@@ -55,7 +56,7 @@ let postRequest = (url, json, callback, { errorCallback }) => {
                         sessionStorage.removeItem("user");
                     }
                     window.location.href = "/login";
-                    message.error("非法访问2");
+                    message.error("非法访问");
                 }
                 return response;
             } else {
@@ -195,7 +196,7 @@ let getRequest = (url, callback, { errorCallback, params }) => {
                         sessionStorage.removeItem("user");
                     }
                     window.location.href = "/login";
-                    message.error("非法访问1");
+                    message.error("非法访问");
                 }
                 return response;
             } else {

@@ -68,6 +68,7 @@ export default class UrlManagePanel extends Component {
             });
             short.idle = idle;
         });
+
         console.log(this.state);
     };
     handleError = (error) => {
@@ -106,6 +107,7 @@ export default class UrlManagePanel extends Component {
     };
     handleBan = (response) => {
         console.log(response.data);
+
         const { editIndex, listData } = this.state;
         if (response.data.status === true) {
             message.success("禁用成功");
@@ -115,6 +117,7 @@ export default class UrlManagePanel extends Component {
     };
     handleLift = (response) => {
         console.log(response.data);
+
         const { editIndex, listData } = this.state;
         if (response.data.status === true) {
             message.success("解禁成功");
@@ -348,7 +351,9 @@ export default class UrlManagePanel extends Component {
                 });
                 message.success("编辑成功");
                 listData[editIndex].longUrl[0].url = prefix + editValue;
+
                 console.log(listData[editIndex]);
+
                 this.setState({ listData: listData });
             },
             errorCallback: this.handleError,
@@ -357,6 +362,7 @@ export default class UrlManagePanel extends Component {
 
     handleCancel = () => {
         console.log("Clicked cancel button");
+
         this.setState({
             editing: false,
         });

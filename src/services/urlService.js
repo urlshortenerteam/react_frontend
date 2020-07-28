@@ -37,6 +37,7 @@ let BanUrl = ({ url, callback, errorCallback }) => {
 let EditUrl = ({ url, newLong, callback, errorCallback }) => {
     console.log(newLong);
     console.log(url);
+
     postRequest(
         "/editUrl",
         {

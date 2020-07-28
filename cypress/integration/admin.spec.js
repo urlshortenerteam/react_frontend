@@ -347,12 +347,23 @@ const stubData = () => {
 };
 const fakeLogin = () => {
     cy.server();
+    let user={
+        loginStatus: true,
+        type: 0,
+        id: 100,
+        // token: "hlduwocoacsffxvunwtghyorueoecijckycmuyprkdcvyngdskdruugxjkdapckmjmiqrmymtwhhjnkece.nsgulqjivzkoeqausrwdymunlomrvpmlyxlcggscfzgiligicjfkmogvenbrooqlhdsbxlqjw.hsficmjojubovhsaphfytcinvsqbkgtqxoyuskgbeesertqiwbaxecryvuvwqfqnigcjqzsvicipgiwpndrmfjcplmcylei",
+        // refreshToken: "rztwwprjkerepcsoijukwklmwrkurgltxgwfqtiusmafarzlrwrgqxvmfibitdyotyztubjoyhyqhlwzfxntfglxtwk.pncakrtifomdobiqcvufxheycruoqgwficcscjehsquhohttorsdrciuofdimmsocwnzyybffqgvvnj.fydwucxwtdutdmhwtnubwhiysgfoewbnkyeeeuqlyhmeredlqtxxglvqgcmqjuqpftbhryceuvunjdmjcmpjksrzbgjr",
+    };
+    // cy.window().then(win=> {
+    //     win.sessionStorage.setItem("user",user);
+    // });
+    window.sessionStorage.setItem('user', JSON.stringify(user));
     cy.route({
         method: "GET",
         url: "**/checkSession",
         response: {
-            msg: "查询成功",
             status: 200
         }
     });
+
 };

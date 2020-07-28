@@ -40,9 +40,12 @@ class AdminUrlManage extends Component {
                 }
                 message.error("您不是管理员");
                 window.location.href = "/login";
+                // window.location.href='/404';
                 return;
             }
+
             console.log(res.data);
+
             this.setState({
                 dataSource: res.data,
                 rawData: res.data,
@@ -63,6 +66,7 @@ class AdminUrlManage extends Component {
     };
     handleLift = (response) => {
         console.log(response.data);
+
         let listData = this.state.dataSource;
         if (response.data.status === true) {
             message.success("解禁成功");
@@ -93,6 +97,7 @@ class AdminUrlManage extends Component {
     };
     handleBan = (response) => {
         console.log(response.data);
+
         let listData = this.state.dataSource;
         if (response.data.status === true) {
             message.success("禁用成功");
