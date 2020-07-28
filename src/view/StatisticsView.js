@@ -90,13 +90,68 @@ class StatisticsView extends React.Component {
         console.log(error);
     };
     render() {
+        let content = (<div />);
+        if (this.state.data.length > 0)
+            content = (<>
+                {this.state.display === "time" ? (
+                    <TrendingLines data={this.state.lineData} />
+                ) : null}
+                {this.state.display === "area" ? (
+                    this.state.data.length > 0 ? (
+                        <>
+                            <Select
+                                mode="multiple"
+                                placeholder="选择短链接"
+                                style={{
+                                    width: "40vw",
+                                    position: "absolute",
+                                    zIndex: 3,
+                                    backdropFilter:
+                                        "saturate(180%) blur(20px)",
+                                    opacity: 0.7,
+                                }}
+                                defaultValue={[this.state.data[0].shortUrl]}
+                                onChange={this.handleChangeSelector}
+                            >
+                                {this.state.children}
+                            </Select>
+                            <MapBox data={this.state.mapDisplay} />
+                        </>
+                    ) : (
+                            <Text style={{ color: "#ffffff" }}> 暂无数据 </Text>
+                        )
+                ) : null}
+                {this.state.display === "overview" ? (
+                    <OverView data={this.state.lineData} />
+                ) : null}
+            </>);
+        else content = (<div
+            style={{
+                marginTop: "10vmin",
+                color: "#ffffff",
+                position: "relative",
+                textAlign: "center"
+            }}
+        >
+            <img
+                src="资源 1.png"
+                alt="nodata"
+                style={{
+                    width: "30%",
+                    marginLeft: "35%",
+                    marginRight: "35%",
+                    marginBottom: "10vh"
+                }}
+            />
+                    你还没有短链接哦~
+            <a href="/create">创建一个</a>
+        </div>);
         return (
             <Layout justify="space-between">
                 <Sider
-                    style={{ background: "black", maxWidth: "20%" }}
+                    style={{ background: "#001121", maxWidth: "20%" }}
                     breakpoint="lg"
                     collapsed={this.state.collapsed}
-                    collapsible
                     collapsedWidth="0"
                     onCollapse={(collapsed) => {
                         this.setState({ collapsed });
@@ -110,41 +165,13 @@ class StatisticsView extends React.Component {
                         marginLeft: "40px",
                         marginRight: "2vmin",
                         float: "right",
-                        background: "black",
+                        background: "#001121",
                     }}
                 >
-                    {this.state.display === "time" ? (
-                        <TrendingLines data={this.state.lineData} />
-                    ) : null}
-                    {this.state.display === "area" ? (
-                        this.state.data.length > 0 ? (
-                            <>
-                                <Select
-                                    mode="multiple"
-                                    placeholder="选择短链接"
-                                    style={{
-                                        width: "40vw",
-                                        position: "absolute",
-                                        zIndex: 3,
-                                        backdropFilter:
-                                            "saturate(180%) blur(20px)",
-                                        opacity: 0.7,
-                                    }}
-                                    defaultValue={[this.state.data[0].shortUrl]}
-                                    onChange={this.handleChangeSelector}
-                                >
-                                    {this.state.children}
-                                </Select>
-                                <MapBox data={this.state.mapDisplay} />
-                            </>
-                        ) : (
-                            <Text> 暂无数据 </Text>
-                        )
-                    ) : null}
-                    {this.state.display === "overview" ? (
-                        <OverView data={this.state.lineData} />
-                    ) : null}
+                    {content}
+
                 </Content>
+
             </Layout>
         );
     }
