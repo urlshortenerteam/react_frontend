@@ -7,11 +7,11 @@ import BasicRouter from "./router/BasicRouter";
 
 var logDebug = true;
 console.log = (function (oriLogFunc) {
-  return function () {
-    if (logDebug) {
-      oriLogFunc.apply(this, arguments);
-    }
-  }
+    return function () {
+        if (logDebug) {
+            oriLogFunc.apply(this, arguments);
+        }
+    };
 })(console.log);
 
 ReactDOM.render(<BasicRouter />, document.getElementById("root"));

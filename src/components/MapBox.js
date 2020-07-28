@@ -60,8 +60,7 @@ export default class MapBox extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.data)
-        this.countryLayer.updateData(this.props.data);
+        if (this.props.data) this.countryLayer.updateData(this.props.data);
     }
 
     componentWillUnmount() {
