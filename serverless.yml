@@ -12,7 +12,7 @@ plugins:
 # 以下为 serverless-finch 的配置
 custom:
   client:
-    bucketName: reevoo-frontend # 需要和 S3 上创建的 bucket 同名
+    bucketName: home.rv-s.cn # 需要和 S3 上创建的 bucket 同名
     distributionFolder: build # 本地打包的输出目录
     indexDocument: index.html # 同 S3 上静态文件托管中设置的入口文档
     errorDocument: index.html # 同 S3 上静态文件托管中设置的错误文档
