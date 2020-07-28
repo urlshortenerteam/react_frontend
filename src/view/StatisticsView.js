@@ -77,7 +77,7 @@ class StatisticsView extends React.Component {
         });
         this.setState({
             lineData: lines,
-            mapDisplay: this.state.data[0].areaDistr,
+            mapDisplay: this.state.data[0].areaDistr ? this.state.data[0].areaDistr : null,
         });
     };
     handleError = (error) => {
@@ -96,8 +96,8 @@ class StatisticsView extends React.Component {
                         this.setState({ collapsed });
                     }}
                 >
-                    <StatisticsBar toggleSwitch={this.toggleSwitch} />{" "}
-                </Sider>{" "}
+                    <StatisticsBar toggleSwitch={this.toggleSwitch} />
+                </Sider>
                 <Content
                     flex="auto"
                     style={{
@@ -107,12 +107,12 @@ class StatisticsView extends React.Component {
                         background: "black",
                     }}
                 >
-                    {" "}
+
                     {this.state.display === "time" ? (
                         <TrendingLines data={this.state.lineData} />
-                    ) : null}{" "}
+                    ) : null}
                     {this.state.display === "area" ? (
-                        this.state.data !== null ? (
+                        this.state.data.length > 0 ? (
                             <>
                                 <Select
                                     mode="multiple"
@@ -128,19 +128,19 @@ class StatisticsView extends React.Component {
                                     defaultValue={[this.state.data[0].shortUrl]}
                                     onChange={this.handleChangeSelector}
                                 >
-                                    {" "}
-                                    {this.state.children}{" "}
-                                </Select>{" "}
-                                <MapBox data={this.state.mapDisplay} />{" "}
+
+                                    {this.state.children}
+                                </Select>
+                                <MapBox data={this.state.mapDisplay} />
                             </>
                         ) : (
-                            <Text> 暂无数据 </Text>
-                        )
-                    ) : null}{" "}
+                                <Text> 暂无数据 </Text>
+                            )
+                    ) : null}
                     {this.state.display === "overview" ? (
                         <OverView data={this.state.lineData} />
-                    ) : null}{" "}
-                </Content>{" "}
+                    ) : null}
+                </Content>
             </Layout>
         );
     }

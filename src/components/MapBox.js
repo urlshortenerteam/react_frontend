@@ -17,6 +17,7 @@ export default class MapBox extends React.Component {
     componentDidMount() {
         const scene = new Scene({
             id: "map",
+            logoVisible: false,
             map: new Mapbox({
                 center: [116.2825, 39.9],
                 pitch: 0,
@@ -59,6 +60,7 @@ export default class MapBox extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.data)
         this.countryLayer.updateData(this.props.data);
     }
 

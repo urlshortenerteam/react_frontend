@@ -6,8 +6,8 @@
  * */
 import { message } from "antd";
 
-export const hostUrl = "http://3.81.71.37:8080";
-// export const hostUrl = "http://localhost:4000";
+// export const hostUrl = "http://3.81.71.37:8080";
+export const hostUrl = "http://localhost:4000";
 // export const hostUrl = "http://111.186.46.37:4000";
 /**
  * postRequest
@@ -231,7 +231,7 @@ let getRequest_checkSession = (url, callback, { errorCallback, params }) => {
             Authorization: JSON.parse(sessionStorage.getItem("user"))
                 ? JSON.parse(sessionStorage.getItem("user")).token
                 : null,
-            "Cache-Control": "no-cache",
+            // "Cache-Control": "no-cache",
         },
     };
 
