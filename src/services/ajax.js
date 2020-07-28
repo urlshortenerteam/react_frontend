@@ -6,9 +6,9 @@
  * */
 import { message } from "antd";
 
-export const hostUrl = process.env.REACT_APP_HOST_URL;
+// export const hostUrl = process.env.REACT_APP_HOST_URL;
 // export const hostUrl = "http://3.81.71.37:8080";
-// export const hostUrl = "http://localhost:4000";
+export const hostUrl = "http://localhost:4000";
 
 /**
  * postRequest

@@ -27,8 +27,8 @@ class LoginView extends Component {
                     console.log(this.props.history);
 
                     message.success("登录成功");
-
-                    this.props.history.goBack();
+                    this.props.history.go(-1);
+                    // this.props.history.goBack();
                 } else {
                     console.log("no data");
                 }
