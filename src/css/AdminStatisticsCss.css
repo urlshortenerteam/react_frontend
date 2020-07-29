@@ -1,11 +1,22 @@
 .number .ant-statistic-title {
     color: white;
+    font-size: 20px;
+    font-weight: bold;
+    /*font-family: "等线 Light", ,fantasy;*/
+    font-family: "等线", "Calibri Light", serif;
+    max-height: 6vh;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
+
 .number {
     /*margin: 10px;*/
-    margin-left: 4%;
-    margin-bottom: 10px;
+    /*margin-left: 4%;*/
+    margin-bottom: 40px;
     margin-top: 10px;
+    /*margin-right: 40px;*/
+    margin-left: 40px;
 }
 
 .number .ant-card-hoverable {
@@ -15,6 +26,7 @@
     transition: box-shadow 0.3s, border-color 0.3s, -webkit-box-shadow 0.3s;
     box-shadow: 1px 1px 10px #3399cc;
 }
+
 .number .ant-statistic {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -34,10 +46,13 @@
 
 .number .ant-statistic-content {
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .number .ant-card-bordered {
@@ -59,41 +74,62 @@
     position: relative;
     background: #0c1112;
     border-radius: 2px;
+    max-height: 18vh;
 }
+
 .ant-table-thead {
     height: 10vh;
 }
+
+.number .ant-statistic-content-prefix {
+    /*width: 18%;*/
+    width: 26px
+}
+
 .number .ant-card-head-title {
     display: inline-block;
     -ms-flex: 1;
     flex: 1 1;
     padding: 16px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     color: white;
     font-size: 23px;
 }
+
 /*for VisitRankingList*/
 
 .topRank .donutPlot {
     margin-top: 14%;
     align-content: center;
 }
+
 .topRank .topList {
     margin: 20px;
 }
+
 .topRank {
     background: #0c1112;
     height: auto;
+    min-height: 40vh;
     box-shadow: 1px 1px 10px #3399cc;
-    margin: 30px;
+    /*margin-top: 30px;*/
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom:5px;
 }
+
+.topRank .ant-row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    /* flex-flow: row wrap;*/
+}
+
 .topRank .ant-pagination-item-active {
     font-weight: 500;
     background: #151414;
     border-color: white;
 }
+
 .topRank .ant-pagination-item-active a {
     color: #ffffff;
 }
@@ -111,9 +147,13 @@
     border-color: #ee808000;
     color: white;
 }
-.rank .ant-list * {
-    outline: none;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+
+.ring-guide-name {
+    color: white;
+    font-family: "等线 Light", serif;
+}
+
+.ring-guide-value {
+    color: white !important;
+    opacity: 0.7
 }

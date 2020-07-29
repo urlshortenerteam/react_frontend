@@ -97,13 +97,13 @@ body {
     /*font-family: "Calibri Light", serif;*/
     font-family: "Calibri Light", serif;
 }
-.ant-statistic-content-value {
+.countDown .ant-statistic-content-value {
     display: inline-block;
     direction: ltr;
     color: #cccccc;
 }
 
-.ant-statistic-content-suffix {
+.countDown .ant-statistic-content-suffix {
     margin-left: 4px;
     font-size: 10px;
     color: #cccccc;
