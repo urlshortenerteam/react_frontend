@@ -30,7 +30,6 @@ class StatisticsView extends React.Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: 0 },
             errorCallback: this.handleError,
         });
     }
@@ -134,7 +133,7 @@ class StatisticsView extends React.Component {
             }}
         >
             <img
-                src="资源 1.png"
+                src={`${hostUrl}/static/box.png`}
                 alt="nodata"
                 style={{
                     width: "30%",
