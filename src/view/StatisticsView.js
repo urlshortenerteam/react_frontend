@@ -1,7 +1,6 @@
 import { Layout, Select, Typography } from "antd";
-import React from "react";
+import React,{lazy} from "react";
 import { withRouter } from "react-router-dom";
-import MapBox from "../components/MapBox";
 import OverView from "../components/statistics/OverView";
 import StatisticsBar from "../components/statistics/StatisticsBar";
 import TrendingLines from "../components/statistics/TrendingLines";
@@ -9,6 +8,7 @@ import "../css/Statistics.css";
 import { getRequest, hostUrl } from "../services/ajax";
 const { Sider, Content } = Layout;
 const { Text } = Typography;
+const MapBox=lazy(()=>import("../components/MapBox.js"))
 /**
  StatisticsView
  @author Zhuohao Shen <ao7777@sjtu.edu.cn>

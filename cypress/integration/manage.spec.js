@@ -31,7 +31,7 @@ describe("Manage", () => {
             .get("input:nth-child(2)")
             .type("baidu.com",{force:true})
             .get(".ant-select-selection-item")
-            .click({ force: true })
+            .click()
             .get("[aria-selected=\"false\"] > .ant-select-item-option-content")
             .click({ force: true })
             .get(".ant-btn-primary > span")
