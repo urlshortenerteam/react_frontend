@@ -17,10 +17,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12"
       - run: npm install
       - run: npm run lint
   test:
@@ -78,11 +74,15 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - run: npm build
-      - name: serverless deploy
-        uses: serverless/github-action@master
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm install
+      - run: npm run build
+      - uses: jakejarvis/s3-sync-action@v0.5.1
         with:
-          args: deploy
+          args: --acl public-read --follow-symlinks --delete
         env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AO_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AO_AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: 'build'      
