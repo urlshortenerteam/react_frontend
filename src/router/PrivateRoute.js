@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { Layout, Skeleton } from "antd";
+import { Layout, Skeleton, message } from "antd";
 import * as userService from "../services/userService";
 import LoginView from "../view/LoginView";
 import "../css/NavigationCss.css";
@@ -25,10 +25,21 @@ export default class PrivateRoute extends React.Component {
         window.location.href = "/login";
     };
     componentDidMount() {
-        if (sessionStorage.getItem("user")) {
-            console.log(JSON.parse(sessionStorage.getItem("user")));
+        if (
+            sessionStorage.getItem("user") &&
+            JSON.parse(sessionStorage.getItem("user")).id !== null &&
+            JSON.parse(sessionStorage.getItem("user")).loginStatus !== null &&
+            JSON.parse(sessionStorage.getItem("user")).type !== null &&
+            JSON.parse(sessionStorage.getItem("user")).token !== null &&
+            JSON.parse(sessionStorage.getItem("user")).refreshToken !== null
+        ) {
+            userService.checkSession(this.checkAuth, this.errorHandler);
+        } else {
+            if (sessionStorage.getItem("user"))
+                sessionStorage.removeItem("user");
+            window.location.href = "/login";
+            message.error("您未登录");
         }
-        userService.checkSession(this.checkAuth, this.errorHandler);
     }
 
     render() {
@@ -37,12 +48,15 @@ export default class PrivateRoute extends React.Component {
         const path = this.props.path;
         const exact = this.props.exact;
 
+        console.log(this.state.isAuthed);
         if (!this.state.hasAuthed) {
             return (
-                <Content style={{ padding: "0 12vw" }}>
-                    <Skeleton active paragraph={{ rows: 5 }} />
-                    <Skeleton active paragraph={{ rows: 5 }} />
-                    <Skeleton active paragraph={{ rows: 5 }} />
+                <Content style={{ padding: "0 20vw" }}>
+                    <div className="private">
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                    </div>
                 </Content>
             );
         }

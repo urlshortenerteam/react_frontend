@@ -12,7 +12,8 @@ import {
 import "../css/NavigationCss.css";
 import { logout } from "../services/userService";
 import { Link } from "react-router-dom";
-import pic from "./logo.png";
+// import pic from "./logo.png";
+import { hostUrl } from "../services/ajax";
 const menu = (
     <Menu>
         <Menu.Item>
@@ -48,7 +49,11 @@ export default class Navigation extends React.Component {
                     ghost
                     className="site-page-header"
                     title="eevoo"
-                    avatar={{ src: pic, shape: "square", size: "small" }}
+                    avatar={{
+                        src: hostUrl + "/static/logo.png",
+                        shape: "square",
+                        size: "small",
+                    }}
                     subTitle={[
                         <Menu
                             onClick={this.handleClick}

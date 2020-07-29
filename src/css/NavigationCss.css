@@ -46,11 +46,8 @@
     margin-right: 0;
 }
 
-.ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-title,
-.ant-skeleton.ant-skeleton-active,
-.ant-skeleton-content,
-.ant-skeleton-paragraph,
-> li {
+.private .ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-title,
+.ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-paragraph > li {
     background: -webkit-gradient(
         linear,
         left top,
