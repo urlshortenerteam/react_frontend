@@ -12,7 +12,7 @@ import {
 import "../css/NavigationCss.css";
 import { logout } from "../services/userService";
 import { Link } from "react-router-dom";
-
+import pic from "./logo.png";
 const menu = (
     <Menu>
         <Menu.Item>
@@ -47,7 +47,8 @@ export default class Navigation extends React.Component {
                 <PageHeader
                     ghost
                     className="site-page-header"
-                    title="Reevoo"
+                    title="eevoo"
+                    avatar={{ src: pic, shape: "square", size: "small" }}
                     subTitle={[
                         <Menu
                             onClick={this.handleClick}

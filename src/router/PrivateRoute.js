@@ -1,8 +1,10 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { Layout, Skeleton } from "antd";
 import * as userService from "../services/userService";
 import LoginView from "../view/LoginView";
-
+import "../css/NavigationCss.css";
+const { Content } = Layout;
 export default class PrivateRoute extends React.Component {
     constructor(props) {
         super(props);
@@ -36,7 +38,13 @@ export default class PrivateRoute extends React.Component {
         const exact = this.props.exact;
 
         if (!this.state.hasAuthed) {
-            return null;
+            return (
+                <Content style={{ padding: "0 12vw" }}>
+                    <Skeleton active paragraph={{ rows: 5 }} />
+                    <Skeleton active paragraph={{ rows: 5 }} />
+                    <Skeleton active paragraph={{ rows: 5 }} />
+                </Content>
+            );
         }
 
         return this.state.isAuthed ? (
