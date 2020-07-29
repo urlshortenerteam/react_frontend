@@ -30,7 +30,6 @@ class StatisticsView extends React.Component {
 
     async componentDidMount() {
         getRequest("/getStat", this.handleData, {
-            params: { id: 0 },
             errorCallback: this.handleError,
         });
     }
@@ -81,42 +80,24 @@ class StatisticsView extends React.Component {
 
         this.setState({
             lineData: lines,
-            mapDisplay: this.state.data[0].areaDistr,
+            mapDisplay: this.state.data[0].areaDistr
+                ? this.state.data[0].areaDistr
+                : null,
         });
     };
     handleError = (error) => {
         console.log(error);
     };
     render() {
-        return (
-            <Layout justify="space-between">
-                <Sider
-                    style={{ background: "black", maxWidth: "20%" }}
-                    breakpoint="lg"
-                    collapsed={this.state.collapsed}
-                    collapsible
-                    collapsedWidth="0"
-                    onCollapse={(collapsed) => {
-                        this.setState({ collapsed });
-                    }}
-                >
-                    <StatisticsBar toggleSwitch={this.toggleSwitch} />{" "}
-                </Sider>{" "}
-                <Content
-                    flex="auto"
-                    style={{
-                        marginLeft: "40px",
-                        marginRight: "2vmin",
-                        float: "right",
-                        background: "black",
-                    }}
-                >
-                    {" "}
+        let content = <div />;
+        if (this.state.data.length > 0)
+            content = (
+                <>
                     {this.state.display === "time" ? (
                         <TrendingLines data={this.state.lineData} />
-                    ) : null}{" "}
+                    ) : null}
                     {this.state.display === "area" ? (
-                        this.state.data !== null ? (
+                        this.state.data.length > 0 ? (
                             <>
                                 <Select
                                     mode="multiple"
@@ -132,19 +113,67 @@ class StatisticsView extends React.Component {
                                     defaultValue={[this.state.data[0].shortUrl]}
                                     onChange={this.handleChangeSelector}
                                 >
-                                    {" "}
-                                    {this.state.children}{" "}
-                                </Select>{" "}
-                                <MapBox data={this.state.mapDisplay} />{" "}
+                                    {this.state.children}
+                                </Select>
+                                <MapBox data={this.state.mapDisplay} />
                             </>
                         ) : (
-                            <Text> 暂无数据 </Text>
+                            <Text style={{ color: "#ffffff" }}> 暂无数据 </Text>
                         )
-                    ) : null}{" "}
+                    ) : null}
                     {this.state.display === "overview" ? (
                         <OverView data={this.state.lineData} />
-                    ) : null}{" "}
-                </Content>{" "}
+                    ) : null}
+                </>
+            );
+        else
+            content = (
+                <div
+                    style={{
+                        marginTop: "10vmin",
+                        color: "#ffffff",
+                        position: "relative",
+                        textAlign: "center",
+                    }}
+                >
+                    <img
+                        src={`${hostUrl}/static/box.png`}
+                        alt="nodata"
+                        style={{
+                            width: "30%",
+                            marginLeft: "35%",
+                            marginRight: "35%",
+                            marginBottom: "10vh",
+                        }}
+                    />
+                    你还没有短链接哦~
+                    <a href="/create">创建一个</a>
+                </div>
+            );
+        return (
+            <Layout justify="space-between">
+                <Sider
+                    style={{ background: "#001121", maxWidth: "20%" }}
+                    breakpoint="lg"
+                    collapsed={this.state.collapsed}
+                    collapsedWidth="0"
+                    onCollapse={(collapsed) => {
+                        this.setState({ collapsed });
+                    }}
+                >
+                    <StatisticsBar toggleSwitch={this.toggleSwitch} />
+                </Sider>
+                <Content
+                    flex="auto"
+                    style={{
+                        marginLeft: "40px",
+                        marginRight: "2vmin",
+                        float: "right",
+                        background: "#001121",
+                    }}
+                >
+                    {content}
+                </Content>
             </Layout>
         );
     }

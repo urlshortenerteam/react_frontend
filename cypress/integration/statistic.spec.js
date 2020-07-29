@@ -19,13 +19,15 @@ describe("Statistic", () => {
     it("check area distribution", () => {
         cy.get(
             ".ant-layout-sider-children > .ant-menu > :nth-child(3)"
-        ).click();
+        ).click()
+        .get('.ant-select-selector')
+        .click();
     });
 });
 const stubData = () => {
     cy.route({
         method: "GET",
-        url: "**/getReal?**",
+        url: "**/getReal",
         response: {
             status: 200,
             msg: "查询成功",
@@ -58,7 +60,7 @@ const stubData = () => {
     });
     cy.route({
         method: "GET",
-        url: "**/getStat?**",
+        url: "**/getStat",
         response: {
             status: 200,
             msg: "查询成功",
