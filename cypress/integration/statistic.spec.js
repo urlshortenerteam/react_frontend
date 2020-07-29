@@ -27,7 +27,7 @@ describe("Statistic", () => {
 const stubData = () => {
     cy.route({
         method: "GET",
-        url: "**/getReal?**",
+        url: "**/getReal",
         response: {
             status: 200,
             msg: "查询成功",
@@ -60,7 +60,7 @@ const stubData = () => {
     });
     cy.route({
         method: "GET",
-        url: "**/getStat?**",
+        url: "**/getStat",
         response: {
             status: 200,
             msg: "查询成功",
