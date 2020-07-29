@@ -18,11 +18,6 @@ jobs:
         with:
           node-version: 12
       - run: npm install
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12"
-      - run: npm install
       - run: npm run lint
   test:
     name: e2e test
@@ -79,6 +74,8 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
       - run: npm install
       - run: npm run build
       - uses: jakejarvis/s3-sync-action@v0.5.1
