@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Layout, Statistic } from "antd";
+import { Layout, Statistic, Row } from "antd";
 import { withRouter } from "react-router-dom";
 import "../css/HomeCss.css";
 import { hostUrl } from "../services/ajax";
-// import pic2 from "./error2.png";
 const { Countdown } = Statistic;
 const deadline = Date.now() + 1000 * 15; // Moment is also OK
 
@@ -18,13 +17,10 @@ const { Content } = Layout;
 class NoMatchView extends Component {
     onFinish = () => {
         this.props.history.go(-1);
-        // window.location.href = document.referrer;
     };
     render() {
         return (
             <Content>
-                {/*<div className={`centerDesc magictime puffIn`}>*/}
-
                 <div className="titleNoMatch">
                     404
                     <Countdown
@@ -39,27 +35,21 @@ class NoMatchView extends Component {
                 {/*    <div className="smallNoMatch1">*/}
                 {/*    The page you are looking for is stolen by aliens .*/}
                 {/*</div>*/}
-                {/*</div>*/}
 
-                <div className="picture">
-                    {/*<img*/}
-                    {/*    src={pic2}*/}
-                    {/*    alt={""}*/}
-                    {/*    style={{*/}
-                    {/*        marginTop: "45px",*/}
-                    {/*    }}*/}
-                    {/*    width="400px"*/}
-                    {/*/>*/}
-
-                    <img
-                        src={hostUrl + "/static/alien.png"}
-                        alt={""}
-                        style={{
-                            marginTop: "60px",
-                        }}
-                        width="400px"
-                    />
-                </div>
+                <Row justify="center">
+                    <div className="picture">
+                        <img
+                            src={hostUrl + "/static/alien.png"}
+                            alt={""}
+                            style={{
+                                marginTop: "10%",
+                                height: "21vw",
+                            }}
+                            // width="400px"
+                            // width: 40vw;
+                        />
+                    </div>
+                </Row>
             </Content>
         );
     }

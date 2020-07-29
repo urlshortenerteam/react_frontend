@@ -76,11 +76,9 @@ body {
     font-family: "Corbel", fantasy;
 }
 .picture {
-    align-content: center;
-    align-self: center;
-    align-items: center;
-    margin-left: 37%;
-    position: relative;
+    margin-left: auto;
+    /*margin-left: 37%;*/
+    position: fixed;
 }
 .smallNoMatch {
     color: #d8e3e7;
