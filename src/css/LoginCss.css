@@ -10,7 +10,6 @@
 .login {
     width: 90vmin;
     margin-top: 15vh;
-    position: fixed;
     border-radius: 5px;
     box-shadow: 10px 10px 30px #3399cc;
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
