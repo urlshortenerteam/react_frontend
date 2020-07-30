@@ -17,7 +17,7 @@ import { hostUrl } from "../services/ajax";
 const menu = (
     <Menu>
         <Menu.Item>
-            <a key="logout" onClick={logout} href='/'>
+            <a key="logout" onClick={logout} href="/">
                 <Row>
                     <Col offset={2}>
                         <ReloadOutlined />
