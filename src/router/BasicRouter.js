@@ -1,17 +1,17 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomeView from "../view/HomeView";
-import LoginView from "../view/LoginView";
-import CreateView from "../view/CreateView";
-import StatisticsView from "../view/StatisticsView";
-import ManageView from "../view/ManageView";
-import RegisterView from "../view/RegisterView";
 import { Layout } from "antd";
 import Navigation from "../components/Navigation";
-import AdminManageView from "../view/AdminManageView";
 import PrivateRoute from "./PrivateRoute";
 import NoMatchView from "../view/NoMatchView";
+import HomeView from "../view/HomeView";
 
+const AdminManageView = lazy(() => import("../view/AdminManageView.js"));
+const LoginView = lazy(() => import("../view/LoginView.js"));
+const CreateView = lazy(() => import("../view/CreateView.js"));
+const StatisticsView = lazy(() => import("../view/StatisticsView.js"));
+const ManageView = lazy(() => import("../view/ManageView.js"));
+const RegisterView = lazy(() => import("../view/RegisterView.js"));
 const { Header, Footer } = Layout;
 const BasicRouter = () => (
     <BrowserRouter>
@@ -19,27 +19,28 @@ const BasicRouter = () => (
             <Header>
                 <Navigation />
             </Header>
-            <Switch>
-                <Route exact path="/" component={HomeView} />
-                <Route exact path="/login" component={LoginView} />
-                <PrivateRoute exact path="/create" component={CreateView} />
-                <PrivateRoute
-                    exact
-                    path="/statistics"
-                    component={StatisticsView}
-                />
-                <PrivateRoute exact path="/manage" component={ManageView} />
-                <Route exact path="/register" component={RegisterView} />
-                <PrivateRoute
-                    exact
-                    path="/adminManage"
-                    component={AdminManageView}
-                />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Switch>
+                    <Route exact path="/" component={HomeView} />
+                    <Route exact path="/login" component={LoginView} />
+                    <PrivateRoute exact path="/create" component={CreateView} />
+                    <PrivateRoute
+                        exact
+                        path="/statistics"
+                        component={StatisticsView}
+                    />
+                    <PrivateRoute exact path="/manage" component={ManageView} />
+                    <Route exact path="/register" component={RegisterView} />
+                    <PrivateRoute
+                        exact
+                        path="/adminManage"
+                        component={AdminManageView}
+                    />
 
-                <Route path="/404" component={NoMatchView} />
-                <Route component={NoMatchView} />
-            </Switch>
-
+                    <Route path="/404" component={NoMatchView} />
+                    <Route component={NoMatchView} />
+                </Switch>
+            </Suspense>
             <Footer
                 style={{
                     textAlign: "center",
