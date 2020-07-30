@@ -51,6 +51,6 @@
 .ant-tabs-tab {
     color: white;
 }
-.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
     color: white;
 }
