@@ -53,6 +53,7 @@ export default class PrivateRoute extends React.Component {
             return (
                 <Content style={{ padding: "0 20vw" }}>
                     <div className="private">
+                        <br/>
                         <Skeleton active paragraph={{ rows: 4 }} />
                         <Skeleton active paragraph={{ rows: 4 }} />
                         <Skeleton active paragraph={{ rows: 4 }} />
@@ -68,20 +69,7 @@ export default class PrivateRoute extends React.Component {
                 render={(props) => <Component {...props} />}
             />
         ) : (
-            // <Route
-            //     path={path}
-            //     exact={exact}
-            //     render={(props) => <Component {...props} />}
-            // />
             <Route exact path="/login" component={LoginView} />
-            // <Redirect
-            //     push
-            //     // to={{
-            //     //     pathname: "/login",
-            //     //     state: { from: props.location },
-            //     // }}
-            //     to="/login"
-            // />
         );
     }
 }

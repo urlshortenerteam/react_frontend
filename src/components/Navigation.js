@@ -108,7 +108,7 @@ export default class Navigation extends React.Component {
                                 >
                                     <Tag
                                         icon={<UserOutlined />}
-                                        color="#3b5999"
+                                        color="#7f6cf5"
                                     >
                                         {
                                             JSON.parse(

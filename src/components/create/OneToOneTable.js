@@ -148,7 +148,6 @@ export default class OneToOneTable extends React.Component {
                 ellipsis: {
                     showTitle: false,
                 },
-                width: "60%",
                 render: (long) => (
                     <Tooltip placement="topLeft" title={long}>
                         {long}

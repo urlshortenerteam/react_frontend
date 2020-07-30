@@ -12,10 +12,10 @@ import VisitRankingList from "./VisitRankingList";
 export default class SimpleStatistics extends Component {
     render() {
         return (
-            <>
+            <div>
                 <NumberCount />
                 <VisitRankingList />
-            </>
+            </div>
         );
     }
 }

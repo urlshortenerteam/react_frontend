@@ -6,10 +6,10 @@
  * */
 import { message } from "antd";
 
-// export const hostUrl = process.env.REACT_APP_HOST_URL;
+export const hostUrl = process.env.REACT_APP_HOST_URL;
 // export const hostUrl = "http://3.81.71.37:8080";
 // export const hostUrl = "http://localhost:4000";
-export const hostUrl = "http://rv-s.cn:8080";
+// export const hostUrl = "http://rv-s.cn:8080";
 /**
  * postRequest
  * @author Shuchang Liu & Zhuohao Shen <ao7777@sjtu.edu.cn>
@@ -115,11 +115,16 @@ let resetToken = (
 
             // successfully renew time
             if (res.success) {
-                message.success("续费成功");
+                if(!session)
+                {
+                    message.success("续费成功");
+                }
+
                 let name = JSON.parse(sessionStorage.getItem("user")).userName;
                 let ans = { ...JSON.parse(res.data), userName: name };
                 // sessionStorage.setItem("user", JSON.stringify(res.data));
                 sessionStorage.setItem("user", JSON.stringify(ans));
+
                 // send post request again
                 if (post) {
                     postRequest(url, json, callback, {
