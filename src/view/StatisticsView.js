@@ -93,11 +93,10 @@ class StatisticsView extends React.Component {
         });
     };
     handleError = (error) => {
-        console.log(error);
-        this.setState({ loading: false });
         import("antd").then(({ message }) => {
-            message.error(error);
-        });
+            message.error(error.toString());
+        });;
+        this.setState({ loading: false });
     };
     render() {
         let content = <div />;

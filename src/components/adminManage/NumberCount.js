@@ -44,7 +44,9 @@ export default class NumberCount extends Component {
             });
         };
         getNumberCount(callback, (error) => {
-            console.log(error);
+                    import("antd").then(({ message }) => {
+            message.error(error.toString());
+        });;
         });
     }
     render() {

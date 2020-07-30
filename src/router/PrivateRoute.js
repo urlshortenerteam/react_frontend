@@ -19,7 +19,6 @@ export default class PrivateRoute extends React.Component {
     };
 
     errorHandler = () => {
-        // console.log(error);
         this.setState({ isAuthed: false, hasAuthed: true });
         if (sessionStorage.getItem("user")) sessionStorage.removeItem("user");
         window.location.href = "/login";
