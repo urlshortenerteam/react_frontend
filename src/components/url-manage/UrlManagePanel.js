@@ -23,6 +23,7 @@ import {
 } from "@ant-design/icons";
 import { getRequest, hostUrl } from "../../services/ajax";
 import SnapShot from "./SnapShot";
+import Loading from "../Loading";
 import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
 import "../../css/ManageCss.css";
 const { Panel } = Collapse;
@@ -153,6 +154,40 @@ export default class UrlManagePanel extends Component {
                 <Option value="https://">https://</Option>
             </Select>
         );
+        if (this.state.loading)
+            return (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 226px)",
+                        marginLeft: "calc(50vw - 101.667px",
+                    }}
+                />
+            );
+        if (this.state.listData.length === 0)
+            return (
+                <div
+                    style={{
+                        marginTop: "10vmin",
+                        color: "#ffffff",
+                        position: "relative",
+                        textAlign: "center",
+                    }}
+                >
+                    <img
+                        src={`${hostUrl}/static/box.png`}
+                        alt="nodata"
+                        style={{
+                            width: "30%",
+                            marginLeft: "35%",
+                            marginRight: "35%",
+                            marginBottom: "3vh",
+                        }}
+                    />
+                    你还没有短链接哦~
+                    <a href="/create">创建一个</a>
+                </div>
+            );
         return (
             <>
                 <List

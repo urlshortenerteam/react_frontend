@@ -65,17 +65,24 @@ class StatisticsView extends React.Component {
     handleData = (response) => {
         this.setState({ data: response.data });
         let lines = [];
-        this.state.data.forEach((url) => {
-            this.state.children.push(
-                <Select.Option key={url.shortUrl} value={url.shortUrl}>
-                    {url.shortUrl}
-                </Select.Option>
-            );
-            url.timeDistr.forEach((time) => {
-                time.url = hostUrl + "/" + url.shortUrl;
-                lines.push(time);
+        if (response.data.length > 0) {
+            this.state.data.forEach((url) => {
+                this.state.children.push(
+                    <Select.Option key={url.shortUrl} value={url.shortUrl}>
+                        {url.shortUrl}
+                    </Select.Option>
+                );
+                url.timeDistr.forEach((time) => {
+                    time.url = hostUrl + "/" + url.shortUrl;
+                    lines.push(time);
+                });
             });
-        });
+            this.setState({
+                mapDisplay: this.state.data[0].areaDistr
+                    ? this.state.data[0].areaDistr
+                    : null,
+            });
+        }
         this.setState({ lineData: lines });
 
         console.log(this.state);
@@ -83,13 +90,14 @@ class StatisticsView extends React.Component {
         this.setState({
             lineData: lines,
             loading: false,
-            mapDisplay: this.state.data[0].areaDistr
-                ? this.state.data[0].areaDistr
-                : null,
         });
     };
     handleError = (error) => {
         console.log(error);
+        this.setState({ loading: false });
+        import("antd").then(({ message }) => {
+            message.error(error);
+        });
     };
     render() {
         let content = <div />;
@@ -153,7 +161,17 @@ class StatisticsView extends React.Component {
                     <a href="/create">创建一个</a>
                 </div>
             );
-        else content = <Loading />;
+        else
+            content = (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 167px)",
+                        marginLeft: "calc(50% - 93px)",
+                    }}
+                />
+            );
+        console.log(this.state.loading);
         return (
             <Layout justify="space-between">
                 <Sider

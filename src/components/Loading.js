@@ -3,11 +3,7 @@ export default class Loading extends Component {
     render() {
         return (
             <video
-                style={{
-                    height: 200,
-                    marginTop: "calc(50vh - 167px)",
-                    marginLeft: "calc(50% - 93px)",
-                }}
+                style={this.props.style}
                 autoPlay
                 playsInline
                 muted
