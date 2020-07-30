@@ -100,12 +100,10 @@ export default class VisitRankingList extends Component {
                                                 item.longUrl.forEach(
                                                     (long, index) => {
                                                         longList.push(
-                                                            // <div>
                                                             <Row
                                                                 key={index}
                                                                 align="middle"
                                                             >
-                                                                {/*<Col span={2}>*/}
                                                                 <SnapShot
                                                                     value={
                                                                         long.url
@@ -114,8 +112,6 @@ export default class VisitRankingList extends Component {
                                                                         false
                                                                     }
                                                                 />
-                                                                {/*</Col>*/}
-                                                                {/*<Col span={22}>*/}
                                                                 <span
                                                                     style={{
                                                                         marginLeft: 8,
@@ -135,9 +131,7 @@ export default class VisitRankingList extends Component {
                                                                         }
                                                                     </Tooltip>
                                                                 </span>
-                                                                {/*</Col>*/}
                                                             </Row>
-                                                            // </div>
                                                         );
                                                     }
                                                 );

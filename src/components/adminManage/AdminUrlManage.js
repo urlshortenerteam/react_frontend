@@ -1,11 +1,21 @@
 import React, { Component } from "react";
-import { Button, List, message, Popconfirm, Row, Table, Tag } from "antd";
+import {
+    Button,
+    Input,
+    List,
+    message,
+    Popconfirm,
+    Row,
+    Table,
+    Tag,
+    ConfigProvider,
+} from "antd";
 import { getAllUrls } from "../../services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
-import { StopOutlined } from "@ant-design/icons";
+import { RedoOutlined, SearchOutlined, StopOutlined } from "@ant-design/icons";
 import { BanUrl, GetUrl, LiftUrl } from "../../services/urlService";
 import { hostUrl } from "../../services/ajax";
-
+import zhCN from "antd/es/locale/zh_CN";
 const IconText = ({ icon, text, action }) => (
     <span onClick={action} style={{ marginLeft: 32, color: "red" }}>
         {React.createElement(icon, {
@@ -43,9 +53,7 @@ class AdminUrlManage extends Component {
                 // window.location.href='/404';
                 return;
             }
-
             console.log(res.data);
-
             this.setState({
                 dataSource: res.data,
                 rawData: res.data,
@@ -56,6 +64,76 @@ class AdminUrlManage extends Component {
         });
     }
 
+    getColumnSearchProps = (dataIndex, title) => ({
+        filterDropdown: ({
+            setSelectedKeys,
+            selectedKeys,
+            confirm,
+            clearFilters,
+        }) => (
+            <div style={{ padding: 8 }}>
+                <Input
+                    ref={(node) => {
+                        this.searchInput = node;
+                    }}
+                    placeholder={`搜索 ${title}`}
+                    value={selectedKeys[0]}
+                    onChange={(e) =>
+                        setSelectedKeys(e.target.value ? [e.target.value] : [])
+                    }
+                    onPressEnter={() =>
+                        this.handleSearch(selectedKeys, confirm, dataIndex)
+                    }
+                    style={{ width: 188, marginBottom: 8, display: "block" }}
+                />
+                <Button
+                    type="primary"
+                    onClick={() =>
+                        this.handleSearch(selectedKeys, confirm, dataIndex)
+                    }
+                    icon={<SearchOutlined />}
+                    size="small"
+                    style={{ width: 90, marginRight: 8 }}
+                >
+                    搜索
+                </Button>
+                <Button
+                    onClick={() => this.handleReset(clearFilters)}
+                    size="small"
+                    style={{ width: 90 }}
+                    icon={<RedoOutlined />}
+                >
+                    重置
+                </Button>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{ color: filtered ? "#1890ff" : undefined }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex]
+                .toString()
+                .toLowerCase()
+                .includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+            if (visible) {
+                setTimeout(() => this.searchInput.select());
+            }
+        },
+    });
+    handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+        this.setState({
+            searchText: selectedKeys[0],
+            searchedColumn: dataIndex,
+        });
+    };
+    handleReset = (clearFilters) => {
+        clearFilters();
+        this.setState({ searchText: "" });
+    };
     handleToggleLift = (item) => {
         this.setState({ editShort: item.shortUrl });
         LiftUrl({
@@ -170,9 +248,22 @@ class AdminUrlManage extends Component {
                             </Tag>
                         )
                     ) : null,
+                ...this.getColumnSearchProps("shortUrl", "短链接"),
             },
-            { title: "访问量", align: "center", dataIndex: "count" },
-            { title: "创建用户", align: "center", dataIndex: "creatorName" },
+            {
+                title: "访问量",
+                align: "center",
+                dataIndex: "count",
+                sorter: {
+                    compare: (a, b) => a.count - b.count,
+                },
+            },
+            {
+                title: "创建用户",
+                align: "center",
+                dataIndex: "creatorName",
+                ...this.getColumnSearchProps("creatorName", "创建用户"),
+            },
             {
                 title: "创建日期",
                 align: "center",
@@ -190,6 +281,14 @@ class AdminUrlManage extends Component {
             {
                 title: "禁用/启用",
                 align: "center",
+                filters: [
+                    { text: "未禁用", value: "UNBANNED" },
+                    { text: "已禁用", value: "BANNED" },
+                ],
+                onFilter: (value, record) =>
+                    value === "BANNED"
+                        ? record.longUrl[0].url === value
+                        : record.longUrl[0].url !== "BANNED",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         record.longUrl.length === 0 ||
@@ -221,15 +320,17 @@ class AdminUrlManage extends Component {
         return (
             <div>
                 <br />
-                <Table
-                    className="components-table-demo-nested"
-                    columns={columns}
-                    expandable={{
-                        expandedRowRender: this.expandedRowRender,
-                    }}
-                    dataSource={this.state.dataSource}
-                    rowKey="shortUrl"
-                />
+                <ConfigProvider locale={zhCN}>
+                    <Table
+                        className="components-table-demo-nested"
+                        columns={columns}
+                        expandable={{
+                            expandedRowRender: this.expandedRowRender,
+                        }}
+                        dataSource={this.state.dataSource}
+                        rowKey="shortUrl"
+                    />
+                </ConfigProvider>
             </div>
         );
     }

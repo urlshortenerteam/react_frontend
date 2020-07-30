@@ -1,21 +1,21 @@
 .shadow {
     box-shadow: 10px 10px 50px #3399cc;
-
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
 }
 
-.ant-tabs-tab {
-    position: relative;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -ms-flex-align: center;
-    align-items: center;
-    margin: 0 32px 0 0;
-    padding: 12px 0;
+.ant-tabs {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.75);
     font-size: 14px;
-    background: transparent;
-    border: 0;
-    outline: none;
-    cursor: pointer;
-    color: white;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    -webkit-font-feature-settings: "tnum";
+    font-feature-settings: "tnum", "tnum";
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
 }

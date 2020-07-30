@@ -24,7 +24,7 @@ import {
 import { getRequest, hostUrl } from "../../services/ajax";
 import SnapShot from "./SnapShot";
 import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
-
+import "../../css/ManageCss.css";
 const { Panel } = Collapse;
 
 const { Option } = Select;
@@ -302,7 +302,10 @@ export default class UrlManagePanel extends Component {
                                     />
                                     <Collapse
                                         ghost
-                                        style={{ backgroundColor: "#011428" }}
+                                        style={{
+                                            backgroundColor: "#011428",
+                                            color: "white",
+                                        }}
                                     >
                                         <Panel header="详情" key="1">
                                             {longList}

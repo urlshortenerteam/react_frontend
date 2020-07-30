@@ -21,3 +21,70 @@
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
+
+#components-dropdown-demo-arrow .ant-btn {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.ant-row-rtl #components-dropdown-demo-arrow .ant-btn {
+    margin-right: 0;
+    margin-bottom: 8px;
+    margin-left: 8px;
+}
+
+.ant-page-header-heading-title {
+    margin-right: 12px;
+    margin-bottom: 0;
+    color: white;
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 32px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ant-page-header-heading .ant-avatar {
+    margin-right: 0;
+    margin-bottom: 5px;
+}
+
+.private
+    .ant-skeleton.ant-skeleton-active
+    .ant-skeleton-content
+    .ant-skeleton-title,
+.ant-skeleton.ant-skeleton-active
+    .ant-skeleton-content
+    .ant-skeleton-paragraph
+    > li {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        color-stop(25%, #f2f2f2),
+        color-stop(37%, #e6e6e6),
+        color-stop(63%, #f2f2f2)
+    );
+    background: linear-gradient(
+        90deg,
+        rgba(49, 68, 85, 0.98) 25%,
+        rgba(72, 112, 130, 0.89) 37%,
+        #435367 63%
+    );
+    background-size: 400% 100%;
+    -webkit-animation: ant-skeleton-loading 1.4s ease infinite;
+    animation: ant-skeleton-loading 1.4s ease infinite;
+}
+
+.ant-page-header-heading-title {
+    margin-right: 12px;
+    margin-bottom: 5px;
+    color: white;
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 32px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

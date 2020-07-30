@@ -2,6 +2,22 @@
 body {
     background-color: #001529;
 }
+.ant-tabs {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    -webkit-font-feature-settings: "tnum";
+    font-feature-settings: "tnum", "tnum";
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+}
 
 /*#000000   黑色*/
 /*#333333   灰色*/
@@ -69,20 +85,44 @@ body {
 
 .titleNoMatch {
     color: #d8e3e7;
-    font-size: 120px;
+    font-size: 110px;
     text-align: center;
     font-weight: bold;
     /*font-family: "Calibri Light";*/
     font-family: "Corbel", fantasy;
 }
 .picture {
-    align-content: center;
-    margin-left: 37%;
+    margin-left: auto;
+    /*margin-left: 37%;*/
+    position: fixed;
 }
 .smallNoMatch {
     color: #d8e3e7;
     text-align: center;
     font-weight: lighter;
     font-size: 16px;
+    /*font-family: "Calibri Light", serif;*/
+    font-family: "等线 Light", "Calibri Light", serif;
+}
+
+.smallNoMatch1 {
+    color: #d8e3e7;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 12px;
+    /*font-family: "Calibri Light", serif;*/
     font-family: "Calibri Light", serif;
+}
+.countDown .ant-statistic-content-value {
+    display: inline-block;
+    direction: ltr;
+    color: #cccccc;
+}
+
+.countDown .ant-statistic-content-suffix {
+    margin-left: 4px;
+    font-size: 10px;
+    color: #cccccc;
+    font-weight: lighter;
+    font-family: "等线 Light", serif;
 }

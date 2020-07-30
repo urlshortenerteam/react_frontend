@@ -1,5 +1,6 @@
 describe('Navigation',()=>{
     beforeEach(()=>{
+        fakeLogin();
         cy.visit('/')
     });
     it('home button navigates to right url',()=>{
@@ -37,3 +38,22 @@ describe('Navigation',()=>{
             .should('contain','create')
     })
 });
+const fakeLogin = () => {
+    cy.server();
+    let user={
+        loginStatus: true,
+        type: 0,
+        id: 100,
+        token: "hlduwocoacsffxvunwtghyorueoecijckycmuyprkdcvyngdskdruugxjkdapckmjmiqrmymtwhhjnkece.nsgulqjivzkoeqausrwdymunlomrvpmlyxlcggscfzgiligicjfkmogvenbrooqlhdsbxlqjw.hsficmjojubovhsaphfytcinvsqbkgtqxoyuskgbeesertqiwbaxecryvuvwqfqnigcjqzsvicipgiwpndrmfjcplmcylei",
+        refreshToken: "rztwwprjkerepcsoijukwklmwrkurgltxgwfqtiusmafarzlrwrgqxvmfibitdyotyztubjoyhyqhlwzfxntfglxtwk.pncakrtifomdobiqcvufxheycruoqgwficcscjehsquhohttorsdrciuofdimmsocwnzyybffqgvvnj.fydwucxwtdutdmhwtnubwhiysgfoewbnkyeeeuqlyhmeredlqtxxglvqgcmqjuqpftbhryceuvunjdmjcmpjksrzbgjr",
+    };
+    window.sessionStorage.setItem('user', JSON.stringify(user));
+    cy.route({
+        method: "GET",
+        url: "**/checkSession",
+        response: {
+            status: 200
+        }
+    });
+
+};

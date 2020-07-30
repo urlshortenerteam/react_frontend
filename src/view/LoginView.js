@@ -16,19 +16,28 @@ LoginView
 */
 class LoginView extends Component {
     formRef = React.createRef();
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: null,
+        };
+    }
 
     render() {
         const callback = (res) => {
             if (res.data.loginStatus) {
-                sessionStorage.setItem("user", JSON.stringify(res.data));
-
+                let ans = { ...res.data, userName: this.state.username };
+                sessionStorage.setItem("user", JSON.stringify(ans));
+                // sessionStorage.setItem("user", JSON.stringify(res.data));
+                // sessionStorage.setItem("userName",this.state.username);
                 if (sessionStorage.getItem("user")) {
                     console.log(JSON.parse(sessionStorage.getItem("user")));
                     console.log(this.props.history);
 
                     message.success("登录成功");
-
-                    this.props.history.goBack();
+                    this.props.history.go(-1);
+                    // window.location.reload();
+                    // this.props.history.goBack();
                 } else {
                     console.log("no data");
                 }
@@ -47,6 +56,9 @@ class LoginView extends Component {
         const onFinish = (values) => {
             console.log("Received values of form: ", values);
 
+            this.setState({
+                username: values.name,
+            });
             userService.login(values, callback);
         };
 
@@ -62,7 +74,10 @@ class LoginView extends Component {
                 <Row justify="center">
                     <div className="login">
                         <Row style={{ padding: "25px" }}>
-                            <Col span={12} offset={6}>
+                            <Col
+                                lg={{ span: 14, offset: 5 }}
+                                xs={{ span: 18, offset: 3 }}
+                            >
                                 <div>
                                     <div className="title">登录</div>
                                     <Form

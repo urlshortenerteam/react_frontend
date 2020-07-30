@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, Skeleton } from "antd";
 import Navigation from "../components/Navigation";
 import PrivateRoute from "./PrivateRoute";
 import NoMatchView from "../view/NoMatchView";
@@ -19,7 +19,17 @@ const BasicRouter = () => (
             <Header>
                 <Navigation />
             </Header>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+                fallback={
+                    <div className="private" style={{ padding: "0 20vw" }}>
+                        <br />
+
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                    </div>
+                }
+            >
                 <Switch>
                     <Route exact path="/" component={HomeView} />
                     <Route exact path="/login" component={LoginView} />

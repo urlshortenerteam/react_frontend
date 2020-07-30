@@ -1,6 +1,6 @@
 import React from "react";
 import { Donut } from "@ant-design/charts";
-
+import "../../css/AdminStatisticsCss.css";
 /**
  * DonutPlot
  * @author Shuchang Liu
@@ -30,6 +30,13 @@ class DonutPlot extends React.Component {
             legend: {
                 visible: true,
                 position: "bottom-center",
+            },
+            pieStyle: (v) => {
+                return {
+                    shadowColor: "#55acee",
+                    shadowBlur: 5,
+                    // shadowOffsetX: -5,
+                };
             },
         };
         return <Donut {...config} />;
