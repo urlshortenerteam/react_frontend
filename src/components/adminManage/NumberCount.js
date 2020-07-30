@@ -50,7 +50,7 @@ export default class NumberCount extends Component {
     render() {
         return (
             <div className="number">
-                <Row>
+                <Row justify="space-between">
                     <Col span={5}>
                         <Card hoverable={true}>
                             <div style={{ margin: 10 }}>

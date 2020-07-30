@@ -74,7 +74,7 @@ export default class VisitRankingList extends Component {
         return (
             <div className="topRank">
                 <Row>
-                    <Col span={12}>
+                    <Col flex="auto">
                         <div className="number">
                             <Card title="访问量排行榜--TOP 10">
                                 <List

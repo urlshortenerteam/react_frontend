@@ -1,6 +1,6 @@
 .number .ant-statistic-title {
     color: white;
-    font-size: 20px;
+    font-size: 3vmin;
     font-weight: bold;
     /*font-family: "等线 Light", ,fantasy;*/
     font-family: "等线", "Calibri Light", serif;
@@ -11,12 +11,7 @@
 }
 
 .number {
-    /*margin: 10px;*/
-    /*margin-left: 4%;*/
-    margin-bottom: 40px;
-    margin-top: 10px;
-    /*margin-right: 40px;*/
-    margin-left: 40px;
+    padding: 6px;
 }
 
 .number .ant-card-hoverable {
@@ -26,7 +21,10 @@
     transition: box-shadow 0.3s, border-color 0.3s, -webkit-box-shadow 0.3s;
     box-shadow: 1px 1px 10px #3399cc;
 }
-
+.number .ant-card-body {
+    padding: 1vmin;
+    text-align: center;
+}
 .number .ant-statistic {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -91,7 +89,6 @@
     flex: 1 1;
     padding: 16px 0;
     color: white;
-    font-size: 23px;
 }
 
 /*for VisitRankingList*/
@@ -111,9 +108,7 @@
     min-height: 40vh;
     box-shadow: 1px 1px 10px #3399cc;
     /*margin-top: 30px;*/
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 5px;
+    margin: 2vmin;
 }
 
 .topRank .ant-row {

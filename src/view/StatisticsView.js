@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import OverView from "../components/statistics/OverView";
 import StatisticsBar from "../components/statistics/StatisticsBar";
 import TrendingLines from "../components/statistics/TrendingLines";
+import Loading from "../components/Loading";
 import "../css/Statistics.css";
 import { getRequest, hostUrl } from "../services/ajax";
 const { Sider, Content } = Layout;
@@ -19,6 +20,7 @@ class StatisticsView extends React.Component {
     state = {
         display: "overview",
         data: [],
+        loading: true,
         lineData: [],
         children: [],
         collapsed: false,
@@ -80,6 +82,7 @@ class StatisticsView extends React.Component {
 
         this.setState({
             lineData: lines,
+            loading: false,
             mapDisplay: this.state.data[0].areaDistr
                 ? this.state.data[0].areaDistr
                 : null,
@@ -90,7 +93,7 @@ class StatisticsView extends React.Component {
     };
     render() {
         let content = <div />;
-        if (this.state.data.length > 0)
+        if (!this.state.loading && this.state.data.length > 0)
             content = (
                 <>
                     {this.state.display === "time" ? (
@@ -126,7 +129,7 @@ class StatisticsView extends React.Component {
                     ) : null}
                 </>
             );
-        else
+        else if (!this.state.loading)
             content = (
                 <div
                     style={{
@@ -150,6 +153,7 @@ class StatisticsView extends React.Component {
                     <a href="/create">创建一个</a>
                 </div>
             );
+        else content = <Loading />;
         return (
             <Layout justify="space-between">
                 <Sider
