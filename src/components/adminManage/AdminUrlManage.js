@@ -268,7 +268,7 @@ class AdminUrlManage extends Component {
                 title: "创建日期",
                 align: "center",
                 dataIndex: "createTime",
-                render: (text,  record) => {
+                render: (text, record) => {
                     let time =
                         new Date(record.createTime)
                             .toLocaleDateString()
