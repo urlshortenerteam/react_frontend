@@ -1,14 +1,22 @@
 import React, { Component } from "react";
-import { Button, Input, message, Popconfirm, Table, Tag ,ConfigProvider} from "antd";
+import {
+    Button,
+    Input,
+    message,
+    Popconfirm,
+    Table,
+    Tag,
+    ConfigProvider,
+} from "antd";
 import {
     FrownOutlined,
     SearchOutlined,
     SmileOutlined,
     UserAddOutlined,
-    RedoOutlined
+    RedoOutlined,
 } from "@ant-design/icons";
 import { banUser, getAllUser } from "../../services/adminManageService";
-import zhCN from 'antd/es/locale/zh_CN';
+import zhCN from "antd/es/locale/zh_CN";
 /**
  * UserTable
  * @author Shuchang Liu
@@ -31,7 +39,7 @@ class UserTable extends React.Component {
                 dataIndex: "name",
                 width: "5%",
                 align: "center",
-                ...this.getColumnSearchProps("name","用户名"),
+                ...this.getColumnSearchProps("name", "用户名"),
             },
             {
                 title: "访问次数",
@@ -41,7 +49,6 @@ class UserTable extends React.Component {
                 sorter: {
                     compare: (a, b) => a.visitCount - b.visitCount,
                 },
-
             },
             {
                 title: "用户类型",
@@ -49,11 +56,11 @@ class UserTable extends React.Component {
                 width: "5%",
                 align: "center",
                 filters: [
-                    { text: '管理员', value: 0 },
-                    { text: '普通用户', value: 1 },
-                    { text: '禁用用户', value: 2 },
+                    { text: "管理员", value: 0 },
+                    { text: "普通用户", value: 1 },
+                    { text: "禁用用户", value: 2 },
                 ],
-                onFilter: (value, record) => record.role===value,
+                onFilter: (value, record) => record.role === value,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         <div>
@@ -72,7 +79,6 @@ class UserTable extends React.Component {
                             )}
                         </div>
                     ) : null,
-
             },
             {
                 title: "禁用/启用",
@@ -80,11 +86,11 @@ class UserTable extends React.Component {
                 align: "center",
                 width: "5%",
                 filters: [
-                    { text: '未禁用', value: 1 },
-                    { text: '已禁用', value: 2 },
-                    { text: '无法禁用',value:0}
+                    { text: "未禁用", value: 1 },
+                    { text: "已禁用", value: 2 },
+                    { text: "无法禁用", value: 0 },
                 ],
-                onFilter: (value, record) => record.role===value,
+                onFilter: (value, record) => record.role === value,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         record.role === 0 ? (
@@ -110,7 +116,6 @@ class UserTable extends React.Component {
                     ) : null,
             },
         ];
-
     }
 
     componentDidMount() {
@@ -143,7 +148,7 @@ class UserTable extends React.Component {
         const w = window.open("about:blank");
         w.location.href = "/login";
     };
-    getColumnSearchProps = (dataIndex,title) => ({
+    getColumnSearchProps = (dataIndex, title) => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
@@ -256,14 +261,14 @@ class UserTable extends React.Component {
         return (
             <div>
                 <ConfigProvider locale={zhCN}>
-                <Table
-                    pagination={{ position: ["bottomCenter"] }}
-                    rowClassName={() => "editable-row"}
-                    bordered
-                    rowKey="id"
-                    dataSource={this.state.dataSource}
-                    columns={this.columns}
-                />
+                    <Table
+                        pagination={{ position: ["bottomCenter"] }}
+                        rowClassName={() => "editable-row"}
+                        bordered
+                        rowKey="id"
+                        dataSource={this.state.dataSource}
+                        columns={this.columns}
+                    />
                 </ConfigProvider>
             </div>
         );

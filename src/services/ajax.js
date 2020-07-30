@@ -115,10 +115,10 @@ let resetToken = (
 
             // successfully renew time
             if (res.success) {
-                if(!session)
-                {
-                    message.success("续费成功");
-                }
+                // if(!session)
+                // {
+                //     message.success("续费成功");
+                // }
 
                 let name = JSON.parse(sessionStorage.getItem("user")).userName;
                 let ans = { ...JSON.parse(res.data), userName: name };

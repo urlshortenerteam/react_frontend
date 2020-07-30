@@ -1,11 +1,21 @@
 import React, { Component } from "react";
-import { Button, Input, List, message, Popconfirm, Row, Table, Tag ,ConfigProvider } from "antd";
+import {
+    Button,
+    Input,
+    List,
+    message,
+    Popconfirm,
+    Row,
+    Table,
+    Tag,
+    ConfigProvider,
+} from "antd";
 import { getAllUrls } from "../../services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
 import { RedoOutlined, SearchOutlined, StopOutlined } from "@ant-design/icons";
 import { BanUrl, GetUrl, LiftUrl } from "../../services/urlService";
 import { hostUrl } from "../../services/ajax";
-import zhCN from 'antd/es/locale/zh_CN';
+import zhCN from "antd/es/locale/zh_CN";
 const IconText = ({ icon, text, action }) => (
     <span onClick={action} style={{ marginLeft: 32, color: "red" }}>
         {React.createElement(icon, {
@@ -54,13 +64,13 @@ class AdminUrlManage extends Component {
         });
     }
 
-    getColumnSearchProps = (dataIndex,title) => ({
+    getColumnSearchProps = (dataIndex, title) => ({
         filterDropdown: ({
-                             setSelectedKeys,
-                             selectedKeys,
-                             confirm,
-                             clearFilters,
-                         }) => (
+            setSelectedKeys,
+            selectedKeys,
+            confirm,
+            clearFilters,
+        }) => (
             <div style={{ padding: 8 }}>
                 <Input
                     ref={(node) => {
@@ -238,7 +248,7 @@ class AdminUrlManage extends Component {
                             </Tag>
                         )
                     ) : null,
-                ...this.getColumnSearchProps("shortUrl","短链接"),
+                ...this.getColumnSearchProps("shortUrl", "短链接"),
             },
             {
                 title: "访问量",
@@ -252,7 +262,7 @@ class AdminUrlManage extends Component {
                 title: "创建用户",
                 align: "center",
                 dataIndex: "creatorName",
-                ...this.getColumnSearchProps("creatorName","创建用户"),
+                ...this.getColumnSearchProps("creatorName", "创建用户"),
             },
             {
                 title: "创建日期",
@@ -267,19 +277,18 @@ class AdminUrlManage extends Component {
                         new Date(record.createTime).toTimeString().substr(0, 8);
                     return <span> {time}</span>;
                 },
-
             },
             {
                 title: "禁用/启用",
                 align: "center",
                 filters: [
-                    { text: '未禁用', value: "UNBANNED" },
-                    { text: '已禁用', value: "BANNED" },
+                    { text: "未禁用", value: "UNBANNED" },
+                    { text: "已禁用", value: "BANNED" },
                 ],
                 onFilter: (value, record) =>
-                    value==="BANNED"? record.longUrl[0].url===value:
-                        record.longUrl[0].url!=="BANNED"
-                   ,
+                    value === "BANNED"
+                        ? record.longUrl[0].url === value
+                        : record.longUrl[0].url !== "BANNED",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         record.longUrl.length === 0 ||
@@ -312,18 +321,17 @@ class AdminUrlManage extends Component {
             <div>
                 <br />
                 <ConfigProvider locale={zhCN}>
-                <Table
-                    className="components-table-demo-nested"
-                    columns={columns}
-                    expandable={{
-                        expandedRowRender: this.expandedRowRender,
-                    }}
-                    dataSource={this.state.dataSource}
-                    rowKey="shortUrl"
-                />
+                    <Table
+                        className="components-table-demo-nested"
+                        columns={columns}
+                        expandable={{
+                            expandedRowRender: this.expandedRowRender,
+                        }}
+                        dataSource={this.state.dataSource}
+                        rowKey="shortUrl"
+                    />
                 </ConfigProvider>
             </div>
-
         );
     }
 }

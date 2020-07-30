@@ -351,12 +351,9 @@ const fakeLogin = () => {
         loginStatus: true,
         type: 0,
         id: 100,
-        // token: "hlduwocoacsffxvunwtghyorueoecijckycmuyprkdcvyngdskdruugxjkdapckmjmiqrmymtwhhjnkece.nsgulqjivzkoeqausrwdymunlomrvpmlyxlcggscfzgiligicjfkmogvenbrooqlhdsbxlqjw.hsficmjojubovhsaphfytcinvsqbkgtqxoyuskgbeesertqiwbaxecryvuvwqfqnigcjqzsvicipgiwpndrmfjcplmcylei",
-        // refreshToken: "rztwwprjkerepcsoijukwklmwrkurgltxgwfqtiusmafarzlrwrgqxvmfibitdyotyztubjoyhyqhlwzfxntfglxtwk.pncakrtifomdobiqcvufxheycruoqgwficcscjehsquhohttorsdrciuofdimmsocwnzyybffqgvvnj.fydwucxwtdutdmhwtnubwhiysgfoewbnkyeeeuqlyhmeredlqtxxglvqgcmqjuqpftbhryceuvunjdmjcmpjksrzbgjr",
+        token: "hlduwocoacsffxvunwtghyorueoecijckycmuyprkdcvyngdskdruugxjkdapckmjmiqrmymtwhhjnkece.nsgulqjivzkoeqausrwdymunlomrvpmlyxlcggscfzgiligicjfkmogvenbrooqlhdsbxlqjw.hsficmjojubovhsaphfytcinvsqbkgtqxoyuskgbeesertqiwbaxecryvuvwqfqnigcjqzsvicipgiwpndrmfjcplmcylei",
+        refreshToken: "rztwwprjkerepcsoijukwklmwrkurgltxgwfqtiusmafarzlrwrgqxvmfibitdyotyztubjoyhyqhlwzfxntfglxtwk.pncakrtifomdobiqcvufxheycruoqgwficcscjehsquhohttorsdrciuofdimmsocwnzyybffqgvvnj.fydwucxwtdutdmhwtnubwhiysgfoewbnkyeeeuqlyhmeredlqtxxglvqgcmqjuqpftbhryceuvunjdmjcmpjksrzbgjr",
     };
-    // cy.window().then(win=> {
-    //     win.sessionStorage.setItem("user",user);
-    // });
     window.sessionStorage.setItem('user', JSON.stringify(user));
     cy.route({
         method: "GET",

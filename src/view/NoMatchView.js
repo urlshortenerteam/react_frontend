@@ -24,12 +24,13 @@ class NoMatchView extends Component {
                 <div className="titleNoMatch">
                     404
                     <div className="countDown">
-                    <Countdown
-                        value={deadline}
-                        onFinish={this.onFinish}
-                        format="ss:SSS"
-                        suffix="秒后跳转"
-                    /></div>
+                        <Countdown
+                            value={deadline}
+                            onFinish={this.onFinish}
+                            format="ss:SSS"
+                            suffix="秒后跳转"
+                        />
+                    </div>
                 </div>
 
                 <div className="smallNoMatch">您访问的页面被外星人偷走啦 .</div>

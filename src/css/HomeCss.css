@@ -2,6 +2,22 @@
 body {
     background-color: #001529;
 }
+.ant-tabs {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    -webkit-font-feature-settings: "tnum";
+    font-feature-settings: "tnum", "tnum";
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+}
 
 /*#000000   黑色*/
 /*#333333   灰色*/

@@ -436,6 +436,14 @@ const stubData = () => {
 
 const fakeLogin = () => {
     cy.server();
+    let user={
+        loginStatus: true,
+        type: 0,
+        id: 100,
+        token: "hlduwocoacsffxvunwtghyorueoecijckycmuyprkdcvyngdskdruugxjkdapckmjmiqrmymtwhhjnkece.nsgulqjivzkoeqausrwdymunlomrvpmlyxlcggscfzgiligicjfkmogvenbrooqlhdsbxlqjw.hsficmjojubovhsaphfytcinvsqbkgtqxoyuskgbeesertqiwbaxecryvuvwqfqnigcjqzsvicipgiwpndrmfjcplmcylei",
+        refreshToken: "rztwwprjkerepcsoijukwklmwrkurgltxgwfqtiusmafarzlrwrgqxvmfibitdyotyztubjoyhyqhlwzfxntfglxtwk.pncakrtifomdobiqcvufxheycruoqgwficcscjehsquhohttorsdrciuofdimmsocwnzyybffqgvvnj.fydwucxwtdutdmhwtnubwhiysgfoewbnkyeeeuqlyhmeredlqtxxglvqgcmqjuqpftbhryceuvunjdmjcmpjksrzbgjr",
+    };
+    window.sessionStorage.setItem('user', JSON.stringify(user));
     cy.route({
         method: "GET",
         url: "**/checkSession",

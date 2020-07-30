@@ -21,13 +21,11 @@ AdminManageView
 */
 class AdminManageView extends Component {
     componentDidMount() {
-        if(sessionStorage.getItem("user") === null)
-        {
+        if (sessionStorage.getItem("user") === null) {
             window.location.href = "/login";
-        }
-        else if (
-            (sessionStorage.getItem("user") &&
-                JSON.parse(sessionStorage.getItem("user")).type !== 0)
+        } else if (
+            sessionStorage.getItem("user") &&
+            JSON.parse(sessionStorage.getItem("user")).type !== 0
         ) {
             // this.props.history.push("/404");
             window.location.href = "/404";

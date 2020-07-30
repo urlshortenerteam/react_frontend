@@ -53,7 +53,7 @@ export default class PrivateRoute extends React.Component {
             return (
                 <Content style={{ padding: "0 20vw" }}>
                     <div className="private">
-                        <br/>
+                        <br />
                         <Skeleton active paragraph={{ rows: 4 }} />
                         <Skeleton active paragraph={{ rows: 4 }} />
                         <Skeleton active paragraph={{ rows: 4 }} />

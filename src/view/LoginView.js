@@ -74,7 +74,10 @@ class LoginView extends Component {
                 <Row justify="center">
                     <div className="login">
                         <Row style={{ padding: "25px" }}>
-                            <Col span={12} offset={6}>
+                            <Col
+                                lg={{ span: 14, offset: 5 }}
+                                xs={{ span: 18, offset: 3 }}
+                            >
                                 <div>
                                     <div className="title">登录</div>
                                     <Form
