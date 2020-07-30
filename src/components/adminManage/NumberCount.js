@@ -9,7 +9,6 @@ import React, { Component } from "react";
 import "../../css/AdminStatisticsCss.css";
 import { getNumberCount } from "../../services/adminManageService";
 
-
 /**
  * NumberCount
  * @author Shuchang Liu
