@@ -22,7 +22,14 @@ class LoginView extends Component {
     }
 
     componentDidMount() {
-        if (sessionStorage.getItem("user")) {
+        if (
+            sessionStorage.getItem("user") &&
+            JSON.parse(sessionStorage.getItem("user")).id !== null &&
+            JSON.parse(sessionStorage.getItem("user")).loginStatus !== null &&
+            JSON.parse(sessionStorage.getItem("user")).type !== null &&
+            JSON.parse(sessionStorage.getItem("user")).token !== null &&
+            JSON.parse(sessionStorage.getItem("user")).refreshToken !== null
+        ) {
             this.props.history.go(-1);
         }
     }

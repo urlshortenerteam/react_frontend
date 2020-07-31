@@ -10,12 +10,12 @@ import "../css/NavigationCss.css";
 import "../css/HomeCss.css";
 import "../css/RegisterCss.css";
 import "../css/CreateCss.css";
-
 import "../css/Carousel.css";
 import "../css/LoginCss.css";
 import "../css/Statistics.css";
 import "../css/ManageCss.css";
-// import "../css/NoMatchCss.css"
+import "../css/NoMatchCss.css";
+
 const AdminManageView = lazy(() => import("../view/AdminManageView.js"));
 const LoginView = lazy(() => import("../view/LoginView.js"));
 const CreateView = lazy(() => import("../view/CreateView.js"));
@@ -33,7 +33,6 @@ const BasicRouter = () => (
                 fallback={
                     <div className="private" style={{ padding: "0 20vw" }}>
                         <br />
-
                         <Skeleton active paragraph={{ rows: 4 }} />
                         <Skeleton active paragraph={{ rows: 4 }} />
                         <Skeleton active paragraph={{ rows: 4 }} />

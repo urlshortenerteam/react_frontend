@@ -77,6 +77,15 @@ export default class UrlManagePanelPageable extends Component {
             let data = res.data.data;
             console.log("看看data");
             console.log(data);
+            data.forEach((short) => {
+                let idle = 0;
+                console.log("!");
+                short.timeDistr.forEach((time) => {
+                    //visit less than 2000 is seen as an idle hour
+                    if (time.value <= 2000) idle++;
+                });
+                short.idle = idle;
+            });
             for (let i = 0; i < data.length; i++) {
                 tableData[i].key = i;
                 tableData[i].shortUrl = data[i].shortUrl;
@@ -90,16 +99,6 @@ export default class UrlManagePanelPageable extends Component {
             this.setState({
                 listData: tableData,
                 loadedPages: this.state.loadedPages.concat(1),
-            });
-            this.state.listData.forEach((short) => {
-                let idle = 0;
-                short.timeDistr.forEach((time) => {
-                    //visit less than 2000 is seen as an idle hour
-                    if (time.value <= 2000) idle++;
-                });
-                short.idle = idle;
-            });
-            this.setState({
                 loading: false,
             });
         };
@@ -116,6 +115,7 @@ export default class UrlManagePanelPageable extends Component {
         import("antd").then(({ message }) => {
             message.error(error.toString());
         });
+        console.log(error);
     };
     handleToggleBan = (item, index) => {
         Modal.confirm({
@@ -199,6 +199,7 @@ export default class UrlManagePanelPageable extends Component {
 
             for (let i = 0; i < data.length; i++) {
                 let index = i + (page - 1) * this.state.pageSize;
+                tableData[index].key = i;
                 tableData[index].shortUrl = data[i].shortUrl;
                 tableData[index].longUrl = data[i].longUrl;
                 tableData[index].count = data[i].count;
@@ -299,7 +300,8 @@ export default class UrlManagePanelPageable extends Component {
                     dataSource={listData}
                     renderItem={(item, index) => {
                         let longList = [];
-                        if (item.longUrl.length === 0) return null;
+                        if (item.longUrl !== null && item.longUrl.length === 0)
+                            return null;
                         if (item.longUrl[0].url !== "BANNED")
                             item.longUrl.forEach((long, index) => {
                                 longList.push(
@@ -329,7 +331,7 @@ export default class UrlManagePanelPageable extends Component {
                             );
                         return (
                             <List.Item
-                                key={item.shortUrl}
+                                key={item.key}
                                 actions={
                                     !loading && [
                                         <IconText
