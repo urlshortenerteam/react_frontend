@@ -26,6 +26,7 @@
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",
     "react-scripts": "3.4.1",
+    "serverless": "^1.77.1",
     "source-map-explorer": "^2.4.2",
     "typescript": "^3.9.7"
   },
