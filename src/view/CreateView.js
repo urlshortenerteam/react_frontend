@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { PicCenterOutlined, PicRightOutlined } from "@ant-design/icons";
 import { Col, Layout, Row, Tabs } from "antd";
-import "../css/HomeCss.css";
-import "../css/CreateCss.css";
 import ManyToOneTable from "../components/create/ManyToOneTable";
 import OneToOneTable from "../components/create/OneToOneTable";
 import { withRouter } from "react-router-dom";
@@ -25,7 +23,7 @@ class CreateView extends Component {
 
     render() {
         return (
-            <Content style={{ padding: "0 5vw" }}>
+            <Content style={{ padding: "0 12vw" }}>
                 <Row>
                     <Col flex="auto">
                         <Tabs defaultActiveKey="1" centered>

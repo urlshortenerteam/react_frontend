@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Col, Form, Input, Layout, message, Row } from "antd";
-import "../css/LoginCss.css";
 import * as userService from "../services/userService";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
@@ -20,6 +19,19 @@ class LoginView extends Component {
         this.state = {
             username: null,
         };
+    }
+
+    componentDidMount() {
+        if (
+            sessionStorage.getItem("user") &&
+            JSON.parse(sessionStorage.getItem("user")).id !== null &&
+            JSON.parse(sessionStorage.getItem("user")).loginStatus !== null &&
+            JSON.parse(sessionStorage.getItem("user")).type !== null &&
+            JSON.parse(sessionStorage.getItem("user")).token !== null &&
+            JSON.parse(sessionStorage.getItem("user")).refreshToken !== null
+        ) {
+            this.props.history.go(-1);
+        }
     }
 
     render() {
@@ -76,6 +88,7 @@ class LoginView extends Component {
                             <Col
                                 lg={{ span: 14, offset: 5 }}
                                 xs={{ span: 18, offset: 3 }}
+                                md={{ span: 16, offset: 4 }}
                             >
                                 <div>
                                     <div className="title">登录</div>

@@ -10,12 +10,14 @@ import {
     Tag,
     ConfigProvider,
 } from "antd";
-import { getAllUrls } from "../../services/adminManageService";
+import { getAllUrlsPageable } from "../../services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
 import { RedoOutlined, SearchOutlined, StopOutlined } from "@ant-design/icons";
 import { BanUrl, GetUrl, LiftUrl } from "../../services/urlService";
 import { hostUrl } from "../../services/ajax";
 import zhCN from "antd/es/locale/zh_CN";
+import Loading from "../Loading";
+
 const IconText = ({ icon, text, action }) => (
     <span onClick={action} style={{ marginLeft: 32, color: "red" }}>
         {React.createElement(icon, {
@@ -24,21 +26,27 @@ const IconText = ({ icon, text, action }) => (
         {text}
     </span>
 );
+
 /**
  * AdminUrlManage
  * @author Shuchang Liu
- * @date July 16th 2020
+ * @date July 30th 2020
  * @description Admin Url Management
  **/
-class AdminUrlManage extends Component {
+class AdminUrlManagePageable extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             dataSource: [],
             rawData: [],
             subTabData: [],
             search: 0,
             editShort: null,
+            totalNum: null,
+            currentPage: 1, // 1 base
+            loadedPages: [], // 1 base
+            pageSize: 10,
         };
     }
 
@@ -54,16 +62,50 @@ class AdminUrlManage extends Component {
                 return;
             }
             console.log(res.data);
+
+            let total = res.data.totalElements;
+            console.log(total);
             this.setState({
-                dataSource: res.data,
-                rawData: res.data,
+                totalNum: total,
+            });
+            let tableData = [];
+            for (let i = 0; i < total; i++) {
+                //根据总长度对表格数据初始化
+                tableData.push({
+                    key: i,
+                    shortUrl: null,
+                    longUrl: [],
+                    count: null,
+                    creatorName: null,
+                    createTime: null,
+                });
+            }
+            console.log("看看tableData");
+            console.log(tableData);
+
+            let data = res.data.data;
+            console.log("看看data");
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                tableData[i].key = i;
+                tableData[i].shortUrl = data[i].shortUrl;
+                tableData[i].longUrl = data[i].longUrl;
+                tableData[i].count = data[i].count;
+                tableData[i].creatorName = data[i].creatorName;
+                tableData[i].createTime = data[i].createTime;
+            }
+
+            this.setState({
+                dataSource: tableData,
+                rawData: tableData,
+                loadedPages: this.state.loadedPages.concat(1),
+                loading: false,
             });
         };
-        getAllUrls(callback, (error) => {
-            import("antd").then(({ message }) => {
-                message.error(error.toString());
-            });
-        });
+
+        getAllUrlsPageable(0, this.state.pageSize, callback, (error) =>
+            console.log(error)
+        );
     }
 
     getColumnSearchProps = (dataIndex, title) => ({
@@ -173,7 +215,7 @@ class AdminUrlManage extends Component {
         });
     };
     handleError = (error) => {
-        message.error(error);
+        console.log(error);
     };
     handleBan = (response) => {
         console.log(response.data);
@@ -223,7 +265,71 @@ class AdminUrlManage extends Component {
         );
     };
 
+    onPageChange(page) {
+        console.log(page);
+        this.setState({
+            currentPage: page,
+        });
+        this.getDevData(page);
+    }
+
+    getDevData(page) {
+        let self = this;
+        const callback = (res) => {
+            if (res.not_administrator) {
+                if (sessionStorage.getItem("user")) {
+                    sessionStorage.removeItem("user");
+                }
+                message.error("您不是管理员");
+                window.location.href = "/login";
+                // window.location.href='/404';
+                return;
+            }
+            console.log(res.data);
+
+            let tableData = this.state.dataSource;
+
+            let data = res.data.data;
+            for (let i = 0; i < data.length; i++) {
+                let index = i + (page - 1) * this.state.pageSize;
+                tableData[index].key = index;
+                tableData[index].shortUrl = data[i].shortUrl;
+                tableData[index].longUrl = data[i].longUrl;
+                tableData[index].count = data[i].count;
+                tableData[index].creatorName = data[i].creatorName;
+                tableData[index].createTime = data[i].createTime;
+            }
+
+            self.setState({
+                dataSource: tableData,
+                rawData: tableData,
+                loadedPages: this.state.loadedPages.concat(page),
+            });
+        };
+
+        console.log("看看page");
+        console.log(this.state.loadedPages);
+        if (this.state.loadedPages.indexOf(page) === -1) {
+            getAllUrlsPageable(
+                page - 1,
+                this.state.pageSize,
+                callback,
+                (error) => console.log(error)
+            );
+        }
+    }
+
     render() {
+        if (this.state.loading)
+            return (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 226px)",
+                        marginLeft: "calc(40vw - 101.667px)",
+                    }}
+                />
+            );
         const columns = [
             {
                 title: "短链接",
@@ -231,40 +337,42 @@ class AdminUrlManage extends Component {
                 dataIndex: "shortUrl",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        record.longUrl.length === 0 ? (
-                            <Tag color="#3b5999">{record.shortUrl}</Tag>
-                        ) : (
-                            <Tag
-                                color={
-                                    record.longUrl[0].url === "BANNED"
-                                        ? "#cb0000"
-                                        : "#3b5999"
-                                }
-                            >
-                                <a
-                                    style={{ color: "white" }}
-                                    href={hostUrl + "/" + record.shortUrl}
+                        record.shortUrl !== null ? (
+                            record.longUrl.length === 0 ? (
+                                <Tag color="#3b5999">{record.shortUrl}</Tag>
+                            ) : (
+                                <Tag
+                                    color={
+                                        record.longUrl[0].url === "BANNED"
+                                            ? "#cb0000"
+                                            : "#3b5999"
+                                    }
                                 >
-                                    {record.shortUrl}
-                                </a>
-                            </Tag>
-                        )
+                                    <a
+                                        style={{ color: "white" }}
+                                        href={hostUrl + "/" + record.shortUrl}
+                                    >
+                                        {record.shortUrl}
+                                    </a>
+                                </Tag>
+                            )
+                        ) : null
                     ) : null,
-                ...this.getColumnSearchProps("shortUrl", "短链接"),
+                // ...this.getColumnSearchProps("shortUrl", "短链接")
             },
             {
                 title: "访问量",
                 align: "center",
                 dataIndex: "count",
-                sorter: {
-                    compare: (a, b) => a.count - b.count,
-                },
+                // sorter: {
+                //     compare: (a, b) => a.count - b.count
+                // }
             },
             {
                 title: "创建用户",
                 align: "center",
                 dataIndex: "creatorName",
-                ...this.getColumnSearchProps("creatorName", "创建用户"),
+                // ...this.getColumnSearchProps("creatorName", "创建用户")
             },
             {
                 title: "创建日期",
@@ -277,7 +385,9 @@ class AdminUrlManage extends Component {
                             .replace(/\//g, "-") +
                         " " +
                         new Date(record.createTime).toTimeString().substr(0, 8);
-                    return <span> {time}</span>;
+                    return record.createTime === null ? null : (
+                        <span> {time}</span>
+                    );
                 },
             },
             {
@@ -287,14 +397,16 @@ class AdminUrlManage extends Component {
                     { text: "未禁用", value: "UNBANNED" },
                     { text: "已禁用", value: "BANNED" },
                 ],
-                onFilter: (value, record) =>
-                    value === "BANNED"
-                        ? record.longUrl[0].url === value
-                        : record.longUrl[0].url !== "BANNED",
+                // onFilter: (value, record) =>
+                //     record.longUrl.length===0?
+                //         false:
+                //     value === "BANNED"
+                //         ? record.longUrl[0].url === value
+                //         : record.longUrl[0].url !== "BANNED",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        record.longUrl.length === 0 ||
-                        record.longUrl[0].url !== "BANNED" ? (
+                        record.longUrl.length === 0 ? null : record.longUrl[0]
+                              .url !== "BANNED" ? (
                             <Popconfirm
                                 title="确认禁用?"
                                 okText="确认"
@@ -318,7 +430,13 @@ class AdminUrlManage extends Component {
                     ) : null,
             },
         ];
-
+        const pagination = {
+            pageSize: this.state.pageSize,
+            total: this.state.totalNum,
+            onChange: this.onPageChange.bind(this),
+            current: this.state.currentPage,
+            position: ["bottomCenter"],
+        };
         return (
             <div>
                 <br />
@@ -329,8 +447,9 @@ class AdminUrlManage extends Component {
                         expandable={{
                             expandedRowRender: this.expandedRowRender,
                         }}
+                        pagination={pagination}
                         dataSource={this.state.dataSource}
-                        rowKey="shortUrl"
+                        rowKey="key"
                     />
                 </ConfigProvider>
             </div>
@@ -338,4 +457,4 @@ class AdminUrlManage extends Component {
     }
 }
 
-export default AdminUrlManage;
+export default AdminUrlManagePageable;

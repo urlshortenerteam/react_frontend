@@ -17,6 +17,7 @@ import {
 } from "@ant-design/icons";
 import { banUser, getAllUser } from "../../services/adminManageService";
 import zhCN from "antd/es/locale/zh_CN";
+import Loading from "../Loading";
 /**
  * UserTable
  * @author Shuchang Liu
@@ -27,6 +28,7 @@ class UserTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             dataSource: [],
             rowData: [],
             searchText: "",
@@ -131,7 +133,11 @@ class UserTable extends React.Component {
 
             console.log(res);
 
-            this.setState({ dataSource: res.data, rowData: res.data });
+            this.setState({
+                dataSource: res.data,
+                rowData: res.data,
+                loading: false,
+            });
             // console.log(JSON.stringify(data));
         };
 
@@ -258,6 +264,16 @@ class UserTable extends React.Component {
     };
 
     render() {
+        if (this.state.loading)
+            return (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 226px)",
+                        marginLeft: "calc(40vw - 101.667px)",
+                    }}
+                />
+            );
         return (
             <div>
                 <ConfigProvider locale={zhCN}>

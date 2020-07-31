@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Layout } from "antd";
-import "../css/HomeCss.css";
 import { RightOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 const { Content } = Layout;

@@ -1,4 +1,3 @@
-import "../../css/Carousel.css";
 import React from "react";
 import RealTimeTrack from "./RealTimeTrack";
 import { StackedArea } from "@ant-design/charts";

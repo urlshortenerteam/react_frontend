@@ -1,6 +1,6 @@
 import React from "react";
 import { Donut } from "@ant-design/charts";
-import "../../css/AdminStatisticsCss.css";
+
 /**
  * DonutPlot
  * @author Shuchang Liu
@@ -18,6 +18,20 @@ class DonutPlot extends React.Component {
             data,
             angleField: "value",
             colorField: "type",
+            title: {
+                visible: true,
+                text: "TOP10环状图",
+                style: {
+                    fill: "white",
+                    fontSize: 24,
+                },
+                alignTo: "middle",
+            },
+            description: {
+                visible: false,
+                position: "top-center",
+                text: "访问量前十的热门短链接",
+            },
             ringStyle: {
                 stroke: "#0c1112",
                 lineWidth: 0,
@@ -31,7 +45,7 @@ class DonutPlot extends React.Component {
                 visible: true,
                 position: "bottom-center",
             },
-            pieStyle: (v) => {
+            pieStyle: () => {
                 return {
                     shadowColor: "#55acee",
                     shadowBlur: 5,

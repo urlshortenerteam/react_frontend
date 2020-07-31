@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import { Layout, Skeleton, message } from "antd";
 import * as userService from "../services/userService";
 import LoginView from "../view/LoginView";
-import "../css/NavigationCss.css";
+
 const { Content } = Layout;
 export default class PrivateRoute extends React.Component {
     constructor(props) {
