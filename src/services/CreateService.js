@@ -12,9 +12,9 @@ export const getBatchOneToOne = (data, callback) => {
 
     postRequest(url, data, callback, {
         errorCallback: (error) => {
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         },
     });
 };
@@ -32,9 +32,9 @@ export const getBatchManyToOne = (data, callback) => {
 
     postRequest(url, data, callback, {
         errorCallback: (error) => {
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         },
     });
 };

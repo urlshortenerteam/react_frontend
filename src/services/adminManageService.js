@@ -11,9 +11,9 @@ export const getAllUser = (callback) => {
     const url = `/getUserStat`;
     getRequest(url, callback, {
         errorCallback: (error) => {
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         },
         params: {},
     });
@@ -32,9 +32,9 @@ export const banUser = (ban, ban_id, callback) => {
     const url = `/banUser`;
     getRequest(url, callback, {
         errorCallback: (error) => {
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         },
         params: {
             banId: ban_id,

@@ -68,9 +68,9 @@ let postRequest = (url, json, callback, { errorCallback }) => {
         })
         .catch((error) => {
             errorCallback(error);
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
 };
 
@@ -155,9 +155,9 @@ let resetToken = (
         })
         .catch((error) => {
             errorCallback(error);
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
 };
 
@@ -220,9 +220,9 @@ let getRequest = (url, callback, { errorCallback, params }) => {
         })
         .catch((error) => {
             errorCallback(error);
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
 };
 
@@ -281,9 +281,9 @@ let getRequest_checkSession = (url, callback, { errorCallback, params }) => {
             callback(data);
         })
         .catch((error) => {
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
             errorCallback(error);
         });
 };

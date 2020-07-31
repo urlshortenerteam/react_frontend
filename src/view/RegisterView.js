@@ -50,9 +50,9 @@ const RegistrationForm = () => {
         console.log("Received values of form: ", values);
 
         register(values, callback, (error) => {
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
     };
 

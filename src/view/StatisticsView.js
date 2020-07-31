@@ -95,7 +95,7 @@ class StatisticsView extends React.Component {
     handleError = (error) => {
         import("antd").then(({ message }) => {
             message.error(error.toString());
-        });;
+        });
         this.setState({ loading: false });
     };
     render() {

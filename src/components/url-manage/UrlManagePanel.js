@@ -73,9 +73,9 @@ export default class UrlManagePanel extends Component {
         console.log(this.state);
     };
     handleError = (error) => {
-                import("antd").then(({ message }) => {
+        import("antd").then(({ message }) => {
             message.error(error.toString());
-        });;
+        });
     };
 
     handleToggleBan = (item, index) => {

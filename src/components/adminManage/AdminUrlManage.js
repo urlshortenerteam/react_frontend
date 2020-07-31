@@ -60,9 +60,9 @@ class AdminUrlManage extends Component {
             });
         };
         getAllUrls(callback, (error) => {
-                    import("antd").then(({ message }) => {
-            message.error(error.toString());
-        });;
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
     }
 
