@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Col, Form, Input, Layout, message, Row } from "antd";
 import "../css/LoginCss.css";
-import "antd/dist/antd.css";
 import * as userService from "../services/userService";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
