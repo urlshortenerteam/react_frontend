@@ -9,7 +9,7 @@ import {
     UserOutlined,
     ReloadOutlined,
 } from "@ant-design/icons";
-import "../css/NavigationCss.css";
+
 import { logout } from "../services/userService";
 import { Link } from "react-router-dom";
 // import pic from "./logo.png";

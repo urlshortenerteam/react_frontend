@@ -22,8 +22,8 @@
     box-shadow: 1px 1px 10px #3399cc;
 }
 .number .ant-card-body {
-    padding: 1vmin;
-    text-align: center;
+    padding: 3vmin;
+    /*text-align: center;*/
 }
 .number .ant-statistic {
     -webkit-box-sizing: border-box;
@@ -90,34 +90,60 @@
     padding: 16px 0;
     color: white;
 }
-
+.number .ant-card-head {
+    min-height: 48px;
+    margin-bottom: -1px;
+    padding: 0 24px;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    font-size: 24px;
+    background: transparent;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 2px 2px 0 0;
+    /* padding: 3vmin; */
+}
 /*for VisitRankingList*/
 
 .topRank .donutPlot {
-    margin-top: 14%;
     align-content: center;
+    padding-top: 14%;
+    padding-left: 2vmin;
+    padding-right: 2vmin;
 }
 
 .topRank .topList {
-    margin: 20px;
+    margin: 10px;
 }
 
 .topRank {
     background: #0c1112;
     height: auto;
-    min-height: 40vh;
+    /*min-height: 40vh;*/
     box-shadow: 1px 1px 10px #3399cc;
     /*margin-top: 30px;*/
-    margin: 2vmin;
+    margin-top: 2vmin;
+    width: 100%;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    /*width: 60%;*/
 }
 
-.topRank .ant-row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-flow: row wrap;
-    /* flex-flow: row wrap;*/
-}
+/*.topRank .ant-row {*/
+/*    display: -ms-flexbox;*/
+/*    display: flex;*/
+/*    !*-ms-flex-flow: row wrap;*!*/
+/*    !* flex-flow: row wrap;*!*/
+/*}*/
+.topRankDonutPlot {
+    background: #0c1112;
+    height: 96%;
+    /*min-height: 40vh;*/
+    box-shadow: 1px 1px 10px #3399cc;
+    /*margin-top: 30px;*/
+    margin-top: 2vmin;
 
+    margin-right: 5px;
+}
 .topRank .ant-pagination-item-active {
     font-weight: 500;
     background: #151414;
@@ -167,21 +193,4 @@
     display: -ms-flexbox;
     display: flex;
     overflow: hidden;
-}
-
-.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis, .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: block;
-    margin: auto;
-    color: rgba(255, 255, 255, 0.74);
-    letter-spacing: 2px;
-    text-align: center;
-    text-indent: 0.13em;
-    opacity: 1;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
 }

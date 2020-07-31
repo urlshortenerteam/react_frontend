@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Col, Layout, Row, Tabs } from "antd";
-import "../css/HomeCss.css";
-import UrlManagePanel from "../components/url-manage/UrlManagePanel";
 import CategoryManage from "../components/url-manage/CategoryManage";
 import { withRouter } from "react-router-dom";
 import { ScheduleOutlined } from "@ant-design/icons";
+import UrlManagePanelPageable from "../components/url-manage/UrlManagePanelPageable";
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -25,7 +24,8 @@ class ManageView extends Component {
                                     </span>
                                 }
                             >
-                                <UrlManagePanel />
+                                <UrlManagePanelPageable />
+                                {/*<UrlManagePanel />*/}
                             </TabPane>
                             <TabPane
                                 key="2"

@@ -5,7 +5,6 @@ import OverView from "../components/statistics/OverView";
 import StatisticsBar from "../components/statistics/StatisticsBar";
 import TrendingLines from "../components/statistics/TrendingLines";
 import Loading from "../components/Loading";
-import "../css/Statistics.css";
 import { getRequest, hostUrl } from "../services/ajax";
 const { Sider, Content } = Layout;
 const { Text } = Typography;
@@ -99,7 +98,7 @@ class StatisticsView extends React.Component {
         this.setState({ loading: false });
     };
     render() {
-        let content = <div />;
+        let content;
         if (!this.state.loading && this.state.data.length > 0)
             content = (
                 <>

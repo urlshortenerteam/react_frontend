@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Col, Form, Input, Layout, message, Row } from "antd";
-import "../css/LoginCss.css";
 import * as userService from "../services/userService";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
@@ -20,6 +19,12 @@ class LoginView extends Component {
         this.state = {
             username: null,
         };
+    }
+
+    componentDidMount() {
+        if (sessionStorage.getItem("user")) {
+            this.props.history.go(-1);
+        }
     }
 
     render() {

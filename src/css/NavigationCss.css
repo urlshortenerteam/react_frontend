@@ -50,14 +50,8 @@
     margin-bottom: 5px;
 }
 
-.private
-    .ant-skeleton.ant-skeleton-active
-    .ant-skeleton-content
-    .ant-skeleton-title,
-.ant-skeleton.ant-skeleton-active
-    .ant-skeleton-content
-    .ant-skeleton-paragraph
-    > li {
+.private .ant-skeleton-title,
+.private .ant-skeleton-paragraph > li {
     background: -webkit-gradient(
         linear,
         left top,

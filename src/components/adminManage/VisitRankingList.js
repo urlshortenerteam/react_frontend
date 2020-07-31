@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Card, Col, List, message, Row, Skeleton, Tag, Tooltip } from "antd";
 import { StopOutlined } from "@ant-design/icons";
-import "../../css/AdminStatisticsCss.css";
 import { getTopTen } from "../../services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
 import { hostUrl } from "../../services/ajax";
 import DonutPlot from "./DonutPlot";
+import Loading from "../Loading";
 
 const IconText = ({ icon, text, action }) => (
     <span style={{ color: "white" }} onClick={action}>
@@ -72,11 +72,20 @@ export default class VisitRankingList extends Component {
 
     render() {
         const { loading, listData } = this.state;
-
+        if (this.state.loading)
+            return (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(40vh - 226px)",
+                        marginLeft: "calc(40vw - 101.667px)",
+                    }}
+                />
+            );
         return (
-            <div className="topRank">
-                <Row>
-                    <Col flex="auto">
+            <Row>
+                <Col xs={23} lg={14} md={23}>
+                    <div className="topRank">
                         <div className="number">
                             <Card title="访问量排行榜--TOP 10">
                                 <List
@@ -288,16 +297,33 @@ export default class VisitRankingList extends Component {
                                 />
                             </Card>
                         </div>
-                    </Col>
-                    <Col span={10} offset={1}>
+
+                        {/*<Col span={10} offset={1}>*/}
+                        {/*    <div className="donutPlot">*/}
+                        {/*        {this.state.showData.length >= 1 ? (*/}
+                        {/*            <DonutPlot data={this.state.showData} />*/}
+                        {/*        ) : null}*/}
+                        {/*    </div>*/}
+                        {/*</Col>*/}
+                    </div>
+                </Col>
+                <Col
+                    xs={{ span: 0, offset: 0 }}
+                    md={{ span: 0, offset: 0 }}
+                    lg={{ span: 9, offset: 1 }}
+                >
+                    <div className="topRankDonutPlot">
+                        <br />
+                        <br />
+                        <br />
                         <div className="donutPlot">
                             {this.state.showData.length >= 1 ? (
                                 <DonutPlot data={this.state.showData} />
                             ) : null}
                         </div>
-                    </Col>
-                </Row>
-            </div>
+                    </div>
+                </Col>
+            </Row>
         );
     }
 }

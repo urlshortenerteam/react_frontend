@@ -96,5 +96,4 @@ let GetUrl = ({ url, callback, errorCallback }) => {
     });
 };
 
-
 export { BanUrl, EditUrl, LiftUrl, GetUrl };

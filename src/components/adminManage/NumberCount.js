@@ -6,7 +6,7 @@ import {
     TeamOutlined,
 } from "@ant-design/icons";
 import React, { Component } from "react";
-import "../../css/AdminStatisticsCss.css";
+
 import { getNumberCount } from "../../services/adminManageService";
 
 /**

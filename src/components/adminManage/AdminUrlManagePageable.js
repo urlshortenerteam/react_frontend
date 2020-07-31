@@ -8,19 +8,20 @@ import {
     Row,
     Table,
     Tag,
-    ConfigProvider
+    ConfigProvider,
 } from "antd";
-import { getAllUrls, getAllUrlsPageable } from "../../services/adminManageService";
+import { getAllUrlsPageable } from "../../services/adminManageService";
 import SnapShot from "../url-manage/SnapShot";
 import { RedoOutlined, SearchOutlined, StopOutlined } from "@ant-design/icons";
 import { BanUrl, GetUrl, LiftUrl } from "../../services/urlService";
 import { hostUrl } from "../../services/ajax";
 import zhCN from "antd/es/locale/zh_CN";
+import Loading from "../Loading";
 
 const IconText = ({ icon, text, action }) => (
     <span onClick={action} style={{ marginLeft: 32, color: "red" }}>
         {React.createElement(icon, {
-            style: { marginRight: 16 }
+            style: { marginRight: 16 },
         })}
         {text}
     </span>
@@ -36,16 +37,16 @@ class AdminUrlManagePageable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            loading: true,
             dataSource: [],
             rawData: [],
             subTabData: [],
             search: 0,
             editShort: null,
             totalNum: null,
-            currentPage: 1,  // 1 base
+            currentPage: 1, // 1 base
             loadedPages: [], // 1 base
-            pageSize: 10
+            pageSize: 10,
         };
     }
 
@@ -65,17 +66,18 @@ class AdminUrlManagePageable extends Component {
             let total = res.data.totalElements;
             console.log(total);
             this.setState({
-                totalNum: total
+                totalNum: total,
             });
             let tableData = [];
-            for (let i = 0; i < total; i++) {  //根据总长度对表格数据初始化
+            for (let i = 0; i < total; i++) {
+                //根据总长度对表格数据初始化
                 tableData.push({
-                    key:i,
+                    key: i,
                     shortUrl: null,
                     longUrl: [],
                     count: null,
                     creatorName: null,
-                    createTime: null
+                    createTime: null,
                 });
             }
             console.log("看看tableData");
@@ -85,7 +87,7 @@ class AdminUrlManagePageable extends Component {
             console.log("看看data");
             console.log(data);
             for (let i = 0; i < data.length; i++) {
-                tableData[i].key=i;
+                tableData[i].key = i;
                 tableData[i].shortUrl = data[i].shortUrl;
                 tableData[i].longUrl = data[i].longUrl;
                 tableData[i].count = data[i].count;
@@ -96,20 +98,23 @@ class AdminUrlManagePageable extends Component {
             this.setState({
                 dataSource: tableData,
                 rawData: tableData,
-                loadedPages:this.state.loadedPages.concat(1)
+                loadedPages: this.state.loadedPages.concat(1),
+                loading: false,
             });
         };
 
-        getAllUrlsPageable(0, this.state.pageSize, callback, (error) => console.log(error));
+        getAllUrlsPageable(0, this.state.pageSize, callback, (error) =>
+            console.log(error)
+        );
     }
 
     getColumnSearchProps = (dataIndex, title) => ({
         filterDropdown: ({
-                             setSelectedKeys,
-                             selectedKeys,
-                             confirm,
-                             clearFilters
-                         }) => (
+            setSelectedKeys,
+            selectedKeys,
+            confirm,
+            clearFilters,
+        }) => (
             <div style={{ padding: 8 }}>
                 <Input
                     ref={(node) => {
@@ -130,7 +135,7 @@ class AdminUrlManagePageable extends Component {
                     onClick={() =>
                         this.handleSearch(selectedKeys, confirm, dataIndex)
                     }
-                    icon={<SearchOutlined/>}
+                    icon={<SearchOutlined />}
                     size="small"
                     style={{ width: 90, marginRight: 8 }}
                 >
@@ -140,7 +145,7 @@ class AdminUrlManagePageable extends Component {
                     onClick={() => this.handleReset(clearFilters)}
                     size="small"
                     style={{ width: 90 }}
-                    icon={<RedoOutlined/>}
+                    icon={<RedoOutlined />}
                 >
                     重置
                 </Button>
@@ -160,13 +165,13 @@ class AdminUrlManagePageable extends Component {
             if (visible) {
                 setTimeout(() => this.searchInput.select());
             }
-        }
+        },
     });
     handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         this.setState({
             searchText: selectedKeys[0],
-            searchedColumn: dataIndex
+            searchedColumn: dataIndex,
         });
     };
     handleReset = (clearFilters) => {
@@ -178,7 +183,7 @@ class AdminUrlManagePageable extends Component {
         LiftUrl({
             url: item.shortUrl,
             callback: this.handleLift,
-            errorCallback: this.handleError
+            errorCallback: this.handleError,
         });
     };
     handleLift = (response) => {
@@ -196,7 +201,7 @@ class AdminUrlManagePageable extends Component {
                     listData[index].longUrl = res.data.longUrl;
                     this.setState({ dataSource: listData });
                 },
-                errorCallback: this.handleError
+                errorCallback: this.handleError,
             });
         } else message.error("解禁失败，状态码" + response.status);
     };
@@ -206,11 +211,11 @@ class AdminUrlManagePageable extends Component {
         BanUrl({
             url: item.shortUrl,
             callback: this.handleBan,
-            errorCallback: this.handleError
+            errorCallback: this.handleError,
         });
     };
     handleError = (error) => {
-       console.log(error);
+        console.log(error);
     };
     handleBan = (response) => {
         console.log(response.data);
@@ -243,11 +248,11 @@ class AdminUrlManagePageable extends Component {
                     return (
                         <List.Item>
                             <Row align="middle">
-                                <SnapShot value={item.url} black={true}/>
+                                <SnapShot value={item.url} black={true} />
                                 <span
                                     style={{
                                         marginLeft: 20,
-                                        marginBottom: 4
+                                        marginBottom: 4,
                                     }}
                                 >
                                     {item.url}
@@ -263,7 +268,7 @@ class AdminUrlManagePageable extends Component {
     onPageChange(page) {
         console.log(page);
         this.setState({
-            currentPage: page
+            currentPage: page,
         });
         this.getDevData(page);
     }
@@ -282,13 +287,12 @@ class AdminUrlManagePageable extends Component {
             }
             console.log(res.data);
 
-
             let tableData = this.state.dataSource;
 
             let data = res.data.data;
             for (let i = 0; i < data.length; i++) {
-                let index=i+(page-1)*this.state.pageSize;
-                tableData[index].key=index;
+                let index = i + (page - 1) * this.state.pageSize;
+                tableData[index].key = index;
                 tableData[index].shortUrl = data[i].shortUrl;
                 tableData[index].longUrl = data[i].longUrl;
                 tableData[index].count = data[i].count;
@@ -298,18 +302,34 @@ class AdminUrlManagePageable extends Component {
 
             self.setState({
                 dataSource: tableData,
-                rawData: tableData
+                rawData: tableData,
+                loadedPages: this.state.loadedPages.concat(page),
             });
         };
 
         console.log("看看page");
         console.log(this.state.loadedPages);
         if (this.state.loadedPages.indexOf(page) === -1) {
-            getAllUrlsPageable(page-1, this.state.pageSize, callback, (error) => console.log(error));
+            getAllUrlsPageable(
+                page - 1,
+                this.state.pageSize,
+                callback,
+                (error) => console.log(error)
+            );
         }
     }
 
     render() {
+        if (this.state.loading)
+            return (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 226px)",
+                        marginLeft: "calc(40vw - 101.667px)",
+                    }}
+                />
+            );
         const columns = [
             {
                 title: "短链接",
@@ -317,25 +337,26 @@ class AdminUrlManagePageable extends Component {
                 dataIndex: "shortUrl",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        record.shortUrl!==null ?
-                        record.longUrl.length === 0 ? (
-                            <Tag color="#3b5999">{record.shortUrl}</Tag>
-                        ) : (
-                            <Tag
-                                color={
-                                    record.longUrl[0].url === "BANNED"
-                                        ? "#cb0000"
-                                        : "#3b5999"
-                                }
-                            >
-                                <a
-                                    style={{ color: "white" }}
-                                    href={hostUrl + "/" + record.shortUrl}
+                        record.shortUrl !== null ? (
+                            record.longUrl.length === 0 ? (
+                                <Tag color="#3b5999">{record.shortUrl}</Tag>
+                            ) : (
+                                <Tag
+                                    color={
+                                        record.longUrl[0].url === "BANNED"
+                                            ? "#cb0000"
+                                            : "#3b5999"
+                                    }
                                 >
-                                    {record.shortUrl}
-                                </a>
-                            </Tag>
-                        ):null
+                                    <a
+                                        style={{ color: "white" }}
+                                        href={hostUrl + "/" + record.shortUrl}
+                                    >
+                                        {record.shortUrl}
+                                    </a>
+                                </Tag>
+                            )
+                        ) : null
                     ) : null,
                 // ...this.getColumnSearchProps("shortUrl", "短链接")
             },
@@ -358,26 +379,23 @@ class AdminUrlManagePageable extends Component {
                 align: "center",
                 dataIndex: "createTime",
                 render: (text, record) => {
-
                     let time =
                         new Date(record.createTime)
                             .toLocaleDateString()
                             .replace(/\//g, "-") +
                         " " +
                         new Date(record.createTime).toTimeString().substr(0, 8);
-                    return (
-                        record.createTime===null?
-                            null:
+                    return record.createTime === null ? null : (
                         <span> {time}</span>
                     );
-                }
+                },
             },
             {
                 title: "禁用/启用",
                 align: "center",
                 filters: [
                     { text: "未禁用", value: "UNBANNED" },
-                    { text: "已禁用", value: "BANNED" }
+                    { text: "已禁用", value: "BANNED" },
                 ],
                 // onFilter: (value, record) =>
                 //     record.longUrl.length===0?
@@ -387,9 +405,8 @@ class AdminUrlManagePageable extends Component {
                 //         : record.longUrl[0].url !== "BANNED",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        record.longUrl.length === 0 ?
-                            null:
-                        record.longUrl[0].url !== "BANNED" ? (
+                        record.longUrl.length === 0 ? null : record.longUrl[0]
+                              .url !== "BANNED" ? (
                             <Popconfirm
                                 title="确认禁用?"
                                 okText="确认"
@@ -410,26 +427,25 @@ class AdminUrlManagePageable extends Component {
                                 </Button>
                             </Popconfirm>
                         )
-                    ) : null
-            }
+                    ) : null,
+            },
         ];
         const pagination = {
             pageSize: this.state.pageSize,
             total: this.state.totalNum,
             onChange: this.onPageChange.bind(this),
             current: this.state.currentPage,
-            position: ["bottomCenter"]
+            position: ["bottomCenter"],
         };
         return (
-
             <div>
-                <br/>
+                <br />
                 <ConfigProvider locale={zhCN}>
                     <Table
                         className="components-table-demo-nested"
                         columns={columns}
                         expandable={{
-                            expandedRowRender: this.expandedRowRender
+                            expandedRowRender: this.expandedRowRender,
                         }}
                         pagination={pagination}
                         dataSource={this.state.dataSource}

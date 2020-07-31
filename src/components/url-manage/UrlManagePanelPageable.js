@@ -9,8 +9,8 @@ import {
     Row,
     Select,
     Skeleton,
-    Statistic, Table,
-    Typography
+    Statistic,
+    Typography,
 } from "antd";
 import {
     CloseOutlined,
@@ -19,21 +19,19 @@ import {
     EyeOutlined,
     LinkOutlined,
     StarOutlined,
-    StopOutlined
+    StopOutlined,
 } from "@ant-design/icons";
 import { getRequest, hostUrl } from "../../services/ajax";
 import SnapShot from "./SnapShot";
+import Loading from "../Loading";
 import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
-import "../../css/ManageCss.css";
-import { getAllUrlsPageable } from "../../services/adminManageService";
-
 const { Panel } = Collapse;
 
 const { Option } = Select;
 const IconText = ({ icon, text, action }) => (
     <span style={{ color: "white" }} onClick={action}>
         {React.createElement(icon, {
-            style: { marginRight: 8, color: "white" }
+            style: { marginRight: 8, color: "white" },
         })}
         {text}
     </span>
@@ -48,9 +46,9 @@ export default class UrlManagePanelPageable extends Component {
         listData: [],
         confirmLoading: false,
         totalNum: null,
-        currentPage: 1,  // 1 base
+        currentPage: 1, // 1 base
         loadedPages: [], // 1 base
-        pageSize: 10
+        pageSize: 10,
     };
 
     async componentDidMount() {
@@ -58,18 +56,19 @@ export default class UrlManagePanelPageable extends Component {
             let total = res.data.totalElements;
             console.log(total);
             this.setState({
-                totalNum: total
+                totalNum: total,
             });
             let tableData = [];
-            for (let i = 0; i < total; i++) {  //根据总长度对表格数据初始化
+            for (let i = 0; i < total; i++) {
+                //根据总长度对表格数据初始化
                 tableData.push({
                     key: i,
-                    shortUrl:null,
+                    shortUrl: null,
                     longUrl: [],
                     count: null,
-                    areaDistr:[],
-                    timeDistr:[],
-                    sourceDistr:[]
+                    areaDistr: [],
+                    timeDistr: [],
+                    sourceDistr: [],
                 });
             }
             console.log("看看tableData");
@@ -83,42 +82,41 @@ export default class UrlManagePanelPageable extends Component {
                 tableData[i].shortUrl = data[i].shortUrl;
                 tableData[i].longUrl = data[i].longUrl;
                 tableData[i].count = data[i].count;
-                tableData[i].areaDistr= data[i].areaDistr;
+                tableData[i].areaDistr = data[i].areaDistr;
                 tableData[i].timeDistr = data[i].timeDistr;
                 tableData[i].sourceDistr = data[i].sourceDistr;
             }
 
             this.setState({
                 listData: tableData,
-                loadedPages: this.state.loadedPages.concat(1)
+                loadedPages: this.state.loadedPages.concat(1),
+            });
+            this.state.listData.forEach((short) => {
+                let idle = 0;
+                short.timeDistr.forEach((time) => {
+                    //visit less than 2000 is seen as an idle hour
+                    if (time.value <= 2000) idle++;
+                });
+                short.idle = idle;
+            });
+            this.setState({
+                loading: false,
             });
         };
         getRequest("/getStatPageable", callback, {
             params: {
                 pageCount: 0,
-                pageSize: this.state.pageSize
+                pageSize: this.state.pageSize,
             },
-            errorCallback: this.handleError
+            errorCallback: this.handleError,
         });
     }
 
-    handleData = (response) => {
-        this.setState({ listData: response.data, loading: false });
-        this.state.listData.forEach((short) => {
-            let idle = 0;
-            short.timeDistr.forEach((time) => {
-                //visit less than 2000 is seen as an idle hour
-                if (time.value <= 2000) idle++;
-            });
-            short.idle = idle;
-        });
-
-        console.log(this.state);
-    };
     handleError = (error) => {
-        console.log(error);
+        import("antd").then(({ message }) => {
+            message.error(error.toString());
+        });
     };
-
     handleToggleBan = (item, index) => {
         Modal.confirm({
             content: "确定禁用这条链接吗？",
@@ -129,9 +127,9 @@ export default class UrlManagePanelPageable extends Component {
                 BanUrl({
                     url: item.shortUrl,
                     callback: this.handleBan,
-                    errorCallback: this.handleError
+                    errorCallback: this.handleError,
                 });
-            }
+            },
         });
     };
     handleToggleLift = (item, index) => {
@@ -144,9 +142,9 @@ export default class UrlManagePanelPageable extends Component {
                 LiftUrl({
                     url: item.shortUrl,
                     callback: this.handleLift,
-                    errorCallback: this.handleError
+                    errorCallback: this.handleError,
                 });
-            }
+            },
         });
     };
     handleBan = (response) => {
@@ -171,7 +169,7 @@ export default class UrlManagePanelPageable extends Component {
                     listData[editIndex].longUrl = res.data.longUrl;
                     this.setState({ listData: listData });
                 },
-                errorCallback: this.handleError
+                errorCallback: this.handleError,
             });
         } else message.error("解禁失败，状态码" + response.status);
     };
@@ -186,48 +184,54 @@ export default class UrlManagePanelPageable extends Component {
     onPageChange(page) {
         console.log(page);
         this.setState({
-            currentPage: page
+            currentPage: page,
         });
         this.getDevData(page);
     }
-    getDevData(page) {
+    async getDevData(page) {
         let self = this;
         const callback = (res) => {
-            if (res.not_administrator) {
-                if (sessionStorage.getItem("user")) {
-                    sessionStorage.removeItem("user");
-                }
-                message.error("您不是管理员");
-                window.location.href = "/login";
-                // window.location.href='/404';
-                return;
-            }
             console.log(res.data);
 
-
-            let tableData = this.state.dataSource;
+            let tableData = this.state.listData;
 
             let data = res.data.data;
+
             for (let i = 0; i < data.length; i++) {
-                let index=i+(page-1)*this.state.pageSize;
-                tableData[index].key=index;
+                let index = i + (page - 1) * this.state.pageSize;
                 tableData[index].shortUrl = data[i].shortUrl;
                 tableData[index].longUrl = data[i].longUrl;
                 tableData[index].count = data[i].count;
-                tableData[index].creatorName = data[i].creatorName;
-                tableData[index].createTime = data[i].createTime;
+                tableData[index].areaDistr = data[i].areaDistr;
+                tableData[index].timeDistr = data[i].timeDistr;
+                tableData[index].sourceDistr = data[i].sourceDistr;
             }
 
             self.setState({
-                dataSource: tableData,
-                rawData: tableData
+                listData: tableData,
+                loadedPages: this.state.loadedPages.concat(page),
+            });
+            this.state.listData.forEach((short) => {
+                let idle = 0;
+                short.timeDistr.forEach((time) => {
+                    //visit less than 2000 is seen as an idle hour
+                    if (time.value <= 2000) idle++;
+                });
+                short.idle = idle;
             });
         };
 
         console.log("看看page");
         console.log(this.state.loadedPages);
         if (this.state.loadedPages.indexOf(page) === -1) {
-            getAllUrlsPageable(page-1, this.state.pageSize, callback, (error) => console.log(error));
+            getRequest("/getStatPageable", callback, {
+                params: {
+                    pageCount: page - 1,
+                    pageSize: this.state.pageSize,
+                },
+                errorCallback: this.handleError,
+            });
+            // getAllUrlsPageable(page-1, this.state.pageSize, callback, (error) => console.log(error));
         }
     }
     render() {
@@ -244,22 +248,58 @@ export default class UrlManagePanelPageable extends Component {
                 <Option value="https://">https://</Option>
             </Select>
         );
-        const pagination = {
-            pageSize: this.state.pageSize,
-            total: this.state.totalNum,
-            onChange: this.onPageChange.bind(this),
-            current: this.state.currentPage,
-            position: ["bottomCenter"]
-        };
+        if (this.state.loading)
+            return (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 226px)",
+                        marginLeft: "calc(50vw - 101.667px",
+                    }}
+                />
+            );
+        if (this.state.listData.length === 0)
+            return (
+                <div
+                    style={{
+                        marginTop: "10vmin",
+                        color: "#ffffff",
+                        position: "relative",
+                        textAlign: "center",
+                    }}
+                >
+                    <img
+                        src={`${hostUrl}/static/box.png`}
+                        alt="nodata"
+                        style={{
+                            width: "30%",
+                            marginLeft: "35%",
+                            marginRight: "35%",
+                            marginBottom: "3vh",
+                        }}
+                    />
+                    你还没有短链接哦~
+                    <a href="/create">创建一个</a>
+                </div>
+            );
         return (
-            <>
+            <div className="manage">
                 <List
+                    // pagination={pagination}
+                    pagination={{
+                        pageSize: this.state.pageSize,
+                        total: this.state.totalNum,
+                        onChange: this.onPageChange.bind(this),
+                        current: this.state.currentPage,
+                        // position: ["bottomCenter"],
+                        // size:"small"
+                    }}
                     itemLayout="vertical"
                     size="large"
-                    pagination={pagination}
                     dataSource={listData}
                     renderItem={(item, index) => {
                         let longList = [];
+                        if (item.longUrl.length === 0) return null;
                         if (item.longUrl[0].url !== "BANNED")
                             item.longUrl.forEach((long, index) => {
                                 longList.push(
@@ -267,7 +307,7 @@ export default class UrlManagePanelPageable extends Component {
                                         <span
                                             style={{
                                                 padding: "7px",
-                                                color: "#cccccc"
+                                                color: "#cccccc",
                                             }}
                                         >
                                             {long.url}
@@ -303,15 +343,15 @@ export default class UrlManagePanelPageable extends Component {
                                             action={
                                                 item.longUrl[0].url === "BANNED"
                                                     ? () =>
-                                                        this.handleToggleLift(
-                                                            item,
-                                                            index
-                                                        )
+                                                          this.handleToggleLift(
+                                                              item,
+                                                              index
+                                                          )
                                                     : () =>
-                                                        this.handleToggleBan(
-                                                            item,
-                                                            index
-                                                        )
+                                                          this.handleToggleBan(
+                                                              item,
+                                                              index
+                                                          )
                                             }
                                         />,
                                         <IconText
@@ -326,7 +366,7 @@ export default class UrlManagePanelPageable extends Component {
                                             action={() =>
                                                 this.handleEdit(item, index)
                                             }
-                                        />
+                                        />,
                                     ]
                                 }
                                 extra={
@@ -341,13 +381,13 @@ export default class UrlManagePanelPageable extends Component {
                                                     value={item.count / 1000.0}
                                                     precision={3}
                                                     valueStyle={{
-                                                        color: "#cccccc"
+                                                        color: "#cccccc",
                                                     }}
                                                     prefix={
                                                         <EyeOutlined
                                                             style={{
                                                                 marginLeft:
-                                                                    "auto"
+                                                                    "auto",
                                                             }}
                                                         />
                                                     }
@@ -360,9 +400,9 @@ export default class UrlManagePanelPageable extends Component {
                                                     style={{ color: "white" }}
                                                     value={item.idle}
                                                     valueStyle={{
-                                                        color: "#cccccc"
+                                                        color: "#cccccc",
                                                     }}
-                                                    prefix={<CoffeeOutlined/>}
+                                                    prefix={<CoffeeOutlined />}
                                                     suffix="h"
                                                 />
                                             </Col>
@@ -390,8 +430,8 @@ export default class UrlManagePanelPageable extends Component {
                                                 copyable={{
                                                     tooltips: [
                                                         "复制",
-                                                        "复制成功"
-                                                    ]
+                                                        "复制成功",
+                                                    ],
                                                 }}
                                                 style={{ color: "white" }}
                                             >
@@ -403,7 +443,7 @@ export default class UrlManagePanelPageable extends Component {
                                         ghost
                                         style={{
                                             backgroundColor: "#011428",
-                                            color: "white"
+                                            color: "white",
                                         }}
                                     >
                                         <Panel header="详情" key="1">
@@ -427,20 +467,19 @@ export default class UrlManagePanelPageable extends Component {
                     <Input
                         addonBefore={selectBefore}
                         placeholder="请输入新Url"
-                        prefix={<LinkOutlined/>}
+                        prefix={<LinkOutlined />}
                         onChange={(event) => {
                             this.setState({ editValue: event.target.value });
                         }}
                         allowClear
                     />
                 </Modal>
-            </>
+            </div>
         );
     }
-
     handleOk = () => {
         this.setState({
-            confirmLoading: true
+            confirmLoading: true,
         });
         const { prefix, editValue, editIndex, listData } = this.state;
         EditUrl({
@@ -450,7 +489,7 @@ export default class UrlManagePanelPageable extends Component {
                 let { listData } = this.state;
                 this.setState({
                     editing: false,
-                    confirmLoading: false
+                    confirmLoading: false,
                 });
                 message.success("编辑成功");
                 listData[editIndex].longUrl[0].url = prefix + editValue;
@@ -459,7 +498,7 @@ export default class UrlManagePanelPageable extends Component {
 
                 this.setState({ listData: listData });
             },
-            errorCallback: this.handleError
+            errorCallback: this.handleError,
         });
     };
 
@@ -467,7 +506,7 @@ export default class UrlManagePanelPageable extends Component {
         console.log("Clicked cancel button");
 
         this.setState({
-            editing: false
+            editing: false,
         });
     };
 }
