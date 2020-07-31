@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Statistic, Row } from "antd";
 import { withRouter } from "react-router-dom";
-import "../css/HomeCss.css";
+import "../css/NoMatchCss.css";
 import { hostUrl } from "../services/ajax";
 const { Countdown } = Statistic;
 const deadline = Date.now() + 1000 * 15; // Moment is also OK
@@ -44,14 +44,18 @@ class NoMatchView extends Component {
                             src={hostUrl + "/static/alien.png"}
                             alt={""}
                             style={{
-                                marginTop: "10%",
-                                height: "21vw",
+                                marginTop: "3%",
+                                height: "44vh",
+
                             }}
                             // width="400px"
                             // width: 40vw;
                         />
                     </div>
+
+
                 </Row>
+                <br/>
             </Content>
         );
     }

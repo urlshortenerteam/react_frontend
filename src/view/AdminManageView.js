@@ -10,6 +10,7 @@ import UserManage from "../components/adminManage/UserManage";
 import SimpleStatistics from "../components/adminManage/AdminStatistics";
 import AdminUrlManage from "../components/adminManage/AdminUrlManage";
 import { withRouter } from "react-router-dom";
+import AdminUrlManagePageable from "../components/adminManage/AdminUrlManagePageable";
 const { TabPane } = Tabs;
 const { Content } = Layout;
 
@@ -46,7 +47,8 @@ class AdminManageView extends Component {
                                     </span>
                                 }
                             >
-                                <AdminUrlManage />
+                                <AdminUrlManagePageable/>
+                                {/*<AdminUrlManage />*/}
                             </TabPane>
                             <TabPane
                                 key="2"

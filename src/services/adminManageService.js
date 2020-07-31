@@ -87,3 +87,21 @@ export const getNumberCount = (callBack, errorHandler) => {
         errorCallback: errorHandler,
     });
 };
+
+
+/**
+ * getAllUrlsPageable
+ * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
+ * @date July 30th 2020
+ * @description get all the url info for AdminStatistic pageable
+ * @param pageCount
+ * @param pageSize
+ * @param callBack - The callback for successful return
+ * @param errorHandler - The callback for errors
+ * */
+export const getAllUrlsPageable = (pageCount,pageSize,callBack, errorHandler) => {
+    getRequest("/getAllUrlsPageable", callBack, {
+        params: {pageCount:pageCount,pageSize:pageSize},
+        errorCallback: errorHandler,
+    });
+};

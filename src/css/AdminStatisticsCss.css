@@ -168,3 +168,20 @@
     display: flex;
     overflow: hidden;
 }
+
+.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis, .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    margin: auto;
+    color: rgba(255, 255, 255, 0.74);
+    letter-spacing: 2px;
+    text-align: center;
+    text-indent: 0.13em;
+    opacity: 1;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
