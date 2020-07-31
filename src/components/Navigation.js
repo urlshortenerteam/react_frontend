@@ -19,10 +19,12 @@ const menu = (
         <Menu.Item>
             <a key="logout" onClick={logout} href="/">
                 <Row>
-                    <Col offset={2}>
+                    <Col>
                         <ReloadOutlined />
                     </Col>
-                    <Col offset={5}>登出</Col>
+                    <Col flex="auto" style={{ textAlign: "center" }}>
+                        登出
+                    </Col>
                 </Row>
             </a>
         </Menu.Item>

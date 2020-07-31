@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Layout } from "antd";
 import "../css/HomeCss.css";
-import { hostUrl } from "../services/ajax";
 import { RightOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 const { Content } = Layout;
@@ -78,21 +77,21 @@ class HomeView extends Component {
                 {this.state.showLeft ? (
                     <img
                         className="leftDesc magictime puffIn"
-                        src={hostUrl + "/static/flow.png"}
+                        src="/flow.png"
                         alt={""}
                     />
                 ) : null}
                 {this.state.showBottom ? (
                     <img
                         className="rightBottomDesc magictime puffIn"
-                        src={hostUrl + "/static/people.png"}
+                        src="/people.png"
                         alt={""}
                     />
                 ) : null}
                 {this.state.showRight ? (
                     <img
                         className="rightTopDesc magictime puffIn"
-                        src={hostUrl + "/static/trans.png"}
+                        src="/trans.png"
                         alt={""}
                     />
                 ) : null}

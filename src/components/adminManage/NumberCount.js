@@ -44,13 +44,15 @@ export default class NumberCount extends Component {
             });
         };
         getNumberCount(callback, (error) => {
-            console.log(error);
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
     }
     render() {
         return (
             <div className="number">
-                <Row>
+                <Row justify="space-between">
                     <Col span={5}>
                         <Card hoverable={true}>
                             <div style={{ margin: 10 }}>

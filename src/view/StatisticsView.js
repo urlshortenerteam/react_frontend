@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import OverView from "../components/statistics/OverView";
 import StatisticsBar from "../components/statistics/StatisticsBar";
 import TrendingLines from "../components/statistics/TrendingLines";
+import Loading from "../components/Loading";
 import "../css/Statistics.css";
 import { getRequest, hostUrl } from "../services/ajax";
 const { Sider, Content } = Layout;
@@ -19,6 +20,7 @@ class StatisticsView extends React.Component {
     state = {
         display: "overview",
         data: [],
+        loading: true,
         lineData: [],
         children: [],
         collapsed: false,
@@ -63,34 +65,42 @@ class StatisticsView extends React.Component {
     handleData = (response) => {
         this.setState({ data: response.data });
         let lines = [];
-        this.state.data.forEach((url) => {
-            this.state.children.push(
-                <Select.Option key={url.shortUrl} value={url.shortUrl}>
-                    {url.shortUrl}
-                </Select.Option>
-            );
-            url.timeDistr.forEach((time) => {
-                time.url = hostUrl + "/" + url.shortUrl;
-                lines.push(time);
+        if (response.data.length > 0) {
+            this.state.data.forEach((url) => {
+                this.state.children.push(
+                    <Select.Option key={url.shortUrl} value={url.shortUrl}>
+                        {url.shortUrl}
+                    </Select.Option>
+                );
+                url.timeDistr.forEach((time) => {
+                    time.url = hostUrl + "/" + url.shortUrl;
+                    lines.push(time);
+                });
             });
-        });
+            this.setState({
+                mapDisplay: this.state.data[0].areaDistr
+                    ? this.state.data[0].areaDistr
+                    : null,
+            });
+        }
         this.setState({ lineData: lines });
 
         console.log(this.state);
 
         this.setState({
             lineData: lines,
-            mapDisplay: this.state.data[0].areaDistr
-                ? this.state.data[0].areaDistr
-                : null,
+            loading: false,
         });
     };
     handleError = (error) => {
-        console.log(error);
+        import("antd").then(({ message }) => {
+            message.error(error.toString());
+        });
+        this.setState({ loading: false });
     };
     render() {
         let content = <div />;
-        if (this.state.data.length > 0)
+        if (!this.state.loading && this.state.data.length > 0)
             content = (
                 <>
                     {this.state.display === "time" ? (
@@ -126,7 +136,7 @@ class StatisticsView extends React.Component {
                     ) : null}
                 </>
             );
-        else
+        else if (!this.state.loading)
             content = (
                 <div
                     style={{
@@ -150,6 +160,17 @@ class StatisticsView extends React.Component {
                     <a href="/create">创建一个</a>
                 </div>
             );
+        else
+            content = (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 167px)",
+                        marginLeft: "calc(50% - 93px)",
+                    }}
+                />
+            );
+        console.log(this.state.loading);
         return (
             <Layout justify="space-between">
                 <Sider

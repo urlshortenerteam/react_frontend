@@ -58,7 +58,9 @@ export default class RealTimeTrack extends React.Component {
         this.setState({ data: response.data.logs });
     };
     handleError = (error) => {
-        console.log(error);
+        import("antd").then(({ message }) => {
+            message.error(error.toString());
+        });
     };
 
     render() {
