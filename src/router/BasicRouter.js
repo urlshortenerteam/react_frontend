@@ -31,11 +31,23 @@ const BasicRouter = () => (
             </Header>
             <Suspense
                 fallback={
-                    <div className="private" style={{ padding: "0 20vw" }}>
+                    <div style={{ padding: "0 20vw" }}>
                         <br />
-                        <Skeleton active paragraph={{ rows: 4 }} />
-                        <Skeleton active paragraph={{ rows: 4 }} />
-                        <Skeleton active paragraph={{ rows: 4 }} />
+                        <Skeleton
+                            className="private"
+                            active
+                            paragraph={{ rows: 4 }}
+                        />
+                        <Skeleton
+                            className="private"
+                            active
+                            paragraph={{ rows: 4 }}
+                        />
+                        <Skeleton
+                            className="private"
+                            active
+                            paragraph={{ rows: 4 }}
+                        />
                     </div>
                 }
             >
