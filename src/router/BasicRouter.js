@@ -5,6 +5,7 @@ import Navigation from "../components/Navigation";
 import PrivateRoute from "./PrivateRoute";
 import NoMatchView from "../view/NoMatchView";
 import HomeView from "../view/HomeView";
+import "../css/theme.less";
 import "../css/AdminStatisticsCss.css";
 import "../css/NavigationCss.css";
 import "../css/HomeCss.css";

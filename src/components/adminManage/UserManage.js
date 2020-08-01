@@ -18,6 +18,8 @@ import {
 import { banUser, getAllUser } from "../../services/adminManageService";
 import zhCN from "antd/es/locale/zh_CN";
 import Loading from "../Loading";
+import { primaryColor } from "../../css/theme.js";
+
 /**
  * UserTable
  * @author Shuchang Liu
@@ -199,7 +201,7 @@ class UserTable extends React.Component {
         ),
         filterIcon: (filtered) => (
             <SearchOutlined
-                style={{ color: filtered ? "#1890ff" : undefined }}
+                style={{ color: filtered ? primaryColor : undefined }}
             />
         ),
         onFilter: (value, record) =>

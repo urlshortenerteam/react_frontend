@@ -17,6 +17,8 @@
     "aws-sdk": "^2.717.0",
     "cypress": "^4.10.0",
     "express": "^4.17.1",
+    "less": "^3.12.2",
+    "less-loader": "^6.2.0",
     "magic.css": "^1.4.6",
     "minimist": "^1.2.5",
     "mockjs": "^1.1.0",
@@ -30,7 +32,7 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-app-rewired start",
-    "build":"react-scripts build",
+    "build": "react-scripts build",
     "build:rewire": "react-app-rewired build",
     "test": "react-app-rewired test",
     "serverless:deploy": "serverless client deploy",
