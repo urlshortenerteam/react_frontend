@@ -11,7 +11,7 @@ describe("Statistic", () => {
         cy.get(
             ".ant-layout-sider-children > .ant-menu > :nth-child(2)"
         )
-            .click()
+            .click({ force: true })
             .get(".ant-collapse-item-active > .ant-collapse-header")
             .contains("过去24小时")
             .get(".ant-collapse-item-active > .ant-collapse-header");
@@ -19,9 +19,9 @@ describe("Statistic", () => {
     it("check area distribution", () => {
         cy.get(
             ".ant-layout-sider-children > .ant-menu > :nth-child(3)"
-        ).click()
-        .get('.ant-select-selector')
-        .click();
+        ).click({ force: true })
+            .get('.ant-select-selector')
+            .click({ force: true });
     });
 });
 const stubData = () => {
@@ -357,7 +357,7 @@ const stubData = () => {
 };
 const fakeLogin = () => {
     cy.server();
-    let user={
+    let user = {
         loginStatus: true,
         type: 0,
         id: 100,
