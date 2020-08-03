@@ -1,6 +1,7 @@
 import { Popover, Spin } from "antd";
 import React from "react";
 import { PictureFilled } from "@ant-design/icons";
+import { primaryColor } from "../../css/theme.js";
 
 export default class SnapShot extends React.Component {
     state = {
@@ -32,7 +33,7 @@ export default class SnapShot extends React.Component {
             >
                 {this.props.black ? (
                     <PictureFilled
-                        style={{ color: "#1890ff", marginLeft: 8 }}
+                        style={{ color: primaryColor, marginLeft: 8 }}
                     />
                 ) : (
                     <PictureFilled style={{ color: "white", marginLeft: 8 }} />

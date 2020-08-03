@@ -5,6 +5,7 @@ import Navigation from "../components/Navigation";
 import PrivateRoute from "./PrivateRoute";
 import NoMatchView from "../view/NoMatchView";
 import HomeView from "../view/HomeView";
+import "../css/theme.less";
 import "../css/AdminStatisticsCss.css";
 import "../css/NavigationCss.css";
 import "../css/HomeCss.css";
@@ -31,11 +32,23 @@ const BasicRouter = () => (
             </Header>
             <Suspense
                 fallback={
-                    <div className="private" style={{ padding: "0 20vw" }}>
+                    <div style={{ padding: "0 20vw" }}>
                         <br />
-                        <Skeleton active paragraph={{ rows: 4 }} />
-                        <Skeleton active paragraph={{ rows: 4 }} />
-                        <Skeleton active paragraph={{ rows: 4 }} />
+                        <Skeleton
+                            className="private"
+                            active
+                            paragraph={{ rows: 4 }}
+                        />
+                        <Skeleton
+                            className="private"
+                            active
+                            paragraph={{ rows: 4 }}
+                        />
+                        <Skeleton
+                            className="private"
+                            active
+                            paragraph={{ rows: 4 }}
+                        />
                     </div>
                 }
             >

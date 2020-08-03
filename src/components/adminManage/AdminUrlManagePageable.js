@@ -17,6 +17,7 @@ import { BanUrl, GetUrl, LiftUrl } from "../../services/urlService";
 import { hostUrl } from "../../services/ajax";
 import zhCN from "antd/es/locale/zh_CN";
 import Loading from "../Loading";
+import { primaryColor } from "../../css/theme.js";
 
 const IconText = ({ icon, text, action }) => (
     <span onClick={action} style={{ marginLeft: 32, color: "red" }}>
@@ -153,7 +154,7 @@ class AdminUrlManagePageable extends Component {
         ),
         filterIcon: (filtered) => (
             <SearchOutlined
-                style={{ color: filtered ? "#1890ff" : undefined }}
+                style={{ color: filtered ? primaryColor : undefined }}
             />
         ),
         onFilter: (value, record) =>

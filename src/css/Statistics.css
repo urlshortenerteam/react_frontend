@@ -10,10 +10,6 @@
     top: 0;
 }
 
-.ant-collapse > .ant-collapse-item > .ant-collapse-header {
-    color: #ffffff;
-}
-
 .ant-statistic-title {
     color: rgba(255, 255, 255, 0.25);
 }
@@ -49,8 +45,5 @@
     background-color: #00000013;
 }
 .ant-tabs-tab {
-    color: white;
-}
-.ant-collapse > .ant-collapse-item > .ant-collapse-header {
     color: white;
 }

@@ -1,3 +1,4 @@
+/// <reference types="Cypress" />
 describe("Manage", () => {
     beforeEach(() => {
         fakeLogin();
@@ -352,7 +353,7 @@ const stubData = () => {
                         ]
                     }
                 ],
-                totalElements:4
+                totalElements: 4
             },
 
         }
