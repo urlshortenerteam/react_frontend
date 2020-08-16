@@ -59,7 +59,6 @@ class StatisticsView extends React.Component {
         this.setState({
             mapDisplay: display,
         });
-        console.log(display[0].value);
     };
     handleData = (response) => {
         this.setState({ data: response.data });
