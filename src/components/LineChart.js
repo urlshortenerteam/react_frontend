@@ -22,10 +22,10 @@ export default class LineChart extends React.Component {
         };
     }
     render() {
-        let { data } = this.props
+        let { data } = this.props;
         const maxValue = Math.max.apply(
             [],
-            data.map((d) => d.value),
+            data.map((d) => d.value)
         );
         let config = {
             title: {
@@ -82,13 +82,13 @@ export default class LineChart extends React.Component {
                     label: {
                         visible: true,
                         formatter: (value) => {
-                            return '峰值：' + value + '次'
+                            return "峰值：" + value + "次";
                         },
                         style: {
-                            fill: 'white'
-                        }
+                            fill: "white",
+                        },
                     },
-                    style: { normal: { fill: 'rgba(255, 0, 0, 0.65)' } },
+                    style: { normal: { fill: "rgba(255, 0, 0, 0.65)" } },
                     animation: {
                         endState: {
                             size: 4,
@@ -96,14 +96,14 @@ export default class LineChart extends React.Component {
                         },
                         animateCfg: {
                             duration: 1500,
-                            easing: 'easeLinear',
+                            easing: "easeLinear",
                             repeat: true,
                             delay: 1200,
                         },
                     },
                 },
             ],
-        }
+        };
         return <Line {...config} memoData={data.length} />;
     }
 }
