@@ -1,7 +1,7 @@
 import React from "react";
 import RealTimeTrack from "./RealTimeTrack";
 import { StackedArea } from "@ant-design/charts";
-import { Select} from 'antd';
+import { Select } from "antd";
 
 const { Option } = Select;
 /**
@@ -53,11 +53,11 @@ export default class OverView extends React.Component {
     };
 
     constructor(props) {
-        super(props)
-        let options = Array.from(new Set(props.data.map((data) => data.url)))
+        super(props);
+        let options = Array.from(new Set(props.data.map((data) => data.url)));
         this.state = {
             options: options,
-            lineDisplay: props.data.slice(0, 10 * 24)
+            lineDisplay: props.data.slice(0, 10 * 24),
         };
     }
     render() {
@@ -71,23 +71,17 @@ export default class OverView extends React.Component {
                             position: "relative",
                             width: "100%",
                             zIndex: 3,
-                            backdropFilter:
-                                "saturate(180%) blur(20px)",
+                            backdropFilter: "saturate(180%) blur(20px)",
                             opacity: 0.7,
                         }}
                         defaultValue={this.state.options.slice(0, 10)}
                         onChange={this.handleChangeSelector}
                     >
-                        {this.state.options.map(
-                            (url) => (
-                                <Option key={url}>
-                                    {url}
-                                </Option>
-                            )
-                        )}
+                        {this.state.options.map((url) => (
+                            <Option key={url}>{url}</Option>
+                        ))}
                     </Select>
                     {this.StackedLines(this.state.lineDisplay)}
-
                 </>
                 <RealTimeTrack />
             </div>

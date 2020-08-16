@@ -17,22 +17,22 @@ export default class TrendingLines extends Component {
 
     constructor(props) {
         super(props);
-        let options = Array.from(new Set(props.data.map((data) => data.url)))
+        let options = Array.from(new Set(props.data.map((data) => data.url)));
         this.state = {
             data: props.data,
             options: options,
-            lineDisplay: props.data.slice(0,10*24)
+            lineDisplay: props.data.slice(0, 10 * 24),
         };
-        console.log(this.state)
+        console.log(this.state);
     }
 
     handleChangeSelector = (value) => {
         this.setState({
             lineDisplay: this.state.data.filter(
                 (time) => value.indexOf(time.url) !== -1
-            )
-        })
-    }
+            ),
+        });
+    };
     render() {
         return (
             <Collapse
@@ -46,22 +46,17 @@ export default class TrendingLines extends Component {
                         placeholder="选择短链接"
                         style={{
                             position: "relative",
-                            width:"100%",
+                            width: "100%",
                             zIndex: 3,
-                            backdropFilter:
-                                "saturate(180%) blur(20px)",
+                            backdropFilter: "saturate(180%) blur(20px)",
                             opacity: 0.7,
                         }}
                         defaultValue={this.state.options.slice(0, 10)}
                         onChange={this.handleChangeSelector}
                     >
-                        {this.state.options.map(
-                            (url) => (
-                                <Option key={url}>
-                                    {url}
-                                </Option>
-                            )
-                        )}
+                        {this.state.options.map((url) => (
+                            <Option key={url}>{url}</Option>
+                        ))}
                     </Select>
                     <LineChart
                         data={this.state.lineDisplay}
@@ -69,36 +64,30 @@ export default class TrendingLines extends Component {
                         description="短链接访问量分时段统计"
                         xField="time"
                         yField="value"
-                        legend={
+                        legend={{
+                            visible: false,
+                            position: "top-left",
+                            offsetX: 10,
+                            style: { fill: "white" },
+                        }}
+                        tooltip={{
+                            visible: true,
+                            shared: true,
+                            showCrosshairs: true,
+                            crosshairs: {
+                                type: "y",
+                            },
+                            offset: 20,
+                        }}
+                        interactions={[
                             {
-                                visible: false,
-                                position: "top-left",
-                                offsetX: 10,
-                                style: { fill: "white" },
-                            }
-                        }
-                        tooltip={
-                            {
-                                visible: true,
-                                shared: true,
-                                showCrosshairs: true,
-                                crosshairs: {
-                                    type: "y",
+                                type: "slider",
+                                cfg: {
+                                    start: 0.4,
+                                    end: 0.8,
                                 },
-                                offset: 20,
-                            }
-                        }
-                        interactions={
-                            [
-                                {
-                                    type: "slider",
-                                    cfg: {
-                                        start: 0.4,
-                                        end: 0.8,
-                                    },
-                                },
-                            ]
-                        }
+                            },
+                        ]}
                     />
                 </Panel>
                 <Panel header="最近一周" key="2">
