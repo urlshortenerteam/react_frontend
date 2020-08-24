@@ -477,7 +477,7 @@ apiRoutes.get("/checkSession", function (req, res) {
     // if (!loginMock) {
     //     res.status(404);
     // } else {
-        res.status(200);
+    res.status(200);
     // }
 
     setTimeout(() => {

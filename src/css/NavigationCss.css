@@ -45,11 +45,12 @@
     text-overflow: ellipsis;
 }
 
-.ant-page-header-heading .ant-avatar {
+.myHead .ant-page-header-heading .ant-avatar {
     margin-right: 0;
     margin-bottom: 5px;
 }
-/* 
+
+/*
 .ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-title,
 .ant-skeleton.ant-skeleton-active
     .ant-skeleton-content

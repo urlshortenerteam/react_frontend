@@ -46,7 +46,7 @@ export default class Navigation extends React.Component {
     render() {
         const { current } = this.state;
         return (
-            <div>
+            <div className="myHead">
                 <PageHeader
                     ghost
                     className="site-page-header"

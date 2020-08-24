@@ -394,10 +394,10 @@ class AdminUrlManagePageable extends Component {
             {
                 title: "禁用/启用",
                 align: "center",
-                filters: [
-                    { text: "未禁用", value: "UNBANNED" },
-                    { text: "已禁用", value: "BANNED" },
-                ],
+                // filters: [
+                //     { text: "未禁用", value: "UNBANNED" },
+                //     { text: "已禁用", value: "BANNED" },
+                // ],
                 // onFilter: (value, record) =>
                 //     record.longUrl.length===0?
                 //         false:
@@ -437,6 +437,7 @@ class AdminUrlManagePageable extends Component {
             onChange: this.onPageChange.bind(this),
             current: this.state.currentPage,
             position: ["bottomCenter"],
+            showSizeChanger: false,
         };
         return (
             <div>
