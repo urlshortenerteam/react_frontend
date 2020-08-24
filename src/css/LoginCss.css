@@ -2,7 +2,7 @@
     width: 65vmin;
     margin-top: 15vh;
     border-radius: 5px;
-    box-shadow: 10px 10px 30px #8e44ad;
+    box-shadow: 10px 10px 30px #795c9c;
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
 }
 
@@ -45,5 +45,5 @@ body .login {
     text-align: center;
     font-weight: bold;
     margin: 15px;
-    text-shadow: 0 0 5px #8e44ad;
+    text-shadow: 0 0 5px #8668a5;
 }

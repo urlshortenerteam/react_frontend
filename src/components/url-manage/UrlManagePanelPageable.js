@@ -10,7 +10,7 @@ import {
     Select,
     Skeleton,
     Statistic,
-    Typography,
+    Typography
 } from "antd";
 import {
     CloseOutlined,
@@ -19,19 +19,20 @@ import {
     EyeOutlined,
     LinkOutlined,
     StarOutlined,
-    StopOutlined,
+    StopOutlined
 } from "@ant-design/icons";
 import { getRequest, hostUrl } from "../../services/ajax";
 import SnapShot from "./SnapShot";
 import Loading from "../Loading";
 import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
+
 const { Panel } = Collapse;
 
 const { Option } = Select;
 const IconText = ({ icon, text, action }) => (
     <span style={{ color: "white" }} onClick={action}>
         {React.createElement(icon, {
-            style: { marginRight: 8, color: "white" },
+            style: { marginRight: 8, color: "white" }
         })}
         {text}
     </span>
@@ -48,7 +49,7 @@ export default class UrlManagePanelPageable extends Component {
         totalNum: null,
         currentPage: 1, // 1 base
         loadedPages: [], // 1 base
-        pageSize: 10,
+        pageSize: 10
     };
 
     async componentDidMount() {
@@ -56,7 +57,7 @@ export default class UrlManagePanelPageable extends Component {
             let total = res.data.totalElements;
             console.log(total);
             this.setState({
-                totalNum: total,
+                totalNum: total
             });
             let tableData = [];
             for (let i = 0; i < total; i++) {
@@ -68,7 +69,7 @@ export default class UrlManagePanelPageable extends Component {
                     count: null,
                     areaDistr: [],
                     timeDistr: [],
-                    sourceDistr: [],
+                    sourceDistr: []
                 });
             }
             console.log("看看tableData");
@@ -99,15 +100,15 @@ export default class UrlManagePanelPageable extends Component {
             this.setState({
                 listData: tableData,
                 loadedPages: this.state.loadedPages.concat(1),
-                loading: false,
+                loading: false
             });
         };
         getRequest("/getStatPageable", callback, {
             params: {
                 pageCount: 0,
-                pageSize: this.state.pageSize,
+                pageSize: this.state.pageSize
             },
-            errorCallback: this.handleError,
+            errorCallback: this.handleError
         });
     }
 
@@ -127,9 +128,9 @@ export default class UrlManagePanelPageable extends Component {
                 BanUrl({
                     url: item.shortUrl,
                     callback: this.handleBan,
-                    errorCallback: this.handleError,
+                    errorCallback: this.handleError
                 });
-            },
+            }
         });
     };
     handleToggleLift = (item, index) => {
@@ -142,9 +143,9 @@ export default class UrlManagePanelPageable extends Component {
                 LiftUrl({
                     url: item.shortUrl,
                     callback: this.handleLift,
-                    errorCallback: this.handleError,
+                    errorCallback: this.handleError
                 });
-            },
+            }
         });
     };
     handleBan = (response) => {
@@ -169,7 +170,7 @@ export default class UrlManagePanelPageable extends Component {
                     listData[editIndex].longUrl = res.data.longUrl;
                     this.setState({ listData: listData });
                 },
-                errorCallback: this.handleError,
+                errorCallback: this.handleError
             });
         } else message.error("解禁失败，状态码" + response.status);
     };
@@ -181,13 +182,15 @@ export default class UrlManagePanelPageable extends Component {
             this.setState({ editing: true, editIndex: index });
         }
     };
+
     onPageChange(page) {
         console.log(page);
         this.setState({
-            currentPage: page,
+            currentPage: page
         });
         this.getDevData(page);
     }
+
     async getDevData(page) {
         let self = this;
         const callback = (res) => {
@@ -210,7 +213,7 @@ export default class UrlManagePanelPageable extends Component {
 
             self.setState({
                 listData: tableData,
-                loadedPages: this.state.loadedPages.concat(page),
+                loadedPages: this.state.loadedPages.concat(page)
             });
             this.state.listData.forEach((short) => {
                 let idle = 0;
@@ -228,13 +231,14 @@ export default class UrlManagePanelPageable extends Component {
             getRequest("/getStatPageable", callback, {
                 params: {
                     pageCount: page - 1,
-                    pageSize: this.state.pageSize,
+                    pageSize: this.state.pageSize
                 },
-                errorCallback: this.handleError,
+                errorCallback: this.handleError
             });
             // getAllUrlsPageable(page-1, this.state.pageSize, callback, (error) => console.log(error));
         }
     }
+
     render() {
         const { loading, listData, editing, confirmLoading } = this.state;
         const selectBefore = (
@@ -255,7 +259,7 @@ export default class UrlManagePanelPageable extends Component {
                     style={{
                         height: 200,
                         marginTop: "calc(50vh - 226px)",
-                        marginLeft: "calc(50vw - 101.667px",
+                        marginLeft: "calc(50vw - 101.667px"
                     }}
                 />
             );
@@ -266,7 +270,7 @@ export default class UrlManagePanelPageable extends Component {
                         marginTop: "10vmin",
                         color: "#ffffff",
                         position: "relative",
-                        textAlign: "center",
+                        textAlign: "center"
                     }}
                 >
                     <img
@@ -276,7 +280,7 @@ export default class UrlManagePanelPageable extends Component {
                             width: "30%",
                             marginLeft: "35%",
                             marginRight: "35%",
-                            marginBottom: "3vh",
+                            marginBottom: "3vh"
                         }}
                     />
                     你还没有短链接哦~
@@ -285,13 +289,14 @@ export default class UrlManagePanelPageable extends Component {
             );
         return (
             <div className="manage">
+
                 <List
                     // pagination={pagination}
                     pagination={{
                         pageSize: this.state.pageSize,
                         total: this.state.totalNum,
                         onChange: this.onPageChange.bind(this),
-                        current: this.state.currentPage,
+                        current: this.state.currentPage
                         // position: ["bottomCenter"],
                         // size:"small"
                     }}
@@ -309,7 +314,7 @@ export default class UrlManagePanelPageable extends Component {
                                         <span
                                             style={{
                                                 padding: "7px",
-                                                color: "#cccccc",
+                                                color: "#cccccc"
                                             }}
                                         >
                                             {long.url}
@@ -345,15 +350,15 @@ export default class UrlManagePanelPageable extends Component {
                                             action={
                                                 item.longUrl[0].url === "BANNED"
                                                     ? () =>
-                                                          this.handleToggleLift(
-                                                              item,
-                                                              index
-                                                          )
+                                                        this.handleToggleLift(
+                                                            item,
+                                                            index
+                                                        )
                                                     : () =>
-                                                          this.handleToggleBan(
-                                                              item,
-                                                              index
-                                                          )
+                                                        this.handleToggleBan(
+                                                            item,
+                                                            index
+                                                        )
                                             }
                                         />,
                                         <IconText
@@ -368,7 +373,7 @@ export default class UrlManagePanelPageable extends Component {
                                             action={() =>
                                                 this.handleEdit(item, index)
                                             }
-                                        />,
+                                        />
                                     ]
                                 }
                                 extra={
@@ -383,13 +388,13 @@ export default class UrlManagePanelPageable extends Component {
                                                     value={item.count / 1000.0}
                                                     precision={3}
                                                     valueStyle={{
-                                                        color: "#cccccc",
+                                                        color: "#cccccc"
                                                     }}
                                                     prefix={
                                                         <EyeOutlined
                                                             style={{
                                                                 marginLeft:
-                                                                    "auto",
+                                                                    "auto"
                                                             }}
                                                         />
                                                     }
@@ -402,9 +407,9 @@ export default class UrlManagePanelPageable extends Component {
                                                     style={{ color: "white" }}
                                                     value={item.idle}
                                                     valueStyle={{
-                                                        color: "#cccccc",
+                                                        color: "#cccccc"
                                                     }}
-                                                    prefix={<CoffeeOutlined />}
+                                                    prefix={<CoffeeOutlined/>}
                                                     suffix="h"
                                                 />
                                             </Col>
@@ -432,8 +437,8 @@ export default class UrlManagePanelPageable extends Component {
                                                 copyable={{
                                                     tooltips: [
                                                         "复制",
-                                                        "复制成功",
-                                                    ],
+                                                        "复制成功"
+                                                    ]
                                                 }}
                                                 style={{ color: "white" }}
                                             >
@@ -445,7 +450,7 @@ export default class UrlManagePanelPageable extends Component {
                                         ghost
                                         style={{
                                             backgroundColor: "#011428",
-                                            color: "white",
+                                            color: "white"
                                         }}
                                     >
                                         <Panel header="详情" key="1">
@@ -469,19 +474,21 @@ export default class UrlManagePanelPageable extends Component {
                     <Input
                         addonBefore={selectBefore}
                         placeholder="请输入新Url"
-                        prefix={<LinkOutlined />}
+                        prefix={<LinkOutlined/>}
                         onChange={(event) => {
                             this.setState({ editValue: event.target.value });
                         }}
                         allowClear
                     />
                 </Modal>
+
             </div>
         );
     }
+
     handleOk = () => {
         this.setState({
-            confirmLoading: true,
+            confirmLoading: true
         });
         const { prefix, editValue, editIndex, listData } = this.state;
         EditUrl({
@@ -491,7 +498,7 @@ export default class UrlManagePanelPageable extends Component {
                 let { listData } = this.state;
                 this.setState({
                     editing: false,
-                    confirmLoading: false,
+                    confirmLoading: false
                 });
                 message.success("编辑成功");
                 listData[editIndex].longUrl[0].url = prefix + editValue;
@@ -500,7 +507,7 @@ export default class UrlManagePanelPageable extends Component {
 
                 this.setState({ listData: listData });
             },
-            errorCallback: this.handleError,
+            errorCallback: this.handleError
         });
     };
 
@@ -508,7 +515,7 @@ export default class UrlManagePanelPageable extends Component {
         console.log("Clicked cancel button");
 
         this.setState({
-            editing: false,
+            editing: false
         });
     };
 }

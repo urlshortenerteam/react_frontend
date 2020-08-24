@@ -5,7 +5,8 @@ import Navigation from "../components/Navigation";
 import PrivateRoute from "./PrivateRoute";
 import NoMatchView from "../view/NoMatchView";
 import HomeView from "../view/HomeView";
-import "../css/theme.less";
+
+import "../css/ManageCss.css";
 import "../css/AdminStatisticsCss.css";
 import "../css/NavigationCss.css";
 import "../css/HomeCss.css";
@@ -14,8 +15,8 @@ import "../css/CreateCss.css";
 import "../css/Carousel.css";
 import "../css/LoginCss.css";
 import "../css/Statistics.css";
-import "../css/ManageCss.css";
 import "../css/NoMatchCss.css";
+import "../css/theme.less";
 
 const AdminManageView = lazy(() => import("../view/AdminManageView.js"));
 const LoginView = lazy(() => import("../view/LoginView.js"));
