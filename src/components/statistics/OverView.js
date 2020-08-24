@@ -1,7 +1,9 @@
 import React from "react";
 import RealTimeTrack from "./RealTimeTrack";
 import { StackedArea } from "@ant-design/charts";
+import { Select } from "antd";
 
+const { Option } = Select;
 /**
 Overview
 @author Zhuohao Shen
@@ -43,20 +45,44 @@ export default class OverView extends React.Component {
                 autoScale: true,
             },
             legend: {
-                visible: true,
-                offsetX: -10,
-                position: "right-top",
+                visible: false,
             },
             responsive: true,
         };
-        return <StackedArea {...config} />;
+        return <StackedArea {...config} memoData={data.length} />;
     };
 
+    constructor(props) {
+        super(props);
+        let options = Array.from(new Set(props.data.map((data) => data.url)));
+        this.state = {
+            options: options,
+            lineDisplay: props.data.slice(0, 10 * 24),
+        };
+    }
     render() {
         return (
             <div style={{ position: "relative" }}>
-                {this.StackedLines(this.props.data)}
-
+                <>
+                    <Select
+                        mode="multiple"
+                        placeholder="选择短链接"
+                        style={{
+                            position: "relative",
+                            width: "100%",
+                            zIndex: 3,
+                            backdropFilter: "saturate(180%) blur(20px)",
+                            opacity: 0.7,
+                        }}
+                        defaultValue={this.state.options.slice(0, 10)}
+                        onChange={this.handleChangeSelector}
+                    >
+                        {this.state.options.map((url) => (
+                            <Option key={url}>{url}</Option>
+                        ))}
+                    </Select>
+                    {this.StackedLines(this.state.lineDisplay)}
+                </>
                 <RealTimeTrack />
             </div>
         );
