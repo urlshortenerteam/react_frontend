@@ -474,11 +474,11 @@ apiRoutes.get("/checkSession", function (req, res) {
         msg: "查询成功",
     };
 
-    if (!loginMock) {
-        res.status(404);
-    } else {
-        res.status(200);
-    }
+    // if (!loginMock) {
+    //     res.status(404);
+    // } else {
+    res.status(200);
+    // }
 
     setTimeout(() => {
         res.json(jsonResponse);

@@ -344,7 +344,7 @@ export default class OneToOneTable extends React.Component {
             };
         });
         return (
-            <div>
+            <div className="manage">
                 <br />
                 <Table
                     components={components}

@@ -25,6 +25,7 @@ import { getRequest, hostUrl } from "../../services/ajax";
 import SnapShot from "./SnapShot";
 import Loading from "../Loading";
 import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
+
 const { Panel } = Collapse;
 
 const { Option } = Select;
@@ -181,6 +182,7 @@ export default class UrlManagePanelPageable extends Component {
             this.setState({ editing: true, editIndex: index });
         }
     };
+
     onPageChange(page) {
         console.log(page);
         this.setState({
@@ -188,6 +190,7 @@ export default class UrlManagePanelPageable extends Component {
         });
         this.getDevData(page);
     }
+
     async getDevData(page) {
         let self = this;
         const callback = (res) => {
@@ -235,6 +238,7 @@ export default class UrlManagePanelPageable extends Component {
             // getAllUrlsPageable(page-1, this.state.pageSize, callback, (error) => console.log(error));
         }
     }
+
     render() {
         const { loading, listData, editing, confirmLoading } = this.state;
         const selectBefore = (
@@ -292,6 +296,7 @@ export default class UrlManagePanelPageable extends Component {
                         total: this.state.totalNum,
                         onChange: this.onPageChange.bind(this),
                         current: this.state.currentPage,
+                        showSizeChanger: false,
                         // position: ["bottomCenter"],
                         // size:"small"
                     }}
@@ -479,6 +484,7 @@ export default class UrlManagePanelPageable extends Component {
             </div>
         );
     }
+
     handleOk = () => {
         this.setState({
             confirmLoading: true,
