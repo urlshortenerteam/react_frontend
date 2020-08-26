@@ -51,7 +51,7 @@ export default class MapBox extends React.Component {
                 popup: {
                     enable: true,
                     Html: (props) => {
-                        return `<span>${props.NAME_CHN}</span><br/><span>${props.value}次访问</span>`;
+                        return ` <span style="color: black"> ${props.NAME_CHN} </span><br/><span style="color: black">${props.value}次访问</span>`;
                     },
                 },
             });

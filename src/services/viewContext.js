@@ -13,7 +13,7 @@ const ViewportProvider = ({ children }) => {
     };
 
     React.useEffect(() => {
-        useViewport();
+        // useViewport();
         window.addEventListener("resize", handleWindowResize);
         return () => window.removeEventListener("resize", handleWindowResize);
     }, []);
@@ -25,7 +25,7 @@ const ViewportProvider = ({ children }) => {
     );
 };
 
-const useViewport = () => {
+export const useViewport = () => {
     const { width, height } = React.useContext(viewportContext);
     return { width, height };
 };
