@@ -20,9 +20,9 @@ const menu = (
             <a key="logout" onClick={logout} href="/">
                 <Row>
                     <Col>
-                        <ReloadOutlined />
-                    </Col>
-                    <Col flex="auto" style={{ textAlign: "center" }}>
+                        <ReloadOutlined style={{color:"white"}}/>
+                </Col>
+                    <Col flex="auto" style={{ textAlign: "center" ,color:"white"}}>
                         登出
                     </Col>
                 </Row>
@@ -120,8 +120,8 @@ export default class Navigation extends React.Component {
                                     </Tag>
                                 </Dropdown>
                             ) : (
-                                <Button key="1" ghost href="/login">
-                                    登录
+                                <Button key="1" ghost href="/login" >
+                                  登录
                                 </Button>
                             )}
                         </Row>,
