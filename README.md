@@ -1,68 +1,137 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# REEVOO短链接项目开发文档
 
-## Available Scripts
+[TOC]
 
-In the project directory, you can run:
+## 功能性需求
 
-### `npm start`
+​		**「REEVOO短链接」**是一款短链接生成及统计工具。「REEVOO短链接」帮助用户快捷的将长链接转化为短链接，支持一对一生成和多对一生成两种模式，并支持批量生成。同时提供管理链接，统计图表的功能，针对管理员提供运营管理功能。
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 短链创建
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- 可批量生成短链接
+- 支持多对一生成（随机跳转），一对一生成
+- 支持以 http:// 和 https:// 开头的网址，并自动检测网址格式
+- 短链接支持生成二维码
+- 支持批量导入长链接，以换行符或空格切分长链接
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### 管理连接
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 显示所有该用户创建的短链接
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- 展示短链接的访问量和闲时
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 支持禁用短链接的功能
 
-### `npm run eject`
+- 一对一生成的短链接可随时修改短链的跳转地址
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- 支持网页预览，显示网页标题和页面缩略图 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 分页从后端拉取数据，避免数据量过大导致等待时间过久
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 支持一键复制短链接网址，方便分享
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  
 
-## Learn More
+### 统计图表
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 概览
+  - 显示各个短链接近24小时的访问量趋势图，了解访问的高峰在哪个时段
+  - 实时统计最近被访问的五个短链接的信息，包括原长链接，访问者IP，来源，访问时间
+  - 可关闭指定短链接折线图
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 时段
+  - 短链接访问分时段统计
+  - 可任意选择时间区间
+  - 可关闭指定短链接折线图
+- 地区
+  - 显示短链接访问地区分布图
+  - 以颜色深浅区分访问密集程度，颜色越深，则该地区访问量越大
+  - 支持筛选指定短链接
 
-### Code Splitting
+### 运营管理
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- 限管理员用户访问
+- 短链接管理
+  - 显示所有后台存储的短链接
+  - 显示短链接，访问量，创建用户，创建日期，禁用/启用等详细信息
+  - 折叠显示短链接对应跳转的长链接
+  - 分页从后端拉取数据，避免数据量过大导致等待时间过久
+  - 支持禁用短链接，启用被禁用的短链接的功能
+- 用户管理
+  - 显示所有后台存储用户信息
+  - 显示用户名，访问次数，用户类型，禁用/解除等详细信息
+  - 支持排序、筛选、搜索等功能
+  - 支持禁用普通用户、解禁被禁用用户的功能
+- 统计
+  - 显示用户数，总短链接数，总访问量，最受欢迎短链接等信息
+  - 显示访问量前十的短链接信息，并绘制成可视化的环状图
 
-### Analyzing the Bundle Size
+### 网站细节
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- 异常页面显示
+  - 404页面绘制精美，实现15秒后自动跳回
+  - 未创建短链接网址的跳转页面绘制精美（如果跳转网址为一个还未创建的短链接，则进入该页面
+  - 禁用短链接的跳转页面绘制精美（如果跳转短链接被禁用，则进入该页面
+- 全部页面支持响应式
+- 自定义网站主题色
+- 加入骨架屏和自制的加载动画
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
+## 非功能需求
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+非功能性需求分成"safety"和"security"两部分。"safety"指保证系统有稳定可靠的状态，"security"包括认证(Authentication)和授权(Authorization)。
 
-### Deployment
+## Safety
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### Accessibility
 
-### `npm run build` fails to minify
+- 支持多种交互方式：鼠标、键盘
+- 多平台：完成网页端，由于网页端设计成了可响应式，可较方便的转换成手机端
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Scalability
+
+- 横向扩展 ： 后端做成微服务，使用了负载均衡器（traefik) ，提升性能
+- 纵向扩展 ： 可增加资源
+
+### Availability
+
+- 代码测试覆盖率：100%
+
+## Security
+
+"security"包括认证（Authentication）和授权（Authorization）。本项目采取JWT实现。
+
+传统的认证方式随着认证用户的增多，服务端的开销会明显增大，并且传统的认证方式不适用于分布式系统。于是我们采用了JWT，通过验证签名，使token的验证直接在本地完成，不需要连接认证服务器；并在payload中定义用户的信息，实现token和用户信息的绑定。
+
+除此之外我们实现了JWT的续签和过期处理，用户在十五分钟内不对网站进行任何操作，则强制退出；若三分钟内有进行操作，则会自动续签。
+
+@lmz 看看要补充什么JWT
+
+## 项目架构与设计
+
+### 微服务
+
+@ao7777   @lmz
+
+### 前端打包优化
+
+@ao7777
+
+
+
+### 可观测性
+
+#### cAdvisor+Prometheus+Grafana
+
+由于需要监控服务器上的多个容器状态（CPU，内存，网络请求等），所以我们使用cAdvisor监控容器,将数据暴露给Prometheus,并通过Grafana绘制成图,方便横向对比不同容器的CPU占用量等信息。
+
+#### Elasticsearch+Fluentd+Kibana
+
+多个容器将产生大量不同的日志,并存储在不同地方,难以统一查询与分析 。于是我们使用fluentd工具采集并汇总、解析日志。Fluentd可以过滤不需要的日志,将不同日志标记、分类,统一汇总到Elasticsearch进行存储。最后再通过Kibana可视化呈现。
+
+为更好的使用fluentd解析日志,我们将容器的日志统一输出为json格式。
+
+## 测试
