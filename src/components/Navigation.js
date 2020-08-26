@@ -21,9 +21,12 @@ const menu = (
             <a key="logout" onClick={logout} href="/">
                 <Row>
                     <Col>
-                        <ReloadOutlined style={{color:"white"}}/>
-                </Col>
-                    <Col flex="auto" style={{ textAlign: "center" ,color:"white"}}>
+                        <ReloadOutlined style={{ color: "white" }} />
+                    </Col>
+                    <Col
+                        flex="auto"
+                        style={{ textAlign: "center", color: "white" }}
+                    >
                         登出
                     </Col>
                 </Row>
@@ -35,54 +38,38 @@ const MyComponent = () => {
     const { width } = useViewport();
     const breakpoint = 620;
 
-    return width < breakpoint ?
+    return width < breakpoint ? (
         <div>
             {sessionStorage.getItem("user") &&
-            JSON.parse(sessionStorage.getItem("user"))
-                .loginStatus &&
-            JSON.parse(sessionStorage.getItem("user"))
-                .userName ? (
-                <Button key="1" ghost href="/login" >
+            JSON.parse(sessionStorage.getItem("user")).loginStatus &&
+            JSON.parse(sessionStorage.getItem("user")).userName ? (
+                <Button key="1" ghost href="/login">
                     登出
                 </Button>
             ) : (
-                <Button key="1" ghost href="/login" >
+                <Button key="1" ghost href="/login">
                     登录
                 </Button>
             )}
         </div>
-            :<div>
+    ) : (
+        <div>
             {sessionStorage.getItem("user") &&
-            JSON.parse(sessionStorage.getItem("user"))
-                .loginStatus &&
-            JSON.parse(sessionStorage.getItem("user"))
-                .userName ? (
-                <Dropdown
-                    overlay={menu}
-                    placement="bottomCenter"
-                    arrow
-                >
-                    <Tag
-                        icon={<UserOutlined />}
-                        color="#7f6cf5"
-                    >
-                        {
-                            JSON.parse(
-                                sessionStorage.getItem("user")
-                            ).userName
-                        }
+            JSON.parse(sessionStorage.getItem("user")).loginStatus &&
+            JSON.parse(sessionStorage.getItem("user")).userName ? (
+                <Dropdown overlay={menu} placement="bottomCenter" arrow>
+                    <Tag icon={<UserOutlined />} color="#7f6cf5">
+                        {JSON.parse(sessionStorage.getItem("user")).userName}
                     </Tag>
                 </Dropdown>
             ) : (
-                <Button key="1" ghost href="/login" >
+                <Button key="1" ghost href="/login">
                     登录
                 </Button>
             )}
         </div>
-
-        ;
+    );
 };
-
 
 /**
  Navigation:
@@ -151,37 +138,37 @@ export default class Navigation extends React.Component {
                     ]}
                     extra={[
                         <ViewportProvider>
-                        {/*<Row key="login">*/}
-                        {/*        {sessionStorage.getItem("user") &&*/}
-                        {/*        JSON.parse(sessionStorage.getItem("user"))*/}
-                        {/*            .loginStatus &&*/}
-                        {/*        JSON.parse(sessionStorage.getItem("user"))*/}
-                        {/*            .userName ? (*/}
-                        {/*            <Dropdown*/}
-                        {/*                overlay={menu}*/}
-                        {/*                placement="bottomCenter"*/}
-                        {/*                arrow*/}
-                        {/*            >*/}
-                        {/*                <Tag*/}
-                        {/*                    icon={<UserOutlined />}*/}
-                        {/*                    color="#7f6cf5"*/}
-                        {/*                >*/}
-                        {/*                    {*/}
-                        {/*                        JSON.parse(*/}
-                        {/*                            sessionStorage.getItem("user")*/}
-                        {/*                        ).userName*/}
-                        {/*                    }*/}
-                        {/*                </Tag>*/}
-                        {/*            </Dropdown>*/}
-                        {/*        ) : (*/}
-                        {/*            <Button key="1" ghost href="/login" >*/}
-                        {/*                登录*/}
-                        {/*            </Button>*/}
-                        {/*        )}*/}
+                            {/*<Row key="login">*/}
+                            {/*        {sessionStorage.getItem("user") &&*/}
+                            {/*        JSON.parse(sessionStorage.getItem("user"))*/}
+                            {/*            .loginStatus &&*/}
+                            {/*        JSON.parse(sessionStorage.getItem("user"))*/}
+                            {/*            .userName ? (*/}
+                            {/*            <Dropdown*/}
+                            {/*                overlay={menu}*/}
+                            {/*                placement="bottomCenter"*/}
+                            {/*                arrow*/}
+                            {/*            >*/}
+                            {/*                <Tag*/}
+                            {/*                    icon={<UserOutlined />}*/}
+                            {/*                    color="#7f6cf5"*/}
+                            {/*                >*/}
+                            {/*                    {*/}
+                            {/*                        JSON.parse(*/}
+                            {/*                            sessionStorage.getItem("user")*/}
+                            {/*                        ).userName*/}
+                            {/*                    }*/}
+                            {/*                </Tag>*/}
+                            {/*            </Dropdown>*/}
+                            {/*        ) : (*/}
+                            {/*            <Button key="1" ghost href="/login" >*/}
+                            {/*                登录*/}
+                            {/*            </Button>*/}
+                            {/*        )}*/}
 
-                        {/*</Row>*/}
-                            <MyComponent/>
-                    </ViewportProvider>,
+                            {/*</Row>*/}
+                            <MyComponent />
+                        </ViewportProvider>,
                     ]}
                 />
             </div>
