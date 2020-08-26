@@ -138,35 +138,6 @@ export default class Navigation extends React.Component {
                     ]}
                     extra={[
                         <ViewportProvider>
-                            {/*<Row key="login">*/}
-                            {/*        {sessionStorage.getItem("user") &&*/}
-                            {/*        JSON.parse(sessionStorage.getItem("user"))*/}
-                            {/*            .loginStatus &&*/}
-                            {/*        JSON.parse(sessionStorage.getItem("user"))*/}
-                            {/*            .userName ? (*/}
-                            {/*            <Dropdown*/}
-                            {/*                overlay={menu}*/}
-                            {/*                placement="bottomCenter"*/}
-                            {/*                arrow*/}
-                            {/*            >*/}
-                            {/*                <Tag*/}
-                            {/*                    icon={<UserOutlined />}*/}
-                            {/*                    color="#7f6cf5"*/}
-                            {/*                >*/}
-                            {/*                    {*/}
-                            {/*                        JSON.parse(*/}
-                            {/*                            sessionStorage.getItem("user")*/}
-                            {/*                        ).userName*/}
-                            {/*                    }*/}
-                            {/*                </Tag>*/}
-                            {/*            </Dropdown>*/}
-                            {/*        ) : (*/}
-                            {/*            <Button key="1" ghost href="/login" >*/}
-                            {/*                登录*/}
-                            {/*            </Button>*/}
-                            {/*        )}*/}
-
-                            {/*</Row>*/}
                             <MyComponent />
                         </ViewportProvider>,
                     ]}
