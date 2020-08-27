@@ -1,3 +1,5 @@
+# REEVOO短链接项目开发文档
+
 <!-- START doctoc generated TOC please keep comment here to allow auto-update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
@@ -25,13 +27,10 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto-update -->
 
-# REEVOO短链接项目开发文档
-
-[TOC]
 
 ## 功能性需求
 
-​		**「REEVOO短链接」**是一款短链接生成及统计工具。「REEVOO短链接」帮助用户快捷的将长链接转化为短链接，支持一对一生成和多对一生成两种模式，并支持批量生成。同时提供管理链接，统计图表的功能，针对管理员提供运营管理功能。
+​		**REEVOO短链接**是一款短链接生成及统计工具。「REEVOO短链接」帮助用户快捷的将长链接转化为短链接，支持一对一生成和多对一生成两种模式，并支持批量生成。同时提供管理链接，统计图表的功能，针对管理员提供运营管理功能。
 
 ### 短链创建
 
