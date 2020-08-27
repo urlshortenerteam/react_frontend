@@ -81,6 +81,7 @@ export default class LineChart extends React.Component {
                     data: [{ value: maxValue }],
                     label: {
                         visible: true,
+                        field: "value",
                         formatter: (value) => {
                             return "峰值：" + value + "次";
                         },
