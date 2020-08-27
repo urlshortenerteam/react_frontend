@@ -49,7 +49,7 @@ export default class OverView extends React.Component {
             },
             responsive: true,
         };
-        return <StackedArea {...config} memoData={data.length} />;
+        return <StackedArea {...config} memoData={data.length} onlyChangeData={true}/>;
     };
 
     constructor(props) {
@@ -60,6 +60,15 @@ export default class OverView extends React.Component {
             lineDisplay: props.data.slice(0, 10 * 24),
         };
     }
+
+    handleChangeSelector = (value) => {
+        this.setState({
+            lineDisplay: this.props.data.filter(
+                (time) => value.indexOf(time.url) !== -1
+            ),
+        });
+    }
+
     render() {
         return (
             <div style={{ position: "relative" }}>

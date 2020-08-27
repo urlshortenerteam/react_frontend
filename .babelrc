@@ -16,7 +16,7 @@
             "@babel/plugin-proposal-decorators",
             {
                 "legacy": true
-            }
+            },
         ],
         [
             "import",
@@ -25,6 +25,10 @@
                 "libraryDirectory": "es",
                 "style": "css"
             }
+        ],
+        [
+            
+            "@babel/plugin-proposal-class-properties",
         ]
     ]
 }
