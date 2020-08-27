@@ -1,3 +1,30 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [REEVOO短链接项目开发文档](#reevoo%E7%9F%AD%E9%93%BE%E6%8E%A5%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
+  - [功能性需求](#%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82)
+    - [短链创建](#%E7%9F%AD%E9%93%BE%E5%88%9B%E5%BB%BA)
+    - [管理链接](#%E7%AE%A1%E7%90%86%E8%BF%9E%E6%8E%A5)
+    - [统计图表](#%E7%BB%9F%E8%AE%A1%E5%9B%BE%E8%A1%A8)
+    - [运营管理](#%E8%BF%90%E8%90%A5%E7%AE%A1%E7%90%86)
+    - [网站细节](#%E7%BD%91%E7%AB%99%E7%BB%86%E8%8A%82)
+  - [非功能需求](#%E9%9D%9E%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82)
+  - [Safety](#safety)
+    - [Accessibility](#accessibility)
+    - [Scalability](#scalability)
+    - [Availability](#availability)
+  - [Security](#security)
+  - [项目架构与设计](#%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1)
+    - [微服务](#%E5%BE%AE%E6%9C%8D%E5%8A%A1)
+    - [前端打包优化](#%E5%89%8D%E7%AB%AF%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96)
+    - [可观测性](#%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7)
+      - [cAdvisor+Prometheus+Grafana](#cadvisorprometheusgrafana)
+      - [Elasticsearch+Fluentd+Kibana](#elasticsearchfluentdkibana)
+  - [测试](#%E6%B5%8B%E8%AF%95)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # REEVOO短链接项目开发文档
 
 [TOC]
@@ -16,7 +43,7 @@
 
 
 
-### 管理连接
+### 管理链接
 
 - 显示所有该用户创建的短链接
 
@@ -114,12 +141,15 @@
 
 ### 微服务
 
-@ao7777   @lmz
+后端将短链接重定向至长链接的API拆分为两个微服务，分别是重定向和日志服务。我们使用Go以及原生net/http库实现上述微服务，具有极高的并发性能和超小的资源占用。两个微服务之间通过kafka进行消息队列沟通，实现日志服务的并发削峰并进一步增强重定向服务的并发性能。
+
+同时，我们在重定向服务中加入了少量的内存缓存，轻巧有效地加快了读取速度。
 
 ### 前端打包优化
 
-@ao7777
+由于前端页面资源丰富，js和css体积都较大，首页加载时间相当长。为加快首屏加载速度并增强前端页面鲁棒性，我们在React Router中使用懒加载技术引入包，从而实现代码分割，降低了首页所需js包大小。同时我们通过babel和动态注入技术，缩小Ant Design包体积，减少不必要的模块引入。
 
+最后，我们使用React Rewired来去除js包中的源码映射，进一步减少整体打包体积，加快编译和渲染速度。
 
 
 ### 可观测性
@@ -127,6 +157,9 @@
 #### cAdvisor+Prometheus+Grafana
 
 由于需要监控服务器上的多个容器状态（CPU，内存，网络请求等），所以我们使用cAdvisor监控容器,将数据暴露给Prometheus,并通过Grafana绘制成图,方便横向对比不同容器的CPU占用量等信息。
+
+同时，我们在SpringBoot和Go的服务中都暴露了Prometheus的接口，从而可以在Grafana中了解到更加细粒度的统计数据。
+
 
 #### Elasticsearch+Fluentd+Kibana
 
