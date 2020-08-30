@@ -29,40 +29,40 @@ describe("AdminManage", () => {
 
     it("url manage : expand and collapse", () => {
         cy.get('[data-row-key="0"] > .ant-table-row-expand-icon-cell > .ant-table-row-expand-icon')
-            .click()
+            .click({force:true})
             .get(".ant-table-expanded-row > .ant-table-cell");
         cy.get('[data-row-key="0"] > .ant-table-row-expand-icon-cell > .ant-table-row-expand-icon')
-            .click()
+            .click({force:true})
             .get(".ant-table-expanded-row > .ant-table-cell")
             .should("not.be.visible");
     });
 
     it("url manage : ban and lift", () => {
         cy.get('[data-row-key="0"] > :nth-child(6) > .ant-btn')
-            .click()
+            .click({force:true})
             .get(".ant-popover-buttons > :nth-child(1) > span")
-            .click()
+            .click({force:true})
             .get(".ant-popover-inner-content");
         // .should('not.be.visible');
 
         cy.get('[data-row-key="0"] > :nth-child(6) > .ant-btn')
-            .click()
+            .click({force:true})
             .get(".ant-popover-buttons > .ant-btn-primary")
-            .click()
+            .click({force:true})
             .get("[data-row-key=\"0\"] > :nth-child(6) > .ant-btn > span")
             .contains("启 用");
 
         cy.get("[data-row-key=\"0\"] > :nth-child(6) > .ant-btn")
-            .click()
+            .click({force:true})
             .get(".ant-popover-buttons > .ant-btn-primary")
-            .click()
+            .click({force:true})
             .get("[data-row-key=\"0\"] > :nth-child(6) > .ant-btn > span")
             .contains("禁 用");
     });
 
     it("user manage : display", () => {
         cy.get("#rc-tabs-0-tab-2 > :nth-child(1)")
-            .click();
+            .click({force:true})
         cy.get(":nth-child(1) > .ant-table-filter-column > .ant-table-filter-column-title")
             .contains("用户名");
         cy.get(".ant-table-column-sorters > :nth-child(1)")
@@ -99,7 +99,7 @@ describe("AdminManage", () => {
 
     it("statistic : display", () => {
         cy.get("#rc-tabs-0-tab-3 > :nth-child(1)")
-            .click();
+            .click({force:true});
         cy.get(".ant-row > :nth-child(1) > .ant-card > .ant-card-body")
             .contains("用户数");
         cy.get(":nth-child(2) > .ant-card > .ant-card-body")
