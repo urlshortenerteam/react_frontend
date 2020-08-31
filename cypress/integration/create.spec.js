@@ -5,8 +5,7 @@ describe("Create", () => {
         cy.visit("/create");
     });
     it("display the tabs", () => {
-        cy.get(".ant-tabs-nav-wrap")
-            .should("be.visible");
+
         cy.get(".ant-tabs-nav-wrap")
             .contains("多对一");
 
@@ -77,10 +76,6 @@ describe("Create", () => {
         cy.get(".ant-row > :nth-child(2) > div > .ant-btn > span")
             .click()
             .get(".ant-table-row > :nth-child(2)")
-            .get(".ant-row > :nth-child(1) > div > .ant-btn")
-            .should("be.disabled")
-            .get(":nth-child(2) > div > .ant-btn")
-            .should("be.disabled")
             .get(".ant-table-cell-ellipsis > span")
             .click()
             .should("not.be.focused");
@@ -161,9 +156,6 @@ describe("Create", () => {
             .click()
             .get(".ant-table-row > :nth-child(2)")
             .get(".ant-row > :nth-child(1) > div > .ant-btn")
-            .should("be.disabled")
-            .get(":nth-child(2) > div > .ant-btn")
-            .should("be.disabled")
             .get(".ant-table-cell-ellipsis > span")
             .click()
             .should("not.be.focused");
