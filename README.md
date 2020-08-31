@@ -4,26 +4,29 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [REEVOO短链接项目开发文档](#reevoo%E7%9F%AD%E9%93%BE%E6%8E%A5%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
-  - [功能性需求](#%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82)
-    - [短链创建](#%E7%9F%AD%E9%93%BE%E5%88%9B%E5%BB%BA)
-    - [管理链接](#%E7%AE%A1%E7%90%86%E8%BF%9E%E6%8E%A5)
-    - [统计图表](#%E7%BB%9F%E8%AE%A1%E5%9B%BE%E8%A1%A8)
-    - [运营管理](#%E8%BF%90%E8%90%A5%E7%AE%A1%E7%90%86)
-    - [网站细节](#%E7%BD%91%E7%AB%99%E7%BB%86%E8%8A%82)
-  - [非功能需求](#%E9%9D%9E%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82)
-  - [Safety](#safety)
-    - [Accessibility](#accessibility)
-    - [Scalability](#scalability)
-    - [Availability](#availability)
-  - [Security](#security)
-  - [项目架构与设计](#%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1)
-    - [微服务](#%E5%BE%AE%E6%9C%8D%E5%8A%A1)
-    - [前端打包优化](#%E5%89%8D%E7%AB%AF%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96)
-    - [可观测性](#%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7)
-      - [cAdvisor+Prometheus+Grafana](#cadvisorprometheusgrafana)
-      - [Elasticsearch+Fluentd+Kibana](#elasticsearchfluentdkibana)
-  - [测试](#%E6%B5%8B%E8%AF%95)
+- [功能性需求](#%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82)
+  - [短链创建](#%E7%9F%AD%E9%93%BE%E5%88%9B%E5%BB%BA)
+  - [管理链接](#%E7%AE%A1%E7%90%86%E9%93%BE%E6%8E%A5)
+  - [统计图表](#%E7%BB%9F%E8%AE%A1%E5%9B%BE%E8%A1%A8)
+  - [运营管理](#%E8%BF%90%E8%90%A5%E7%AE%A1%E7%90%86)
+  - [网站细节](#%E7%BD%91%E7%AB%99%E7%BB%86%E8%8A%82)
+- [非功能需求](#%E9%9D%9E%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82)
+- [Safety](#safety)
+  - [Accessibility](#accessibility)
+  - [Scalability](#scalability)
+  - [Availability](#availability)
+- [Security](#security)
+- [项目架构与设计](#%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1)
+  - [微服务](#%E5%BE%AE%E6%9C%8D%E5%8A%A1)
+  - [前端打包优化](#%E5%89%8D%E7%AB%AF%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96)
+  - [可观测性](#%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7)
+    - [cAdvisor+Prometheus+Grafana](#cadvisorprometheusgrafana)
+    - [Elasticsearch+Fluentd+Kibana](#elasticsearchfluentdkibana)
+- [测试](#%E6%B5%8B%E8%AF%95)
+  - [v1.0 origin](#v10-origin)
+  - [v1.1 async+log](#v11-asynclog)
+  - [v2.0 microService](#v20-microservice)
+  - [v2.1 kafka](#v21-kafka)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto-update -->
 
@@ -186,5 +189,3 @@
 ### v2.1 kafka
 
 在v2.0的基础上，跳转请求不再被发给visitlogService，而是通过消息队列kafka，由redirectService处理请求后将相关数据异步发送一个消息到broker，visitlogService再从broker中获取数据写入数据库。这样避免了两者重复查询数据库，提高效率。
-
-#### 

@@ -14,9 +14,9 @@ import "../css/RegisterCss.css";
 import "../css/CreateCss.css";
 import "../css/Carousel.css";
 import "../css/LoginCss.css";
-import "../css/Statistics.css";
 import "../css/NoMatchCss.css";
 import "../css/theme.less";
+import "../css/Statistics.css";
 
 const AdminManageView = lazy(() => import("../view/AdminManageView.js"));
 const LoginView = lazy(() => import("../view/LoginView.js"));
