@@ -272,6 +272,9 @@ export default class ManyToOneTable extends React.Component {
     };
 
     manyToOne = () => {
+        this.setState({
+            created: true,
+        });
         let urlArray = this.state.dataSource;
         let req = [];
         //check the format
@@ -320,7 +323,7 @@ export default class ManyToOneTable extends React.Component {
             });
             this.setState({
                 dataSource: result,
-                created: true,
+
                 loaded: false,
             });
             console.log(result);

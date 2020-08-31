@@ -336,6 +336,7 @@ class AdminUrlManagePageable extends Component {
                 title: "短链接",
                 align: "center",
                 dataIndex: "shortUrl",
+                key: "shortUrl",
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         record.shortUrl !== null ? (
@@ -365,6 +366,7 @@ class AdminUrlManagePageable extends Component {
                 title: "访问量",
                 align: "center",
                 dataIndex: "count",
+                key: "count",
                 // sorter: {
                 //     compare: (a, b) => a.count - b.count
                 // }
@@ -373,12 +375,14 @@ class AdminUrlManagePageable extends Component {
                 title: "创建用户",
                 align: "center",
                 dataIndex: "creatorName",
+                key: "creatorName",
                 // ...this.getColumnSearchProps("creatorName", "创建用户")
             },
             {
                 title: "创建日期",
                 align: "center",
                 dataIndex: "createTime",
+                key: "createTime",
                 render: (text, record) => {
                     let time =
                         new Date(record.createTime)
@@ -404,6 +408,7 @@ class AdminUrlManagePageable extends Component {
                 //     value === "BANNED"
                 //         ? record.longUrl[0].url === value
                 //         : record.longUrl[0].url !== "BANNED",
+
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         record.longUrl.length === 0 ? null : record.longUrl[0]

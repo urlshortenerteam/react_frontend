@@ -261,6 +261,9 @@ export default class OneToOneTable extends React.Component {
         });
     };
     oneToOne = () => {
+        this.setState({
+            created: true,
+        });
         let urlArray = this.state.dataSource;
         let req = [];
         //check the format
@@ -307,7 +310,6 @@ export default class OneToOneTable extends React.Component {
             });
             this.setState({
                 dataSource: result,
-                created: true,
             });
 
             console.log(result);
