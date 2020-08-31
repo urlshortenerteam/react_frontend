@@ -43,6 +43,35 @@ export default class RealTimeTrack extends React.Component {
                     title: "访问时间",
                     dataIndex: "time",
                     key: "time",
+                    render: (text, record) => {
+                        let myTime = record.time.split(" ");
+                        myTime = myTime[1];
+                        let t = myTime.split(":");
+                        let hours = (parseInt(t[0]) + 3) % 24;
+                        myTime = hours.toString() + ":" + t[1] + ":" + t[2];
+
+                        let dateTemp = record.time.split("-");
+                        let days = dateTemp[2];
+
+                        days = parseInt(days);
+                        let date = new Date(dateTemp[0] + "-01-01"); //转换为MM-DD-YYYY格式
+
+                        date.setDate(date.getDate() + days - 1);
+                        var day = date.getDate();
+
+                        return record.time === null ? null : (
+                            <span>
+                                {" "}
+                                {dateTemp[0] +
+                                    "-" +
+                                    dateTemp[1] +
+                                    "-" +
+                                    day +
+                                    " " +
+                                    myTime}
+                            </span>
+                        );
+                    },
                 },
             ],
         };
