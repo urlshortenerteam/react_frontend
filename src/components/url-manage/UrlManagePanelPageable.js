@@ -95,7 +95,7 @@ export default class UrlManagePanelPageable extends Component {
                 tableData[i].areaDistr = data[i].areaDistr;
                 tableData[i].timeDistr = data[i].timeDistr;
                 tableData[i].sourceDistr = data[i].sourceDistr;
-                tableData[i].idle=data[i].idle;
+                tableData[i].idle = data[i].idle;
             }
 
             this.setState({
