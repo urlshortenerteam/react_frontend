@@ -54,9 +54,7 @@ export default class RealTimeTrack extends React.Component {
                         let days = dateTemp[2];
 
                         days = parseInt(days);
-                        let date = new Date(
-                            dateTemp[0] + "-" + "01" + "-" + "01"
-                        ); //转换为MM-DD-YYYY格式
+                        let date = new Date(dateTemp[0] + "-01-01"); //转换为MM-DD-YYYY格式
 
                         date.setDate(date.getDate() + days - 1);
                         var day = date.getDate();
