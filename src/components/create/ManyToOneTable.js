@@ -167,7 +167,6 @@ export default class ManyToOneTable extends React.Component {
                 },
             ],
             count: 1,
-            created: false,
             loaded: false,
         };
     }
@@ -267,13 +266,13 @@ export default class ManyToOneTable extends React.Component {
                 },
             ],
             count: 1,
-            created: false,
+            loaded: false,
         });
     };
 
     manyToOne = () => {
         this.setState({
-            created: true,
+            loaded: true,
         });
         let urlArray = this.state.dataSource;
         let req = [];
@@ -323,7 +322,6 @@ export default class ManyToOneTable extends React.Component {
             });
             this.setState({
                 dataSource: result,
-
                 loaded: false,
             });
             console.log(result);
@@ -374,7 +372,7 @@ export default class ManyToOneTable extends React.Component {
                         <Row justify="center">
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    {!this.state.created ? (
+                                    {!this.state.loaded ? (
                                         <Button
                                             onClick={this.handleAdd}
                                             type="primary"
@@ -395,7 +393,7 @@ export default class ManyToOneTable extends React.Component {
                             </Col>
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    {!this.state.created ? (
+                                    {!this.state.loaded ? (
                                         <Button
                                             type="primary"
                                             onClick={this.manyToOne}
@@ -407,7 +405,7 @@ export default class ManyToOneTable extends React.Component {
                                         <Button
                                             type="primary"
                                             block={true}
-                                            disabled
+                                            loading={this.state.loaded}
                                         >
                                             生成
                                         </Button>
@@ -416,13 +414,23 @@ export default class ManyToOneTable extends React.Component {
                             </Col>
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    <Button
-                                        type="primary"
-                                        block={true}
-                                        onClick={this.reset}
-                                    >
-                                        重置
-                                    </Button>
+                                    {!this.state.loaded ? (
+                                        <Button
+                                            type="primary"
+                                            block={true}
+                                            onClick={this.reset}
+                                        >
+                                            重置
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            type="primary"
+                                            block={true}
+                                            disabled
+                                        >
+                                            重置
+                                        </Button>
+                                    )}
                                 </div>
                             </Col>
                         </Row>
