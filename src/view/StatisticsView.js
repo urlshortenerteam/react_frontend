@@ -118,6 +118,7 @@ class StatisticsView extends React.Component {
                                             "saturate(180%) blur(20px)",
                                         opacity: 0.7,
                                     }}
+                                    className="MapSelector"
                                     defaultValue={[this.state.data[0].shortUrl]}
                                     onChange={this.handleChangeSelector}
                                 >
