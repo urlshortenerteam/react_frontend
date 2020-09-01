@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Button, Col, Form, Input, Layout, message, Row } from "antd";
-import "../css/LoginCss.css";
-import "antd/dist/antd.css";
 import * as userService from "../services/userService";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
@@ -16,16 +14,41 @@ LoginView
 */
 class LoginView extends Component {
     formRef = React.createRef();
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: null,
+        };
+    }
+
+    componentDidMount() {
+        if (
+            sessionStorage.getItem("user") &&
+            JSON.parse(sessionStorage.getItem("user")).id !== null &&
+            JSON.parse(sessionStorage.getItem("user")).loginStatus !== null &&
+            JSON.parse(sessionStorage.getItem("user")).type !== null &&
+            JSON.parse(sessionStorage.getItem("user")).token !== null &&
+            JSON.parse(sessionStorage.getItem("user")).refreshToken !== null
+        ) {
+            this.props.history.go(-1);
+        }
+    }
 
     render() {
         const callback = (res) => {
             if (res.data.loginStatus) {
-                sessionStorage.setItem("user", JSON.stringify(res.data));
-
+                let ans = { ...res.data, userName: this.state.username };
+                sessionStorage.setItem("user", JSON.stringify(ans));
+                // sessionStorage.setItem("user", JSON.stringify(res.data));
+                // sessionStorage.setItem("userName",this.state.username);
                 if (sessionStorage.getItem("user")) {
                     console.log(JSON.parse(sessionStorage.getItem("user")));
+                    console.log(this.props.history);
+
                     message.success("登录成功");
-                    this.props.history.goBack();
+                    this.props.history.go(-1);
+                    // window.location.reload();
+                    // this.props.history.goBack();
                 } else {
                     console.log("no data");
                 }
@@ -43,18 +66,30 @@ class LoginView extends Component {
         };
         const onFinish = (values) => {
             console.log("Received values of form: ", values);
+
+            this.setState({
+                username: values.name,
+            });
             userService.login(values, callback);
         };
 
         const onFinishFailed = (errorInfo) => {
             console.log("Failed:", errorInfo);
         };
+
+        const goToReg = () => {
+            window.location.replace("/register");
+        };
         return (
             <Content>
                 <Row justify="center">
                     <div className="login">
                         <Row style={{ padding: "25px" }}>
-                            <Col span={12} offset={6}>
+                            <Col
+                                lg={{ span: 16, offset: 4 }}
+                                xs={{ span: 20, offset: 2 }}
+                                md={{ span: 18, offset: 3 }}
+                            >
                                 <div>
                                     <div className="title">登录</div>
                                     <Form
@@ -109,7 +144,7 @@ class LoginView extends Component {
                                         <Row justify="space-between">
                                             <Col>
                                                 {" "}
-                                                <Button href="/register" ghost>
+                                                <Button onClick={goToReg} ghost>
                                                     <span>注册</span>
                                                 </Button>
                                             </Col>

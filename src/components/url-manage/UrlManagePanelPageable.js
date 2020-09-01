@@ -23,6 +23,7 @@ import {
 } from "@ant-design/icons";
 import { getRequest, hostUrl } from "../../services/ajax";
 import SnapShot from "./SnapShot";
+import Loading from "../Loading";
 import { BanUrl, EditUrl, GetUrl, LiftUrl } from "../../services/urlService";
 
 const { Panel } = Collapse;
@@ -36,7 +37,7 @@ const IconText = ({ icon, text, action }) => (
         {text}
     </span>
 );
-export default class UrlManagePanel extends Component {
+export default class UrlManagePanelPageable extends Component {
     state = {
         loading: true,
         editing: false,
@@ -45,35 +46,79 @@ export default class UrlManagePanel extends Component {
         editIndex: "",
         listData: [],
         confirmLoading: false,
+        totalNum: null,
+        currentPage: 1, // 1 base
+        loadedPages: [], // 1 base
+        pageSize: 10,
     };
 
     async componentDidMount() {
-        getRequest("/getStat", this.handleData, {
+        const callback = (res) => {
+            let total = res.data.totalElements;
+            console.log(total);
+            this.setState({
+                totalNum: total,
+            });
+            let tableData = [];
+            for (let i = 0; i < total; i++) {
+                //根据总长度对表格数据初始化
+                tableData.push({
+                    key: i,
+                    shortUrl: null,
+                    longUrl: [],
+                    count: null,
+                    areaDistr: [],
+                    timeDistr: [],
+                    sourceDistr: [],
+                });
+            }
+            console.log("看看tableData");
+            console.log(tableData);
+
+            let data = res.data.data;
+            console.log("看看data");
+            console.log(data);
+            data.forEach((short) => {
+                let idle = 0;
+                console.log("!");
+                short.timeDistr.forEach((time) => {
+                    //visit less than 2000 is seen as an idle hour
+                    if (time.value <= 2000) idle++;
+                });
+                short.idle = idle;
+            });
+            for (let i = 0; i < data.length; i++) {
+                tableData[i].key = i;
+                tableData[i].shortUrl = data[i].shortUrl;
+                tableData[i].longUrl = data[i].longUrl;
+                tableData[i].count = data[i].count;
+                tableData[i].areaDistr = data[i].areaDistr;
+                tableData[i].timeDistr = data[i].timeDistr;
+                tableData[i].sourceDistr = data[i].sourceDistr;
+                tableData[i].idle = data[i].idle;
+            }
+
+            this.setState({
+                listData: tableData,
+                loadedPages: this.state.loadedPages.concat(1),
+                loading: false,
+            });
+        };
+        getRequest("/getStatPageable", callback, {
             params: {
-                id: sessionStorage.getItem("user")
-                    ? JSON.parse(sessionStorage.getItem("user")).id
-                    : null,
+                pageCount: 0,
+                pageSize: this.state.pageSize,
             },
             errorCallback: this.handleError,
         });
     }
 
-    handleData = (response) => {
-        this.setState({ listData: response.data, loading: false });
-        this.state.listData.forEach((short) => {
-            let idle = 0;
-            short.timeDistr.forEach((time) => {
-                //visit less than 2000 is seen as an idle hour
-                if (time.value <= 2000) idle++;
-            });
-            short.idle = idle;
-        });
-        console.log(this.state);
-    };
     handleError = (error) => {
+        import("antd").then(({ message }) => {
+            message.error(error.toString());
+        });
         console.log(error);
     };
-
     handleToggleBan = (item, index) => {
         Modal.confirm({
             content: "确定禁用这条链接吗？",
@@ -106,6 +151,7 @@ export default class UrlManagePanel extends Component {
     };
     handleBan = (response) => {
         console.log(response.data);
+
         const { editIndex, listData } = this.state;
         if (response.data.status === true) {
             message.success("禁用成功");
@@ -115,6 +161,7 @@ export default class UrlManagePanel extends Component {
     };
     handleLift = (response) => {
         console.log(response.data);
+
         const { editIndex, listData } = this.state;
         if (response.data.status === true) {
             message.success("解禁成功");
@@ -136,6 +183,63 @@ export default class UrlManagePanel extends Component {
             this.setState({ editing: true, editIndex: index });
         }
     };
+
+    onPageChange(page) {
+        console.log(page);
+        this.setState({
+            currentPage: page,
+        });
+        this.getDevData(page);
+    }
+
+    async getDevData(page) {
+        let self = this;
+        const callback = (res) => {
+            console.log(res.data);
+
+            let tableData = this.state.listData;
+
+            let data = res.data.data;
+
+            for (let i = 0; i < data.length; i++) {
+                let index = i + (page - 1) * this.state.pageSize;
+                tableData[index].key = i;
+                tableData[index].shortUrl = data[i].shortUrl;
+                tableData[index].longUrl = data[i].longUrl;
+                tableData[index].count = data[i].count;
+                tableData[index].areaDistr = data[i].areaDistr;
+                tableData[index].timeDistr = data[i].timeDistr;
+                tableData[index].sourceDistr = data[i].sourceDistr;
+            }
+
+            self.setState({
+                listData: tableData,
+                loadedPages: this.state.loadedPages.concat(page),
+            });
+            this.state.listData.forEach((short) => {
+                let idle = 0;
+                short.timeDistr.forEach((time) => {
+                    //visit less than 2000 is seen as an idle hour
+                    if (time.value <= 2000) idle++;
+                });
+                short.idle = idle;
+            });
+        };
+
+        console.log("看看page");
+        console.log(this.state.loadedPages);
+        if (this.state.loadedPages.indexOf(page) === -1) {
+            getRequest("/getStatPageable", callback, {
+                params: {
+                    pageCount: page - 1,
+                    pageSize: this.state.pageSize,
+                },
+                errorCallback: this.handleError,
+            });
+            // getAllUrlsPageable(page-1, this.state.pageSize, callback, (error) => console.log(error));
+        }
+    }
+
     render() {
         const { loading, listData, editing, confirmLoading } = this.state;
         const selectBefore = (
@@ -150,14 +254,60 @@ export default class UrlManagePanel extends Component {
                 <Option value="https://">https://</Option>
             </Select>
         );
+        if (this.state.loading)
+            return (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 226px)",
+                        marginLeft: "calc(50vw - 101.667px",
+                    }}
+                />
+            );
+        if (this.state.listData.length === 0)
+            return (
+                <div
+                    style={{
+                        marginTop: "10vmin",
+                        color: "#ffffff",
+                        position: "relative",
+                        textAlign: "center",
+                    }}
+                >
+                    <img
+                        src={`${hostUrl}/static/box.png`}
+                        alt="nodata"
+                        style={{
+                            width: "30%",
+                            marginLeft: "35%",
+                            marginRight: "35%",
+                            marginBottom: "3vh",
+                        }}
+                    />
+                    你还没有短链接哦~
+                    <a href="/create">创建一个</a>
+                </div>
+            );
         return (
-            <>
+            <div className="manage">
                 <List
+                    // pagination={pagination}
+                    pagination={{
+                        pageSize: this.state.pageSize,
+                        total: this.state.totalNum,
+                        onChange: this.onPageChange.bind(this),
+                        current: this.state.currentPage,
+                        showSizeChanger: false,
+                        // position: ["bottomCenter"],
+                        // size:"small"
+                    }}
                     itemLayout="vertical"
                     size="large"
                     dataSource={listData}
                     renderItem={(item, index) => {
                         let longList = [];
+                        if (item.longUrl !== null && item.longUrl.length === 0)
+                            return null;
                         if (item.longUrl[0].url !== "BANNED")
                             item.longUrl.forEach((long, index) => {
                                 longList.push(
@@ -187,7 +337,7 @@ export default class UrlManagePanel extends Component {
                             );
                         return (
                             <List.Item
-                                key={item.shortUrl}
+                                key={item.key}
                                 actions={
                                     !loading && [
                                         <IconText
@@ -299,7 +449,10 @@ export default class UrlManagePanel extends Component {
                                     />
                                     <Collapse
                                         ghost
-                                        style={{ backgroundColor: "#011428" }}
+                                        style={{
+                                            backgroundColor: "#011428",
+                                            color: "white",
+                                        }}
                                     >
                                         <Panel header="详情" key="1">
                                             {longList}
@@ -329,9 +482,10 @@ export default class UrlManagePanel extends Component {
                         allowClear
                     />
                 </Modal>
-            </>
+            </div>
         );
     }
+
     handleOk = () => {
         this.setState({
             confirmLoading: true,
@@ -348,7 +502,9 @@ export default class UrlManagePanel extends Component {
                 });
                 message.success("编辑成功");
                 listData[editIndex].longUrl[0].url = prefix + editValue;
+
                 console.log(listData[editIndex]);
+
                 this.setState({ listData: listData });
             },
             errorCallback: this.handleError,
@@ -357,6 +513,7 @@ export default class UrlManagePanel extends Component {
 
     handleCancel = () => {
         console.log("Clicked cancel button");
+
         this.setState({
             editing: false,
         });

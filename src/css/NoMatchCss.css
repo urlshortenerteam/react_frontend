@@ -1,0 +1,46 @@
+.titleNoMatch {
+    color: #d8e3e7;
+    font-size: 110px;
+    text-align: center;
+    font-weight: bold;
+    /*font-family: "Calibri Light";*/
+    font-family: "Corbel", fantasy;
+}
+.picture {
+    margin-left: auto;
+    margin-bottom: auto;
+    position: fixed;
+    margin-top: auto;
+    /*margin-bottom: 20px;*/
+    overflow: hidden;
+}
+.smallNoMatch {
+    color: #d8e3e7;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 16px;
+    /*font-family: "Calibri Light", serif;*/
+    font-family: "等线 Light", "Calibri Light", serif;
+}
+
+.smallNoMatch1 {
+    color: #d8e3e7;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 12px;
+    /*font-family: "Calibri Light", serif;*/
+    font-family: "Calibri Light", serif;
+}
+.countDown .ant-statistic-content-value {
+    display: inline-block;
+    direction: ltr;
+    color: #cccccc;
+}
+
+.countDown .ant-statistic-content-suffix {
+    margin-left: 4px;
+    font-size: 10px;
+    color: #cccccc;
+    font-weight: lighter;
+    font-family: "等线 Light", serif;
+}

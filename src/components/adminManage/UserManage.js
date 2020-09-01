@@ -1,12 +1,24 @@
 import React, { Component } from "react";
-import { Button, Input, message, Popconfirm, Table, Tag } from "antd";
+import {
+    Button,
+    Input,
+    message,
+    Popconfirm,
+    Table,
+    Tag,
+    ConfigProvider,
+} from "antd";
 import {
     FrownOutlined,
     SearchOutlined,
     SmileOutlined,
     UserAddOutlined,
+    RedoOutlined,
 } from "@ant-design/icons";
 import { banUser, getAllUser } from "../../services/adminManageService";
+import zhCN from "antd/es/locale/zh_CN";
+import Loading from "../Loading";
+import { primaryColor } from "../../css/theme.js";
 
 /**
  * UserTable
@@ -17,13 +29,21 @@ import { banUser, getAllUser } from "../../services/adminManageService";
 class UserTable extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true,
+            dataSource: [],
+            rowData: [],
+            searchText: "",
+            searchedColumn: "",
+            visible: false,
+        };
         this.columns = [
             {
                 title: "用户名",
                 dataIndex: "name",
                 width: "5%",
                 align: "center",
-                ...this.getColumnSearchProps("name"),
+                ...this.getColumnSearchProps("name", "用户名"),
             },
             {
                 title: "访问次数",
@@ -33,18 +53,18 @@ class UserTable extends React.Component {
                 sorter: {
                     compare: (a, b) => a.visitCount - b.visitCount,
                 },
-                // render: (text, record) =>
-                //     this.state.dataSource.length >= 1 ? (
-                //         <Statistic title="Feedback" value={record.visitCount} prefix={<LikeOutlined />} />
-                //     ) : null,
-
-                ...this.getColumnSearchProps("visitCount"),
             },
             {
                 title: "用户类型",
                 dataIndex: "role",
                 width: "5%",
                 align: "center",
+                filters: [
+                    { text: "管理员", value: 0 },
+                    { text: "普通用户", value: 1 },
+                    { text: "禁用用户", value: 2 },
+                ],
+                onFilter: (value, record) => record.role === value,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         <div>
@@ -63,13 +83,18 @@ class UserTable extends React.Component {
                             )}
                         </div>
                     ) : null,
-                // ...this.getColumnSearchProps("role")
             },
             {
                 title: "禁用/启用",
                 dataIndex: "role",
                 align: "center",
                 width: "5%",
+                filters: [
+                    { text: "未禁用", value: 1 },
+                    { text: "已禁用", value: 2 },
+                    { text: "无法禁用", value: 0 },
+                ],
+                onFilter: (value, record) => record.role === value,
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
                         record.role === 0 ? (
@@ -95,13 +120,6 @@ class UserTable extends React.Component {
                     ) : null,
             },
         ];
-        this.state = {
-            dataSource: [],
-            rowData: [],
-            searchText: "",
-            searchedColumn: "",
-            visible: false,
-        };
     }
 
     componentDidMount() {
@@ -114,8 +132,14 @@ class UserTable extends React.Component {
                 message.error("您不是管理员");
                 return;
             }
+
             console.log(res);
-            this.setState({ dataSource: res.data, rowData: res.data });
+
+            this.setState({
+                dataSource: res.data,
+                rowData: res.data,
+                loading: false,
+            });
             // console.log(JSON.stringify(data));
         };
 
@@ -132,7 +156,7 @@ class UserTable extends React.Component {
         const w = window.open("about:blank");
         w.location.href = "/login";
     };
-    getColumnSearchProps = (dataIndex) => ({
+    getColumnSearchProps = (dataIndex, title) => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
@@ -144,7 +168,7 @@ class UserTable extends React.Component {
                     ref={(node) => {
                         this.searchInput = node;
                     }}
-                    placeholder={`search ${dataIndex}`}
+                    placeholder={`搜索 ${title}`}
                     value={selectedKeys[0]}
                     onChange={(e) =>
                         setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -169,6 +193,7 @@ class UserTable extends React.Component {
                     onClick={() => this.handleReset(clearFilters)}
                     size="small"
                     style={{ width: 90 }}
+                    icon={<RedoOutlined />}
                 >
                     重置
                 </Button>
@@ -176,7 +201,7 @@ class UserTable extends React.Component {
         ),
         filterIcon: (filtered) => (
             <SearchOutlined
-                style={{ color: filtered ? "#1890ff" : undefined }}
+                style={{ color: filtered ? primaryColor : undefined }}
             />
         ),
         onFilter: (value, record) =>
@@ -241,16 +266,28 @@ class UserTable extends React.Component {
     };
 
     render() {
+        if (this.state.loading)
+            return (
+                <Loading
+                    style={{
+                        height: 200,
+                        marginTop: "calc(50vh - 226px)",
+                        marginLeft: "calc(40vw - 101.667px)",
+                    }}
+                />
+            );
         return (
             <div>
-                <Table
-                    pagination={{ position: ["bottomCenter"] }}
-                    rowClassName={() => "editable-row"}
-                    bordered
-                    rowKey="id"
-                    dataSource={this.state.dataSource}
-                    columns={this.columns}
-                />
+                <ConfigProvider locale={zhCN}>
+                    <Table
+                        pagination={{ position: ["bottomCenter"] }}
+                        rowClassName={() => "editable-row"}
+                        bordered
+                        rowKey="id"
+                        dataSource={this.state.dataSource}
+                        columns={this.columns}
+                    />
+                </ConfigProvider>
             </div>
         );
     }

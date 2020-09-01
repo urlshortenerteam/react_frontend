@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
 import { getBatchManyToOne } from "../../services/CreateService";
-import "../../css/HomeCss.css";
-import "../../css/CreateCss.css";
 import ShortWithQR from "./ShortWithQR";
 
 const { Search } = Input;
@@ -66,6 +64,7 @@ const EditableCell = ({
     const deleteHandle = async () => {
         try {
             console.log("delete");
+
             // const values = await form.validateFields();
             toggleEdit();
             handleDelete(record.key);
@@ -168,7 +167,6 @@ export default class ManyToOneTable extends React.Component {
                 },
             ],
             count: 1,
-            created: false,
             loaded: false,
         };
     }
@@ -268,11 +266,14 @@ export default class ManyToOneTable extends React.Component {
                 },
             ],
             count: 1,
-            created: false,
+            loaded: false,
         });
     };
 
     manyToOne = () => {
+        this.setState({
+            loaded: true,
+        });
         let urlArray = this.state.dataSource;
         let req = [];
         //check the format
@@ -308,6 +309,9 @@ export default class ManyToOneTable extends React.Component {
         const callBack = (rep) => {
             console.log(rep.data);
             let result = [];
+            if (!rep.data) {
+                return;
+            }
             urlArray.forEach(function (item, index) {
                 result.push({
                     long: urlArray[index].long,
@@ -318,7 +322,6 @@ export default class ManyToOneTable extends React.Component {
             });
             this.setState({
                 dataSource: result,
-                created: true,
                 loaded: false,
             });
             console.log(result);
@@ -355,8 +358,9 @@ export default class ManyToOneTable extends React.Component {
             };
         });
         return (
-            <div>
+            <div className="manage">
                 <br />
+
                 <Table
                     components={components}
                     rowClassName={() => "editable-row"}
@@ -368,7 +372,7 @@ export default class ManyToOneTable extends React.Component {
                         <Row justify="center">
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    {!this.state.created ? (
+                                    {!this.state.loaded ? (
                                         <Button
                                             onClick={this.handleAdd}
                                             type="primary"
@@ -389,7 +393,7 @@ export default class ManyToOneTable extends React.Component {
                             </Col>
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    {!this.state.created ? (
+                                    {!this.state.loaded ? (
                                         <Button
                                             type="primary"
                                             onClick={this.manyToOne}
@@ -401,7 +405,7 @@ export default class ManyToOneTable extends React.Component {
                                         <Button
                                             type="primary"
                                             block={true}
-                                            disabled
+                                            loading={this.state.loaded}
                                         >
                                             生成
                                         </Button>
@@ -410,13 +414,23 @@ export default class ManyToOneTable extends React.Component {
                             </Col>
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    <Button
-                                        type="primary"
-                                        block={true}
-                                        onClick={this.reset}
-                                    >
-                                        重置
-                                    </Button>
+                                    {!this.state.loaded ? (
+                                        <Button
+                                            type="primary"
+                                            block={true}
+                                            onClick={this.reset}
+                                        >
+                                            重置
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            type="primary"
+                                            block={true}
+                                            disabled
+                                        >
+                                            重置
+                                        </Button>
+                                    )}
                                 </div>
                             </Col>
                         </Row>

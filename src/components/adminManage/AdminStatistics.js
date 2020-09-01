@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../../css/AdminStatisticsCss.css";
 import NumberCount from "./NumberCount";
 import VisitRankingList from "./VisitRankingList";
 
@@ -14,6 +13,7 @@ export default class SimpleStatistics extends Component {
         return (
             <div>
                 <NumberCount />
+                <br />
                 <VisitRankingList />
             </div>
         );

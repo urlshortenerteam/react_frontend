@@ -11,7 +11,7 @@ describe("Statistic", () => {
         cy.get(
             ".ant-layout-sider-children > .ant-menu > :nth-child(2)"
         )
-            .click()
+            .click({ force: true })
             .get(".ant-collapse-item-active > .ant-collapse-header")
             .contains("过去24小时")
             .get(".ant-collapse-item-active > .ant-collapse-header");
@@ -19,13 +19,15 @@ describe("Statistic", () => {
     it("check area distribution", () => {
         cy.get(
             ".ant-layout-sider-children > .ant-menu > :nth-child(3)"
-        ).click();
+        ).click({ force: true })
+            .get('.ant-select-selector')
+            .click({ force: true });
     });
 });
 const stubData = () => {
     cy.route({
         method: "GET",
-        url: "**/getReal?**",
+        url: "**/getReal",
         response: {
             status: 200,
             msg: "查询成功",
@@ -58,7 +60,7 @@ const stubData = () => {
     });
     cy.route({
         method: "GET",
-        url: "**/getStat?**",
+        url: "**/getStat",
         response: {
             status: 200,
             msg: "查询成功",
@@ -71,7 +73,7 @@ const stubData = () => {
                     ],
                     count: 43834,
                     long: "http://xihj.om/smmzh",
-                    area_distr: [
+                    areaDistr: [
                         { name: "云南省", code: 530000, value: 220 },
                         { name: "黑龙江省", code: 230000, value: 2448 },
                         { name: "贵州省", code: 520000, value: 1394 },
@@ -107,7 +109,7 @@ const stubData = () => {
                         { name: "西藏自治区", code: 540000, value: 955 },
                         { name: "台湾省", code: 710000, value: 2700 }
                     ],
-                    time_distr: [
+                    timeDistr: [
                         { time: "0", value: 2852 },
                         { time: "1", value: 837 },
                         { time: "2", value: 2574 },
@@ -139,7 +141,7 @@ const stubData = () => {
                     longUrl: [{ url: "https://www.taobao.com" }],
                     count: 40503,
                     long: "http://vvyshb.sy/joulvppl",
-                    area_distr: [
+                    areaDistr: [
                         { name: "云南省", code: 530000, value: 1724 },
                         { name: "黑龙江省", code: 230000, value: 1475 },
                         { name: "贵州省", code: 520000, value: 305 },
@@ -175,7 +177,7 @@ const stubData = () => {
                         { name: "西藏自治区", code: 540000, value: 2178 },
                         { name: "台湾省", code: 710000, value: 1885 }
                     ],
-                    time_distr: [
+                    timeDistr: [
                         { time: "0", value: 101 },
                         { time: "1", value: 550 },
                         { time: "2", value: 2696 },
@@ -213,7 +215,7 @@ const stubData = () => {
                     ],
                     count: 71286,
                     long: "http://gjuhkd.ga/qbtackbyf",
-                    area_distr: [
+                    areaDistr: [
                         { name: "云南省", code: 530000, value: 2485 },
                         { name: "黑龙江省", code: 230000, value: 50 },
                         { name: "贵州省", code: 520000, value: 66 },
@@ -249,7 +251,7 @@ const stubData = () => {
                         { name: "西藏自治区", code: 540000, value: 1338 },
                         { name: "台湾省", code: 710000, value: 2333 }
                     ],
-                    time_distr: [
+                    timeDistr: [
                         { time: "0", value: 2601 },
                         { time: "1", value: 768 },
                         { time: "2", value: 2415 },
@@ -286,7 +288,7 @@ const stubData = () => {
                     ],
                     count: 39269,
                     long: "http://xbimbx.do/devrzujc",
-                    area_distr: [
+                    areaDistr: [
                         { name: "云南省", code: 530000, value: 2182 },
                         { name: "黑龙江省", code: 230000, value: 2859 },
                         { name: "贵州省", code: 520000, value: 2289 },
@@ -322,7 +324,7 @@ const stubData = () => {
                         { name: "西藏自治区", code: 540000, value: 2374 },
                         { name: "台湾省", code: 710000, value: 767 }
                     ],
-                    time_distr: [
+                    timeDistr: [
                         { time: "0", value: 1196 },
                         { time: "1", value: 2286 },
                         { time: "2", value: 213 },
@@ -355,6 +357,14 @@ const stubData = () => {
 };
 const fakeLogin = () => {
     cy.server();
+    let user = {
+        loginStatus: true,
+        type: 0,
+        id: 100,
+        token: "hlduwocoacsffxvunwtghyorueoecijckycmuyprkdcvyngdskdruugxjkdapckmjmiqrmymtwhhjnkece.nsgulqjivzkoeqausrwdymunlomrvpmlyxlcggscfzgiligicjfkmogvenbrooqlhdsbxlqjw.hsficmjojubovhsaphfytcinvsqbkgtqxoyuskgbeesertqiwbaxecryvuvwqfqnigcjqzsvicipgiwpndrmfjcplmcylei",
+        refreshToken: "rztwwprjkerepcsoijukwklmwrkurgltxgwfqtiusmafarzlrwrgqxvmfibitdyotyztubjoyhyqhlwzfxntfglxtwk.pncakrtifomdobiqcvufxheycruoqgwficcscjehsquhohttorsdrciuofdimmsocwnzyybffqgvvnj.fydwucxwtdutdmhwtnubwhiysgfoewbnkyeeeuqlyhmeredlqtxxglvqgcmqjuqpftbhryceuvunjdmjcmpjksrzbgjr",
+    };
+    window.sessionStorage.setItem('user', JSON.stringify(user));
     cy.route({
         method: "GET",
         url: "**/checkSession",

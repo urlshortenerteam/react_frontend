@@ -11,7 +11,9 @@ export const getAllUser = (callback) => {
     const url = `/getUserStat`;
     getRequest(url, callback, {
         errorCallback: (error) => {
-            console.log(error);
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         },
         params: {},
     });
@@ -30,7 +32,9 @@ export const banUser = (ban, ban_id, callback) => {
     const url = `/banUser`;
     getRequest(url, callback, {
         errorCallback: (error) => {
-            console.log(error);
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         },
         params: {
             banId: ban_id,
@@ -80,6 +84,28 @@ export const getAllUrls = (callBack, errorHandler) => {
 export const getNumberCount = (callBack, errorHandler) => {
     getRequest("/getNumberCount", callBack, {
         params: {},
+        errorCallback: errorHandler,
+    });
+};
+
+/**
+ * getAllUrlsPageable
+ * @author Shuchang Liu <liushuchang0609@sjtu.edu.cn>
+ * @date July 30th 2020
+ * @description get all the url info for AdminStatistic pageable
+ * @param pageCount
+ * @param pageSize
+ * @param callBack - The callback for successful return
+ * @param errorHandler - The callback for errors
+ * */
+export const getAllUrlsPageable = (
+    pageCount,
+    pageSize,
+    callBack,
+    errorHandler
+) => {
+    getRequest("/getAllUrlsPageable", callBack, {
+        params: { pageCount: pageCount, pageSize: pageSize },
         errorCallback: errorHandler,
     });
 };

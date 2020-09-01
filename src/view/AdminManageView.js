@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Layout, Row, Tabs } from "antd";
-import "../css/HomeCss.css";
+
 import {
     ScheduleOutlined,
     TableOutlined,
@@ -8,8 +8,8 @@ import {
 } from "@ant-design/icons";
 import UserManage from "../components/adminManage/UserManage";
 import SimpleStatistics from "../components/adminManage/AdminStatistics";
-import AdminUrlManage from "../components/adminManage/AdminUrlManage";
 import { withRouter } from "react-router-dom";
+import AdminUrlManagePageable from "../components/adminManage/AdminUrlManagePageable";
 const { TabPane } = Tabs;
 const { Content } = Layout;
 
@@ -20,10 +20,21 @@ AdminManageView
 @description AdminManage View
 */
 class AdminManageView extends Component {
+    componentDidMount() {
+        if (sessionStorage.getItem("user") === null) {
+            window.location.href = "/login";
+        } else if (
+            sessionStorage.getItem("user") &&
+            JSON.parse(sessionStorage.getItem("user")).type !== 0
+        ) {
+            // this.props.history.push("/404");
+            window.location.href = "/404";
+        }
+    }
     render() {
         return (
-            <Content style={{ padding: "0 5vw" }}>
-                <Row>
+            <Content style={{ padding: "0 10vw" }}>
+                <Row className="manage">
                     <Col flex="auto">
                         <Tabs defaultActiveKey="1" centered>
                             <TabPane
@@ -35,7 +46,8 @@ class AdminManageView extends Component {
                                     </span>
                                 }
                             >
-                                <AdminUrlManage />
+                                <AdminUrlManagePageable />
+                                {/*<AdminUrlManage />*/}
                             </TabPane>
                             <TabPane
                                 key="2"

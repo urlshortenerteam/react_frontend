@@ -13,20 +13,11 @@ MapBox:
 */
 export default class MapBox extends React.Component {
     scene: Scene;
-    state = {
-        statisticData: [],
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            statisticData: props.data,
-        };
-    }
-
+    countryLayer: CountryLayer;
     componentDidMount() {
         const scene = new Scene({
             id: "map",
+            logoVisible: false,
             map: new Mapbox({
                 center: [116.2825, 39.9],
                 pitch: 0,
@@ -37,8 +28,8 @@ export default class MapBox extends React.Component {
             }),
         });
         scene.on("loaded", () => {
-            new CountryLayer(scene, {
-                data: this.state.statisticData,
+            this.countryLayer = new CountryLayer(scene, {
+                data: this.props.data,
                 joinBy: ["NAME_CHN", "name"],
                 depth: 1,
                 provinceStroke: "#783D2D",
@@ -60,12 +51,16 @@ export default class MapBox extends React.Component {
                 popup: {
                     enable: true,
                     Html: (props) => {
-                        return `<span>${props.NAME_CHN}</span><br/><span>${props.value}次访问</span>`;
+                        return ` <span style="color: black"> ${props.NAME_CHN} </span><br/><span style="color: black">${props.value}次访问</span>`;
                     },
                 },
             });
         });
         this.scene = scene;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.data) this.countryLayer.updateData(this.props.data);
     }
 
     componentWillUnmount() {

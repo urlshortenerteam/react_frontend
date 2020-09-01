@@ -1,8 +1,10 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { Layout, Skeleton, message } from "antd";
 import * as userService from "../services/userService";
 import LoginView from "../view/LoginView";
 
+const { Content } = Layout;
 export default class PrivateRoute extends React.Component {
     constructor(props) {
         super(props);
@@ -17,16 +19,26 @@ export default class PrivateRoute extends React.Component {
     };
 
     errorHandler = () => {
-        // console.log(error);
         this.setState({ isAuthed: false, hasAuthed: true });
         if (sessionStorage.getItem("user")) sessionStorage.removeItem("user");
         window.location.href = "/login";
     };
     componentDidMount() {
-        if (sessionStorage.getItem("user")) {
-            console.log(JSON.parse(sessionStorage.getItem("user")));
+        if (
+            sessionStorage.getItem("user") &&
+            JSON.parse(sessionStorage.getItem("user")).id !== null &&
+            JSON.parse(sessionStorage.getItem("user")).loginStatus !== null &&
+            JSON.parse(sessionStorage.getItem("user")).type !== null &&
+            JSON.parse(sessionStorage.getItem("user")).token !== null &&
+            JSON.parse(sessionStorage.getItem("user")).refreshToken !== null
+        ) {
+            userService.checkSession(this.checkAuth, this.errorHandler);
+        } else {
+            if (sessionStorage.getItem("user"))
+                sessionStorage.removeItem("user");
+            window.location.href = "/login";
+            message.error("您未登录");
         }
-        userService.checkSession(this.checkAuth, this.errorHandler);
     }
 
     render() {
@@ -36,9 +48,17 @@ export default class PrivateRoute extends React.Component {
         const exact = this.props.exact;
 
         console.log(this.state.isAuthed);
-
         if (!this.state.hasAuthed) {
-            return null;
+            return (
+                <Content style={{ padding: "0 20vw" }}>
+                    <div className="private">
+                        <br />
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                        <Skeleton active paragraph={{ rows: 4 }} />
+                    </div>
+                </Content>
+            );
         }
 
         return this.state.isAuthed ? (
@@ -48,20 +68,7 @@ export default class PrivateRoute extends React.Component {
                 render={(props) => <Component {...props} />}
             />
         ) : (
-            // <Route
-            //     path={path}
-            //     exact={exact}
-            //     render={(props) => <Component {...props} />}
-            // />
             <Route exact path="/login" component={LoginView} />
-            // <Redirect
-            //     push
-            //     // to={{
-            //     //     pathname: "/login",
-            //     //     state: { from: props.location },
-            //     // }}
-            //     to="/login"
-            // />
         );
     }
 }

@@ -15,7 +15,7 @@
     position: relative;
     height: auto;
     border-radius: 25px;
-    box-shadow: 10px 10px 30px #3399cc;
+    box-shadow: 10px 10px 40px #795c9c;
     /*background-color: #336699;*/
 
     /*background-image: linear-gradient(to bottom right,#baccd9,#8abcd1);*/
@@ -28,7 +28,7 @@
 
     text-align: center;
     font-weight: bold;
-    text-shadow: 0 0 5px #3399cc;
+    text-shadow: 0 0 5px #795c9c;
 }
 
 .register .ant-input {

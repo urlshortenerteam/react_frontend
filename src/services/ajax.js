@@ -6,9 +6,10 @@
  * */
 import { message } from "antd";
 
-export const hostUrl = "http://3.81.71.37:8080";
+export const hostUrl = process.env.REACT_APP_HOST_URL;
+// export const hostUrl = "http://3.81.71.37:8080";
 // export const hostUrl = "http://localhost:4000";
-// export const hostUrl = "http://111.186.46.37:4000";
+// export const hostUrl = "http://rv-s.cn:8080";
 /**
  * postRequest
  * @author Shuchang Liu & Zhuohao Shen <ao7777@sjtu.edu.cn>
@@ -55,7 +56,7 @@ let postRequest = (url, json, callback, { errorCallback }) => {
                         sessionStorage.removeItem("user");
                     }
                     window.location.href = "/login";
-                    message.error("非法访问2");
+                    message.error("非法访问");
                 }
                 return response;
             } else {
@@ -67,7 +68,9 @@ let postRequest = (url, json, callback, { errorCallback }) => {
         })
         .catch((error) => {
             errorCallback(error);
-            console.log(error);
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
 };
 
@@ -114,8 +117,16 @@ let resetToken = (
 
             // successfully renew time
             if (res.success) {
-                message.success("续费成功");
-                sessionStorage.setItem("user", JSON.stringify(res.data));
+                // if(!session)
+                // {
+                //     message.success("续费成功");
+                // }
+
+                let name = JSON.parse(sessionStorage.getItem("user")).userName;
+                let ans = { ...JSON.parse(res.data), userName: name };
+                // sessionStorage.setItem("user", JSON.stringify(res.data));
+                sessionStorage.setItem("user", JSON.stringify(ans));
+
                 // send post request again
                 if (post) {
                     postRequest(url, json, callback, {
@@ -144,7 +155,9 @@ let resetToken = (
         })
         .catch((error) => {
             errorCallback(error);
-            console.log(error);
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
 };
 
@@ -195,7 +208,7 @@ let getRequest = (url, callback, { errorCallback, params }) => {
                         sessionStorage.removeItem("user");
                     }
                     window.location.href = "/login";
-                    message.error("非法访问1");
+                    message.error("非法访问");
                 }
                 return response;
             } else {
@@ -207,7 +220,9 @@ let getRequest = (url, callback, { errorCallback, params }) => {
         })
         .catch((error) => {
             errorCallback(error);
-            console.log(error);
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
         });
 };
 
@@ -266,7 +281,9 @@ let getRequest_checkSession = (url, callback, { errorCallback, params }) => {
             callback(data);
         })
         .catch((error) => {
-            console.log(error);
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
             errorCallback(error);
         });
 };

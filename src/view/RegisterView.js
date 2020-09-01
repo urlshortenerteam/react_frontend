@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Col, Form, Input, Layout, message, Row } from "antd";
-import "../css/RegisterCss.css";
 import { withRouter } from "react-router-dom";
 import { register } from "../services/userService";
 
@@ -41,7 +40,7 @@ const RegistrationForm = () => {
     const callback = (res) => {
         if (res.data.success) {
             message.success("注册成功");
-            window.location.href = "/login";
+            window.location.replace("/login");
         } else {
             message.error("注册失败:用户名重复");
         }
@@ -49,7 +48,11 @@ const RegistrationForm = () => {
     const onFinish = (values) => {
         console.log("Received values of form: ", values);
 
-        register(values, callback);
+        register(values, callback, (error) => {
+            import("antd").then(({ message }) => {
+                message.error(error.toString());
+            });
+        });
     };
 
     return (

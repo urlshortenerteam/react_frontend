@@ -21,7 +21,9 @@ export default class SearchBar extends React.Component {
                     <Search
                         placeholder="请输入需转换网址"
                         size="large"
-                        onSearch={(value) => console.log(value)}
+                        onSearch={(value) => {
+                            console.log(value);
+                        }}
                         style={{ width: 700 }}
                     />
                 </Col>

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { Button, Col, Form, Input, message, Row, Table, Tooltip } from "antd";
-import "../../css/HomeCss.css";
-import "../../css/CreateCss.css";
+
 import { getBatchOneToOne } from "../../services/CreateService";
 import ShortWithQR from "./ShortWithQR";
 
@@ -67,6 +66,7 @@ const EditableCell = ({
     const deleteHandle = async () => {
         try {
             console.log("delete");
+
             // const values = await form.validateFields();
             toggleEdit();
             handleDelete(record.key);
@@ -135,7 +135,7 @@ export default class OneToOneTable extends React.Component {
                 },
             ],
             count: 1,
-            created: false,
+            loaded: false,
         };
         this.columns = [
             {
@@ -147,7 +147,6 @@ export default class OneToOneTable extends React.Component {
                 ellipsis: {
                     showTitle: false,
                 },
-                width: "60%",
                 render: (long) => (
                     <Tooltip placement="topLeft" title={long}>
                         {long}
@@ -184,6 +183,7 @@ export default class OneToOneTable extends React.Component {
             dataSource: [...dataSource, newData],
             count: this.state.count + 1,
         });
+
         console.log([...dataSource, newData]);
     };
 
@@ -227,6 +227,7 @@ export default class OneToOneTable extends React.Component {
             newData.splice(index, 1, ...newRow);
 
             this.setState({ dataSource: newData });
+
             console.log(newData);
         } else {
             const item = newData[index];
@@ -240,6 +241,7 @@ export default class OneToOneTable extends React.Component {
                 ...row,
             });
             this.setState({ dataSource: newData });
+
             console.log(newData);
         }
     };
@@ -255,10 +257,13 @@ export default class OneToOneTable extends React.Component {
                 },
             ],
             count: 1,
-            created: false,
+            loaded: false,
         });
     };
     oneToOne = () => {
+        this.setState({
+            loaded: true,
+        });
         let urlArray = this.state.dataSource;
         let req = [];
         //check the format
@@ -305,8 +310,9 @@ export default class OneToOneTable extends React.Component {
             });
             this.setState({
                 dataSource: result,
-                created: true,
+                loaded: false,
             });
+
             console.log(result);
         };
 
@@ -341,7 +347,7 @@ export default class OneToOneTable extends React.Component {
             };
         });
         return (
-            <div>
+            <div className="manage">
                 <br />
                 <Table
                     components={components}
@@ -354,7 +360,7 @@ export default class OneToOneTable extends React.Component {
                         <Row justify="center">
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    {!this.state.created ? (
+                                    {!this.state.loaded ? (
                                         <Button
                                             onClick={this.handleAdd}
                                             type="primary"
@@ -370,7 +376,7 @@ export default class OneToOneTable extends React.Component {
                             </Col>
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    {!this.state.created ? (
+                                    {!this.state.loaded ? (
                                         <Button
                                             type="primary"
                                             onClick={this.oneToOne}
@@ -378,7 +384,10 @@ export default class OneToOneTable extends React.Component {
                                             生成
                                         </Button>
                                     ) : (
-                                        <Button type="primary" disabled>
+                                        <Button
+                                            type="primary"
+                                            loading={this.state.loaded}
+                                        >
                                             生成
                                         </Button>
                                     )}
@@ -386,9 +395,23 @@ export default class OneToOneTable extends React.Component {
                             </Col>
                             <Col span={1.5}>
                                 <div style={{ marginLeft: 5 }}>
-                                    <Button type="primary" onClick={this.reset}>
-                                        重置
-                                    </Button>
+                                    {!this.state.loaded ? (
+                                        <Button
+                                            type="primary"
+                                            block={true}
+                                            onClick={this.reset}
+                                        >
+                                            重置
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            type="primary"
+                                            block={true}
+                                            disabled
+                                        >
+                                            重置
+                                        </Button>
+                                    )}
                                 </div>
                             </Col>
                         </Row>
