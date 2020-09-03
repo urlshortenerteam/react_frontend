@@ -123,10 +123,6 @@
 - 横向扩展 ： 后端做成微服务，使用了负载均衡器（traefik) ，提升性能
 - 纵向扩展 ： 可增加资源
 
-### Availability
-
-- 代码测试覆盖率：100%
-
 ## Security
 
 "security"包括认证（Authentication）和授权（Authorization）。本项目采取JWT实现。
