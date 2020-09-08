@@ -112,9 +112,13 @@
 
 ## 非功能需求
 
+
 非功能性需求分成"safety"和"security"两部分。"safety"指保证系统有稳定可靠的状态，"security"包括认证(Authentication)和授权(Authorization)。
 
 ## Safety
+### Performance
+- wrk测试：12线程50连接，持续30s，平均延迟65.27ms,最大延迟251.41ms
+- 并发：742
 
 ### Accessibility
 
@@ -125,6 +129,10 @@
 
 - 横向扩展 ： 后端做成微服务，使用了负载均衡器（traefik) ，提升性能
 - 纵向扩展 ： 可增加资源
+
+### Availability
+- 代码测试覆盖率：90+%
+- 原创代码测试覆盖率：100%
 
 ## Security
 
